@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 820" width="600" height="820" role="img" aria-label="정의의 상징">
+  <defs>
+    <linearGradient id="gdFade" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0"    stop-color="#ffffff" stop-opacity="0.90"/>
+      <stop offset="0.62" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="1"    stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="gdHalo" cx="0.5" cy="0.30" r="0.52">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="600" height="820" fill="url(#gdHalo)"/>
+
+  <g stroke="url(#gdFade)" fill="none" stroke-width="2.6"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- 저울 중심 기둥 -->
+    <path d="M300 176 V612"/>
+
+    <!-- 받침 -->
+    <path d="M232 612 H368"/>
+    <path d="M258 612 q42 22 84 0"/>
+
+    <!-- 저울대 -->
+    <path d="M104 214 H496"/>
+    <circle cx="300" cy="176" r="17"/>
+
+    <!-- 좌측 접시 -->
+    <path d="M104 214 V300"/>
+    <path d="M40 300 H168"/>
+    <path d="M40 300 a64 64 0 0 0 128 0"/>
+
+    <!-- 우측 접시 -->
+    <path d="M496 214 V300"/>
+    <path d="M432 300 H560"/>
+    <path d="M432 300 a64 64 0 0 0 128 0"/>
+  </g>
+
+  <!-- 접시를 잇는 미세한 사슬 -->
+  <g stroke="url(#gdFade)" stroke-width="1" opacity="0.55">
+    <path d="M104 214 L60 296 M104 214 L148 296" fill="none"/>
+    <path d="M496 214 L452 296 M496 214 L540 296" fill="none"/>
+  </g>
+</svg>

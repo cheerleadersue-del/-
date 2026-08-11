@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d0e10">
+
+  <title>법무법인 유일 | 증거주의 수사·재판 대응</title>
+
+  <meta name="description" content="법무법인 유일은 증거와 기록을 중심으로 수사와 재판에 대응합니다. 형사·민사·가사·회생·공증 분야에서 한 명의 의뢰인에게 변호인단 전체의 전략이 배정됩니다.">
+  <meta name="author" content="법무법인 유일">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="법무법인 유일">
+  <meta property="og:title" content="법무법인 유일 | 증거주의 수사·재판 대응">
+  <meta property="og:description" content="증거는 결과를 만듭니다. 의뢰인이 미처 보지 못한 증거까지 새로운 관점으로 사건을 다시 설계합니다.">
+  <meta property="og:image" content="assets/lawyers-city-bg.webp">
+  <meta property="og:locale" content="ko_KR">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="법무법인 유일 | 증거주의 수사·재판 대응">
+  <meta name="twitter:description" content="증거는 결과를 만듭니다.">
+  <meta name="twitter:image" content="assets/lawyers-city-bg.webp">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap">
+
+  <link rel="preload" as="image" href="assets/hero-yuil.webp">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <a class="skip-link" href="#about">본문 바로가기</a>
+
+  <!-- ==========================================================
+       HEADER
+  =========================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="메뉴 열기"
+        aria-expanded="false"
+        aria-controls="fullscreenMenu"
+      >
+        <span class="menu-button__bars" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </span>
+      </button>
+
+      <a class="brand" href="#hero" aria-label="법무법인 유일 — 첫 화면으로">
+        <span class="brand-ko">법무법인 유일</span>
+        <span class="brand-en">LAW FIRM YUIL</span>
+      </a>
+
+      <a class="header-contact" href="tel:032-000-0000">
+        <span class="header-contact__text">032.000.0000</span>
+        <span class="header-contact__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2.5 2.5 0 0 1-2.7 2.5A16.5 16.5 0 0 1 3.5 5.7 2.5 2.5 0 0 1 6 3Z"
+                  stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+
+    </div>
+  </header>
+
+
+  <!-- ==========================================================
+       FULLSCREEN MENU
+  =========================================================== -->
+  <nav class="fullscreen-menu" id="fullscreenMenu" aria-label="전체 메뉴" inert>
+
+    <p class="menu-background-text" aria-hidden="true">YUIL</p>
+
+    <div class="menu-inner">
+      <p class="menu-label">LAW FIRM YUIL</p>
+
+      <ul class="menu-links">
+        <li><a href="#hero"><span>01</span><strong>메인</strong></a></li>
+        <li><a href="#about"><span>02</span><strong>유일의 방식</strong></a></li>
+        <li><a href="#lawyers"><span>03</span><strong>변호인단</strong></a></li>
+        <li><a href="#practice"><span>04</span><strong>전문 분야</strong></a></li>
+        <li><a href="#contact"><span>05</span><strong>상담안내</strong></a></li>
+      </ul>
+
+      <div class="menu-footer">
+        <a href="tel:032-000-0000">032.000.0000</a>
+        <p>인천광역시 ○○구 ○○로 00</p>
+      </div>
+    </div>
+  </nav>
+
+
+  <main>
+
+    <!-- ==========================================================
+         HERO — 스크롤에 따라 가로로 전환되는 3개 패널
+    =========================================================== -->
+    <section class="hero" id="hero" aria-labelledby="heroTitle">
+      <div class="hero-sticky">
+
+        <div class="hero-backgrounds" aria-hidden="true">
+          <div class="hero-gray-background"></div>
+
+          <img class="hero-goddess" src="assets/hero-goddess.svg" alt="">
+
+          <img class="hero-symbol-image" src="assets/hero-yuil.webp" alt=""
+               width="707" height="353" fetchpriority="high">
+
+          <div class="hero-dark-overlay"></div>
+        </div>
+
+        <div class="hero-track" id="heroTrack">
+
+          <article class="hero-panel">
+            <p class="hero-eyebrow">LAW FIRM YUIL</p>
+
+            <h1 class="hero-title" id="heroTitle">
+              <span>증거는</span>
+              <span>결과를</span>
+              <span>만듭니다.</span>
+            </h1>
+
+            <a class="hero-button" href="#contact">상담 신청</a>
+          </article>
+
+          <article class="hero-panel">
+            <p class="hero-eyebrow">EVIDENCE FIRST</p>
+
+            <h2 class="hero-subtitle">
+              증거주의<br>
+              수사·재판 대응
+            </h2>
+          </article>
+
+          <article class="hero-panel">
+            <p class="hero-description">
+              <span>의뢰인이 미처 보지 못한 증거까지.</span>
+              <span>새로운 관점으로 사건을 다시 설계합니다.</span>
+            </p>
+
+            <a class="hero-text-link" href="#about">
+              유일의 대응 방식 보기
+              <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+        </div>
+
+        <div class="hero-progress" aria-hidden="true">
+          <div class="hero-progress-line">
+            <span id="heroProgress"></span>
+          </div>
+
+          <p class="hero-progress-number">
+            <span id="heroCurrent">01</span>
+            <span>/ 03</span>
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================================
+         WHY YUIL
+    =========================================================== -->
+    <section class="yuil-strategy" id="about" aria-labelledby="aboutTitle">
+      <div class="container yuil-strategy__inner">
+
+        <div class="yuil-strategy__headline">
+          <p class="yuil-strategy__label">WHY YUIL</p>
+
+          <h2 id="aboutTitle">
+            한 명의 의뢰인에게<br>
+            변호인단 전체의<br>
+            전략이 배정됩니다.
+          </h2>
+        </div>
+
+        <div class="yuil-strategy__copy">
+          <p class="yuil-strategy__copy-label">EVIDENCE · RECORD · STRATEGY</p>
+
+          <p>
+            기록과 진술, 디지털 자료와 계좌 흐름,<br>
+            사건 전후의 정황과 수사기관의 관점까지.
+          </p>
+
+          <p>
+            유일은 하나의 사건을 여러 시선으로 검토하고,
+            결과를 바꿀 수 있는 증거와 전략을 설계합니다.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================================
+         OUR LAWYERS — 도심 배경 위에서 프로필이 순차 전환
+    =========================================================== -->
+    <section class="lawyers-cinematic" id="lawyers" aria-labelledby="lawyersTitle">
+      <div class="lawyers-cinematic__sticky">
+
+        <img
+          class="lawyers-cinematic__city"
+          id="lawyersCity"
+          src="assets/lawyers-city-bg.webp"
+          alt=""
+          width="1672" height="941"
+          loading="lazy"
+        >
+
+        <div class="lawyers-cinematic__overlay" id="lawyersOverlay" aria-hidden="true"></div>
+
+        <div class="lawyers-cinematic__intro" id="lawyersIntro">
+          <div class="container">
+            <p class="lawyers-cinematic__label">OUR LAWYERS</p>
+
+            <h2 id="lawyersTitle">
+              <span>사건을 함께 설계하는</span>
+              <span>유일의 변호인단</span>
+            </h2>
+
+            <p class="lawyers-cinematic__intro-copy">
+              서로 다른 경험과 시선이 하나의 전략으로 연결됩니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="lawyers-profile" id="lawyersProfile">
+
+          <figure class="lawyers-profile__portrait">
+            <img id="lawyerImage" src="assets/lawyer-01.webp"
+                 alt="정호길 대표변호사" width="635" height="998" loading="lazy">
+          </figure>
+
+          <div class="lawyers-profile__information">
+            <p class="lawyers-profile__number" id="lawyerNumber">01</p>
+            <p class="lawyers-profile__role" id="lawyerRole">REPRESENTATIVE LAWYER · CRIMINAL DEFENSE</p>
+
+            <h3 id="lawyerName">정호길</h3>
+
+            <p class="lawyers-profile__position" id="lawyerPosition">대표변호사 · 형사전문</p>
+
+            <p class="lawyers-profile__description" id="lawyerDescription">
+              형사사건의 초기 대응부터 수사와 재판까지, 증거와 기록을 중심으로
+              사건의 방향과 방어 전략을 직접 총괄합니다.
+            </p>
+
+            <ol class="lawyers-profile__career" id="lawyerCareer">
+              <li><span>01</span>형사사건 25년 경력</li>
+              <li><span>02</span>수사·재판 대응 총괄</li>
+              <li><span>03</span>법무법인 유일 대표변호사</li>
+            </ol>
+
+            <a class="lawyers-profile__link" href="#contact">
+              상담 안내
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="lawyers-cinematic__steps" id="lawyersSteps" aria-hidden="true">
+          <span class="is-active"></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </div>
+
+        <div class="lawyers-cinematic__progress" aria-hidden="true">
+          <p class="lawyers-cinematic__counter">
+            <strong id="lawyerCurrent">01</strong>
+            <span>/ 06</span>
+          </p>
+
+          <div class="lawyers-cinematic__progress-line">
+            <span id="lawyersProgressFill"></span>
+          </div>
+        </div>
+
+        <div class="lawyers-cinematic__scroll" id="lawyersScrollGuide" aria-hidden="true">
+          <span>SCROLL</span>
+          <i></i>
+        </div>
+
+      </div>
+
+      <!-- 스크롤 연출을 쓸 수 없는 환경(모션 최소화·JS 미동작)에서의 대체 목록 -->
+      <ul class="lawyers-fallback" id="lawyersFallback"></ul>
+    </section>
+
+
+    <!-- ==========================================================
+         PRACTICE AREAS
+    =========================================================== -->
+    <section class="practice-areas" id="practice" aria-labelledby="practiceTitle">
+
+      <div class="container practice-areas__heading">
+        <div>
+          <p class="practice-areas__label">EXPERTISE</p>
+          <h2 id="practiceTitle">전문 분야</h2>
+        </div>
+
+        <p class="practice-areas__introduction">
+          사건의 성격과 필요한 대응은 모두 다릅니다.<br>
+          유일은 각 분야에 맞는 전략을 설계합니다.
+        </p>
+      </div>
+
+      <div class="practice-areas__content">
+
+        <div class="practice-areas__visual">
+          <figure class="practice-areas__image-wrap">
+            <img id="practiceImage" src="assets/center-criminal.webp"
+                 alt="형사센터" width="416" height="358" loading="lazy">
+
+            <div class="practice-areas__shade" aria-hidden="true"></div>
+
+            <figcaption class="practice-areas__image-heading">
+              <p id="practiceEnglish">CRIMINAL CENTER</p>
+              <strong id="practiceVisualNumber">01</strong>
+            </figcaption>
+
+            <a class="practice-areas__case-link" id="practiceCaseLink" href="#contact">
+              <span>
+                <small id="practiceLinkLabel">CONSULTATION</small>
+                <strong>형사센터 상담 안내</strong>
+              </span>
+              <i aria-hidden="true">→</i>
+            </a>
+          </figure>
+        </div>
+
+        <ul class="practice-areas__list">
+
+          <li class="practice-item is-active" data-index="0">
+            <button type="button" class="practice-item__button">
+              <span class="practice-item__number">01</span>
+
+              <span class="practice-item__content">
+                <small>CRIMINAL CENTER</small>
+                <strong>형사센터</strong>
+                <span>초기 진술부터 압수수색, 조사와 재판까지 증거를 중심으로 대응합니다.</span>
+              </span>
+
+              <i aria-hidden="true">↗</i>
+            </button>
+          </li>
+
+          <li class="practice-item" data-index="1">
+            <button type="button" class="practice-item__button">
+              <span class="practice-item__number">02</span>
+
+              <span class="practice-item__content">
+                <small>CIVIL CENTER</small>
+                <strong>민사센터</strong>
+                <span>계약과 손해배상, 부동산 분쟁의 핵심 자료와 책임 관계를 분석합니다.</span>
+              </span>
+
+              <i aria-hidden="true">↗</i>
+            </button>
+          </li>
+
+          <li class="practice-item" data-index="2">
+            <button type="button" class="practice-item__button">
+              <span class="practice-item__number">03</span>
+
+              <span class="practice-item__content">
+                <small>FAMILY CENTER</small>
+                <strong>가사센터</strong>
+                <span>이혼과 상속, 친권과 양육권 문제를 현실적인 해결 방향으로 설계합니다.</span>
+              </span>
+
+              <i aria-hidden="true">↗</i>
+            </button>
+          </li>
+
+          <li class="practice-item" data-index="3">
+            <button type="button" class="practice-item__button">
+              <span class="practice-item__number">04</span>
+
+              <span class="practice-item__content">
+                <small>RECOVERY CENTER</small>
+                <strong>회생센터</strong>
+                <span>채무와 소득, 재산 구조를 분석해 개인회생과 파산 절차를 준비합니다.</span>
+              </span>
+
+              <i aria-hidden="true">↗</i>
+            </button>
+          </li>
+
+          <li class="practice-item" data-index="4">
+            <button type="button" class="practice-item__button">
+              <span class="practice-item__number">05</span>
+
+              <span class="practice-item__content">
+                <small>NOTARY CENTER</small>
+                <strong>공증센터</strong>
+                <span>계약과 의사표시를 명확한 문서와 절차로 남겨 미래의 분쟁을 예방합니다.</span>
+              </span>
+
+              <i aria-hidden="true">↗</i>
+            </button>
+          </li>
+
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================================
+         CONTACT
+    =========================================================== -->
+    <section class="contact-section" id="contact" aria-labelledby="contactTitle">
+      <div class="container contact-grid">
+
+        <div>
+          <p class="section-label">CONTACT YUIL</p>
+
+          <h2 id="contactTitle">
+            사건의 방향이 필요할 때,<br>
+            유일이 먼저 보겠습니다.
+          </h2>
+
+          <dl class="contact-facts">
+            <div>
+              <dt>대표전화</dt>
+              <dd><a href="tel:032-000-0000">032.000.0000</a></dd>
+            </div>
+            <div>
+              <dt>상담시간</dt>
+              <dd>평일 09:00 – 18:00</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="contact-links">
+          <a href="tel:032-000-0000">
+            <span>전화 상담</span>
+            <strong aria-hidden="true">→</strong>
+          </a>
+
+          <a href="https://pf.kakao.com/" target="_blank" rel="noopener noreferrer">
+            <span>카카오톡 상담</span>
+            <strong aria-hidden="true">→</strong>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ==========================================================
+       FOOTER
+  =========================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div>
+        <strong>법무법인 유일</strong>
+        <p>LAW FIRM YUIL</p>
+      </div>
+
+      <div>
+        <p>인천광역시 ○○구 ○○로 00</p>
+        <p>대표전화 032.000.0000</p>
+      </div>
+
+      <div class="footer-meta">
+        <a href="#">개인정보처리방침</a>
+        <p>© <span id="currentYear">2026</span> LAW FIRM YUIL</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- 모바일 하단 고정 상담 바 -->
+  <div class="mobile-fixed-bar">
+    <a href="tel:032-000-0000">전화 상담</a>
+    <a href="https://pf.kakao.com/" target="_blank" rel="noopener noreferrer">카카오톡 상담</a>
+  </div>
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "법무법인 유일",
+    "alternateName": "LAW FIRM YUIL",
+    "description": "증거와 기록을 중심으로 수사와 재판에 대응하는 법무법인입니다.",
+    "image": "assets/lawyers-city-bg.webp",
+    "telephone": "032-000-0000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "KR",
+      "addressLocality": "인천광역시",
+      "streetAddress": "○○구 ○○로 00"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "areaServed": "KR",
+    "knowsLanguage": "ko",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "전문 분야",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "형사센터" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "민사센터" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "가사센터" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "회생센터" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "공증센터" } }
+      ]
+    }
+  }
+  </script>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
