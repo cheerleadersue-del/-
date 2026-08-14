@@ -4,15 +4,15 @@
 
    01. 토큰
    02. 리셋 · 기본
-   03. 공통 (셸 · 버튼 · 라벨)
+   03. 공통 (셸 · 버튼 · 원형 버튼 · 섹션)
    04. 헤더 · 모바일 메뉴
-   05. HERO
-   06. LEAD ATTORNEY
-   07. ATTORNEYS
-   08. WHY YUIL
-   09. CASES
-   10. CONTACT
-   11. FOOTER · 모바일 하단 바
+   05. 우측 상담 레일
+   06. HERO (좌 사옥 / 우 변호인단 캐러셀)
+   07. 변호인단 썸네일 스트립
+   08. 대응 절차
+   09. 전문센터
+   10. 상담안내
+   11. 푸터 · 모바일 하단 바
    12. 반응형
    13. 모션 최소화
 ===================================================================== */
@@ -23,30 +23,25 @@
 ===================================================================== */
 
 :root {
-  /* 시안의 다크 / 크림 / 골드 3색 구성 */
-  --ink:        #111111;
-  --ink-soft:   #1a1a1a;
-  --ink-line:   rgba(255, 255, 255, 0.14);
+  --black:      #0d0d0f;
+  --panel:      #141416;
+  --panel-warm: #1c1713;
+  --line:       rgba(255, 255, 255, 0.12);
+  --line-soft:  rgba(255, 255, 255, 0.07);
 
-  --cream:      #f5f2ed;
-  --cream-deep: #ebe6dd;
-  --paper:      #ffffff;
+  --gold:       #c9a45c;
+  --gold-light: #e0c489;
+  --gold-deep:  #8a6b2f;
+  --kakao:      #fee500;
 
-  --gold:       #b8985a;
-  --gold-light: #c9a961;
-  --gold-pale:  #d8c191;
+  --text:       #ffffff;
+  --text-soft:  rgba(255, 255, 255, 0.66);
+  --text-faint: rgba(255, 255, 255, 0.42);
 
-  --text:       #1a1a1a;
-  --text-soft:  #5a564f;
-  --text-faint: #8b8781;
-
-  --on-dark:        #ffffff;
-  --on-dark-soft:   rgba(255, 255, 255, 0.72);
-  --on-dark-faint:  rgba(255, 255, 255, 0.48);
-
-  --shell:  1180px;
+  --shell:  1280px;
   --gutter: 24px;
-  --header-h: 84px;
+  --header-h: 80px;
+  --rail-w:   64px;
 
   --ease: cubic-bezier(0.22, 0.8, 0.22, 1);
 
@@ -76,7 +71,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  /* 우측 레일이 콘텐츠를 가리지 않도록 그만큼 비워 둔다 */
+  padding-right: var(--rail-w);
+  background: var(--black);
   color: var(--text);
   font-family: var(--font-sans);
   font-size: 16px;
@@ -126,14 +123,25 @@ img, svg {
   border-radius: 4px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .skip-link {
   position: fixed;
   top: -80px;
   left: 16px;
-  z-index: 300;
+  z-index: 400;
   padding: 12px 22px;
   background: var(--gold);
-  color: #fff;
+  color: var(--black);
   font-size: 14px;
   font-weight: 700;
   transition: top 0.2s var(--ease);
@@ -154,11 +162,35 @@ img, svg {
 }
 
 .section-label {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   color: var(--gold);
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
+}
+
+.display {
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: -0.045em;
+  word-break: keep-all;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.section-note {
+  max-width: 340px;
+  color: var(--text-soft);
+  font-size: 14.5px;
+  line-height: 1.85;
+  word-break: keep-all;
 }
 
 
@@ -174,7 +206,6 @@ img, svg {
   border: 1.5px solid transparent;
   font-size: 15px;
   font-weight: 700;
-  letter-spacing: -0.01em;
   white-space: nowrap;
   transition:
     background   0.25s ease,
@@ -189,73 +220,58 @@ img, svg {
   flex: none;
 }
 
-.button i {
-  font-style: normal;
-  transition: transform 0.3s var(--ease);
-}
-
-.button:hover i {
-  transform: translateX(5px);
-}
-
 .button-gold {
   background: linear-gradient(135deg, var(--gold-light), var(--gold));
-  color: #fff;
+  color: var(--black);
 }
 
 .button-gold:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg, #d3b571, #a9873f);
+  background: linear-gradient(135deg, #ecd3a0, #b9924b);
 }
 
 .button-outline {
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.4);
   color: #fff;
 }
 
 .button-outline:hover {
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.button-dark {
-  gap: 40px;
-  background: var(--ink);
-  color: #fff;
-}
-
-.button-dark:hover {
-  background: #2c2c2c;
+  border-color: var(--gold);
+  background: rgba(201, 164, 92, 0.12);
+  color: var(--gold-light);
 }
 
 .button-block {
   width: 100%;
 }
 
-.text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  /* 터치 영역 확보 — 음수 마진으로 시각적 위치는 유지한다 */
-  margin: -10px -12px;
-  padding: 10px 12px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--on-dark-soft);
-  transition: color 0.25s ease;
+
+/* ---------- 원형 버튼 ---------- */
+
+.circle-button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--text-soft);
+  transition:
+    border-color 0.25s ease,
+    background   0.25s ease,
+    color        0.25s ease;
 }
 
-.text-link i {
-  font-style: normal;
-  transition: transform 0.3s var(--ease);
+.circle-button svg {
+  width: 18px;
+  height: 18px;
 }
 
-.text-link:hover {
-  color: #fff;
-}
-
-.text-link:hover i {
-  transform: translateX(5px);
+.circle-button:hover {
+  border-color: var(--gold);
+  background: rgba(201, 164, 92, 0.12);
+  color: var(--gold-light);
 }
 
 
@@ -264,26 +280,19 @@ img, svg {
 ===================================================================== */
 
 .header {
-  position: fixed;
-  inset: 0 0 auto;
+  position: sticky;
+  top: 0;
   z-index: 200;
   height: var(--header-h);
-  transition: background 0.3s ease, height 0.3s var(--ease);
-}
-
-.header.is-scrolled {
-  height: 68px;
-  background: rgba(17, 17, 17, 0.92);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--ink-line);
+  background: var(--black);
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .header-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 32px;
-  width: min(100% - var(--gutter) * 2, 1440px);
+  width: min(100% - var(--gutter) * 2, 1600px);
   height: 100%;
   margin-inline: auto;
 }
@@ -294,33 +303,39 @@ img, svg {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  color: #fff;
+  gap: 16px;
+  margin-right: auto;
 }
 
 .brand-mark {
-  width: 38px;
-  height: 38px;
-  flex: none;
-  color: var(--gold-light);
+  color: #fff;
+  font-size: 27px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+}
+
+.brand-divider {
+  width: 1px;
+  height: 26px;
+  background: var(--line);
 }
 
 .brand-text {
   display: grid;
-  gap: 2px;
+  gap: 1px;
 }
 
 .brand-text strong {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .brand-text small {
-  color: var(--on-dark-faint);
-  font-size: 9px;
+  color: var(--text-faint);
+  font-size: 8.5px;
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
 }
 
 
@@ -329,14 +344,13 @@ img, svg {
 .nav {
   display: flex;
   align-items: center;
-  gap: 38px;
-  margin-left: auto;
+  gap: 40px;
 }
 
 .nav a {
   position: relative;
-  padding: 6px 0;
-  color: var(--on-dark-soft);
+  padding: 10px 0;
+  color: var(--text-soft);
   font-size: 15px;
   font-weight: 600;
   white-space: nowrap;
@@ -347,10 +361,10 @@ img, svg {
   content: "";
   position: absolute;
   right: 100%;
-  bottom: 0;
+  bottom: 4px;
   left: 0;
   height: 1.5px;
-  background: var(--gold-light);
+  background: var(--gold);
   transition: right 0.35s var(--ease);
 }
 
@@ -365,25 +379,36 @@ img, svg {
 }
 
 
-/* ---------- 메뉴 버튼 ---------- */
+/* ---------- 메뉴 버튼 (원형) ---------- */
 
 .menu-toggle {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border: 1px solid var(--line);
+  border-radius: 50%;
   color: #fff;
+  transition:
+    border-color 0.25s ease,
+    background   0.25s ease;
+}
+
+.menu-toggle:hover {
+  border-color: var(--gold);
+  background: rgba(201, 164, 92, 0.12);
 }
 
 .menu-bars {
   display: grid;
-  gap: 5px;
-  width: 24px;
+  gap: 4px;
+  width: 17px;
 }
 
 .menu-bars i {
   display: block;
-  height: 1.6px;
+  height: 1.4px;
   background: currentColor;
   transition:
     transform 0.3s var(--ease),
@@ -391,7 +416,7 @@ img, svg {
 }
 
 .menu-toggle.is-open .menu-bars i:nth-child(1) {
-  transform: translateY(6.6px) rotate(45deg);
+  transform: translateY(5.4px) rotate(45deg);
 }
 
 .menu-toggle.is-open .menu-bars i:nth-child(2) {
@@ -399,7 +424,7 @@ img, svg {
 }
 
 .menu-toggle.is-open .menu-bars i:nth-child(3) {
-  transform: translateY(-6.6px) rotate(-45deg);
+  transform: translateY(-5.4px) rotate(-45deg);
 }
 
 
@@ -407,15 +432,14 @@ img, svg {
 
 .mobile-menu {
   position: fixed;
-  inset: 0;
+  inset: var(--header-h) 0 0;
   z-index: 190;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: calc(var(--header-h) + 24px) var(--gutter) 40px;
+  padding: 24px var(--gutter) 40px;
   overflow-y: auto;
-  background: var(--ink);
-  color: #fff;
+  background: var(--black);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -434,15 +458,15 @@ img, svg {
   align-items: center;
   justify-content: space-between;
   padding: 22px 2px;
-  border-bottom: 1px solid var(--ink-line);
-  font-size: 22px;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 23px;
   font-weight: 700;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.04em;
 }
 
 .mobile-menu-links a::after {
   content: "→";
-  color: var(--gold-light);
+  color: var(--gold);
   font-size: 18px;
   font-weight: 400;
 }
@@ -455,558 +479,641 @@ img, svg {
 }
 
 .mobile-menu-foot p {
-  color: var(--on-dark-faint);
+  color: var(--text-faint);
   font-size: 13px;
 }
 
 
 /* =====================================================================
-   05. HERO
+   05. 우측 상담 레일
+===================================================================== */
+
+.rail {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 210;
+  display: flex;
+  flex-direction: column;
+  width: var(--rail-w);
+  border-left: 1px solid rgba(0, 0, 0, 0.28);
+}
+
+/* 전화 — 세로쓰기 */
+.rail-call {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 28px 0;
+  background: linear-gradient(180deg, #a98a4b, #8a6b2f);
+  color: #fff;
+  transition: filter 0.25s ease;
+}
+
+.rail-call:hover {
+  filter: brightness(1.12);
+}
+
+.rail-call svg {
+  width: 21px;
+  height: 21px;
+  flex: none;
+}
+
+.rail-label,
+.rail-number {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.16em;
+}
+
+.rail-label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.rail-number {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.rail-item {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 20px 4px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  background: var(--panel-warm);
+  color: var(--text-soft);
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  transition:
+    background 0.25s ease,
+    color      0.25s ease;
+}
+
+.rail-item svg {
+  width: 21px;
+  height: 21px;
+}
+
+.rail-item:hover {
+  background: #2a221a;
+  color: #fff;
+}
+
+.rail-kakao {
+  background: var(--kakao);
+  color: #3c1e1e;
+}
+
+.rail-kakao:hover {
+  background: #ffe94d;
+  color: #3c1e1e;
+}
+
+
+/* =====================================================================
+   06. HERO
 ===================================================================== */
 
 .hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  min-height: clamp(460px, 56vw, 620px);
+}
+
+
+/* ---------- 좌: 사옥 ---------- */
+
+.hero-left {
   position: relative;
   isolation: isolate;
   display: flex;
   align-items: center;
-  min-height: min(760px, 100svh);
-  padding: calc(var(--header-h) + 40px) 0 72px;
   overflow: hidden;
-  background: var(--ink);
-  color: #fff;
+  background: #10131a;
 }
 
-/* 우측 인물 비주얼 — 좌측 텍스트 영역으로 자연스럽게 사라진다 */
-.hero-visual {
+.hero-building {
   position: absolute;
-  inset: 0 0 0 auto;
-  z-index: -1;
-  width: 58%;
-}
-
-.hero-visual img {
+  inset: 0;
+  z-index: -2;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 22%;
-  filter: grayscale(100%) contrast(1.12);
+  object-position: center 42%;
+  /* 시안처럼 밤 톤으로 눌러 제목이 사진 위에서도 읽히게 한다 */
+  filter: brightness(0.52) saturate(0.7) contrast(1.08);
 }
 
-.hero-visual::after {
+.hero-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      100deg,
+      rgba(8, 9, 12, 0.9) 0%,
+      rgba(8, 9, 12, 0.62) 48%,
+      rgba(8, 9, 12, 0.3) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(8, 9, 12, 0.55) 0%,
+      transparent 32%,
+      rgba(8, 9, 12, 0.5) 100%
+    );
+}
+
+.hero-left-inner {
+  padding: clamp(36px, 4vw, 64px) clamp(24px, 4vw, 60px);
+  margin-left: max(calc((100vw - var(--rail-w) - 1600px) / 2), 0px);
+}
+
+/*
+  한글은 라틴 문자보다 글자 상·하 여백이 좁다.
+  큰 제목이라도 line-height 를 1.1 아래로 내리면 획이 겹친다.
+*/
+.hero-kicker {
+  background: linear-gradient(100deg, var(--gold-light), var(--gold-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(34px, 4.4vw, 62px);
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
+}
+
+.hero-title {
+  font-size: clamp(38px, 5vw, 70px);
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: 0.01em;
+}
+
+.hero-firm {
+  margin-top: 14px;
+  font-size: clamp(16px, 1.6vw, 23px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.hero-note {
+  position: relative;
+  margin-top: clamp(26px, 3vw, 42px);
+  padding-left: 16px;
+  color: var(--text-soft);
+  font-size: clamp(12.5px, 1.05vw, 14.5px);
+  line-height: 1.85;
+  word-break: keep-all;
+}
+
+.hero-note::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 2px;
+  background: var(--gold);
+}
+
+
+/* ---------- 우: 변호인단 캐러셀 ---------- */
+
+.hero-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 78% 42%,
+      rgba(201, 164, 92, 0.14),
+      transparent 58%
+    ),
+    linear-gradient(120deg, #16120e 0%, #211a12 55%, #171310 100%);
+}
+
+.hero-profile {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+}
+
+.hero-profile.is-changing {
+  opacity: 0;
+}
+
+.hero-profile-text {
+  align-self: center;
+  padding: clamp(32px, 3.4vw, 56px) 0 clamp(32px, 3.4vw, 56px) clamp(24px, 3.4vw, 56px);
+}
+
+.profile-role {
+  margin-bottom: 12px;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.profile-name {
+  font-size: clamp(30px, 3.4vw, 48px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.profile-title {
+  margin-top: 14px;
+  color: var(--gold-light);
+  font-size: clamp(13px, 1.2vw, 16px);
+  font-weight: 600;
+}
+
+.profile-desc {
+  margin-top: clamp(18px, 2vw, 30px);
+  color: var(--text-soft);
+  font-size: clamp(12.5px, 1.05vw, 14.5px);
+  line-height: 1.9;
+  word-break: keep-all;
+}
+
+.profile-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: clamp(20px, 2.4vw, 34px);
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.profile-more i {
+  display: block;
+  width: 36px;
+  height: 1px;
+  position: relative;
+  background: currentColor;
+  font-style: normal;
+  transition: width 0.3s var(--ease);
+}
+
+.profile-more i::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: 0;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.profile-more:hover {
+  color: var(--gold-light);
+}
+
+.profile-more:hover i {
+  width: 48px;
+}
+
+.hero-profile-photo {
+  position: relative;
+  align-self: end;
+  height: 100%;
+  min-height: 0;
+}
+
+.hero-profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+
+/* ---------- 캐러셀 컨트롤 ---------- */
+
+.hero-controls {
+  position: absolute;
+  right: clamp(20px, 2.4vw, 36px);
+  bottom: clamp(20px, 2.4vw, 34px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-counter {
+  margin-right: 8px;
+  color: var(--text-faint);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+.hero-counter strong {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+/* =====================================================================
+   07. 변호인단 썸네일 스트립
+===================================================================== */
+
+.strip {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.8fr) auto minmax(0, 6fr) auto;
+  align-items: center;
+  gap: clamp(12px, 1.4vw, 22px);
+  padding: 0 clamp(20px, 2.4vw, 36px);
+  background: var(--panel);
+  border-top: 1px solid var(--line-soft);
+}
+
+.strip-aside {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  align-self: stretch;
+  padding: 22px 0;
+}
+
+.strip-label {
+  color: var(--text-faint);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+
+.strip-scroll {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  color: var(--text-faint);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+}
+
+.strip-scroll span {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.strip-scroll i {
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+}
+
+.strip-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+}
+
+.strip-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3.15;
+  overflow: hidden;
+  border-left: 1px solid var(--line-soft);
+  background: #1a1a1c;
+  text-align: left;
+  transition: filter 0.35s ease;
+  filter: grayscale(100%) brightness(0.62);
+}
+
+.strip-list li:last-child .strip-card {
+  border-right: 1px solid var(--line-soft);
+}
+
+.strip-card:hover,
+.strip-card.is-active {
+  filter: none;
+}
+
+.strip-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+}
+
+.strip-card::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
     linear-gradient(
-      90deg,
-      var(--ink) 0%,
-      rgba(17, 17, 17, 0.86) 24%,
-      rgba(17, 17, 17, 0.22) 62%,
-      rgba(17, 17, 17, 0.38) 100%
+      180deg,
+      rgba(10, 10, 12, 0.55) 0%,
+      rgba(10, 10, 12, 0.1) 34%,
+      rgba(10, 10, 12, 0.9) 100%
     );
 }
 
-.hero-inner {
-  position: relative;
-  max-width: 620px;
-  margin-right: auto;
-  margin-left: max(calc((100vw - var(--shell)) / 2), var(--gutter));
+.strip-card.is-active {
+  outline: 1px solid var(--gold);
+  outline-offset: -1px;
 }
 
-.hero-eyebrow {
-  margin-bottom: 14px;
-  color: var(--on-dark-soft);
-  font-size: clamp(17px, 1.7vw, 22px);
-  font-weight: 500;
-  letter-spacing: -0.03em;
+.strip-info {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  left: 14px;
+  z-index: 1;
 }
 
-.hero-title {
-  font-size: clamp(38px, 5.2vw, 66px);
-  font-weight: 800;
-  line-height: 1.22;
-  letter-spacing: -0.05em;
-  word-break: keep-all;
-}
-
-.hero-lead {
-  margin-top: 30px;
-  color: var(--on-dark-soft);
-  font-size: clamp(14px, 1.2vw, 17px);
-  font-weight: 400;
-  line-height: 1.9;
-  word-break: keep-all;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 40px;
-}
-
-.hero-actions .button {
-  min-width: 172px;
-}
-
-
-/* =====================================================================
-   06. LEAD ATTORNEY
-===================================================================== */
-
-.lead-attorney {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  align-items: stretch;
-  background: var(--cream);
-}
-
-.lead-photo {
-  position: relative;
-  min-height: 460px;
-  overflow: hidden;
-  background: linear-gradient(180deg, #2a2a2c, #141416);
-}
-
-.lead-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 18%;
-  filter: grayscale(100%) contrast(1.06);
-}
-
-.lead-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(48px, 5vw, 76px) clamp(28px, 5vw, 76px);
-}
-
-.lead-label {
-  margin-bottom: 18px;
+.strip-num {
+  display: block;
   color: var(--gold);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.1em;
 }
 
-.lead-name {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 22px;
-}
-
-.lead-name span {
-  font-size: clamp(34px, 3.6vw, 50px);
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  line-height: 1.2;
-}
-
-.lead-name small {
-  color: var(--gold);
-  font-size: clamp(14px, 1.3vw, 17px);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.lead-title {
-  font-size: clamp(17px, 1.6vw, 21px);
+.strip-name {
+  display: block;
+  margin-top: 4px;
+  color: #fff;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.035em;
 }
 
-.lead-sub {
-  margin-top: 6px;
-  color: var(--text-soft);
-  font-size: clamp(14px, 1.3vw, 17px);
-  font-weight: 500;
-  letter-spacing: -0.03em;
+.strip-role {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-faint);
+  font-size: 11.5px;
 }
 
 
-/* ---------- 경력 목록 ---------- */
-
-/* 시안처럼 위→아래로 먼저 채운 뒤 오른쪽 열로 넘어간다 */
-.credentials {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(3, auto);
-  grid-auto-flow: column;
-  gap: 18px 36px;
-  margin: 34px 0 38px;
-  padding: 30px 0;
-  border-top: 1px solid rgba(26, 26, 26, 0.12);
-  border-bottom: 1px solid rgba(26, 26, 26, 0.12);
-}
-
-.credentials li {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  font-size: 14.5px;
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  word-break: keep-all;
-}
-
-.cred-icon {
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  flex: none;
-  color: var(--gold);
-}
-
-.cred-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.lead-body .button-dark {
-  align-self: flex-start;
+/* 스트립 상단의 번호 라벨 */
+.strip-card .strip-index {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  z-index: 1;
+  color: var(--text-faint);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
 
 
 /* =====================================================================
-   07. ATTORNEYS
+   08. 대응 절차
 ===================================================================== */
 
-.attorneys {
-  padding: clamp(64px, 7vw, 100px) 0 clamp(72px, 8vw, 110px);
-  background: var(--ink-soft);
-  color: #fff;
+.process {
+  padding: clamp(28px, 3vw, 44px) clamp(20px, 2.4vw, 36px);
+  background: var(--black);
+  border-top: 1px solid var(--line-soft);
 }
 
-.attorneys-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 32px;
-  margin-bottom: clamp(32px, 4vw, 52px);
-}
-
-.attorneys-head h2 {
-  font-size: clamp(24px, 2.6vw, 34px);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  word-break: keep-all;
-}
-
-.attorneys-head p {
-  margin-top: 10px;
-  color: var(--on-dark-soft);
-  font-size: 15px;
-  word-break: keep-all;
-}
-
-.attorney-grid {
+.process-list {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
 }
 
-.attorney-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: var(--cream);
-  color: var(--text);
-  transition: transform 0.35s var(--ease);
+.process-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px clamp(16px, 2vw, 30px);
+  border-left: 1px solid var(--line-soft);
 }
 
-.attorney-card:hover {
-  transform: translateY(-5px);
+.process-list li:first-child {
+  border-left: 0;
 }
 
-.attorney-photo {
-  aspect-ratio: 4 / 3.4;
-  overflow: hidden;
-  background: linear-gradient(180deg, #2a2a2c, #141416);
+.process-num {
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
-.attorney-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 15%;
-  filter: grayscale(100%) contrast(1.05);
-  transition: transform 0.6s var(--ease);
-}
-
-.attorney-card:hover .attorney-photo img {
-  transform: scale(1.04);
-}
-
-.attorney-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 22px 22px 26px;
-}
-
-.attorney-name {
-  font-size: 19px;
+.process-body h3 {
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
 }
 
-.attorney-name small {
-  margin-left: 5px;
-  color: var(--text-soft);
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.attorney-field {
-  margin-top: 5px;
-  color: var(--text-soft);
-  font-size: 13.5px;
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  word-break: keep-all;
-}
-
-.attorney-career {
-  margin-top: 16px;
-  padding-top: 15px;
-  border-top: 1px solid rgba(26, 26, 26, 0.12);
-}
-
-.attorney-career li {
-  position: relative;
-  padding-left: 12px;
-  color: var(--text-soft);
+.process-body p {
+  margin-top: 6px;
+  color: var(--text-faint);
   font-size: 12.5px;
-  line-height: 1.75;
+  line-height: 1.7;
   word-break: keep-all;
 }
 
-.attorney-career li + li {
-  margin-top: 4px;
-}
-
-.attorney-career li::before {
-  content: "";
-  position: absolute;
-  top: 9px;
-  left: 0;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--gold);
+.process-arrow {
+  color: var(--text-faint);
+  font-size: 17px;
+  font-style: normal;
 }
 
 
 /* =====================================================================
-   08. WHY YUIL
+   09. 전문센터
 ===================================================================== */
 
-.why {
-  padding: clamp(64px, 7vw, 100px) 0;
-  background: var(--cream);
+.centers {
+  padding: clamp(64px, 7vw, 110px) 0;
+  background: var(--panel);
 }
 
-.why-inner {
+.center-list {
   display: grid;
-  grid-template-columns: minmax(0, 0.72fr) minmax(0, 2.28fr);
-  gap: clamp(32px, 4vw, 64px);
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1px;
+  background: var(--line-soft);
+  border: 1px solid var(--line-soft);
 }
 
-.why-label {
-  margin-bottom: 16px;
+.center-item {
+  display: grid;
+  gap: 12px;
+  padding: clamp(28px, 3vw, 40px) clamp(22px, 2.4vw, 32px);
+  background: var(--panel);
+  transition: background 0.3s ease;
+}
+
+.center-item:hover {
+  background: #1e1a15;
+}
+
+.center-num {
   color: var(--gold);
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
 }
 
-.why-head h2 {
-  font-size: clamp(26px, 2.8vw, 38px);
-  font-weight: 800;
-  line-height: 1.28;
-  letter-spacing: -0.045em;
-  word-break: keep-all;
-}
-
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
-}
-
-.why-item {
-  padding: 4px 22px 0;
-  border-left: 1px solid rgba(26, 26, 26, 0.14);
-  text-align: center;
-}
-
-.why-item:last-child {
-  border-right: 1px solid rgba(26, 26, 26, 0.14);
-}
-
-.why-num {
-  display: block;
-  margin-bottom: 18px;
-  color: var(--gold);
-  font-size: 26px;
+.center-name {
+  font-size: 21px;
   font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.why-icon {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  margin: 0 auto 16px;
-  color: var(--ink);
-}
-
-.why-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.why-item h3 {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.45;
   letter-spacing: -0.04em;
-  word-break: keep-all;
 }
 
-.why-item p {
-  margin-top: 12px;
+.center-desc {
   color: var(--text-soft);
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.8;
   word-break: keep-all;
 }
 
 
 /* =====================================================================
-   09. CASES
-===================================================================== */
-
-.cases {
-  padding: clamp(64px, 7vw, 100px) 0;
-  background: var(--paper);
-}
-
-.cases-head {
-  max-width: 760px;
-  margin-bottom: clamp(36px, 4vw, 56px);
-}
-
-.cases-head h2 {
-  font-size: clamp(24px, 2.7vw, 36px);
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  word-break: keep-all;
-}
-
-.cases-note {
-  margin-top: 16px;
-  color: var(--text-soft);
-  font-size: 14.5px;
-  line-height: 1.85;
-  word-break: keep-all;
-}
-
-.case-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-
-.case-card {
-  padding: 30px 28px 32px;
-  border: 1px solid rgba(26, 26, 26, 0.12);
-  background: var(--paper);
-  transition:
-    border-color 0.3s ease,
-    transform    0.3s var(--ease);
-}
-
-.case-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--gold);
-}
-
-.case-tag {
-  display: inline-block;
-  margin-bottom: 16px;
-  padding: 5px 12px;
-  background: var(--cream);
-  color: var(--gold);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
-
-.case-situation {
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1.5;
-  word-break: keep-all;
-}
-
-.case-response {
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(26, 26, 26, 0.1);
-  color: var(--text-soft);
-  font-size: 14px;
-  line-height: 1.85;
-  word-break: keep-all;
-}
-
-.case-response strong {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--gold);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
-
-
-/* =====================================================================
-   10. CONTACT
+   10. 상담안내
 ===================================================================== */
 
 .contact {
-  padding: clamp(64px, 7vw, 100px) 0;
-  background: var(--ink);
-  color: #fff;
+  padding: clamp(64px, 7vw, 110px) 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(201, 164, 92, 0.12), transparent 55%),
+    var(--black);
 }
 
 .contact-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.6fr);
   align-items: center;
   gap: clamp(36px, 5vw, 72px);
-}
-
-.contact-copy h2 {
-  font-size: clamp(26px, 3vw, 42px);
-  font-weight: 800;
-  line-height: 1.3;
-  letter-spacing: -0.045em;
-  word-break: keep-all;
 }
 
 .contact-copy > p {
   max-width: 520px;
   margin-top: 20px;
-  color: var(--on-dark-soft);
+  color: var(--text-soft);
   font-size: 15px;
   line-height: 1.9;
   word-break: keep-all;
@@ -1018,12 +1125,12 @@ img, svg {
   gap: 18px 48px;
   margin-top: 34px;
   padding-top: 28px;
-  border-top: 1px solid var(--ink-line);
+  border-top: 1px solid var(--line);
 }
 
 .contact-facts dt {
   margin-bottom: 5px;
-  color: var(--gold-pale);
+  color: var(--gold);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -1037,13 +1144,13 @@ img, svg {
 /* 전화번호는 손가락으로 누르는 링크이므로 터치 영역을 확보한다 */
 .contact-facts dd a {
   display: inline-block;
-  margin: -6px -10px;
-  padding: 6px 10px;
+  margin: -8px -10px;
+  padding: 8px 10px;
   transition: color 0.2s ease;
 }
 
 .contact-facts dd a:hover {
-  color: var(--gold-pale);
+  color: var(--gold-light);
 }
 
 .contact-actions {
@@ -1053,14 +1160,15 @@ img, svg {
 
 
 /* =====================================================================
-   11. FOOTER · 모바일 하단 바
+   11. 푸터 · 모바일 하단 바
 ===================================================================== */
 
 .footer {
-  padding: clamp(48px, 5vw, 70px) 0 34px;
-  background: #0b0b0b;
-  color: var(--on-dark-faint);
+  padding: clamp(48px, 5vw, 72px) 0 32px;
+  background: #0a0a0b;
+  color: var(--text-faint);
   font-size: 13px;
+  border-top: 1px solid var(--line-soft);
 }
 
 .footer-inner {
@@ -1073,27 +1181,25 @@ img, svg {
 .footer-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   color: #fff;
 }
 
 .footer-brand .brand-mark {
-  color: var(--gold);
+  font-size: 22px;
 }
 
-.footer-brand strong {
-  display: block;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+.footer-brand p {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .footer-brand small {
-  display: block;
-  margin-top: 3px;
-  color: var(--on-dark-faint);
+  color: var(--text-faint);
   font-size: 9px;
-  letter-spacing: 0.2em;
+  font-weight: 500;
+  letter-spacing: 0.18em;
 }
 
 .footer-info p + p {
@@ -1103,7 +1209,7 @@ img, svg {
 .footer-disclaimer {
   margin-top: 14px !important;
   max-width: 460px;
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.3);
   font-size: 12px;
   line-height: 1.75;
   word-break: keep-all;
@@ -1126,8 +1232,8 @@ img, svg {
 .footer-bottom {
   margin-top: 40px;
   padding-top: 22px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.3);
+  border-top: 1px solid var(--line-soft);
+  color: rgba(255, 255, 255, 0.28);
   font-size: 12px;
 }
 
@@ -1140,81 +1246,102 @@ img, svg {
    12. 반응형
 ===================================================================== */
 
-/* ---------- 노트북 ---------- */
+/* ---------- 데스크톱 축소 ---------- */
 
-@media (max-width: 1100px) {
+@media (max-width: 1240px) {
   .nav {
-    gap: 24px;
+    gap: 26px;
   }
 
   .nav a {
     font-size: 14px;
   }
 
-  .why-inner {
-    grid-template-columns: 1fr;
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 
-  .why-item {
-    text-align: left;
-    padding: 0 18px;
+  .process-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .why-icon {
-    margin-inline: 0;
+  .process-list li:nth-child(3) {
+    border-left: 0;
+  }
+
+  .process-list li:nth-child(n + 3) {
+    border-top: 1px solid var(--line-soft);
   }
 }
 
 
 /* ---------- 태블릿 ---------- */
 
-@media (max-width: 900px) {
+@media (max-width: 980px) {
   :root {
     --header-h: 68px;
+    --rail-w: 0px;
   }
 
-  .nav {
+  .nav,
+  .rail {
     display: none;
   }
 
-  .hero-visual {
-    width: 100%;
-  }
-
-  .hero-visual::after {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(17, 17, 17, 0.72) 0%,
-        rgba(17, 17, 17, 0.55) 40%,
-        rgba(17, 17, 17, 0.94) 100%
-      );
-  }
-
-  .lead-attorney {
+  /* 히어로를 위아래로 쌓는다 */
+  .hero {
     grid-template-columns: 1fr;
-  }
-
-  .lead-photo {
     min-height: 0;
-    aspect-ratio: 3 / 2;
   }
 
-  .lead-photo img {
-    object-position: center 12%;
+  .hero-left {
+    min-height: 380px;
   }
 
-  .attorney-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .hero-left-inner {
+    margin-left: 0;
   }
 
-  .why-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px 0;
+  .hero-right {
+    min-height: 440px;
   }
 
-  .why-item:nth-child(2) {
-    border-right: 1px solid rgba(26, 26, 26, 0.14);
+  .hero-profile-text {
+    padding: 40px 0 40px 24px;
+  }
+
+  /* 스트립은 가로 스와이프 */
+  .strip {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  .strip-aside {
+    padding: 18px var(--gutter);
+  }
+
+  .strip-scroll {
+    display: none;
+  }
+
+  .strip-arrow {
+    display: none;
+  }
+
+  .strip-list {
+    grid-auto-columns: 44vw;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .strip-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .strip-card {
+    scroll-snap-align: start;
   }
 
   .contact-inner {
@@ -1229,7 +1356,6 @@ img, svg {
 
   .footer-links {
     grid-auto-flow: column;
-    grid-template-columns: none;
     justify-content: start;
     gap: 20px;
     text-align: left;
@@ -1248,182 +1374,135 @@ img, svg {
     padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
   }
 
+  .brand {
+    gap: 11px;
+  }
+
   .brand-mark {
-    width: 32px;
-    height: 32px;
+    font-size: 21px;
+    letter-spacing: 0.18em;
+  }
+
+  .brand-divider {
+    height: 20px;
   }
 
   .brand-text strong {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .brand-text small {
-    font-size: 8px;
+    font-size: 7.5px;
   }
 
   /* 히어로 */
-  .hero {
-    min-height: 0;
-    padding: calc(var(--header-h) + 34px) 0 48px;
+  .hero-left {
+    min-height: 320px;
   }
 
-  .hero-inner {
-    max-width: none;
-    margin-inline: auto;
+  .hero-left-inner {
+    padding: 34px var(--gutter);
   }
 
-  .hero-visual {
-    /* 모바일에서는 인물이 텍스트 뒤로 은은하게 깔린다 */
-    inset: 0;
-    width: 100%;
-  }
-
-  .hero-visual img {
-    object-position: center 18%;
-  }
-
-  .hero-eyebrow {
-    font-size: 16px;
+  .hero-kicker {
+    font-size: 34px;
   }
 
   .hero-title {
-    font-size: 34px;
-    line-height: 1.28;
+    font-size: 38px;
   }
 
-  .hero-lead {
-    margin-top: 22px;
-    font-size: 14px;
-    line-height: 1.85;
+  .hero-firm {
+    font-size: 16px;
   }
 
-  .hero-actions {
-    gap: 10px;
-    margin-top: 30px;
+  .hero-right {
+    min-height: 0;
   }
 
-  .hero-actions .button {
-    flex: 1;
-    min-width: 0;
-    padding: 0 14px;
-  }
-
-  /* 대표변호사 */
-  .lead-photo {
-    aspect-ratio: 4 / 3;
-  }
-
-  .lead-name {
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-
-  .credentials {
+  /* 인물은 텍스트 뒤로 보내고 아래로 정렬 */
+  .hero-profile {
     grid-template-columns: 1fr;
-    grid-template-rows: none;
-    grid-auto-flow: row;
+    position: relative;
+  }
+
+  .hero-profile-text {
+    position: relative;
+    z-index: 1;
+    padding: 34px var(--gutter) 20px;
+  }
+
+  .hero-profile-photo {
+    height: 300px;
+    margin-top: -10px;
+  }
+
+  .hero-profile-photo img {
+    object-position: center bottom;
+  }
+
+  .profile-name {
+    font-size: 32px;
+  }
+
+  .hero-controls {
+    right: var(--gutter);
+    bottom: 16px;
+  }
+
+  .circle-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* 스트립 */
+  .strip-list {
+    grid-auto-columns: 58vw;
+  }
+
+  /* 절차 */
+  .process {
+    padding: 8px var(--gutter) 20px;
+  }
+
+  .process-list {
+    grid-template-columns: 1fr;
+  }
+
+  .process-list li {
     gap: 14px;
-    margin: 26px 0 30px;
-    padding: 24px 0;
+    padding: 18px 0;
+    border-left: 0;
+    border-top: 1px solid var(--line-soft);
   }
 
-  .credentials li {
-    font-size: 14px;
+  .process-list li:first-child {
+    border-top: 0;
   }
 
-  .lead-body .button-dark {
-    align-self: stretch;
-    gap: 20px;
+  .process-list li:nth-child(n + 3) {
+    border-top: 1px solid var(--line-soft);
   }
 
-  /* 변호사 */
-  .attorneys-head {
+  .process-body p br {
+    display: none;
+  }
+
+  /* 전문센터 */
+  .section-head {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 18px;
   }
 
-  .attorney-grid {
+  .center-list {
     grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  /* 모바일에서는 사진 좌측 · 정보 우측 가로형 카드 */
-  .attorney-card {
-    display: grid;
-    grid-template-columns: 124px 1fr;
-  }
-
-  .attorney-photo {
-    aspect-ratio: auto;
-    height: 100%;
-  }
-
-  .attorney-body {
-    padding: 18px 18px 20px;
-  }
-
-  /* WHY YUIL */
-  .why-grid {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .why-item {
-    display: grid;
-    grid-template-columns: 44px 1fr;
-    gap: 4px 16px;
-    padding: 24px 0;
-    border-left: 0;
-    border-top: 1px solid rgba(26, 26, 26, 0.14);
-  }
-
-  .why-item:last-child {
-    border-right: 0;
-    border-bottom: 1px solid rgba(26, 26, 26, 0.14);
-  }
-
-  .why-item:nth-child(2) {
-    border-right: 0;
-  }
-
-  .why-num {
-    grid-row: 1 / 3;
-    margin: 0;
-    font-size: 20px;
-  }
-
-  .why-icon {
-    display: none;
-  }
-
-  .why-item h3 {
-    font-size: 17px;
-  }
-
-  .why-item h3 br {
-    display: none;
-  }
-
-  .why-item p {
-    grid-column: 2;
-    margin-top: 8px;
-  }
-
-  /* 해결 사례 */
-  .case-list {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .case-card {
-    padding: 24px 22px 26px;
   }
 
   /* 상담 */
   .contact-facts {
-    gap: 16px 34px;
-    margin-top: 28px;
+    gap: 16px 32px;
+    margin-top: 26px;
   }
 
   .contact-facts dd {
@@ -1447,8 +1526,8 @@ img, svg {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
     padding: 9px var(--gutter) calc(9px + env(safe-area-inset-bottom, 0px));
-    background: rgba(17, 17, 17, 0.94);
-    border-top: 1px solid var(--ink-line);
+    background: rgba(13, 13, 15, 0.95);
+    border-top: 1px solid var(--line);
     backdrop-filter: blur(14px);
   }
 
@@ -1469,12 +1548,12 @@ img, svg {
 
   .mobile-bar-call {
     background: linear-gradient(135deg, var(--gold-light), var(--gold));
-    color: #fff;
+    color: var(--black);
   }
 
   .mobile-bar-kakao {
-    border: 1.5px solid rgba(255, 255, 255, 0.45);
-    color: #fff;
+    background: var(--kakao);
+    color: #3c1e1e;
   }
 }
 

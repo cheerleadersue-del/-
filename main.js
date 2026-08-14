@@ -2,9 +2,10 @@
    법무법인 유일 — LAW FIRM YUIL
    main.js
 
-   - 헤더 상태 · 현재 섹션 표시
+   - 변호인단 캐러셀 (히어로 ↔ 썸네일 스트립 연동)
    - 모바일 메뉴
-   - 변호사 · 해결 사례 카드 렌더링
+   - 전문센터 렌더링
+   - 헤더 현재 섹션 표시
 ===================================================================== */
 
 (() => {
@@ -20,172 +21,217 @@
   /* ===================================================================
      데이터
 
-     ⚠ 사진 파일과 변호사 성명의 짝은 시안만으로는 확정할 수 없어
-        성별·인상만 보고 임시로 배정했다. 실제 사진으로 반드시 확인할 것.
+     ⚠ 사진 파일과 성명의 짝은 시안만으로 확정할 수 없어 임시 배정했다.
+        실제 인물과 대조해 image 값을 확인할 것.
   =================================================================== */
 
   const attorneys = [
     {
-      name: "심상한",
-      title: "변호사",
-      field: "기업 회생 · 파산 전문",
-      image: "assets/lawyer-05.webp",
-      careers: [
-        "사법시험 49회 합격",
-        "前 법무법인 세명 구성원",
-        "前 서울지방노동위원회 공익위원 (심판담당)",
-        "25년 이상 경력"
-      ]
-    },
-    {
-      name: "정주현",
-      title: "변호사",
-      field: "부동산 · 민사 · 형사 전문",
-      image: "assets/lawyer-02.webp",
-      careers: [
-        "사법연수원 30기 수료",
-        "前 서울중앙지방법원 조정위원",
-        "부동산 · 민사 분야 전문",
-        "형사사건 다수 수행"
-      ]
+      name: "정호길",
+      role: "대표변호사",
+      title: "25년 경력 형사전문 변호사",
+      image: "assets/lawyer-01.webp",
+      description:
+        "수사기관의 시각에서<br>증거와 진술의 흐름을<br>분석합니다."
     },
     {
       name: "김제도",
-      title: "변호사",
-      field: "형사사건 전문",
+      role: "파트너변호사",
+      title: "형사 · 기업분쟁",
       image: "assets/lawyer-04.webp",
-      careers: [
-        "사법연수원 47기 수료",
-        "마약류관리법, 사기, 폭행, 상해, 도주치상 등 다수 수행",
-        "형사사건 전문"
-      ]
+      description:
+        "사건 기록과 사실관계를<br>면밀히 검토해<br>쟁점을 정리합니다."
+    },
+    {
+      name: "정주형",
+      role: "파트너변호사",
+      title: "부동산 · 민사 · 형사",
+      image: "assets/lawyer-02.webp",
+      description:
+        "계약과 손해배상의<br>핵심 자료와 책임 관계를<br>분석합니다."
+    },
+    {
+      name: "김의환",
+      role: "파트너변호사",
+      title: "형사 · 수사 대응",
+      image: "assets/lawyer-03.webp",
+      description:
+        "조사 단계부터 변론까지<br>필요한 대응 방향을<br>구체적으로 준비합니다."
     },
     {
       name: "이경숙",
-      title: "변호사",
-      field: "이혼 · 상속 · 부동산 · 형사 전문",
-      image: "assets/lawyer-06.webp",
-      careers: [
-        "사법시험 50회 합격",
-        "대한변협 전문분야 등록",
-        "이혼 · 상속 사건 다수 수행",
-        "형사사건 전문"
-      ]
+      role: "파트너변호사",
+      title: "이혼 · 상속 · 형사",
+      image: "assets/lawyer-05.webp",
+      description:
+        "법률적 판단과<br>의뢰인의 현실을 함께<br>고려해 방향을 정합니다."
     }
   ];
 
-  /*
-    해결 사례 — 대한변협 변호사광고규정상 승소율·성공률 같은 수치나
-    특정 결과를 단정하는 표현은 쓸 수 없다. 그래서 결과가 아니라
-    "어떤 상황에서 무엇을 하는가" 만 적는다.
-  */
-  const cases = [
-    {
-      tag: "마약사건",
-      situation: "단순 투약으로 조사 통보를 받은 경우",
-      response:
-        "모발·소변 감정 결과의 의미와 한계를 검토하고, 초기 진술의 방향과 " +
-        "치료·재활 계획을 함께 준비합니다."
-    },
-    {
-      tag: "압수수색",
-      situation: "휴대폰과 계좌가 압수된 경우",
-      response:
-        "압수 범위의 적법성을 확인하고, 텔레그램·계좌 기록이 실제로 무엇을 " +
-        "증명하는지 포렌식 관점에서 분석합니다."
-    },
-    {
-      tag: "구속영장",
-      situation: "영장실질심사를 앞둔 경우",
-      response:
-        "도주·증거인멸 우려를 다투는 자료를 정리하고, 심문 당일 진술 내용을 " +
-        "함께 준비합니다."
-    },
-    {
-      tag: "고소 · 고발",
-      situation: "고소를 당했거나 고소를 준비하는 경우",
-      response:
-        "사실관계와 증거를 먼저 정리해 무엇이 증명되고 무엇이 증명되지 않는지 " +
-        "가린 뒤 대응 순서를 정합니다."
-    }
+  const centers = [
+    { name: "형사센터", en: "CRIMINAL",
+      desc: "초기 진술부터 압수수색, 조사와 재판까지 증거를 중심으로 대응합니다." },
+    { name: "민사센터", en: "CIVIL",
+      desc: "계약과 손해배상, 부동산 분쟁의 핵심 자료와 책임 관계를 분석합니다." },
+    { name: "가사센터", en: "FAMILY",
+      desc: "이혼과 상속, 친권과 양육권 문제를 현실적인 해결 방향으로 설계합니다." },
+    { name: "회생센터", en: "RECOVERY",
+      desc: "채무와 소득, 재산 구조를 분석해 개인회생과 파산 절차를 준비합니다." },
+    { name: "공증센터", en: "NOTARY",
+      desc: "계약과 의사표시를 명확한 문서와 절차로 남겨 미래의 분쟁을 예방합니다." }
   ];
+
+  const pad = (n) => String(n).padStart(2, "0");
 
 
   /* ===================================================================
-     변호사 카드
+     변호인단 캐러셀
   =================================================================== */
 
-  const attorneyGrid = $("#attorneyGrid");
+  const heroProfile = $("#heroProfile");
+  const profileRole  = $("#profileRole");
+  const profileName  = $("#profileName");
+  const profileTitle = $("#profileTitle");
+  const profileDesc  = $("#profileDesc");
+  const profilePhoto = $("#profilePhoto");
+  const heroCurrent  = $("#heroCurrent");
+  const heroTotal    = $("#heroTotal");
+  const stripList    = $("#stripList");
 
-  if (attorneyGrid) {
-    attorneyGrid.replaceChildren(...attorneys.map((person) => {
+  let activeIndex = 0;
+  let changeTimer = null;
+
+  /* 썸네일 스트립 */
+  if (stripList) {
+    stripList.replaceChildren(...attorneys.map((person, index) => {
       const li = document.createElement("li");
-      li.className = "attorney-card";
 
-      const photo = document.createElement("div");
-      photo.className = "attorney-photo";
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "strip-card";
+      card.setAttribute("role", "tab");
+      card.setAttribute("aria-selected", String(index === 0));
+      card.dataset.index = String(index);
 
       const img = document.createElement("img");
       img.src = person.image;
-      img.alt = `${person.name} ${person.title}`;
-      img.loading = "lazy";
-      photo.append(img);
+      img.alt = "";
+      img.loading = index < 3 ? "eager" : "lazy";
 
-      const body = document.createElement("div");
-      body.className = "attorney-body";
+      const indexLabel = document.createElement("span");
+      indexLabel.className = "strip-index";
+      indexLabel.textContent = pad(index + 1);
 
-      const name = document.createElement("h3");
-      name.className = "attorney-name";
-      name.append(document.createTextNode(person.name));
-      const title = document.createElement("small");
-      title.textContent = person.title;
-      name.append(title);
+      const info = document.createElement("span");
+      info.className = "strip-info";
 
-      const field = document.createElement("p");
-      field.className = "attorney-field";
-      field.textContent = person.field;
+      const name = document.createElement("span");
+      name.className = "strip-name";
+      name.textContent = person.name;
 
-      const careers = document.createElement("ul");
-      careers.className = "attorney-career";
-      careers.append(...person.careers.map((career) => {
-        const item = document.createElement("li");
-        item.textContent = career;
-        return item;
-      }));
+      const role = document.createElement("span");
+      role.className = "strip-role";
+      role.textContent = person.role;
 
-      body.append(name, field, careers);
-      li.append(photo, body);
+      info.append(name, role);
+      card.append(img, indexLabel, info);
+      li.append(card);
       return li;
     }));
   }
 
+  const stripCards = $$(".strip-card");
+
+  const render = (index, animate = true) => {
+    const person = attorneys[index];
+    if (!person) return;
+
+    activeIndex = index;
+    window.clearTimeout(changeTimer);
+
+    stripCards.forEach((card, i) => {
+      card.classList.toggle("is-active", i === index);
+      card.setAttribute("aria-selected", String(i === index));
+    });
+
+    if (heroCurrent) heroCurrent.textContent = pad(index + 1);
+
+    const apply = () => {
+      if (profileRole)  profileRole.textContent  = person.role;
+      if (profileName)  profileName.textContent  = person.name;
+      if (profileTitle) profileTitle.textContent = person.title;
+
+      /* description 은 줄바꿈만 포함한 자체 문자열이라 innerHTML 로 넣는다 */
+      if (profileDesc) profileDesc.innerHTML = person.description;
+
+      if (profilePhoto) {
+        profilePhoto.src = person.image;
+        profilePhoto.alt = `${person.name} ${person.role}`;
+      }
+    };
+
+    if (!animate || !heroProfile || prefersReducedMotion) {
+      apply();
+      return;
+    }
+
+    heroProfile.classList.add("is-changing");
+
+    changeTimer = window.setTimeout(() => {
+      apply();
+      requestAnimationFrame(() => heroProfile.classList.remove("is-changing"));
+      /* rAF 는 탭이 백그라운드면 멈추므로 타이머로 안전망을 둔다 */
+      window.setTimeout(() => heroProfile.classList.remove("is-changing"), 200);
+    }, 260);
+  };
+
+  const step = (delta) => {
+    render((activeIndex + delta + attorneys.length) % attorneys.length);
+  };
+
+  stripCards.forEach((card) => {
+    card.addEventListener("click", () => render(Number(card.dataset.index)));
+  });
+
+  $("#heroPrev")?.addEventListener("click", () => step(-1));
+  $("#heroNext")?.addEventListener("click", () => step(1));
+  $("#stripPrev")?.addEventListener("click", () => step(-1));
+  $("#stripNext")?.addEventListener("click", () => step(1));
+
+  /* 스트립 위에서 좌우 방향키 */
+  stripList?.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft")  { event.preventDefault(); step(-1); }
+    if (event.key === "ArrowRight") { event.preventDefault(); step(1); }
+  });
+
+  if (heroTotal) heroTotal.textContent = pad(attorneys.length);
+  render(0, false);
+
 
   /* ===================================================================
-     해결 사례 카드
+     전문센터
   =================================================================== */
 
-  const caseList = $("#caseList");
+  const centerList = $("#centerList");
 
-  if (caseList) {
-    caseList.replaceChildren(...cases.map((item) => {
+  if (centerList) {
+    centerList.replaceChildren(...centers.map((center, index) => {
       const li = document.createElement("li");
-      li.className = "case-card";
+      li.className = "center-item";
 
-      const tag = document.createElement("span");
-      tag.className = "case-tag";
-      tag.textContent = item.tag;
+      const num = document.createElement("p");
+      num.className = "center-num";
+      num.textContent = `${pad(index + 1)} · ${center.en}`;
 
-      const situation = document.createElement("h3");
-      situation.className = "case-situation";
-      situation.textContent = item.situation;
+      const name = document.createElement("h3");
+      name.className = "center-name";
+      name.textContent = center.name;
 
-      const response = document.createElement("p");
-      response.className = "case-response";
-      const label = document.createElement("strong");
-      label.textContent = "이렇게 대응합니다";
-      response.append(label, document.createTextNode(item.response));
+      const desc = document.createElement("p");
+      desc.className = "center-desc";
+      desc.textContent = center.desc;
 
-      li.append(tag, situation, response);
+      li.append(num, name, desc);
       return li;
     }));
   }
@@ -234,10 +280,9 @@
 
 
   /* ===================================================================
-     헤더 상태 · 현재 섹션
+     헤더 현재 섹션
   =================================================================== */
 
-  const header = $("#header");
   const navLinks = $$(".nav a");
 
   const sections = navLinks
@@ -263,21 +308,6 @@
 
     sections.forEach((section) => observer.observe(section));
   }
-
-  let ticking = false;
-
-  const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-
-    requestAnimationFrame(() => {
-      header?.classList.toggle("is-scrolled", window.scrollY > 12);
-      ticking = false;
-    });
-  };
-
-  addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
 
 
   /* ===================================================================
