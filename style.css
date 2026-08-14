@@ -4,17 +4,16 @@
 
    01. 토큰
    02. 리셋 · 기본
-   03. 공통 (셸 · 버튼 · 원형 버튼 · 섹션)
+   03. 공통 (셸 · 버튼 · 원형 버튼 · 라벨)
    04. 헤더 · 모바일 메뉴
-   05. 우측 상담 레일
-   06. HERO (좌 사옥 / 우 변호인단 캐러셀)
-   07. 변호인단 썸네일 스트립
-   08. 대응 절차
-   09. 전문센터
-   10. 상담안내
-   11. 푸터 · 모바일 하단 바
-   12. 반응형
-   13. 모션 최소화
+   05. 변호인단 헤드
+   06. 커버플로우 캐러셀
+   07. 변호사 상세
+   08. 지표
+   09. 상담안내
+   10. 푸터 · 모바일 하단 바
+   11. 반응형
+   12. 모션 최소화
 ===================================================================== */
 
 
@@ -23,11 +22,11 @@
 ===================================================================== */
 
 :root {
-  --black:      #0d0d0f;
-  --panel:      #141416;
-  --panel-warm: #1c1713;
-  --line:       rgba(255, 255, 255, 0.12);
-  --line-soft:  rgba(255, 255, 255, 0.07);
+  --black:      #0a0908;
+  --panel:      #100e0c;
+  --panel-up:   #16130f;
+  --line:       rgba(255, 255, 255, 0.10);
+  --line-gold:  rgba(201, 164, 92, 0.34);
 
   --gold:       #c9a45c;
   --gold-light: #e0c489;
@@ -36,14 +35,19 @@
 
   --text:       #ffffff;
   --text-soft:  rgba(255, 255, 255, 0.66);
-  --text-faint: rgba(255, 255, 255, 0.42);
+  --text-faint: rgba(255, 255, 255, 0.40);
 
-  --shell:  1280px;
+  --shell:  1180px;
   --gutter: 24px;
-  --header-h: 80px;
-  --rail-w:   64px;
+  --header-h: 78px;
 
-  --ease: cubic-bezier(0.22, 0.8, 0.22, 1);
+  --ease:     cubic-bezier(0.22, 0.8, 0.22, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.30, 1);
+
+  /* 커버플로우 — JS 가 화면 폭에 맞춰 덮어쓴다 */
+  --card-w:  268px;
+  --card-h:  432px;
+  --cf-step: 196px;
 
   --font-sans:
     "Pretendard Variable", Pretendard,
@@ -71,8 +75,6 @@ html {
 
 body {
   margin: 0;
-  /* 우측 레일이 콘텐츠를 가리지 않도록 그만큼 비워 둔다 */
-  padding-right: var(--rail-w);
   background: var(--black);
   color: var(--text);
   font-family: var(--font-sans);
@@ -123,17 +125,6 @@ img, svg {
   border-radius: 4px;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 .skip-link {
   position: fixed;
   top: -80px;
@@ -161,35 +152,29 @@ img, svg {
   margin-inline: auto;
 }
 
-.section-label {
-  margin-bottom: 14px;
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
   color: var(--gold);
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+}
+
+.eyebrow i {
+  display: block;
+  width: 34px;
+  height: 1px;
+  background: currentColor;
 }
 
 .display {
-  font-size: clamp(26px, 3vw, 42px);
+  font-size: clamp(26px, 3vw, 40px);
   font-weight: 700;
-  line-height: 1.28;
+  line-height: 1.3;
   letter-spacing: -0.045em;
-  word-break: keep-all;
-}
-
-.section-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 40px;
-  margin-bottom: clamp(32px, 4vw, 56px);
-}
-
-.section-note {
-  max-width: 340px;
-  color: var(--text-soft);
-  font-size: 14.5px;
-  line-height: 1.85;
   word-break: keep-all;
 }
 
@@ -231,7 +216,7 @@ img, svg {
 }
 
 .button-outline {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.36);
   color: #fff;
 }
 
@@ -251,12 +236,14 @@ img, svg {
 .circle-button {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   flex: none;
   border: 1px solid var(--line);
   border-radius: 50%;
+  background: rgba(10, 9, 8, 0.55);
   color: var(--text-soft);
+  backdrop-filter: blur(6px);
   transition:
     border-color 0.25s ease,
     background   0.25s ease,
@@ -264,13 +251,13 @@ img, svg {
 }
 
 .circle-button svg {
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
 }
 
 .circle-button:hover {
   border-color: var(--gold);
-  background: rgba(201, 164, 92, 0.12);
+  background: rgba(201, 164, 92, 0.14);
   color: var(--gold-light);
 }
 
@@ -284,40 +271,39 @@ img, svg {
   top: 0;
   z-index: 200;
   height: var(--header-h);
-  background: var(--black);
-  border-bottom: 1px solid var(--line-soft);
+  background: rgba(10, 9, 8, 0.86);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   gap: 32px;
-  width: min(100% - var(--gutter) * 2, 1600px);
+  width: min(100% - var(--gutter) * 2, 1440px);
   height: 100%;
   margin-inline: auto;
 }
 
-
-/* ---------- 브랜드 ---------- */
-
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   margin-right: auto;
 }
 
 .brand-mark {
-  color: #fff;
-  font-size: 27px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  color: var(--gold);
 }
 
-.brand-divider {
-  width: 1px;
-  height: 26px;
-  background: var(--line);
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
 }
 
 .brand-text {
@@ -326,9 +312,9 @@ img, svg {
 }
 
 .brand-text strong {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
 }
 
 .brand-text small {
@@ -344,7 +330,7 @@ img, svg {
 .nav {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 38px;
 }
 
 .nav a {
@@ -361,9 +347,9 @@ img, svg {
   content: "";
   position: absolute;
   right: 100%;
-  bottom: 4px;
+  bottom: 2px;
   left: 0;
-  height: 1.5px;
+  height: 2px;
   background: var(--gold);
   transition: right 0.35s var(--ease);
 }
@@ -379,36 +365,26 @@ img, svg {
 }
 
 
-/* ---------- 메뉴 버튼 (원형) ---------- */
+/* ---------- 메뉴 버튼 ---------- */
 
 .menu-toggle {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   flex: none;
-  border: 1px solid var(--line);
-  border-radius: 50%;
   color: #fff;
-  transition:
-    border-color 0.25s ease,
-    background   0.25s ease;
-}
-
-.menu-toggle:hover {
-  border-color: var(--gold);
-  background: rgba(201, 164, 92, 0.12);
 }
 
 .menu-bars {
   display: grid;
-  gap: 4px;
-  width: 17px;
+  gap: 5px;
+  width: 24px;
 }
 
 .menu-bars i {
   display: block;
-  height: 1.4px;
+  height: 1.6px;
   background: currentColor;
   transition:
     transform 0.3s var(--ease),
@@ -416,7 +392,7 @@ img, svg {
 }
 
 .menu-toggle.is-open .menu-bars i:nth-child(1) {
-  transform: translateY(5.4px) rotate(45deg);
+  transform: translateY(6.6px) rotate(45deg);
 }
 
 .menu-toggle.is-open .menu-bars i:nth-child(2) {
@@ -424,7 +400,7 @@ img, svg {
 }
 
 .menu-toggle.is-open .menu-bars i:nth-child(3) {
-  transform: translateY(-5.4px) rotate(-45deg);
+  transform: translateY(-6.6px) rotate(-45deg);
 }
 
 
@@ -458,8 +434,8 @@ img, svg {
   align-items: center;
   justify-content: space-between;
   padding: 22px 2px;
-  border-bottom: 1px solid var(--line-soft);
-  font-size: 23px;
+  border-bottom: 1px solid var(--line);
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.04em;
 }
@@ -485,606 +461,441 @@ img, svg {
 
 
 /* =====================================================================
-   05. 우측 상담 레일
+   05. 변호인단 헤드
 ===================================================================== */
 
-.rail {
-  position: fixed;
+.lawyers {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(48px, 6vw, 86px) 0 clamp(56px, 6vw, 92px);
+  overflow: hidden;
+}
+
+.lawyers-backdrop {
+  position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
-  z-index: 210;
-  display: flex;
-  flex-direction: column;
-  width: var(--rail-w);
-  border-left: 1px solid rgba(0, 0, 0, 0.28);
+  z-index: -1;
+  width: min(72%, 1000px);
+  height: clamp(340px, 44vw, 560px);
+  object-fit: cover;
+  -webkit-mask-image:
+    linear-gradient(100deg, transparent 4%, #000 46%),
+    linear-gradient(180deg, #000 52%, transparent 96%);
+  mask-image:
+    linear-gradient(100deg, transparent 4%, #000 46%),
+    linear-gradient(180deg, #000 52%, transparent 96%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
-/* 전화 — 세로쓰기 */
-.rail-call {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  padding: 28px 0;
-  background: linear-gradient(180deg, #a98a4b, #8a6b2f);
-  color: #fff;
-  transition: filter 0.25s ease;
+.lawyers-head {
+  position: relative;
+  margin-bottom: clamp(32px, 4vw, 56px);
 }
 
-.rail-call:hover {
-  filter: brightness(1.12);
-}
-
-.rail-call svg {
-  width: 21px;
-  height: 21px;
-  flex: none;
-}
-
-.rail-label,
-.rail-number {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  letter-spacing: 0.16em;
-}
-
-.rail-label {
-  font-size: 13px;
+.lawyers-title {
+  font-size: clamp(30px, 4.2vw, 58px);
   font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.05em;
+  word-break: keep-all;
 }
 
-.rail-number {
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 12px;
-  font-weight: 600;
+.lawyers-title em {
+  color: var(--gold);
+  font-style: normal;
 }
 
-.rail-item {
-  display: grid;
-  place-items: center;
-  gap: 8px;
-  padding: 20px 4px;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  background: var(--panel-warm);
+.lawyers-lead {
+  margin-top: clamp(18px, 2vw, 28px);
   color: var(--text-soft);
-  font-size: 10.5px;
-  font-weight: 600;
-  line-height: 1.45;
-  text-align: center;
-  transition:
-    background 0.25s ease,
-    color      0.25s ease;
-}
-
-.rail-item svg {
-  width: 21px;
-  height: 21px;
-}
-
-.rail-item:hover {
-  background: #2a221a;
-  color: #fff;
-}
-
-.rail-kakao {
-  background: var(--kakao);
-  color: #3c1e1e;
-}
-
-.rail-kakao:hover {
-  background: #ffe94d;
-  color: #3c1e1e;
+  font-size: clamp(13.5px, 1.1vw, 15.5px);
+  line-height: 1.95;
+  word-break: keep-all;
 }
 
 
 /* =====================================================================
-   06. HERO
+   06. 커버플로우 캐러셀
 ===================================================================== */
 
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  min-height: clamp(460px, 56vw, 620px);
-}
-
-
-/* ---------- 좌: 사옥 ---------- */
-
-.hero-left {
+.coverflow {
   position: relative;
-  isolation: isolate;
   display: flex;
   align-items: center;
-  overflow: hidden;
-  background: #10131a;
+  justify-content: center;
+  padding: 0 clamp(16px, 5vw, 76px) 58px;
 }
 
-.hero-building {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
+.coverflow-stage {
+  position: relative;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 42%;
-  /* 시안처럼 밤 톤으로 눌러 제목이 사진 위에서도 읽히게 한다 */
-  filter: brightness(0.52) saturate(0.7) contrast(1.08);
+  height: calc(var(--card-h) + 34px);
+  perspective: 1700px;
+  /* 세로 스크롤은 브라우저에, 가로 제스처는 캐러셀에 넘긴다 */
+  touch-action: pan-y;
+  cursor: grab;
 }
 
-.hero-left::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(
-      100deg,
-      rgba(8, 9, 12, 0.9) 0%,
-      rgba(8, 9, 12, 0.62) 48%,
-      rgba(8, 9, 12, 0.3) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(8, 9, 12, 0.55) 0%,
-      transparent 32%,
-      rgba(8, 9, 12, 0.5) 100%
-    );
+.coverflow-stage:active {
+  cursor: grabbing;
 }
 
-.hero-left-inner {
-  padding: clamp(36px, 4vw, 64px) clamp(24px, 4vw, 60px);
-  margin-left: max(calc((100vw - var(--rail-w) - 1600px) / 2), 0px);
+.coverflow-stage:focus-visible {
+  outline-offset: 8px;
 }
 
 /*
-  한글은 라틴 문자보다 글자 상·하 여백이 좁다.
-  큰 제목이라도 line-height 를 1.1 아래로 내리면 획이 겹친다.
+  트랙은 inset:0 으로 스테이지 전체를 덮으면서 z=0 평면에 놓인다.
+  카드는 translateZ 로 뒤에 있으므로, preserve-3d 히트테스트에서
+  트랙이 카드를 가려 측면 카드를 클릭할 수 없게 된다.
+  트랙 자신은 포인터 대상에서 빼고 카드만 받게 한다.
 */
-.hero-kicker {
-  background: linear-gradient(100deg, var(--gold-light), var(--gold-deep));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-size: clamp(34px, 4.4vw, 62px);
-  font-weight: 800;
-  line-height: 1.14;
-  letter-spacing: 0.02em;
-}
-
-.hero-title {
-  font-size: clamp(38px, 5vw, 70px);
-  font-weight: 800;
-  line-height: 1.14;
-  letter-spacing: 0.01em;
-}
-
-.hero-firm {
-  margin-top: 14px;
-  font-size: clamp(16px, 1.6vw, 23px);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-}
-
-.hero-note {
-  position: relative;
-  margin-top: clamp(26px, 3vw, 42px);
-  padding-left: 16px;
-  color: var(--text-soft);
-  font-size: clamp(12.5px, 1.05vw, 14.5px);
-  line-height: 1.85;
-  word-break: keep-all;
-}
-
-.hero-note::before {
-  content: "";
+.coverflow-track {
   position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: 0;
-  width: 2px;
-  background: var(--gold);
-}
-
-
-/* ---------- 우: 변호인단 캐러셀 ---------- */
-
-.hero-right {
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  background:
-    radial-gradient(
-      circle at 78% 42%,
-      rgba(201, 164, 92, 0.14),
-      transparent 58%
-    ),
-    linear-gradient(120deg, #16120e 0%, #211a12 55%, #171310 100%);
-}
-
-.hero-profile {
+  inset: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: end;
-  width: 100%;
-  height: 100%;
-  transition: opacity 0.3s ease;
+  place-items: center;
+  transform-style: preserve-3d;
+  pointer-events: none;
 }
 
-.hero-profile.is-changing {
-  opacity: 0;
+.coverflow-card {
+  pointer-events: auto;
 }
 
-.hero-profile-text {
-  align-self: center;
-  padding: clamp(32px, 3.4vw, 56px) 0 clamp(32px, 3.4vw, 56px) clamp(24px, 3.4vw, 56px);
+.coverflow-card {
+  grid-area: 1 / 1;
+  width: var(--card-w);
+  height: var(--card-h);
+  /* 위치는 JS 가 계산해 커스텀 속성으로 넣는다 */
+  transform:
+    translate3d(var(--x, 0), var(--y, 0), var(--z, 0))
+    rotateY(var(--ry, 0deg))
+    scale(var(--s, 1));
+  opacity: var(--o, 1);
+  transition:
+    transform 0.68s var(--ease-out),
+    opacity   0.5s ease;
+  will-change: transform;
 }
 
-.profile-role {
-  margin-bottom: 12px;
-  color: var(--gold);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+/* 드래그 중에는 손가락을 그대로 따라오게 전환을 끈다 */
+.coverflow.is-dragging .coverflow-card {
+  transition: none;
 }
 
-.profile-name {
-  font-size: clamp(30px, 3.4vw, 48px);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.profile-title {
-  margin-top: 14px;
-  color: var(--gold-light);
-  font-size: clamp(13px, 1.2vw, 16px);
-  font-weight: 600;
-}
-
-.profile-desc {
-  margin-top: clamp(18px, 2vw, 30px);
-  color: var(--text-soft);
-  font-size: clamp(12.5px, 1.05vw, 14.5px);
-  line-height: 1.9;
-  word-break: keep-all;
-}
-
-.profile-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 22px;
-  margin-top: clamp(20px, 2.4vw, 34px);
-  padding: 8px 0;
-  font-size: 14px;
-  font-weight: 600;
-  transition: color 0.25s ease;
-}
-
-.profile-more i {
-  display: block;
-  width: 36px;
-  height: 1px;
-  position: relative;
-  background: currentColor;
-  font-style: normal;
-  transition: width 0.3s var(--ease);
-}
-
-.profile-more i::after {
-  content: "";
-  position: absolute;
-  top: -3px;
-  right: 0;
-  width: 7px;
-  height: 7px;
-  border-top: 1px solid currentColor;
-  border-right: 1px solid currentColor;
-  transform: rotate(45deg);
-}
-
-.profile-more:hover {
-  color: var(--gold-light);
-}
-
-.profile-more:hover i {
-  width: 48px;
-}
-
-.hero-profile-photo {
-  position: relative;
-  align-self: end;
-  height: 100%;
-  min-height: 0;
-}
-
-.hero-profile-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center bottom;
-}
-
-
-/* ---------- 캐러셀 컨트롤 ---------- */
-
-.hero-controls {
-  position: absolute;
-  right: clamp(20px, 2.4vw, 36px);
-  bottom: clamp(20px, 2.4vw, 34px);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.hero-counter {
-  margin-right: 8px;
-  color: var(--text-faint);
-  font-size: 13px;
-  letter-spacing: 0.06em;
-}
-
-.hero-counter strong {
-  color: #fff;
-  font-size: 17px;
-  font-weight: 600;
-}
-
-
-/* =====================================================================
-   07. 변호인단 썸네일 스트립
-===================================================================== */
-
-.strip {
-  display: grid;
-  grid-template-columns: minmax(140px, 0.8fr) auto minmax(0, 6fr) auto;
-  align-items: center;
-  gap: clamp(12px, 1.4vw, 22px);
-  padding: 0 clamp(20px, 2.4vw, 36px);
-  background: var(--panel);
-  border-top: 1px solid var(--line-soft);
-}
-
-.strip-aside {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  align-self: stretch;
-  padding: 22px 0;
-}
-
-.strip-label {
-  color: var(--text-faint);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  white-space: nowrap;
-}
-
-.strip-scroll {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
-  color: var(--text-faint);
-  font-size: 9px;
-  letter-spacing: 0.24em;
-}
-
-.strip-scroll span {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-}
-
-.strip-scroll i {
-  width: 1px;
-  height: 34px;
-  background: linear-gradient(180deg, var(--gold), transparent);
-}
-
-.strip-list {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(0, 1fr);
-}
-
-.strip-card {
+.coverflow-panel {
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3.15;
+  height: 100%;
   overflow: hidden;
-  border-left: 1px solid var(--line-soft);
-  background: #1a1a1c;
-  text-align: left;
-  transition: filter 0.35s ease;
-  filter: grayscale(100%) brightness(0.62);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 20px;
+  background: #131110;
+  text-align: center;
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.55);
+  transition:
+    border-color 0.5s ease,
+    box-shadow   0.5s ease;
 }
 
-.strip-list li:last-child .strip-card {
-  border-right: 1px solid var(--line-soft);
-}
-
-.strip-card:hover,
-.strip-card.is-active {
-  filter: none;
-}
-
-.strip-card img {
+.coverflow-photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 12%;
+  filter: grayscale(100%) brightness(0.62) contrast(1.05);
+  transition: filter 0.6s ease;
 }
 
-.strip-card::after {
+/* 아래쪽을 어둡게 깔아 이름이 읽히게 한다 */
+.coverflow-panel::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
     linear-gradient(
       180deg,
-      rgba(10, 10, 12, 0.55) 0%,
-      rgba(10, 10, 12, 0.1) 34%,
-      rgba(10, 10, 12, 0.9) 100%
+      rgba(10, 9, 8, 0.35) 0%,
+      rgba(10, 9, 8, 0.05) 28%,
+      rgba(10, 9, 8, 0.82) 62%,
+      rgba(10, 9, 8, 0.96) 100%
     );
 }
 
-.strip-card.is-active {
-  outline: 1px solid var(--gold);
-  outline-offset: -1px;
-}
-
-.strip-info {
+.coverflow-info {
   position: absolute;
-  right: 14px;
-  bottom: 14px;
-  left: 14px;
+  right: 16px;
+  bottom: 22px;
+  left: 16px;
   z-index: 1;
 }
 
-.strip-num {
+.card-role {
   display: block;
+  margin-bottom: 4px;
   color: var(--gold);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
-
-.strip-name {
-  display: block;
-  margin-top: 4px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-}
-
-.strip-role {
-  display: block;
-  margin-top: 2px;
-  color: var(--text-faint);
-  font-size: 11.5px;
-}
-
-
-/* 스트립 상단의 번호 라벨 */
-.strip-card .strip-index {
-  position: absolute;
-  top: 12px;
-  left: 14px;
-  z-index: 1;
-  color: var(--text-faint);
-  font-size: 11px;
+  font-size: 12.5px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.card-name {
+  display: block;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  transition: color 0.45s ease;
+}
+
+.card-sub {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-faint);
+  font-size: 13px;
+  transition: color 0.45s ease;
+}
+
+/* 비활성 카드의 + 버튼 */
+.card-plus {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin: 12px auto 0;
+  border: 1px solid var(--line-gold);
+  border-radius: 50%;
+  color: var(--gold);
+  font-size: 16px;
+  line-height: 1;
+  transition:
+    opacity   0.4s ease,
+    transform 0.4s var(--ease);
+}
+
+/* 활성 카드의 상담 버튼 */
+.card-cta {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  margin-top: 16px;
+  padding: 0 26px;
+  border: 1px solid var(--line-gold);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background   0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card-cta:hover {
+  border-color: var(--gold);
+  background: rgba(201, 164, 92, 0.16);
+}
+
+
+/* ---------- 활성 카드 ---------- */
+
+.coverflow-card.is-active .coverflow-panel {
+  border-color: var(--line-gold);
+  box-shadow:
+    0 0 0 1px rgba(201, 164, 92, 0.22),
+    0 30px 80px rgba(0, 0, 0, 0.68),
+    0 0 60px rgba(201, 164, 92, 0.14);
+}
+
+.coverflow-card.is-active .coverflow-photo {
+  filter: grayscale(0%) brightness(0.92) contrast(1.02);
+}
+
+.coverflow-card.is-active .card-role {
+  opacity: 1;
+}
+
+.coverflow-card.is-active .card-name {
+  color: #fff;
+  font-size: 29px;
+}
+
+.coverflow-card.is-active .card-sub {
+  color: var(--text-soft);
+}
+
+.coverflow-card.is-active .card-plus {
+  display: none;
+}
+
+.coverflow-card.is-active .card-cta {
+  display: inline-flex;
+}
+
+
+/* ---------- 화살표 ---------- */
+
+.coverflow-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  transform: translateY(-50%);
+}
+
+.coverflow-prev { left: clamp(4px, 1.6vw, 20px); }
+.coverflow-next { right: clamp(4px, 1.6vw, 20px); }
+
+
+/* ---------- 점 ---------- */
+
+.coverflow-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  transform: translateX(-50%);
+}
+
+.coverflow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.24);
+  transition:
+    width      0.45s var(--ease),
+    background 0.3s ease;
+}
+
+.coverflow-dot.is-active {
+  width: 26px;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold));
 }
 
 
 /* =====================================================================
-   08. 대응 절차
+   07. 변호사 상세
 ===================================================================== */
 
-.process {
-  padding: clamp(28px, 3vw, 44px) clamp(20px, 2.4vw, 36px);
-  background: var(--black);
-  border-top: 1px solid var(--line-soft);
-}
-
-.process-list {
+.profile {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  transition: opacity 0.3s ease;
 }
 
-.process-list li {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 16px;
-  padding: 14px clamp(16px, 2vw, 30px);
-  border-left: 1px solid var(--line-soft);
+.profile.is-changing {
+  opacity: 0;
 }
 
-.process-list li:first-child {
-  border-left: 0;
+.profile-left {
+  position: relative;
+  isolation: isolate;
+  min-height: 380px;
 }
 
-.process-num {
-  color: var(--gold);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+.profile-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.process-body h3 {
-  font-size: 16px;
+.profile-left-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(30px, 3.2vw, 46px);
+}
+
+.profile-name {
+  font-size: clamp(22px, 2.2vw, 30px);
   font-weight: 700;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.045em;
 }
 
-.process-body p {
-  margin-top: 6px;
-  color: var(--text-faint);
-  font-size: 12.5px;
-  line-height: 1.7;
+.profile-title {
+  margin-top: 8px;
+  color: var(--gold);
+  font-size: clamp(14px, 1.3vw, 17px);
+  font-weight: 600;
+}
+
+.profile-career {
+  margin-top: clamp(22px, 2.4vw, 34px);
+  padding-top: clamp(20px, 2.2vw, 30px);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.profile-career li {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+  line-height: 2.05;
   word-break: keep-all;
 }
 
-.process-arrow {
-  color: var(--text-faint);
-  font-size: 17px;
-  font-style: normal;
+.profile-signature {
+  width: clamp(150px, 16vw, 210px);
+  height: auto;
+  margin-top: auto;
+  padding-top: 26px;
+  opacity: 0.92;
 }
 
 
-/* =====================================================================
-   09. 전문센터
-===================================================================== */
+/* ---------- 우측 강점 4항목 ---------- */
 
-.centers {
-  padding: clamp(64px, 7vw, 110px) 0;
-  background: var(--panel);
-}
-
-.center-list {
+.profile-points {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 1px;
-  background: var(--line-soft);
-  border: 1px solid var(--line-soft);
+  align-content: center;
+  gap: clamp(18px, 2vw, 26px);
+  padding: clamp(30px, 3.2vw, 46px);
+  background: var(--panel-up);
 }
 
-.center-item {
+.profile-points li {
   display: grid;
-  gap: 12px;
-  padding: clamp(28px, 3vw, 40px) clamp(22px, 2.4vw, 32px);
-  background: var(--panel);
-  transition: background 0.3s ease;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 4px 18px;
 }
 
-.center-item:hover {
-  background: #1e1a15;
-}
-
-.center-num {
+.point-icon {
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
   color: var(--gold);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
 }
 
-.center-name {
-  font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
+.point-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
-.center-desc {
+.point-title {
+  align-self: center;
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+
+.point-desc {
   color: var(--text-soft);
   font-size: 13.5px;
   line-height: 1.8;
@@ -1093,14 +904,78 @@ img, svg {
 
 
 /* =====================================================================
-   10. 상담안내
+   08. 지표
+===================================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: clamp(20px, 2.4vw, 30px);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+}
+
+.stats li {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: clamp(26px, 3vw, 40px) 14px;
+  border-left: 1px solid var(--line);
+  text-align: center;
+}
+
+.stats li:first-child {
+  border-left: 0;
+}
+
+.stat-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 6px;
+  color: var(--gold);
+}
+
+.stat-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.stat-value {
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.stat-label {
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.stats-note {
+  margin-top: 18px;
+  color: var(--text-faint);
+  font-size: 12.5px;
+  text-align: center;
+  word-break: keep-all;
+}
+
+
+/* =====================================================================
+   09. 상담안내
 ===================================================================== */
 
 .contact {
-  padding: clamp(64px, 7vw, 110px) 0;
+  padding: clamp(60px, 7vw, 100px) 0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(201, 164, 92, 0.12), transparent 55%),
-    var(--black);
+    radial-gradient(circle at 22% 34%, rgba(201, 164, 92, 0.12), transparent 56%),
+    var(--panel);
+  border-top: 1px solid var(--line);
 }
 
 .contact-inner {
@@ -1160,15 +1035,15 @@ img, svg {
 
 
 /* =====================================================================
-   11. 푸터 · 모바일 하단 바
+   10. 푸터 · 모바일 하단 바
 ===================================================================== */
 
 .footer {
-  padding: clamp(48px, 5vw, 72px) 0 32px;
-  background: #0a0a0b;
+  padding: clamp(46px, 5vw, 70px) 0 32px;
+  background: #070605;
   color: var(--text-faint);
   font-size: 13px;
-  border-top: 1px solid var(--line-soft);
+  border-top: 1px solid var(--line);
 }
 
 .footer-inner {
@@ -1181,12 +1056,8 @@ img, svg {
 .footer-brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 13px;
   color: #fff;
-}
-
-.footer-brand .brand-mark {
-  font-size: 22px;
 }
 
 .footer-brand p {
@@ -1232,7 +1103,7 @@ img, svg {
 .footer-bottom {
   margin-top: 40px;
   padding-top: 22px;
-  border-top: 1px solid var(--line-soft);
+  border-top: 1px solid var(--line);
   color: rgba(255, 255, 255, 0.28);
   font-size: 12px;
 }
@@ -1243,105 +1114,59 @@ img, svg {
 
 
 /* =====================================================================
-   12. 반응형
+   11. 반응형
 ===================================================================== */
 
-/* ---------- 데스크톱 축소 ---------- */
-
-@media (max-width: 1240px) {
+@media (max-width: 1080px) {
   .nav {
-    gap: 26px;
+    gap: 24px;
   }
 
   .nav a {
     font-size: 14px;
   }
 
-  .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .process-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .process-list li:nth-child(3) {
+  .stats li:nth-child(4) {
     border-left: 0;
   }
 
-  .process-list li:nth-child(n + 3) {
-    border-top: 1px solid var(--line-soft);
+  .stats li:nth-child(n + 4) {
+    border-top: 1px solid var(--line);
   }
 }
 
 
 /* ---------- 태블릿 ---------- */
 
-@media (max-width: 980px) {
+@media (max-width: 900px) {
   :root {
-    --header-h: 68px;
-    --rail-w: 0px;
+    --header-h: 66px;
   }
 
-  .nav,
-  .rail {
+  .nav {
     display: none;
   }
 
-  /* 히어로를 위아래로 쌓는다 */
-  .hero {
+  .lawyers-backdrop {
+    width: 100%;
+    height: 420px;
+    opacity: 0.55;
+  }
+
+  .profile {
     grid-template-columns: 1fr;
+  }
+
+  .profile-left {
     min-height: 0;
   }
 
-  .hero-left {
-    min-height: 380px;
-  }
-
-  .hero-left-inner {
-    margin-left: 0;
-  }
-
-  .hero-right {
-    min-height: 440px;
-  }
-
-  .hero-profile-text {
-    padding: 40px 0 40px 24px;
-  }
-
-  /* 스트립은 가로 스와이프 */
-  .strip {
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding: 0;
-  }
-
-  .strip-aside {
-    padding: 18px var(--gutter);
-  }
-
-  .strip-scroll {
-    display: none;
-  }
-
-  .strip-arrow {
-    display: none;
-  }
-
-  .strip-list {
-    grid-auto-columns: 44vw;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-
-  .strip-list::-webkit-scrollbar {
-    display: none;
-  }
-
-  .strip-card {
-    scroll-snap-align: start;
+  .profile-signature {
+    margin-top: 26px;
   }
 
   .contact-inner {
@@ -1374,132 +1199,73 @@ img, svg {
     padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
   }
 
-  .brand {
-    gap: 11px;
-  }
-
-  .brand-mark {
-    font-size: 21px;
-    letter-spacing: 0.18em;
-  }
-
-  .brand-divider {
-    height: 20px;
-  }
-
   .brand-text strong {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .brand-text small {
     font-size: 7.5px;
   }
 
-  /* 히어로 */
-  .hero-left {
-    min-height: 320px;
+  .lawyers {
+    padding-top: 34px;
   }
 
-  .hero-left-inner {
-    padding: 34px var(--gutter);
+  .lawyers-title {
+    font-size: 29px;
+    line-height: 1.36;
   }
 
-  .hero-kicker {
-    font-size: 34px;
-  }
-
-  .hero-title {
-    font-size: 38px;
-  }
-
-  .hero-firm {
-    font-size: 16px;
-  }
-
-  .hero-right {
-    min-height: 0;
-  }
-
-  /* 인물은 텍스트 뒤로 보내고 아래로 정렬 */
-  .hero-profile {
-    grid-template-columns: 1fr;
-    position: relative;
-  }
-
-  .hero-profile-text {
-    position: relative;
-    z-index: 1;
-    padding: 34px var(--gutter) 20px;
-  }
-
-  .hero-profile-photo {
-    height: 300px;
-    margin-top: -10px;
-  }
-
-  .hero-profile-photo img {
-    object-position: center bottom;
-  }
-
-  .profile-name {
-    font-size: 32px;
-  }
-
-  .hero-controls {
-    right: var(--gutter);
-    bottom: 16px;
-  }
-
-  .circle-button {
-    width: 38px;
-    height: 38px;
-  }
-
-  /* 스트립 */
-  .strip-list {
-    grid-auto-columns: 58vw;
-  }
-
-  /* 절차 */
-  .process {
-    padding: 8px var(--gutter) 20px;
-  }
-
-  .process-list {
-    grid-template-columns: 1fr;
-  }
-
-  .process-list li {
-    gap: 14px;
-    padding: 18px 0;
-    border-left: 0;
-    border-top: 1px solid var(--line-soft);
-  }
-
-  .process-list li:first-child {
-    border-top: 0;
-  }
-
-  .process-list li:nth-child(n + 3) {
-    border-top: 1px solid var(--line-soft);
-  }
-
-  .process-body p br {
+  .lawyers-lead br {
     display: none;
   }
 
-  /* 전문센터 */
-  .section-head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
+  /* 화살표는 감추고 스와이프로 넘긴다 */
+  .coverflow {
+    padding: 0 0 52px;
   }
 
-  .center-list {
-    grid-template-columns: 1fr;
+  .coverflow-arrow {
+    display: none;
   }
 
-  /* 상담 */
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stats li {
+    border-left: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+  }
+
+  .stats li:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .stats li:nth-child(-n + 2) {
+    border-top: 0;
+  }
+
+  .stats li:nth-child(4) {
+    border-left: 1px solid var(--line);
+  }
+
+  /* 5번째 항목은 혼자 남으므로 두 칸을 차지한다 */
+  .stats li:last-child {
+    grid-column: 1 / -1;
+    border-left: 0;
+  }
+
+  .profile-points li {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 4px 14px;
+  }
+
+  .point-icon {
+    width: 34px;
+    height: 34px;
+  }
+
   .contact-facts {
     gap: 16px 32px;
     margin-top: 26px;
@@ -1509,7 +1275,6 @@ img, svg {
     font-size: 16px;
   }
 
-  /* 푸터 */
   .footer-links {
     grid-auto-flow: row;
     gap: 10px;
@@ -1526,7 +1291,7 @@ img, svg {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
     padding: 9px var(--gutter) calc(9px + env(safe-area-inset-bottom, 0px));
-    background: rgba(13, 13, 15, 0.95);
+    background: rgba(10, 9, 8, 0.95);
     border-top: 1px solid var(--line);
     backdrop-filter: blur(14px);
   }
@@ -1559,7 +1324,7 @@ img, svg {
 
 
 /* =====================================================================
-   13. 모션 최소화
+   12. 모션 최소화
 ===================================================================== */
 
 @media (prefers-reduced-motion: reduce) {

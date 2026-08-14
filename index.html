@@ -3,32 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0d0d0f">
+  <meta name="theme-color" content="#0a0908">
 
-  <title>법무법인 유일 | 증거주의 수사중심</title>
+  <title>변호사 소개 | 법무법인 유일</title>
 
-  <meta name="description" content="한 명의 의뢰인에게 변호인단 전체의 전략이 배정됩니다. 수사기관의 시각에서 증거와 진술의 흐름을 분석하는 법무법인 유일.">
+  <meta name="description" content="유일은 각 분야를 깊이 있게 파고든 변호사들이 한 팀이 되어 최선의 결과를 만듭니다. 법무법인 유일 변호인단 소개.">
   <meta name="author" content="법무법인 유일">
   <meta name="robots" content="index, follow">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="법무법인 유일">
-  <meta property="og:title" content="법무법인 유일 | 증거주의 수사중심">
-  <meta property="og:description" content="한 명의 의뢰인에게 변호인단 전체의 전략이 배정됩니다.">
-  <meta property="og:image" content="assets/building.webp">
+  <meta property="og:title" content="변호사 소개 | 법무법인 유일">
+  <meta property="og:description" content="사건은 한 사람이 해결하지 않습니다.">
+  <meta property="og:image" content="assets/lawyer-01.webp">
   <meta property="og:locale" content="ko_KR">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="법무법인 유일 | 증거주의 수사중심">
-  <meta name="twitter:description" content="한 명의 의뢰인에게 변호인단 전체의 전략이 배정됩니다.">
-  <meta name="twitter:image" content="assets/building.webp">
+  <meta name="twitter:title" content="변호사 소개 | 법무법인 유일">
+  <meta name="twitter:description" content="사건은 한 사람이 해결하지 않습니다.">
+  <meta name="twitter:image" content="assets/lawyer-01.webp">
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
-  <link rel="preload" as="image" href="assets/building.webp">
   <link rel="preload" as="image" href="assets/lawyer-01.webp">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -44,8 +43,13 @@
     <div class="header-inner">
 
       <a class="brand" href="#top" aria-label="법무법인 유일 홈">
-        <span class="brand-mark">YUIL</span>
-        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none">
+            <path d="M8 6v22M20 4v26M32 6v22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M5 32h30" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M12 12h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
+          </svg>
+        </span>
         <span class="brand-text">
           <strong>법무법인 유일</strong>
           <small>LAW FIRM YUIL</small>
@@ -53,10 +57,10 @@
       </a>
 
       <nav class="nav" aria-label="주요 메뉴">
-        <a href="#attorneys">변호인단</a>
-        <a href="#centers">전문센터</a>
-        <a href="#practice">업무분야</a>
-        <a href="#contact">상담안내</a>
+        <a href="#why">왜 유일이어야 하는가</a>
+        <a href="#cases">해결 사례</a>
+        <a href="#top" class="is-current" aria-current="page">변호사 소개</a>
+        <a href="#contact">상담 안내</a>
       </nav>
 
       <button class="menu-toggle" id="menuToggle" type="button"
@@ -73,10 +77,10 @@
   =========================================================== -->
   <nav class="mobile-menu" id="mobileMenu" aria-label="모바일 메뉴" inert>
     <ul class="mobile-menu-links">
-      <li><a href="#attorneys">변호인단</a></li>
-      <li><a href="#centers">전문센터</a></li>
-      <li><a href="#practice">업무분야</a></li>
-      <li><a href="#contact">상담안내</a></li>
+      <li><a href="#why">왜 유일이어야 하는가</a></li>
+      <li><a href="#cases">해결 사례</a></li>
+      <li><a href="#top">변호사 소개</a></li>
+      <li><a href="#contact">상담 안내</a></li>
     </ul>
 
     <div class="mobile-menu-foot">
@@ -92,210 +96,93 @@
   </nav>
 
 
-  <!-- ==========================================================
-       우측 상담 레일
-  =========================================================== -->
-  <aside class="rail" aria-label="상담 바로가기">
-    <a class="rail-call" href="tel:010-0000-0000">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2.5 2.5 0 0 1-2.7 2.5A16.5 16.5 0 0 1 3.5 5.7 2.5 2.5 0 0 1 6 3Z"
-              stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-      </svg>
-      <span class="rail-label">상담문의</span>
-      <span class="rail-number">010-0000-0000</span>
-    </a>
-
-    <a class="rail-item rail-kakao" href="https://pf.kakao.com/" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M12 4c-4.5 0-8 2.8-8 6.3 0 2.2 1.5 4.2 3.8 5.3l-.9 3.3a.35.35 0 0 0 .53.38l3.9-2.5c.22.02.45.03.67.03 4.5 0 8-2.8 8-6.5S16.5 4 12 4Z"
-              stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-      </svg>
-      <span>카카오톡<br>상담하기</span>
-    </a>
-
-    <a class="rail-item" href="#contact">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <rect x="3.5" y="5" width="17" height="14" rx="2.2" stroke="currentColor" stroke-width="1.7"/>
-        <path d="m4.5 7 7.5 5.4L19.5 7" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-      </svg>
-      <span>온라인<br>상담하기</span>
-    </a>
-  </aside>
-
-
   <main id="main">
 
     <!-- ==========================================================
-         HERO — 좌: 사옥 / 우: 변호인단 캐러셀
+         변호인단
     =========================================================== -->
-    <section class="hero" id="top">
+    <section class="lawyers" id="top" aria-labelledby="lawyersTitle">
 
-      <div class="hero-left">
-        <img class="hero-building" src="assets/building.webp" alt=""
-             width="1138" height="1098" fetchpriority="high">
+      <img class="lawyers-backdrop" src="assets/backdrop-office.svg" alt="" aria-hidden="true">
 
-        <div class="hero-left-inner">
-          <p class="hero-kicker">증거주의</p>
-          <h1 class="hero-title">수사중심</h1>
-          <p class="hero-firm">법무법인 유일</p>
+      <div class="shell lawyers-head">
+        <p class="eyebrow"><i aria-hidden="true"></i>LAWYERS OF YUIL</p>
 
-          <p class="hero-note">
-            한 명의 의뢰인에게 <br>
-            변호인단 전체의 전략이 배정됩니다.
-          </p>
-        </div>
+        <h1 class="lawyers-title" id="lawyersTitle">
+          사건은<br>
+          한 사람이 <em>해결</em>하지 않습니다.
+        </h1>
+
+        <p class="lawyers-lead">
+          유일은 각 분야를 깊이 있게 파고든 변호사들이 <br>
+          한 팀이 되어 최선의 결과를 만듭니다.
+        </p>
       </div>
 
-      <div class="hero-right">
-        <div class="hero-profile" id="heroProfile" aria-live="polite">
-          <div class="hero-profile-text">
-            <p class="profile-role" id="profileRole">대표변호사</p>
-            <h2 class="profile-name" id="profileName">정호길</h2>
-            <p class="profile-title" id="profileTitle">25년 경력 형사전문 변호사</p>
-            <p class="profile-desc" id="profileDesc">
-              수사기관의 시각에서<br>
-              증거와 진술의 흐름을<br>
-              분석합니다.
-            </p>
 
-            <!-- 화살표는 CSS 로 그린다. 여기에 문자를 넣으면 선과 겹쳐 두 개로 보인다 -->
-            <a class="profile-more" href="#attorneys">
-              자세히 보기
-              <i aria-hidden="true"></i>
-            </a>
-          </div>
+      <!-- ---------- 커버플로우 캐러셀 ---------- -->
+      <div class="coverflow" id="coverflow">
 
-          <div class="hero-profile-photo">
-            <img id="profilePhoto" src="assets/lawyer-01.webp" alt="정호길 대표변호사"
-                 width="635" height="998">
-          </div>
+        <button class="circle-button coverflow-arrow coverflow-prev" id="cfPrev"
+                type="button" aria-label="이전 변호사">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M14.5 5 8 12l6.5 7" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="coverflow-stage" id="cfStage"
+             role="group" aria-roledescription="캐러셀" aria-label="법무법인 유일 변호인단"
+             tabindex="0">
+          <ul class="coverflow-track" id="cfTrack"></ul>
         </div>
 
-        <div class="hero-controls">
-          <p class="hero-counter">
-            <strong id="heroCurrent">01</strong>
-            <span>/ <span id="heroTotal">05</span></span>
-          </p>
+        <button class="circle-button coverflow-arrow coverflow-next" id="cfNext"
+                type="button" aria-label="다음 변호사">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9.5 5 16 12l-6.5 7" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
 
-          <button class="circle-button" id="heroPrev" type="button" aria-label="이전 변호사">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M14.5 5 8 12l6.5 7" stroke="currentColor" stroke-width="1.6"
-                    stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-
-          <button class="circle-button" id="heroNext" type="button" aria-label="다음 변호사">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M9.5 5 16 12l-6.5 7" stroke="currentColor" stroke-width="1.6"
-                    stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
+        <div class="coverflow-dots" id="cfDots" role="tablist" aria-label="변호사 선택"></div>
       </div>
 
-    </section>
 
-
-    <!-- ==========================================================
-         변호인단 썸네일 스트립
-    =========================================================== -->
-    <section class="strip" id="attorneys" aria-labelledby="stripTitle">
-
-      <div class="strip-aside">
-        <p class="strip-label" id="stripTitle">YUIL LAW FIRM</p>
-
-        <div class="strip-scroll" aria-hidden="true">
-          <span>SCROLL</span>
-          <i></i>
-        </div>
-      </div>
-
-      <button class="circle-button strip-arrow" id="stripPrev" type="button" aria-label="이전 변호사">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M14.5 5 8 12l6.5 7" stroke="currentColor" stroke-width="1.6"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-
-      <ul class="strip-list" id="stripList" role="tablist" aria-label="변호사 선택"></ul>
-
-      <button class="circle-button strip-arrow" id="stripNext" type="button" aria-label="다음 변호사">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M9.5 5 16 12l-6.5 7" stroke="currentColor" stroke-width="1.6"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-
-    </section>
-
-
-    <!-- ==========================================================
-         대응 절차
-    =========================================================== -->
-    <section class="process" id="practice" aria-labelledby="processTitle">
-      <h2 class="visually-hidden" id="processTitle">유일의 대응 절차</h2>
-
-      <ul class="process-list">
-        <li>
-          <span class="process-num">01</span>
-          <div class="process-body">
-            <h3>증거분석</h3>
-            <p>기록 속 놓친 단서와 <br>진술의 모순을 확인합니다.</p>
-          </div>
-          <i class="process-arrow" aria-hidden="true">→</i>
-        </li>
-
-        <li>
-          <span class="process-num">02</span>
-          <div class="process-body">
-            <h3>수사흐름 예측</h3>
-            <p>수사기관의 시각에서 <br>사건의 방향을 예측합니다.</p>
-          </div>
-          <i class="process-arrow" aria-hidden="true">→</i>
-        </li>
-
-        <li>
-          <span class="process-num">03</span>
-          <div class="process-body">
-            <h3>전략회의</h3>
-            <p>한 명이 아닌 변호인단이 <br>함께 전략을 설계합니다.</p>
-          </div>
-          <i class="process-arrow" aria-hidden="true">→</i>
-        </li>
-
-        <li>
-          <span class="process-num">04</span>
-          <div class="process-body">
-            <h3>대응 로드맵</h3>
-            <p>조사 전부터 재판까지 <br>대응 순서를 정리합니다.</p>
-          </div>
-          <i class="process-arrow" aria-hidden="true">→</i>
-        </li>
-      </ul>
-    </section>
-
-
-    <!-- ==========================================================
-         전문센터
-    =========================================================== -->
-    <section class="centers" id="centers" aria-labelledby="centersTitle">
+      <!-- ---------- 선택된 변호사 상세 ---------- -->
       <div class="shell">
+        <article class="profile" id="profile" aria-live="polite">
 
-        <div class="section-head">
-          <div>
-            <p class="section-label">PRACTICE CENTERS</p>
-            <h2 class="display" id="centersTitle">분야별 전문센터</h2>
+          <div class="profile-left">
+            <img class="profile-backdrop" src="assets/backdrop-desk.svg" alt="" aria-hidden="true">
+
+            <div class="profile-left-inner">
+              <h2 class="profile-name" id="profileName">정호길 대표변호사</h2>
+              <p class="profile-title" id="profileTitle">25년 경력 형사전문</p>
+
+              <ul class="profile-career" id="profileCareer"></ul>
+
+              <img class="profile-signature" id="profileSignature"
+                   src="assets/signature.png" alt="" aria-hidden="true"
+                   width="1043" height="287">
+            </div>
           </div>
 
-          <p class="section-note">
-            사건의 성격에 따라 필요한 대응을 나누고<br>
-            하나의 전략으로 연결합니다.
-          </p>
-        </div>
+          <ul class="profile-points" id="profilePoints"></ul>
 
-        <ul class="center-list" id="centerList"></ul>
-
+        </article>
       </div>
+
+
+      <!-- ---------- 지표 ---------- -->
+      <div class="shell">
+        <ul class="stats" id="stats"></ul>
+
+        <p class="stats-note">
+          ※ 위 내용은 개인정보보호를 위해 일부 각색되었으며, 결과를 보장하는 것은 아닙니다.
+        </p>
+      </div>
+
     </section>
 
 
@@ -306,11 +193,11 @@
       <div class="shell contact-inner">
 
         <div class="contact-copy">
-          <p class="section-label">CONTACT</p>
+          <p class="eyebrow"><i aria-hidden="true"></i>CONTACT</p>
 
           <h2 class="display" id="contactTitle">
-            사건은 시간이 지나면<br>
-            불리해집니다
+            사건의 방향이 필요할 때,<br>
+            유일이 먼저 보겠습니다
           </h2>
 
           <p>
@@ -365,7 +252,12 @@
     <div class="shell footer-inner">
 
       <div class="footer-brand">
-        <span class="brand-mark">YUIL</span>
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none">
+            <path d="M8 6v22M20 4v26M32 6v22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M5 32h30" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </span>
         <p>
           법무법인 유일<br>
           <small>LAW FIRM YUIL</small>
@@ -381,9 +273,9 @@
       </div>
 
       <nav class="footer-links" aria-label="푸터 메뉴">
-        <a href="#attorneys">변호인단</a>
-        <a href="#centers">전문센터</a>
-        <a href="#practice">업무분야</a>
+        <a href="#why">왜 유일이어야 하는가</a>
+        <a href="#cases">해결 사례</a>
+        <a href="#top">변호사 소개</a>
         <a href="#">개인정보처리방침</a>
       </nav>
 
@@ -417,8 +309,7 @@
     "@type": "LegalService",
     "name": "법무법인 유일",
     "alternateName": "LAW FIRM YUIL",
-    "description": "수사기관의 시각에서 증거와 진술의 흐름을 분석하는 형사전문 법무법인입니다.",
-    "image": "assets/building.webp",
+    "description": "각 분야를 깊이 있게 파고든 변호사들이 한 팀이 되어 대응하는 형사전문 법무법인입니다.",
     "telephone": "010-0000-0000",
     "address": {
       "@type": "PostalAddress",

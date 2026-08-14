@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" width="1000" height="620"
+     preserveAspectRatio="xMidYMid slice" role="presentation">
+  <defs>
+    <linearGradient id="ofBg" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0"    stop-color="#14110d"/>
+      <stop offset="0.55" stop-color="#0f0d0b"/>
+      <stop offset="1"    stop-color="#0a0908"/>
+    </linearGradient>
+
+    <radialGradient id="ofLamp" cx="0.24" cy="0.3" r="0.36">
+      <stop offset="0"   stop-color="#c9a45c" stop-opacity="0.34"/>
+      <stop offset="0.5" stop-color="#c9a45c" stop-opacity="0.10"/>
+      <stop offset="1"   stop-color="#c9a45c" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="ofGlow" cx="0.68" cy="0.42" r="0.42">
+      <stop offset="0" stop-color="#e0c489" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#e0c489" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="ofDesk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#241d15"/>
+      <stop offset="1" stop-color="#0c0a08"/>
+    </linearGradient>
+
+    <linearGradient id="ofLine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9bd83" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#d9bd83" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="620" fill="url(#ofBg)"/>
+
+  <!-- 뒤편 창의 세로 블라인드 -->
+  <g opacity="0.16">
+    <rect x="640" y="0" width="360" height="430" fill="#3a3126"/>
+    <g stroke="#0a0908" stroke-width="9">
+      <path d="M672 0v430M712 0v430M752 0v430M792 0v430M832 0v430M872 0v430M912 0v430M952 0v430M992 0v430"/>
+    </g>
+  </g>
+
+  <!-- 스탠드 조명 빛 -->
+  <rect width="1000" height="620" fill="url(#ofLamp)"/>
+
+  <!-- 책상 -->
+  <rect x="0" y="430" width="1000" height="190" fill="url(#ofDesk)"/>
+  <rect x="0" y="430" width="1000" height="1.5" fill="#c9a45c" opacity="0.28"/>
+
+  <!-- 책상 위 서류 더미 -->
+  <g opacity="0.5">
+    <rect x="120" y="404" width="150" height="26" rx="2" fill="#1c1710"/>
+    <rect x="128" y="392" width="134" height="14" rx="2" fill="#241d15"/>
+  </g>
+
+  <!-- 정의의 여신 실루엣 -->
+  <g transform="translate(690 218)" opacity="0.9">
+    <g stroke="url(#ofLine)" fill="none" stroke-width="3"
+       stroke-linecap="round" stroke-linejoin="round">
+      <!-- 받침과 기둥 -->
+      <path d="M-46 212h92"/>
+      <path d="M-26 212q26 -14 52 0"/>
+      <path d="M0 44v168"/>
+      <!-- 저울대 -->
+      <path d="M-88 62h176"/>
+      <circle cx="0" cy="44" r="11"/>
+      <!-- 접시 -->
+      <path d="M-88 62v34"/>
+      <path d="M-124 96h72"/>
+      <path d="M-124 96a36 36 0 0 0 72 0"/>
+      <path d="M88 62v34"/>
+      <path d="M52 96h72"/>
+      <path d="M52 96a36 36 0 0 0 72 0"/>
+    </g>
+  </g>
+
+  <!-- 오른쪽 은은한 광원 -->
+  <rect width="1000" height="620" fill="url(#ofGlow)"/>
+</svg>

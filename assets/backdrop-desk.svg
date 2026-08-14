@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 900" width="760" height="900"
+     preserveAspectRatio="xMidYMid slice" role="presentation">
+  <defs>
+    <linearGradient id="dkBg" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0"    stop-color="#171310"/>
+      <stop offset="0.55" stop-color="#100e0c"/>
+      <stop offset="1"    stop-color="#0a0908"/>
+    </linearGradient>
+
+    <radialGradient id="dkGlow" cx="0.62" cy="0.58" r="0.5">
+      <stop offset="0" stop-color="#c9a45c" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#c9a45c" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="dkWood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c2318"/>
+      <stop offset="1" stop-color="#0e0b09"/>
+    </linearGradient>
+
+    <linearGradient id="dkMetal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"   stop-color="#e0c489" stop-opacity="0.5"/>
+      <stop offset="0.5" stop-color="#c9a45c" stop-opacity="0.3"/>
+      <stop offset="1"   stop-color="#8a6b2f" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="760" height="900" fill="url(#dkBg)"/>
+  <rect width="760" height="900" fill="url(#dkGlow)"/>
+
+  <!-- 책상면 -->
+  <rect x="0" y="600" width="760" height="300" fill="url(#dkWood)"/>
+  <rect x="0" y="600" width="760" height="1.4" fill="#c9a45c" opacity="0.24"/>
+
+  <!-- 뒤편 법전 -->
+  <g opacity="0.42">
+    <rect x="60"  y="440" width="42" height="162" rx="3" fill="#241c14"/>
+    <rect x="108" y="418" width="38" height="184" rx="3" fill="#1d1711"/>
+    <rect x="152" y="452" width="46" height="150" rx="3" fill="#2a2117"/>
+    <rect x="204" y="430" width="36" height="172" rx="3" fill="#1a1511"/>
+    <g fill="#c9a45c" opacity="0.4">
+      <rect x="66"  y="474" width="30" height="2"/>
+      <rect x="114" y="454" width="26" height="2"/>
+      <rect x="158" y="486" width="34" height="2"/>
+      <rect x="210" y="466" width="24" height="2"/>
+    </g>
+  </g>
+
+  <!-- 의사봉 -->
+  <g transform="translate(300 560) rotate(-18)">
+    <rect x="0"   y="0"  width="196" height="30" rx="15" fill="url(#dkMetal)"/>
+    <rect x="-34" y="-8" width="46"  height="46" rx="10" fill="url(#dkMetal)"/>
+    <rect x="184" y="-8" width="46"  height="46" rx="10" fill="url(#dkMetal)"/>
+    <rect x="86"  y="26" width="20"  height="118" rx="9" fill="url(#dkMetal)"/>
+  </g>
+
+  <!-- 음향판 -->
+  <g transform="translate(250 706)">
+    <ellipse cx="130" cy="16" rx="132" ry="17" fill="#2c2318" opacity="0.85"/>
+    <ellipse cx="130" cy="12" rx="132" ry="17" fill="url(#dkMetal)" opacity="0.35"/>
+  </g>
+
+  <!-- 아래로 갈수록 어둡게 — 텍스트 가독성 확보 -->
+  <rect width="760" height="900"
+        fill="url(#dkFade)" />
+  <defs>
+    <linearGradient id="dkFade" x1="0" y1="0" x2="0.85" y2="0.2">
+      <stop offset="0"   stop-color="#0a0908" stop-opacity="0.86"/>
+      <stop offset="0.6" stop-color="#0a0908" stop-opacity="0.52"/>
+      <stop offset="1"   stop-color="#0a0908" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+</svg>
