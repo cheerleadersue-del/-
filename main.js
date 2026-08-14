@@ -2,11 +2,9 @@
    법무법인 유일 — LAW FIRM YUIL
    main.js
 
-   - 테마 전환 (라이트 / 다크)
    - 헤더 상태 · 현재 섹션 표시
    - 모바일 메뉴
-   - 사이트 내 검색
-   - 변호인단 · 업무분야 카드 렌더링
+   - 변호사 · 해결 사례 카드 렌더링
 ===================================================================== */
 
 (() => {
@@ -21,236 +19,173 @@
 
   /* ===================================================================
      데이터
+
+     ⚠ 사진 파일과 변호사 성명의 짝은 시안만으로는 확정할 수 없어
+        성별·인상만 보고 임시로 배정했다. 실제 사진으로 반드시 확인할 것.
   =================================================================== */
 
-  const lawyers = [
+  const attorneys = [
     {
-      name: "정호길",
-      role: "대표변호사 · 형사전문",
-      image: "assets/lawyer-01.webp",
-      description:
-        "형사사건의 초기 대응부터 수사와 재판까지, 증거와 기록을 중심으로 사건의 방향과 방어 전략을 직접 총괄합니다.",
-      tags: ["형사사건 25년", "수사·재판 총괄"]
+      name: "심상한",
+      title: "변호사",
+      field: "기업 회생 · 파산 전문",
+      image: "assets/lawyer-05.webp",
+      careers: [
+        "사법시험 49회 합격",
+        "前 법무법인 세명 구성원",
+        "前 서울지방노동위원회 공익위원 (심판담당)",
+        "25년 이상 경력"
+      ]
+    },
+    {
+      name: "정주현",
+      title: "변호사",
+      field: "부동산 · 민사 · 형사 전문",
+      image: "assets/lawyer-02.webp",
+      careers: [
+        "사법연수원 30기 수료",
+        "前 서울중앙지방법원 조정위원",
+        "부동산 · 민사 분야 전문",
+        "형사사건 다수 수행"
+      ]
     },
     {
       name: "김제도",
-      role: "변호사 · 소송 전략",
-      image: "assets/lawyer-02.webp",
-      description:
-        "사건 기록과 사실관계를 면밀히 검토해 쟁점을 정리하고, 수사와 재판 과정에 필요한 대응 논리를 설계합니다.",
-      tags: ["형사·민사", "증거 분석"]
-    },
-    {
-      name: "변호사 03",
-      role: "변호사 · 형사소송",
-      image: "assets/lawyer-03.webp",
-      description:
-        "사건의 초기 사실관계부터 증거 제출과 변론까지, 의뢰인에게 필요한 대응 방향을 구체적으로 준비합니다.",
-      tags: ["형사사건", "진술 분석"]
-    },
-    {
-      name: "변호사 04",
-      role: "변호사 · 민사소송",
+      title: "변호사",
+      field: "형사사건 전문",
       image: "assets/lawyer-04.webp",
-      description:
-        "계약과 손해배상, 부동산 분쟁의 핵심 쟁점을 분석하고 실질적인 해결을 위한 소송 전략을 준비합니다.",
-      tags: ["민사소송", "손해배상"]
+      careers: [
+        "사법연수원 47기 수료",
+        "마약류관리법, 사기, 폭행, 상해, 도주치상 등 다수 수행",
+        "형사사건 전문"
+      ]
     },
     {
-      name: "변호사 05",
-      role: "변호사 · 가사소송",
-      image: "assets/lawyer-05.webp",
-      description:
-        "이혼과 상속, 친권과 양육권 문제에서 법률적 판단과 의뢰인의 현실을 함께 고려한 해결 방향을 제시합니다.",
-      tags: ["이혼·가사", "상속"]
-    },
-    {
-      name: "변호사 06",
-      role: "변호사 · 개인회생",
+      name: "이경숙",
+      title: "변호사",
+      field: "이혼 · 상속 · 부동산 · 형사 전문",
       image: "assets/lawyer-06.webp",
-      description:
-        "의뢰인의 채무와 소득, 재산 상황을 분석해 개인회생과 파산 절차에 필요한 자료와 계획을 준비합니다.",
-      tags: ["개인회생", "파산"]
+      careers: [
+        "사법시험 50회 합격",
+        "대한변협 전문분야 등록",
+        "이혼 · 상속 사건 다수 수행",
+        "형사사건 전문"
+      ]
     }
   ];
 
   /*
-    분야별 성공사례 페이지는 아직 없다. 페이지가 준비되면 link 값만
-    해당 경로로 바꾸고 linkText 를 "성공사례 보기" 로 되돌리면 된다.
+    해결 사례 — 대한변협 변호사광고규정상 승소율·성공률 같은 수치나
+    특정 결과를 단정하는 표현은 쓸 수 없다. 그래서 결과가 아니라
+    "어떤 상황에서 무엇을 하는가" 만 적는다.
   */
-  const practices = [
+  const cases = [
     {
-      name: "형사센터",
-      english: "CRIMINAL CENTER",
-      image: "assets/center-criminal.webp",
-      description: "초기 진술부터 압수수색, 조사와 재판까지 증거를 중심으로 대응합니다.",
-      link: "#contact",
-      linkText: "형사 상담 안내"
+      tag: "마약사건",
+      situation: "단순 투약으로 조사 통보를 받은 경우",
+      response:
+        "모발·소변 감정 결과의 의미와 한계를 검토하고, 초기 진술의 방향과 " +
+        "치료·재활 계획을 함께 준비합니다."
     },
     {
-      name: "민사센터",
-      english: "CIVIL CENTER",
-      image: "assets/center-civil.webp",
-      description: "계약과 손해배상, 부동산 분쟁의 핵심 자료와 책임 관계를 분석합니다.",
-      link: "#contact",
-      linkText: "민사 상담 안내"
+      tag: "압수수색",
+      situation: "휴대폰과 계좌가 압수된 경우",
+      response:
+        "압수 범위의 적법성을 확인하고, 텔레그램·계좌 기록이 실제로 무엇을 " +
+        "증명하는지 포렌식 관점에서 분석합니다."
     },
     {
-      name: "가사센터",
-      english: "FAMILY CENTER",
-      image: "assets/center-family.webp",
-      description: "이혼과 상속, 친권과 양육권 문제를 현실적인 해결 방향으로 설계합니다.",
-      link: "#contact",
-      linkText: "가사 상담 안내"
+      tag: "구속영장",
+      situation: "영장실질심사를 앞둔 경우",
+      response:
+        "도주·증거인멸 우려를 다투는 자료를 정리하고, 심문 당일 진술 내용을 " +
+        "함께 준비합니다."
     },
     {
-      name: "회생센터",
-      english: "RECOVERY CENTER",
-      image: "assets/center-recovery.webp",
-      description: "채무와 소득, 재산 구조를 분석해 개인회생과 파산 절차를 준비합니다.",
-      link: "#contact",
-      linkText: "회생 상담 안내"
-    },
-    {
-      name: "공증센터",
-      english: "NOTARY CENTER",
-      image: "assets/center-notary.webp",
-      description: "계약과 의사표시를 명확한 문서와 절차로 남겨 미래의 분쟁을 예방합니다.",
-      link: "#contact",
-      linkText: "공증 상담 안내"
+      tag: "고소 · 고발",
+      situation: "고소를 당했거나 고소를 준비하는 경우",
+      response:
+        "사실관계와 증거를 먼저 정리해 무엇이 증명되고 무엇이 증명되지 않는지 " +
+        "가린 뒤 대응 순서를 정합니다."
     }
   ];
 
 
   /* ===================================================================
-     테마
+     변호사 카드
   =================================================================== */
 
-  const themeToggle = $("#themeToggle");
+  const attorneyGrid = $("#attorneyGrid");
 
-  const applyTheme = (theme) => {
-    document.documentElement.dataset.theme = theme;
-
-    themeToggle?.setAttribute(
-      "aria-label",
-      theme === "dark" ? "밝은 화면으로 전환" : "어두운 화면으로 전환"
-    );
-
-    $('meta[name="theme-color"]')
-      ?.setAttribute("content", theme === "dark" ? "#17171a" : "#ffffff");
-
-    try {
-      localStorage.setItem("yuil-theme", theme);
-    } catch (_) {
-      /* 저장이 막힌 브라우저에서도 전환 자체는 동작해야 한다 */
-    }
-  };
-
-  applyTheme(document.documentElement.dataset.theme || "light");
-
-  themeToggle?.addEventListener("click", () => {
-    applyTheme(
-      document.documentElement.dataset.theme === "dark" ? "light" : "dark"
-    );
-  });
-
-
-  /* ===================================================================
-     카드 렌더링
-  =================================================================== */
-
-  const lawyerGrid = $("#lawyerGrid");
-
-  if (lawyerGrid) {
-    lawyerGrid.replaceChildren(...lawyers.map((lawyer) => {
+  if (attorneyGrid) {
+    attorneyGrid.replaceChildren(...attorneys.map((person) => {
       const li = document.createElement("li");
-      li.className = "lawyer-card";
+      li.className = "attorney-card";
 
       const photo = document.createElement("div");
-      photo.className = "lawyer-photo";
+      photo.className = "attorney-photo";
 
       const img = document.createElement("img");
-      img.src = lawyer.image;
-      img.alt = `${lawyer.name} ${lawyer.role}`;
+      img.src = person.image;
+      img.alt = `${person.name} ${person.title}`;
       img.loading = "lazy";
       photo.append(img);
 
       const body = document.createElement("div");
-      body.className = "lawyer-body";
-
-      const role = document.createElement("p");
-      role.className = "lawyer-role";
-      role.textContent = lawyer.role;
+      body.className = "attorney-body";
 
       const name = document.createElement("h3");
-      name.className = "lawyer-name";
-      name.textContent = lawyer.name;
+      name.className = "attorney-name";
+      name.append(document.createTextNode(person.name));
+      const title = document.createElement("small");
+      title.textContent = person.title;
+      name.append(title);
 
-      const desc = document.createElement("p");
-      desc.className = "lawyer-desc";
-      desc.textContent = lawyer.description;
+      const field = document.createElement("p");
+      field.className = "attorney-field";
+      field.textContent = person.field;
 
-      const tags = document.createElement("div");
-      tags.className = "lawyer-tags";
-      tags.append(...lawyer.tags.map((tag) => {
-        const span = document.createElement("span");
-        span.textContent = tag;
-        return span;
+      const careers = document.createElement("ul");
+      careers.className = "attorney-career";
+      careers.append(...person.careers.map((career) => {
+        const item = document.createElement("li");
+        item.textContent = career;
+        return item;
       }));
 
-      body.append(role, name, desc, tags);
+      body.append(name, field, careers);
       li.append(photo, body);
       return li;
     }));
   }
 
 
-  const practiceGrid = $("#practiceGrid");
+  /* ===================================================================
+     해결 사례 카드
+  =================================================================== */
 
-  if (practiceGrid) {
-    practiceGrid.replaceChildren(...practices.map((practice) => {
+  const caseList = $("#caseList");
+
+  if (caseList) {
+    caseList.replaceChildren(...cases.map((item) => {
       const li = document.createElement("li");
+      li.className = "case-card";
 
-      const card = document.createElement("a");
-      card.className = "practice-card";
-      card.href = practice.link;
+      const tag = document.createElement("span");
+      tag.className = "case-tag";
+      tag.textContent = item.tag;
 
-      const thumb = document.createElement("div");
-      thumb.className = "practice-thumb";
+      const situation = document.createElement("h3");
+      situation.className = "case-situation";
+      situation.textContent = item.situation;
 
-      const img = document.createElement("img");
-      img.src = practice.image;
-      img.alt = practice.name;
-      img.loading = "lazy";
-      thumb.append(img);
+      const response = document.createElement("p");
+      response.className = "case-response";
+      const label = document.createElement("strong");
+      label.textContent = "이렇게 대응합니다";
+      response.append(label, document.createTextNode(item.response));
 
-      const body = document.createElement("div");
-      body.className = "practice-body";
-
-      const en = document.createElement("p");
-      en.className = "practice-en";
-      en.textContent = practice.english;
-
-      const name = document.createElement("h3");
-      name.className = "practice-name";
-      name.textContent = practice.name;
-
-      const desc = document.createElement("p");
-      desc.className = "practice-desc";
-      desc.textContent = practice.description;
-
-      const more = document.createElement("span");
-      more.className = "practice-more";
-      const moreText = document.createElement("span");
-      moreText.textContent = practice.linkText;
-      const arrow = document.createElement("i");
-      arrow.setAttribute("aria-hidden", "true");
-      arrow.textContent = "→";
-      more.append(moreText, arrow);
-
-      body.append(en, name, desc, more);
-      card.append(thumb, body);
-      li.append(card);
+      li.append(tag, situation, response);
       return li;
     }));
   }
@@ -275,6 +210,11 @@
 
     /* 닫힌 메뉴는 포커스와 스크린리더 양쪽에서 완전히 제외한다 */
     mobileMenu.toggleAttribute("inert", !open);
+
+    /* visibility 전환 직후에는 focus() 가 먹지 않아 다음 프레임까지 기다린다 */
+    if (open) {
+      requestAnimationFrame(() => $("a", mobileMenu)?.focus());
+    }
   };
 
   menuToggle?.addEventListener("click", () => {
@@ -285,121 +225,10 @@
     link.addEventListener("click", () => setMenu(false));
   });
 
-
-  /* ===================================================================
-     검색
-  =================================================================== */
-
-  const searchLayer   = $("#searchLayer");
-  const searchToggle  = $("#searchToggle");
-  const searchInput   = $("#searchInput");
-  const searchClear   = $("#searchClear");
-  const searchResults = $("#searchResults");
-  const heroSearch    = $("#heroSearch");
-
-  /* 검색 색인 — 페이지 안의 섹션을 대상으로 한다 */
-  const searchIndex = [
-    { title: "소개 · 유일의 방식", hint: "증거 · 초기 대응 · 변호인단 전략", href: "#about",
-      keywords: "소개 유일 방식 증거 기록 전략 초기대응 why" },
-    { title: "변호인단", hint: "정호길 대표변호사 외 5인", href: "#lawyers",
-      keywords: "변호사 변호인단 정호길 김제도 대표변호사 프로필 경력 lawyer" },
-    { title: "사건 절차", hint: "상담 접수부터 선임까지 4단계", href: "#process",
-      keywords: "절차 과정 상담 접수 선임 진행 프로세스 process" },
-    { title: "상담안내", hint: "032.000.0000 · 평일 09:00–18:00", href: "#contact",
-      keywords: "상담 문의 전화 연락처 카카오톡 예약 위치 오시는길 주소 contact" },
-    ...practices.map((p) => ({
-      title: p.name,
-      hint: p.description,
-      href: "#practice",
-      keywords: `${p.name} ${p.english} ${p.description}`
-    }))
-  ];
-
-  const renderResults = (query) => {
-    if (!searchResults) return;
-
-    const q = query.trim().toLowerCase();
-
-    if (!q) {
-      searchResults.replaceChildren();
-      return;
-    }
-
-    const hits = searchIndex.filter((item) =>
-      `${item.title} ${item.hint} ${item.keywords}`.toLowerCase().includes(q)
-    );
-
-    if (!hits.length) {
-      const empty = document.createElement("p");
-      empty.className = "search-empty";
-      empty.textContent = `"${query.trim()}" 에 대한 결과가 없습니다.`;
-      searchResults.replaceChildren(empty);
-      return;
-    }
-
-    searchResults.replaceChildren(...hits.map((item) => {
-      const a = document.createElement("a");
-      a.href = item.href;
-
-      const strong = document.createElement("strong");
-      strong.textContent = item.title;
-
-      const span = document.createElement("span");
-      span.textContent = item.hint;
-
-      a.append(strong, span);
-      a.addEventListener("click", () => setSearch(false));
-      return a;
-    }));
-  };
-
-  const setSearch = (open) => {
-    if (!searchLayer || !searchToggle) return;
-
-    searchLayer.hidden = !open;
-    searchToggle.setAttribute("aria-expanded", String(open));
-    searchToggle.setAttribute("aria-label", open ? "검색 닫기" : "검색 열기");
-
-    if (open) {
-      searchInput?.focus();
-    } else {
-      if (searchInput) searchInput.value = "";
-      searchResults?.replaceChildren();
-    }
-  };
-
-  searchToggle?.addEventListener("click", () => setSearch(searchLayer.hidden));
-
-  heroSearch?.addEventListener("click", () => {
-    setSearch(true);
-    searchLayer?.scrollIntoView({
-      behavior: prefersReducedMotion ? "auto" : "smooth",
-      block: "nearest"
-    });
-  });
-
-  searchInput?.addEventListener("input", (event) => {
-    renderResults(event.target.value);
-  });
-
-  $("#searchBar")?.addEventListener("submit", (event) => event.preventDefault());
-
-  searchClear?.addEventListener("click", () => {
-    if (!searchInput) return;
-    searchInput.value = "";
-    renderResults("");
-    searchInput.focus();
-  });
-
   document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") return;
-
-    if (mobileMenu?.classList.contains("is-open")) {
+    if (event.key === "Escape" && mobileMenu?.classList.contains("is-open")) {
       setMenu(false);
       menuToggle?.focus();
-    } else if (searchLayer && !searchLayer.hidden) {
-      setSearch(false);
-      searchToggle?.focus();
     }
   });
 
@@ -415,26 +244,21 @@
     .map((link) => document.querySelector(link.getAttribute("href")))
     .filter(Boolean);
 
-  const setCurrent = (id) => {
-    navLinks.forEach((link) => {
-      link.classList.toggle("is-current", link.getAttribute("href") === `#${id}`);
-    });
-  };
-
   if (sections.length) {
-    /*
-      화면 위쪽 1/3 지점을 지나는 섹션을 "현재"로 본다.
-      IntersectionObserver 만으로는 긴 섹션에서 상태가 끊겨 보인다.
-    */
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-        if (visible.length) setCurrent(visible[0].target.id);
+        if (!visible.length) return;
+
+        const id = visible[0].target.id;
+        navLinks.forEach((link) => {
+          link.classList.toggle("is-current", link.getAttribute("href") === `#${id}`);
+        });
       },
-      { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.2, 0.5, 1] }
+      { rootMargin: "-25% 0px -55% 0px", threshold: [0, 0.2, 0.5, 1] }
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -447,7 +271,7 @@
     ticking = true;
 
     requestAnimationFrame(() => {
-      header?.classList.toggle("is-scrolled", window.scrollY > 8);
+      header?.classList.toggle("is-scrolled", window.scrollY > 12);
       ticking = false;
     });
   };
