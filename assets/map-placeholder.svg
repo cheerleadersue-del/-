@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520"
+     preserveAspectRatio="xMidYMid slice" role="presentation">
+  <defs>
+    <linearGradient id="mpBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#211b15"/>
+      <stop offset="1" stop-color="#171310"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="520" fill="url(#mpBg)"/>
+
+  <!-- 블록 -->
+  <g fill="#ffffff" fill-opacity="0.035">
+    <rect x="40"  y="40"  width="200" height="130" rx="4"/>
+    <rect x="270" y="40"  width="150" height="130" rx="4"/>
+    <rect x="450" y="40"  width="140" height="90"  rx="4"/>
+    <rect x="620" y="40"  width="140" height="200" rx="4"/>
+    <rect x="40"  y="205" width="200" height="150" rx="4"/>
+    <rect x="270" y="205" width="150" height="90"  rx="4"/>
+    <rect x="450" y="165" width="140" height="130" rx="4"/>
+    <rect x="40"  y="390" width="330" height="95"  rx="4"/>
+    <rect x="450" y="330" width="310" height="155" rx="4"/>
+  </g>
+
+  <!-- 도로 -->
+  <g stroke="#ffffff" stroke-opacity="0.09" stroke-width="14" stroke-linecap="square">
+    <path d="M0 190h800M0 370h800"/>
+    <path d="M255 0v520M435 0v520M605 0v520"/>
+  </g>
+  <g stroke="#c9a45c" stroke-opacity="0.20" stroke-width="3">
+    <path d="M0 190h800"/>
+    <path d="M435 0v520"/>
+  </g>
+
+  <!-- 위치 핀 -->
+  <g transform="translate(435 190)">
+    <circle r="46" fill="#c9a45c" fill-opacity="0.10"/>
+    <circle r="27" fill="#c9a45c" fill-opacity="0.18"/>
+    <path d="M0 -26a17 17 0 0 1 17 17c0 12-17 29-17 29S-17 3-17 -9A17 17 0 0 1 0 -26Z"
+          fill="#c9a45c"/>
+    <circle cy="-9" r="6" fill="#171310"/>
+  </g>
+
+  <text x="435" y="256" text-anchor="middle"
+        font-family="system-ui, -apple-system, sans-serif"
+        font-size="17" font-weight="700" fill="#e0c489" letter-spacing="0.02em">
+    법무법인 유일
+  </text>
+</svg>
