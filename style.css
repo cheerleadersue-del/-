@@ -1641,7 +1641,15 @@ img, svg {
   .hero-photo {
     width: 66%;
     height: 74%;
-    opacity: 0.4;
+    opacity: 0.55;
+  }
+
+  /*
+    스크롤 안내는 히어로가 화면 전체를 채울 때만 뜻이 있다.
+    여기서는 min-height 가 풀려 히어로가 짧아지므로 칩 위에 겹친다.
+  */
+  .hero-scroll {
+    display: none;
   }
 
   .principle-inner {
@@ -1697,9 +1705,12 @@ img, svg {
     font-size: 7.5px;
   }
 
-  /* 히어로 */
+  /* 히어로 — 문구가 위, 인물이 아래인 세로 배치 */
   .hero {
-    padding: calc(var(--header-h) + 30px) 0 58px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: calc(var(--header-h) + 28px) 0 0;
   }
 
   .hero-title {
@@ -1715,10 +1726,31 @@ img, svg {
     display: none;
   }
 
+  /*
+    좁은 화면에서는 인물을 배경으로 깔지 않는다.
+    글자와 겹쳐 얼룩처럼 보인다. 문구 아래에 제대로 세운다.
+  */
   .hero-photo {
-    width: 88%;
-    height: 60%;
-    opacity: 0.26;
+    order: 2;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    z-index: 0;
+    width: 100%;
+    height: 380px;
+    margin-top: 20px;
+    opacity: 1;
+  }
+
+  .hero-photo img {
+    object-position: center bottom;
+    filter: none;
+    -webkit-mask-image: linear-gradient(180deg, #000 88%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 88%, transparent 100%);
+  }
+
+  .hero-inner {
+    order: 1;
   }
 
   /* 칩은 가로 스와이프 */
@@ -1737,10 +1769,6 @@ img, svg {
 
   .hero-chips .chip {
     scroll-snap-align: start;
-  }
-
-  .hero-scroll {
-    display: none;
   }
 
   /* 방식 */
@@ -1766,47 +1794,63 @@ img, svg {
     justify-content: center;
   }
 
-  /* 변호인단 — 사진 좌측 · 정보 우측 가로형 */
+  /*
+    변호인단 — 왼쪽 사진 · 오른쪽 정보로 완전히 분리한다.
+    사진 위에 글자를 얹으면 좁은 화면에서 얼굴이 가려진다.
+  */
   .lawyer-grid {
     grid-template-columns: 1fr;
     gap: 10px;
   }
 
   .lawyer-card {
-    aspect-ratio: 16 / 7;
+    display: grid;
+    grid-template-columns: 38% minmax(0, 1fr);
+    align-items: center;
+    gap: 13px;
+    aspect-ratio: auto;
+    padding-right: 14px;
   }
 
-  .lawyer-card::before {
-    font-size: 44px;
-  }
-
+  /* 세로 인물사진이므로 세로 비율을 지킨다 */
   .lawyer-photo {
+    position: static;
+    z-index: auto;
+    height: auto;
+    aspect-ratio: 3 / 4;
     object-position: center 14%;
+    /* 어두운 화면에서 얼굴이 묻히지 않게 살짝 올린다 */
+    filter: brightness(1.08) contrast(1.03);
   }
 
+  /* 얼굴을 덮던 그라데이션과 워터마크는 가로형에서 쓰지 않는다 */
+  .lawyer-card::before,
   .lawyer-card::after {
-    background:
-      linear-gradient(
-        95deg,
-        rgba(18, 14, 12, 0.14) 0%,
-        rgba(18, 14, 12, 0.72) 34%,
-        rgba(18, 14, 12, 0.95) 62%
-      );
+    display: none;
   }
 
   .lawyer-info {
-    right: 14px;
-    bottom: auto;
-    top: 50%;
-    left: 42%;
-    transform: translateY(-50%);
+    position: static;
+    padding: 13px 0;
   }
 
-  .lawyer-career {
-    /* 가로형에서는 항상 보여준다 */
-    max-height: 160px;
-    margin-top: 8px;
+  /* 펼침 없이 경력을 항상 보여준다 */
+  .lawyer-career,
+  .lawyer-card:hover .lawyer-career,
+  .lawyer-card.is-open .lawyer-career {
+    max-height: none;
+    margin-top: 9px;
     opacity: 1;
+  }
+
+  /* 터치 화면에는 호버가 없으므로 움직임을 끈다 */
+  .lawyer-card:hover,
+  .lawyer-card.is-open {
+    transform: none;
+  }
+
+  .lawyer-card:hover .lawyer-photo {
+    transform: none;
   }
 
   .lawyer-plus {
