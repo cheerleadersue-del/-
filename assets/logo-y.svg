@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 375" fill="none" role="img" aria-label="법무법인 유일">
+  <!--
+    Y 모노그램. 두 획이 위에서 갈라져 내려와 나란히 선다.
+    stroke 로 그려 어느 크기에서도 굵기 비율이 유지된다.
+    ※ 로고 목업 사진을 보고 다시 그린 근사치입니다.
+       원본 벡터 파일이 있으면 이 파일을 교체하세요.
+  -->
+  <g stroke="currentColor" stroke-linecap="butt" stroke-linejoin="miter">
+    <path d="M30 8 L130 160 L130 367" stroke-width="62"/>
+    <path d="M286 8 L192 156 L192 367" stroke-width="38"/>
+  </g>
+</svg>

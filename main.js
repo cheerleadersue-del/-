@@ -1,523 +1,431 @@
 /* =====================================================================
-   법무법인 유일 — LAW FIRM YUIL
-   main.js
+   법무법인 유일 — main.js
 
-   - 업무분야 탭 (버튼 · 화살표 · 좌우 스와이프)
-   - 변호인단 카드 (터치에서는 탭으로 경력 펼침)
-   - 약속 6항목 렌더링
-   - 상담 폼 검증
-   - 헤더 상태 · 현재 섹션 · 모바일 메뉴
+   내용은 아래 세 배열에서 관리합니다.
+   ⚠️ 법률 절차를 설명하는 문구(questions)는 반드시 변호사 검토를 거치세요.
 ===================================================================== */
 
-(() => {
-  "use strict";
-
-  const $  = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
-
-  const prefersReducedMotion =
-    matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* 마우스가 없는 기기 — 호버 대신 탭으로 펼쳐야 한다 */
-  const isTouch = matchMedia("(hover: none)").matches;
-
-
-  /* ===================================================================
-     데이터
-
-     ⚠ 사진 파일과 성명의 짝은 시안만으로 확정할 수 없어 임시 배정했다.
-        실제 인물과 대조해 image 값을 확인할 것.
-  =================================================================== */
-
-  const practices = [
-    {
-      name: "형사센터",
-      en: "CRIMINAL CENTER",
-      image: "assets/center-criminal.webp",
-      desc: "초기 진술부터 압수수색, 조사와 재판까지 증거를 중심으로 대응합니다. " +
-            "수사기관이 무엇을 보고 있는지 먼저 파악한 뒤 진술 방향을 함께 정리합니다.",
-      tags: ["구속영장", "압수수색", "마약", "성범죄", "폭력·상해", "음주운전"]
-    },
-    {
-      name: "민사센터",
-      en: "CIVIL CENTER",
-      image: "assets/center-civil.webp",
-      desc: "계약과 손해배상, 부동산 분쟁의 핵심 자료와 책임 관계를 분석합니다. " +
-            "무엇이 증명되고 무엇이 증명되지 않는지 먼저 가린 뒤 소송 순서를 정합니다.",
-      tags: ["손해배상", "계약분쟁", "부동산", "임대차", "대여금", "명도"]
-    },
-    {
-      name: "가사센터",
-      en: "FAMILY CENTER",
-      image: "assets/center-family.webp",
-      desc: "이혼과 상속, 친권과 양육권 문제를 현실적인 해결 방향으로 설계합니다. " +
-            "법률적 판단과 의뢰인의 생활 여건을 함께 놓고 검토합니다.",
-      tags: ["이혼", "재산분할", "양육권", "상속", "유류분", "가사조정"]
-    },
-    {
-      name: "회생센터",
-      en: "RECOVERY CENTER",
-      image: "assets/center-recovery.webp",
-      desc: "채무와 소득, 재산 구조를 분석해 개인회생과 파산 절차를 준비합니다. " +
-            "채권자 대응과 변제계획안 작성까지 절차 전체를 함께합니다.",
-      tags: ["개인회생", "개인파산", "법인회생", "채무조정", "변제계획"]
-    },
-    {
-      name: "공증센터",
-      en: "NOTARY CENTER",
-      image: "assets/center-notary.webp",
-      desc: "계약과 의사표시를 명확한 문서와 절차로 남겨 미래의 분쟁을 예방합니다. " +
-            "분쟁이 생긴 뒤보다 남겨두는 편이 훨씬 저렴합니다.",
-      tags: ["금전소비대차", "약속어음", "정관인증", "사서증서", "유언공증"]
-    }
-  ];
-
-  const attorneys = [
-    {
-      name: "정호길", role: "대표변호사", field: "형사 · 수사 및 재판 대응",
-      image: "assets/lawyer-01.webp",
-      career: ["25년 경력 형사전문", "광역수사대 강력·마약 수사 경력", "형사사건 직접 변론 및 총괄"]
-    },
-    {
-      name: "김제도", role: "변호사", field: "형사 · 기업분쟁",
-      image: "assets/lawyer-02.webp",
-      career: ["사법연수원 47기 수료", "마약·사기·폭행 사건 수행", "계좌·통신 자료 분석"]
-    },
-    {
-      name: "심상한", role: "변호사", field: "기업 회생 · 파산",
-      image: "assets/lawyer-03.webp",
-      career: ["사법시험 49회 합격", "前 서울지방노동위원회 공익위원", "25년 이상 경력"]
-    },
-    {
-      name: "정주현", role: "변호사", field: "부동산 · 민사 · 형사",
-      image: "assets/lawyer-04.webp",
-      career: ["사법연수원 30기 수료", "前 서울중앙지방법원 조정위원", "부동산·민사 분야 전문"]
-    },
-    {
-      name: "이경숙", role: "변호사", field: "이혼 · 상속 · 형사",
-      image: "assets/lawyer-05.webp",
-      career: ["사법시험 50회 합격", "대한변협 전문분야 등록", "이혼·상속 사건 다수 수행"]
-    }
-  ];
-
-  const values = [
-    { title: "의뢰인 권익 보호",
-      desc: "의뢰인의 이익이 기준입니다. 사건 수임보다 지금 무엇이 필요한지를 먼저 말씀드립니다." },
-    { title: "신뢰 우선 원칙",
-      desc: "가능한 것과 어려운 것을 있는 그대로 알려드립니다. 결과를 약속하지 않습니다." },
-    { title: "최적의 해법 제시",
-      desc: "소송만이 답은 아닙니다. 합의·조정을 포함해 부담이 가장 적은 길을 함께 찾습니다." },
-    { title: "진행 상황 공유",
-      desc: "지금 어느 단계인지, 다음에 무엇이 오는지 단계마다 알려드립니다." },
-    { title: "전문성으로 증명",
-      desc: "분야별 전문 변호사가 하나의 사건을 교차 검토해 놓치는 쟁점을 줄입니다." },
-    { title: "끝까지 함께",
-      desc: "조사 동행부터 재판 변론까지, 사건이 끝날 때까지 담당 변호사가 유지됩니다." }
-  ];
-
-  const pad = (n) => String(n).padStart(2, "0");
-
-
-  /* ===================================================================
-     업무분야 탭
-  =================================================================== */
-
-  const tabsBox      = $("#practiceTabs");
-  const panel        = $("#practicePanel");
-  const pImage       = $("#practiceImage");
-  const pEn          = $("#practiceEn");
-  const pName        = $("#practiceName");
-  const pDesc        = $("#practiceDesc");
-  const pTags        = $("#practiceTags");
-  const pCurrent     = $("#practiceCurrent");
-  const pTotal       = $("#practiceTotal");
-
-  let practiceIndex = 0;
-  let panelTimer = null;
-
-  if (tabsBox) {
-    tabsBox.replaceChildren(...practices.map((item, index) => {
-      const tab = document.createElement("button");
-      tab.type = "button";
-      tab.className = "tab";
-      tab.setAttribute("role", "tab");
-      tab.setAttribute("aria-selected", String(index === 0));
-      tab.dataset.index = String(index);
-      tab.textContent = item.name;
-      tab.addEventListener("click", () => showPractice(index));
-      return tab;
-    }));
+const questions = [
+  {
+    tag: "형사",
+    q: "수사기관에서 연락이 왔습니다. 변호사는 언제 선임해야 하나요?",
+    a: [
+      "조사를 받기 전입니다. 첫 진술은 이후 절차 내내 따라다닙니다. " +
+      "한 번 조서에 남은 말은 나중에 바꾸기 어렵고, 바꾸면 그 자체가 불리한 사정으로 읽힙니다.",
+      "무엇을 말하고 무엇을 말하지 않을지는 사실관계를 정리한 뒤에 정해야 합니다. " +
+      "조사 일정이 잡히셨다면 그 전에 연락 주십시오. 변호인은 조사에 함께 들어갈 수 있습니다."
+    ]
+  },
+  {
+    tag: "형사",
+    q: "구속영장이 청구되었습니다. 영장실질심사는 어떻게 준비하나요?",
+    a: [
+      "검사가 구속영장을 청구하면 판사가 피의자를 직접 심문합니다. " +
+      "청구 다음 날 열리는 것이 보통이어서, 준비할 시간이 하루 남짓입니다.",
+      "심사에서 다투는 것은 유무죄가 아니라 <b>구속의 필요성</b>입니다. " +
+      "도주하거나 증거를 없앨 우려가 없다는 점을 소명해야 합니다. " +
+      "주거와 직업, 가족관계, 피해 회복을 위해 한 일, 신원을 보증할 사람 — " +
+      "이런 자료를 하루 안에 모아 의견서로 정리합니다.",
+      "심문기일에는 변호인이 출석할 수 있습니다. " +
+      "유일은 청구 사실을 확인한 즉시 기록 검토와 의견서 작성에 들어갑니다."
+    ]
+  },
+  {
+    tag: "형사",
+    q: "경찰이 불송치 결정을 했습니다. 이대로 끝나는 건가요?",
+    a: [
+      "아닙니다. 이의신청을 할 수 있습니다. " +
+      "경찰이 사건을 검찰로 넘기지 않기로 하면 고소인에게 그 이유를 통지하는데, " +
+      "여기에 이의를 제기하면 사건이 검사에게 송치되어 다시 판단을 받습니다.",
+      "다만 <b>고소인과 피해자</b>가 할 수 있고, 고발인의 이의신청권은 법 개정으로 제외되었습니다. " +
+      "고소인이 아닌 지위에서 신고하신 경우라면 다른 방법을 찾아야 합니다.",
+      "이의신청서에 무엇을 쓰느냐가 결과를 좌우합니다. " +
+      "불송치 이유서를 먼저 받아 어느 지점에서 판단이 갈렸는지 확인하고, " +
+      "그 부분을 겨냥한 자료를 붙여야 합니다. 같은 주장을 반복하면 결론도 반복됩니다."
+    ]
+  },
+  {
+    tag: "형사",
+    q: "성범죄로 조사를 받게 되었습니다. 벌금만 내면 끝나는 것 아닌가요?",
+    a: [
+      "형벌만 보시면 안 됩니다. 성범죄는 유죄가 인정되면 형과 별도로 " +
+      "<b>신상정보 등록, 취업제한, 경우에 따라 신상공개</b>가 따라붙습니다. " +
+      "벌금형이라도 이런 처분이 함께 내려질 수 있어, 형량보다 부수처분이 삶에 더 오래 남는 경우가 많습니다.",
+      "통신매체이용음란(통매음), 아동·청소년성보호법 위반, 강제추행, 강간 — " +
+      "죄명마다 요건과 따라오는 처분이 다릅니다. 어떤 조문으로 의율되는지부터 확인해야 합니다.",
+      "억울하게 지목되신 경우도, 실제로 잘못이 있어 수습이 필요한 경우도 " +
+      "초기 진술을 어떻게 하느냐가 갈림길입니다. 혼자 조사에 응하지 마십시오."
+    ]
+  },
+  {
+    tag: "민사",
+    q: "의료사고를 당했습니다. 병원을 상대로 손해배상을 받을 수 있나요?",
+    a: [
+      "가능하지만, 입증 책임이 원칙적으로 <b>환자 측</b>에 있다는 점이 어렵습니다. " +
+      "나쁜 결과가 생겼다는 것만으로는 부족하고, 의료진의 과실과 그 과실이 결과를 불러왔다는 " +
+      "연결고리를 함께 보여야 합니다.",
+      "가장 먼저 하실 일은 <b>진료기록 확보</b>입니다. 환자와 보호자는 진료기록 사본을 청구할 수 있습니다. " +
+      "검사 영상과 간호기록까지 빠짐없이 받아두셔야 합니다. 시간이 지나면 확보가 어려워집니다.",
+      "소송 외에 한국의료분쟁조정중재원의 조정 절차도 있습니다. " +
+      "비용과 기간이 적게 드는 대신 상대가 응하지 않으면 진행되지 않는 한계가 있어, " +
+      "사안에 따라 어느 쪽이 유리한지 먼저 따져봅니다.",
+      "손해배상 청구권에는 시효가 있습니다. 늦어질수록 선택지가 줄어듭니다."
+    ]
+  },
+  {
+    tag: "민사",
+    q: "빌려준 돈을 돌려받지 못하고 있습니다. 차용증이 없어도 되나요?",
+    a: [
+      "차용증이 없어도 청구할 수 있습니다. 계좌이체 내역, 문자와 메신저 대화, " +
+      "통화 녹음처럼 <b>빌려준 사실과 갚기로 한 약속</b>을 보여주는 자료면 됩니다.",
+      "실무에서 가장 자주 걸리는 지점은 상대가 <b>“빌린 게 아니라 받은 것”</b>이라고 다투는 경우입니다. " +
+      "돈이 오간 사실 자체는 인정하면서 증여라고 주장하는 것이지요. " +
+      "그래서 송금 직전후의 대화 내용이 계좌내역보다 중요할 때가 많습니다.",
+      "판결을 받아도 상대에게 재산이 없으면 회수하지 못합니다. " +
+      "그래서 소송을 걸기 전에 재산을 먼저 파악하고, 필요하면 <b>가압류</b>로 묶어두는 순서를 권합니다. " +
+      "이 순서를 바꾸면 이기고도 못 받는 일이 생깁니다.",
+      "대여금 채권에도 소멸시효가 있습니다. 오래된 채권일수록 먼저 확인이 필요합니다."
+    ]
+  },
+  {
+    tag: "공통",
+    q: "비용은 어떻게 정해지나요?",
+    a: [
+      "사건의 종류와 절차 단계에 따라 다릅니다. " +
+      "수사 단계만 대응하는 경우와 재판까지 가는 경우, 심급이 올라가는 경우가 각각 다릅니다.",
+      "상담 단계에서 예상되는 절차와 그에 따르는 비용 범위를 먼저 말씀드립니다. " +
+      "착수 전에 서면으로 확인되지 않은 비용은 청구하지 않습니다."
+    ]
   }
+];
 
-  const tabs = $$(".tab");
-
-  const showPractice = (index, animate = true) => {
-    const item = practices[index];
-    if (!item) return;
-
-    practiceIndex = index;
-    window.clearTimeout(panelTimer);
-
-    tabs.forEach((tab, i) => {
-      tab.classList.toggle("is-active", i === index);
-      tab.setAttribute("aria-selected", String(i === index));
-    });
-
-    if (pCurrent) pCurrent.textContent = String(index + 1);
-
-    /*
-      좁은 화면에서 선택한 탭이 보이도록 탭 줄만 가로로 움직인다.
-      scrollIntoView 를 쓰면 초기 렌더에서 페이지가 이 섹션으로 튄다.
-    */
-    const tab = tabs[index];
-    if (animate && tab && tabsBox) {
-      tabsBox.scrollTo({
-        left: tab.offsetLeft - (tabsBox.clientWidth - tab.offsetWidth) / 2,
-        behavior: prefersReducedMotion ? "auto" : "smooth"
-      });
-    }
-
-    const apply = () => {
-      if (pImage) {
-        pImage.src = item.image;
-        pImage.alt = item.name;
-      }
-      if (pEn)   pEn.textContent   = item.en;
-      if (pName) pName.textContent = item.name;
-      if (pDesc) pDesc.textContent = item.desc;
-
-      if (pTags) {
-        pTags.replaceChildren(...item.tags.map((tag) => {
-          const li = document.createElement("li");
-          li.textContent = tag;
-          return li;
-        }));
-      }
-    };
-
-    if (!animate || !panel || prefersReducedMotion) {
-      apply();
-      return;
-    }
-
-    panel.classList.add("is-changing");
-
-    panelTimer = window.setTimeout(() => {
-      apply();
-      requestAnimationFrame(() => panel.classList.remove("is-changing"));
-      /* rAF 는 탭이 백그라운드면 멈추므로 타이머로 안전망을 둔다 */
-      window.setTimeout(() => panel.classList.remove("is-changing"), 200);
-    }, 220);
-  };
-
-  const stepPractice = (delta) => {
-    showPractice((practiceIndex + delta + practices.length) % practices.length);
-  };
-
-  $("#practicePrev")?.addEventListener("click", () => stepPractice(-1));
-  $("#practiceNext")?.addEventListener("click", () => stepPractice(1));
-
-  if (pTotal) pTotal.textContent = String(practices.length);
-
-  /* 패널 위 좌우 스와이프 */
-  if (panel) {
-    let sx = 0, sy = 0, tracking = false, axis = null;
-
-    panel.addEventListener("pointerdown", (event) => {
-      if (event.pointerType === "mouse") return;   // 마우스는 화살표로
-      sx = event.clientX; sy = event.clientY;
-      tracking = true; axis = null;
-    });
-
-    panel.addEventListener("pointermove", (event) => {
-      if (!tracking || axis) return;
-      const dx = event.clientX - sx;
-      const dy = event.clientY - sy;
-      if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
-      /* 세로 의도면 페이지 스크롤에 양보한다 */
-      axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
-    });
-
-    panel.addEventListener("pointerup", (event) => {
-      if (!tracking) return;
-      const dx = event.clientX - sx;
-      if (axis === "x" && Math.abs(dx) > 46) stepPractice(dx < 0 ? 1 : -1);
-      tracking = false; axis = null;
-    });
-
-    panel.addEventListener("pointercancel", () => { tracking = false; axis = null; });
+const practices = [
+  {
+    name: "형사",
+    en: "CRIMINAL",
+    image: "assets/center-criminal.webp",
+    desc: "수사 단계부터 재판까지 같은 변호인이 맡습니다. " +
+          "진술의 모순과 기록의 공백을 먼저 찾습니다.",
+    tags: ["구속영장", "압수수색", "조사 동행", "고소·고발"]
+  },
+  {
+    name: "민사",
+    en: "CIVIL",
+    image: "assets/center-civil.webp",
+    desc: "다투기 전에 회수 가능성을 먼저 봅니다. " +
+          "이길 수 있는지와 받을 수 있는지는 다른 문제입니다.",
+    tags: ["손해배상", "계약분쟁", "채권추심", "가압류"]
+  },
+  {
+    name: "가사",
+    en: "FAMILY",
+    image: "assets/center-family.webp",
+    desc: "재산과 양육은 감정과 분리해 다룹니다. " +
+          "합의로 끝낼 수 있는 부분과 아닌 부분을 나눕니다.",
+    tags: ["이혼", "재산분할", "양육권", "상속"]
+  },
+  {
+    name: "회생",
+    en: "REHABILITATION",
+    image: "assets/center-recovery.webp",
+    desc: "폐업과 회생 사이에서 남길 것을 정합니다. " +
+          "채권자 구성과 현금 흐름을 먼저 확인합니다.",
+    tags: ["법인회생", "개인회생", "파산", "채무조정"]
+  },
+  {
+    name: "공증",
+    en: "NOTARY",
+    image: "assets/center-notary.webp",
+    desc: "분쟁이 생기기 전에 문서로 정리합니다. " +
+          "나중에 다투는 비용보다 지금 확인하는 비용이 적습니다.",
+    tags: ["공증", "계약검토", "법률자문", "내용증명"]
   }
+];
 
-  showPractice(0, false);
+const attorneys = [
+  {
+    name: "정호길", role: "대표변호사", field: "형사 · 수사 및 재판 대응",
+    image: "assets/lawyer-01.webp",
+    career: ["25년 경력 형사전문", "광역수사대 강력·마약 수사 경력", "형사사건 직접 변론 및 총괄"]
+  },
+  {
+    name: "김제도", role: "변호사", field: "형사 · 기업분쟁",
+    image: "assets/lawyer-02.webp",
+    career: ["사법연수원 47기 수료", "마약·사기·폭행 사건 수행", "계좌·통신 자료 분석"]
+  },
+  {
+    name: "심상한", role: "변호사", field: "기업 회생 · 파산",
+    image: "assets/lawyer-03.webp",
+    career: ["사법시험 49회 합격", "前 서울지방노동위원회 공익위원", "25년 이상 경력"]
+  },
+  {
+    name: "정주현", role: "변호사", field: "부동산 · 민사 · 형사",
+    image: "assets/lawyer-04.webp",
+    career: ["사법연수원 30기 수료", "前 서울중앙지방법원 조정위원", "부동산·민사 분야 전문"]
+  },
+  {
+    name: "이경숙", role: "변호사", field: "이혼 · 상속 · 형사",
+    image: "assets/lawyer-05.webp",
+    career: ["사법시험 50회 합격", "대한변협 전문분야 등록", "이혼·상속 사건 다수 수행"]
+  }
+];
 
 
-  /* ===================================================================
-     변호인단
-  =================================================================== */
+/* ------------------------------------------------------------------ */
 
-  const lawyerGrid = $("#lawyerGrid");
+const $ = (sel, root = document) => root.querySelector(sel);
+const el = (tag, cls, html) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (html != null) n.innerHTML = html;
+  return n;
+};
 
-  if (lawyerGrid) {
-    lawyerGrid.replaceChildren(...attorneys.map((person) => {
-      const li = document.createElement("li");
+const reduceMotion =
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      /*
-        터치 기기에서는 호버가 없으므로 버튼으로 만들어 탭하면 펼쳐지게 한다.
-        마우스 환경에서는 호버로 열리므로 버튼이어도 방해되지 않는다.
-      */
-      const card = document.createElement("button");
-      card.type = "button";
-      card.className = "lawyer-card";
-      card.setAttribute("aria-expanded", "false");
 
-      const img = document.createElement("img");
-      img.className = "lawyer-photo";
-      img.src = person.image;
-      img.alt = `${person.name} ${person.role}`;
-      img.loading = "lazy";
+/* ---------- 의뢰인의 질문 ---------- */
 
-      const plus = document.createElement("span");
-      plus.className = "lawyer-plus";
-      plus.setAttribute("aria-hidden", "true");
-      plus.textContent = "+";
+const qList = $("#qList");
 
-      const info = document.createElement("span");
-      info.className = "lawyer-info";
+if (qList) {
+  const items = questions.map((item, i) => {
+    const li = el("li", "q-item");
+    const open = i === 0;
 
-      const name = document.createElement("span");
-      name.className = "lawyer-name";
-      name.append(document.createTextNode(person.name));
-      const role = document.createElement("small");
-      role.textContent = person.role;
-      name.append(role);
+    const head = el("button", "q-head", `
+      <span class="q-no">${String(i + 1).padStart(2, "0")}</span>
+      <span class="q-tag">${item.tag}</span>
+      <span class="q-q">${item.q}</span>
+      <span class="q-mark" aria-hidden="true"></span>
+    `);
+    head.type = "button";
+    head.setAttribute("aria-expanded", String(open));
 
-      const field = document.createElement("span");
-      field.className = "lawyer-field";
-      field.textContent = person.field;
+    const panel = el("div", "q-panel",
+      `<div class="q-inner">${item.a.map((p) => `<p>${p}</p>`).join("")}</div>`);
 
-      const career = document.createElement("ul");
-      career.className = "lawyer-career";
-      career.append(...person.career.map((line) => {
-        const item = document.createElement("li");
-        item.textContent = line;
-        return item;
-      }));
+    li.classList.toggle("is-open", open);
+    li.append(head, panel);
 
-      info.append(name, field, career);
-      card.append(img, plus, info);
+    head.addEventListener("click", () => {
+      const nowOpen = head.getAttribute("aria-expanded") !== "true";
 
-      card.addEventListener("click", () => {
-        const open = card.classList.toggle("is-open");
-        card.setAttribute("aria-expanded", String(open));
+      /* 한 번에 하나만 열어 둔다. 여백이 유지되어야 읽힌다. */
+      items.forEach(({ li: other, head: otherHead }) => {
+        other.classList.remove("is-open");
+        otherHead.setAttribute("aria-expanded", "false");
       });
 
-      li.append(card);
-      return li;
-    }));
-  }
+      if (nowOpen) {
+        li.classList.add("is-open");
+        head.setAttribute("aria-expanded", "true");
+      }
+    });
 
-
-  /* ===================================================================
-     약속 6항목
-  =================================================================== */
-
-  const valueGrid = $("#valueGrid");
-
-  if (valueGrid) {
-    valueGrid.replaceChildren(...values.map((item, index) => {
-      const li = document.createElement("li");
-      li.className = "value-card";
-
-      const no = document.createElement("span");
-      no.className = "value-no";
-      no.setAttribute("aria-hidden", "true");
-      no.textContent = pad(index + 1);
-
-      const title = document.createElement("h3");
-      title.textContent = item.title;
-
-      const desc = document.createElement("p");
-      desc.textContent = item.desc;
-
-      li.append(no, title, desc);
-      return li;
-    }));
-  }
-
-
-  /* ===================================================================
-     상담 폼
-
-     전송 처리는 아직 연결되지 않았다. 값 검증까지만 하고
-     실제 접수는 Netlify Forms 또는 백엔드에 연결해야 한다 (README 참고).
-  =================================================================== */
-
-  const form   = $("#contactForm");
-  const status = $("#formStatus");
-
-  const setStatus = (message, isError = false) => {
-    if (!status) return;
-    status.textContent = message;
-    status.classList.toggle("is-error", isError);
-  };
-
-  form?.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const name  = $("#fName");
-    const phone = $("#fPhone");
-    const agree = $("#fAgree");
-
-    [name, phone].forEach((el) => el?.setAttribute("aria-invalid", "false"));
-
-    if (!name?.value.trim()) {
-      name?.setAttribute("aria-invalid", "true");
-      name?.focus();
-      setStatus("이름을 입력해 주세요.", true);
-      return;
-    }
-
-    /* 숫자만 남겨 9~11자리면 통과 — 하이픈·공백 형식은 따지지 않는다 */
-    const digits = (phone?.value || "").replace(/\D/g, "");
-    if (digits.length < 9 || digits.length > 11) {
-      phone?.setAttribute("aria-invalid", "true");
-      phone?.focus();
-      setStatus("연락처를 다시 확인해 주세요.", true);
-      return;
-    }
-
-    if (!agree?.checked) {
-      agree?.focus();
-      setStatus("개인정보 수집·이용 동의가 필요합니다.", true);
-      return;
-    }
-
-    setStatus("전송 기능이 아직 연결되지 않았습니다. 010-0000-0000 으로 연락 주세요.", true);
+    return { li, head };
   });
 
+  qList.replaceChildren(...items.map((i) => i.li));
+}
 
-  /* ===================================================================
-     헤더 상태 · 현재 섹션
-  =================================================================== */
 
-  const header = $("#header");
-  const navLinks = $$(".nav a");
+/* ---------- 업무분야 ---------- */
 
-  const sections = navLinks
-    .map((link) => document.querySelector(link.getAttribute("href")))
-    .filter(Boolean);
+const panels = $("#panels");
 
-  if (sections.length) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+if (panels) {
+  panels.replaceChildren(...practices.map((p, i) => {
+    const btn = el("button", "panel" + (i === 0 ? " is-open" : ""));
+    btn.type = "button";
+    btn.setAttribute("aria-expanded", i === 0 ? "true" : "false");
 
-        if (!visible.length) return;
+    const img = el("img", "panel-img");
+    img.src = p.image;
+    img.alt = "";
+    img.width = 1200;
+    img.height = 800;
+    img.loading = i === 0 ? "eager" : "lazy";
 
-        const id = visible[0].target.id;
-        navLinks.forEach((link) => {
-          link.classList.toggle("is-current", link.getAttribute("href") === `#${id}`);
-        });
-      },
-      { rootMargin: "-25% 0px -55% 0px", threshold: [0, 0.2, 0.5, 1] }
+    btn.append(
+      img,
+      el("span", "panel-veil"),
+      el("span", "panel-body", `
+        <span class="panel-en">${p.en}</span>
+        <span class="panel-name">${p.name}</span>
+        <span class="panel-detail">
+          <span class="panel-desc">${p.desc}</span>
+          <span class="panel-tags">${
+            p.tags.map((t) => `<span>${t}</span>`).join("")
+          }</span>
+        </span>
+      `)
     );
 
-    sections.forEach((section) => observer.observe(section));
+    btn.addEventListener("click", () => open(i));
+    return btn;
+  }));
+
+  const all = [...panels.children];
+
+  function open(index) {
+    all.forEach((node, i) => {
+      const on = i === index;
+      node.classList.toggle("is-open", on);
+      node.setAttribute("aria-expanded", String(on));
+    });
   }
 
-  let ticking = false;
+  /*
+    넓은 화면에서는 마우스를 올리기만 해도 펼쳐진다.
+    터치 기기에는 hover 가 없으므로 클릭만 동작한다.
+  */
+  if (window.matchMedia("(hover: hover) and (min-width: 900px)").matches) {
+    all.forEach((node, i) => node.addEventListener("mouseenter", () => open(i)));
+  }
+}
 
+
+/* ---------- 변호인단 ---------- */
+
+const roster = $("#roster");
+
+if (roster) {
+  roster.replaceChildren(...attorneys.map((person) => {
+    const li = el("li", "member");
+
+    const img = el("img", "member-photo");
+    img.src = person.image;
+    img.alt = `${person.name} ${person.role}`;
+    img.width = 635;
+    img.height = 998;
+    img.loading = "lazy";
+
+    const figure = el("figure", "member-figure");
+    figure.append(img);
+
+    li.append(
+      figure,
+      el("div", "member-body", `
+        <p class="member-name">${person.name}<em>${person.role}</em></p>
+        <p class="member-field">${person.field}</p>
+        <ul class="member-career">${
+          person.career.map((c) => `<li>${c}</li>`).join("")
+        }</ul>
+      `)
+    );
+    return li;
+  }));
+}
+
+
+/* ---------- 헤더 · 모바일 메뉴 ---------- */
+
+const head = $("#head");
+
+if (head) {
+  const hero = $(".hero");
+
+  /*
+    히어로 위에서는 헤더가 투명하게 떠 있고, 히어로를 지나면
+    밝은 막대로 바뀐다. 12px 만에 바꾸면 사진 위에 크림색 막대가
+    걸쳐 어색하다.
+  */
   const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-
-    requestAnimationFrame(() => {
-      header?.classList.toggle("is-scrolled", window.scrollY > 12);
-      ticking = false;
-    });
+    const limit = hero ? hero.offsetHeight - 120 : 12;
+    head.classList.toggle("is-stuck", window.scrollY > limit);
   };
 
-  addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+}
 
-  $("#railTop")?.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
-  });
+const burger = $("#burger");
+const drawer = $("#drawer");
 
+if (burger && drawer) {
+  const setOpen = (on) => {
+    document.body.classList.toggle("no-scroll", on);
+    drawer.classList.toggle("is-open", on);
+    burger.classList.toggle("is-on", on);
+    burger.setAttribute("aria-expanded", String(on));
+    burger.setAttribute("aria-label", on ? "메뉴 닫기" : "메뉴 열기");
 
-  /* ===================================================================
-     모바일 메뉴
-  =================================================================== */
-
-  const menuToggle = $("#menuToggle");
-  const mobileMenu = $("#mobileMenu");
-
-  const setMenu = (open) => {
-    if (!menuToggle || !mobileMenu) return;
-
-    menuToggle.classList.toggle("is-open", open);
-    mobileMenu.classList.toggle("is-open", open);
-    document.body.classList.toggle("is-locked", open);
-
-    menuToggle.setAttribute("aria-expanded", String(open));
-    menuToggle.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
-
-    /* 닫힌 메뉴는 포커스와 스크린리더 양쪽에서 완전히 제외한다 */
-    mobileMenu.toggleAttribute("inert", !open);
-
-    /* visibility 전환 직후에는 focus() 가 먹지 않아 다음 프레임까지 기다린다 */
-    if (open) {
-      requestAnimationFrame(() => $("a", mobileMenu)?.focus());
+    /*
+      닫힌 메뉴는 inert 로 완전히 빼둔다.
+      aria-hidden 만 쓰면 링크가 탭 순서에 남아 키보드가 갇힌다.
+    */
+    if (on) {
+      drawer.removeAttribute("inert");
+      requestAnimationFrame(() => drawer.querySelector("a")?.focus());
+    } else {
+      drawer.setAttribute("inert", "");
     }
   };
 
-  menuToggle?.addEventListener("click", () => {
-    setMenu(!mobileMenu.classList.contains("is-open"));
+  burger.addEventListener("click", () =>
+    setOpen(burger.getAttribute("aria-expanded") !== "true"));
+
+  drawer.addEventListener("click", (e) => {
+    if (e.target.closest("a")) setOpen(false);
   });
 
-  $$("a", mobileMenu).forEach((link) => {
-    link.addEventListener("click", () => setMenu(false));
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && mobileMenu?.classList.contains("is-open")) {
-      setMenu(false);
-      menuToggle?.focus();
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && drawer.classList.contains("is-open")) {
+      setOpen(false);
+      burger.focus();
     }
   });
+}
 
 
-  /* ===================================================================
-     부드러운 앵커 이동
-  =================================================================== */
+/* ---------- 상담 폼 ---------- */
 
-  $$('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const href = link.getAttribute("href");
-      if (!href || href === "#") return;
+const form = $("#form");
+const formStatus = $("#formStatus");
 
-      const target = document.querySelector(href);
-      if (!target) return;
+if (form && formStatus) {
+  const say = (msg, ok) => {
+    formStatus.textContent = msg;
+    formStatus.classList.toggle("is-ok", !!ok);
+    formStatus.classList.toggle("is-bad", !ok);
+  };
 
-      event.preventDefault();
-      setMenu(false);
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-      target.scrollIntoView({
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-        block: "start"
-      });
-    });
+    const name = $("#fName").value.trim();
+    const tel = $("#fTel").value.replace(/\D/g, "");
+    const agreed = $("#fAgree").checked;
+
+    if (name.length < 2) return say("성함을 입력해 주세요."), $("#fName").focus();
+    if (tel.length < 9 || tel.length > 11)
+      return say("연락처를 숫자 9~11자리로 입력해 주세요."), $("#fTel").focus();
+    if (!agreed) return say("개인정보 수집·이용에 동의해 주세요."), $("#fAgree").focus();
+
+    /*
+      아직 어디로도 전송되지 않습니다.
+      Netlify Forms 연결 방법은 README 를 보세요.
+    */
+    say("아직 전송 기능이 연결되지 않았습니다. 전화로 연락 주세요.", true);
   });
+}
 
 
-  /* ===================================================================
-     초기화
-  =================================================================== */
+/* ---------- 등장 ---------- */
 
-  const year = $("#currentYear");
-  if (year) year.textContent = String(new Date().getFullYear());
+if (!reduceMotion && "IntersectionObserver" in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
 
-  if (isTouch) document.documentElement.classList.add("is-touch");
-})();
+  document.querySelectorAll(".sec-head, .q-item, .member, .principle-list li")
+    .forEach((node) => { node.classList.add("rise"); io.observe(node); });
+}
