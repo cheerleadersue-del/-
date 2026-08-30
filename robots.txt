@@ -1,4 +1,2 @@
-# 실제 연락처·주소를 넣기 전까지 검색엔진 수집을 막아둡니다.
-# 공개 준비가 끝나면 아래 Disallow 줄을 지우고 Allow: / 로 바꾸세요.
 User-agent: *
-Disallow: /
+Allow: /

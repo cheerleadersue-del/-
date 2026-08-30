@@ -103,6 +103,7 @@ const practices = [
   {
     name: "형사",
     en: "CRIMINAL",
+    credit: "정호길 대표변호사 · 법조경력 25년",
     image: "assets/center-criminal.webp",
     desc: "수사 단계부터 재판까지 같은 변호인이 맡습니다. " +
           "진술의 모순과 기록의 공백을 먼저 찾습니다.",
@@ -111,6 +112,7 @@ const practices = [
   {
     name: "민사",
     en: "CIVIL",
+    credit: "정주현 변호사 · 前 서울중앙지방법원 조정위원",
     image: "assets/center-civil.webp",
     desc: "다투기 전에 회수 가능성을 먼저 봅니다. " +
           "이길 수 있는지와 받을 수 있는지는 다른 문제입니다.",
@@ -119,6 +121,7 @@ const practices = [
   {
     name: "가사",
     en: "FAMILY",
+    credit: "이경숙 변호사 · 대한변협 가사법 전문분야 등록",
     image: "assets/center-family.webp",
     desc: "재산과 양육은 감정과 분리해 다룹니다. " +
           "합의로 끝낼 수 있는 부분과 아닌 부분을 나눕니다.",
@@ -127,6 +130,7 @@ const practices = [
   {
     name: "회생",
     en: "REHABILITATION",
+    credit: "심상한 변호사 · 前 서울지방노동위원회 공익위원",
     image: "assets/center-recovery.webp",
     desc: "폐업과 회생 사이에서 남길 것을 정합니다. " +
           "채권자 구성과 현금 흐름을 먼저 확인합니다.",
@@ -135,6 +139,7 @@ const practices = [
   {
     name: "공증",
     en: "NOTARY",
+    credit: "김제도 변호사 · 前 서울서부지방검찰청 검사 직무대리",
     image: "assets/center-notary.webp",
     desc: "분쟁이 생기기 전에 문서로 정리합니다. " +
           "나중에 다투는 비용보다 지금 확인하는 비용이 적습니다.",
@@ -142,31 +147,79 @@ const practices = [
   }
 ];
 
+/*
+  ⚠️ "전문" 이라는 표현은 대한변협 전문분야 등록을 마친 경우에만 쓸 수 있습니다.
+     등록이 확인된 항목(이경숙 변호사 가사법)만 그렇게 적었습니다.
+     다른 분들도 등록이 되어 있다면 field 문구를 바꾸셔도 됩니다.
+*/
 const attorneys = [
   {
-    name: "정호길", role: "대표변호사", field: "형사 · 수사 및 재판 대응",
-    image: "assets/lawyer-01.webp",
-    career: ["25년 경력 형사전문", "광역수사대 강력·마약 수사 경력", "형사사건 직접 변론 및 총괄"]
+    name: "정호길", role: "대표변호사",
+    field: "교통사고 · 형사",
+    /*
+      lawyer-01.webp 은 전신 컷아웃이라 목록에 넣으면 얼굴이 작아
+      다른 분들과 크기가 안 맞는다. 목록에는 상반신 컷을 쓴다.
+      전신 컷은 인사말 섹션에서 그대로 쓴다.
+    */
+    image: "assets/lawyer-01-portrait.webp",
+    career: [
+      "법조경력 25년 차",
+      "제40회 사법시험 합격 · 사법연수원 30기",
+      "한양대학교 법학과",
+      "공무원연금관리공단 · 서울시교육청 법률자문",
+      "한국자산관리공사 · 기술신용보증기금 법률자문",
+      "前 주택도시보증공사 고문변호사"
+    ]
   },
   {
-    name: "김제도", role: "변호사", field: "형사 · 기업분쟁",
+    name: "심상한", role: "변호사",
+    field: "기업회생 · 파산 · 보험분쟁",
     image: "assets/lawyer-02.webp",
-    career: ["사법연수원 47기 수료", "마약·사기·폭행 사건 수행", "계좌·통신 자료 분석"]
+    career: [
+      "제49회 사법시험 합격 · 사법연수원 39기",
+      "연세대학교 법학과",
+      "미국 조지워싱턴 로스쿨 IBT 과정",
+      "前 서울지방노동위원회 공익위원(심판담당)",
+      "前 서울지방국세청 납세자보호위원회 위원",
+      "서울지방변호사회 중소기업 고문변호사단"
+    ]
   },
   {
-    name: "심상한", role: "변호사", field: "기업 회생 · 파산",
+    name: "정주현", role: "변호사",
+    field: "부동산 소송 · 민사 · 형사",
     image: "assets/lawyer-03.webp",
-    career: ["사법시험 49회 합격", "前 서울지방노동위원회 공익위원", "25년 이상 경력"]
+    career: [
+      "1998년 사법시험 합격 · 사법연수원 30기",
+      "고려대학교 법학과",
+      "건국대학교 부동산대학원 석사",
+      "前 행정안전부 순직보상심사위원회 위원",
+      "前 서울중앙지방법원 조정위원",
+      "저서 『헌법 완결』 『행정법 완결』"
+    ]
   },
   {
-    name: "정주현", role: "변호사", field: "부동산 · 민사 · 형사",
+    name: "김제도", role: "변호사",
+    field: "형사 · 민사 · 기업사건",
     image: "assets/lawyer-04.webp",
-    career: ["사법연수원 30기 수료", "前 서울중앙지방법원 조정위원", "부동산·민사 분야 전문"]
+    career: [
+      "사법연수원 47기",
+      "국민대학교 법학과",
+      "前 서울서부지방검찰청 검사 직무대리",
+      "前 의정부지방법원 고양지원 조정위원"
+    ]
   },
   {
-    name: "이경숙", role: "변호사", field: "이혼 · 상속 · 형사",
+    name: "이경숙", role: "변호사",
+    field: "이혼 · 상속 · 가사 · 형사",
     image: "assets/lawyer-05.webp",
-    career: ["사법시험 50회 합격", "대한변협 전문분야 등록", "이혼·상속 사건 다수 수행"]
+    career: [
+      "제50회 사법시험 합격 · 사법연수원 40기",
+      "숙명여자대학교 영문과 및 동대학원",
+      "대한변협 가사법 전문분야 등록",
+      "現 서울중앙지방법원 조정위원",
+      "대한변협 교육이사 · 대의원",
+      "방위사업청 · 한국콘텐츠진흥원 · 성동경찰서 법률자문"
+    ]
   }
 ];
 
@@ -255,6 +308,7 @@ if (panels) {
         <span class="panel-en">${p.en}</span>
         <span class="panel-name">${p.name}</span>
         <span class="panel-detail">
+          ${p.credit ? `<span class="panel-credit">${p.credit}</span>` : ""}
           <span class="panel-desc">${p.desc}</span>
           <span class="panel-tags">${
             p.tags.map((t) => `<span>${t}</span>`).join("")
