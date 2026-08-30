@@ -447,23 +447,27 @@ if (form && formStatus) {
     formStatus.classList.toggle("is-bad", !ok);
   };
 
+  /*
+    검증만 여기서 하고, 통과하면 브라우저가 그대로 제출한다.
+    제출은 Netlify Forms 가 받아 /thanks.html 로 보낸다.
+  */
   form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
     const name = $("#fName").value.trim();
     const tel = $("#fTel").value.replace(/\D/g, "");
     const agreed = $("#fAgree").checked;
 
-    if (name.length < 2) return say("성함을 입력해 주세요."), $("#fName").focus();
-    if (tel.length < 9 || tel.length > 11)
-      return say("연락처를 숫자 9~11자리로 입력해 주세요."), $("#fTel").focus();
-    if (!agreed) return say("개인정보 수집·이용에 동의해 주세요."), $("#fAgree").focus();
+    const stop = (msg, field) => {
+      event.preventDefault();
+      say(msg);
+      field.focus();
+    };
 
-    /*
-      아직 어디로도 전송되지 않습니다.
-      Netlify Forms 연결 방법은 README 를 보세요.
-    */
-    say("아직 전송 기능이 연결되지 않았습니다. 전화로 연락 주세요.", true);
+    if (name.length < 2) return stop("성함을 입력해 주세요.", $("#fName"));
+    if (tel.length < 9 || tel.length > 11)
+      return stop("연락처를 숫자 9~11자리로 입력해 주세요.", $("#fTel"));
+    if (!agreed) return stop("개인정보 수집·이용에 동의해 주세요.", $("#fAgree"));
+
+    say("보내는 중입니다…", true);
   });
 }
 
