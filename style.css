@@ -1078,8 +1078,13 @@ body.no-scroll .head .burger i { background: var(--ink); }
   overflow: hidden;
 }
 
+/*
+  height: auto 가 없으면 img 의 height 속성이 아래 aspect-ratio 를 눌러
+  사진이 세로로 늘어난다. 속성은 로딩 중 자리만 잡는 용도로 둔다.
+*/
 .member-photo {
   width: 100%;
+  height: auto;
   aspect-ratio: 3 / 3.7;
   object-fit: cover;
   object-position: center 12%;
@@ -1953,21 +1958,42 @@ body.no-scroll .head .burger i { background: var(--ink); }
     gap: 14px;
   }
 
+  /*
+    사진과 이름을 위에 나란히, 경력은 아래 칸에서 가로 폭을 다 쓴다.
+    셋을 한 줄에 넣으면 경력 글줄이 12자마다 끊겨 읽기 어렵다.
+  */
   .member {
     display: grid;
-    grid-template-columns: 38% minmax(0, 1fr);
+    grid-template-columns: 42% minmax(0, 1fr);
+    grid-template-areas:
+      "photo head"
+      "career career";
     gap: 16px;
-    align-items: center;
-    padding: 12px;
+    align-items: start;
+    padding: 14px;
     background: var(--paper-2);
   }
 
-  .member-photo {
-    aspect-ratio: 3 / 4;
+  .member-figure {
+    grid-area: photo;
   }
 
+  .member-photo {
+    aspect-ratio: 3 / 3.9;
+  }
+
+  /* 자식들이 직접 그리드 칸에 놓이도록 껍데기를 비운다 */
   .member-body {
-    padding-top: 0;
+    display: contents;
+  }
+
+  .member-head {
+    grid-area: head;
+  }
+
+  .member-career {
+    grid-area: career;
+    margin-top: 0;
   }
 
   .member-name {

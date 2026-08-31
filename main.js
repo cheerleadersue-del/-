@@ -352,8 +352,9 @@ if (roster) {
     const img = el("img", "member-photo");
     img.src = person.image;
     img.alt = `${person.name} ${person.role}`;
-    img.width = 635;
-    img.height = 998;
+    /* 카드 비율(3 : 3.7)과 같은 값. 로딩 중 자리를 미리 잡아준다. */
+    img.width = 300;
+    img.height = 370;
     img.loading = "lazy";
 
     const figure = el("figure", "member-figure");
@@ -361,9 +362,16 @@ if (roster) {
 
     li.append(
       figure,
+      /*
+        이름·분야를 member-head 로 묶어둔다.
+        좁은 화면에서 사진 옆에는 이 묶음만 두고,
+        경력은 아래 칸으로 내려 가로 폭을 다 쓰게 하기 위해서다.
+      */
       el("div", "member-body", `
-        <p class="member-name">${person.name}<em>${person.role}</em></p>
-        <p class="member-field">${person.field}</p>
+        <div class="member-head">
+          <p class="member-name">${person.name}<em>${person.role}</em></p>
+          <p class="member-field">${person.field}</p>
+        </div>
         <ul class="member-career">${
           person.career.map((c) => `<li>${c}</li>`).join("")
         }</ul>
