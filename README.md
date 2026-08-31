@@ -9,6 +9,7 @@ main.js         질문 아코디언 · 업무분야 · 변호인단 · 폼
 assets/         이미지(WebP) · SVG
 netlify.toml    Netlify 캐시 · 보안 헤더
 robots.txt
+docs/           설정 안내서
 ```
 
 ## 로컬에서 보기
@@ -184,11 +185,29 @@ API 키 없이 동작하는 Google Maps 임베드를 넣었습니다.
 Netlify Forms 로 연결했습니다. **배포 후 첫 제출이 정상인지 한 번 시험해 주세요.**
 
 - 접수함 위치 — Netlify 관리화면 → 해당 사이트 → **Forms** 탭 → `consult`
-- 알림 받기 — Forms → **Settings & usage** → Form notifications 에서
-  이메일(`psg8656@naver.com`)이나 Slack 알림을 켜세요. **켜지 않으면 메일이 오지 않습니다.**
 - 제출 후 `thanks.html` 로 이동합니다.
 - `bot-field` 는 화면에 보이지 않는 스팸 덫입니다. 지우지 마세요.
-- 무료 요금제는 월 제출 건수 제한이 있습니다. 상담이 많아지면 확인이 필요합니다.
+- 폼 필드 이름은 `name` · `tel` · `message` · `agree` 입니다.
+
+#### 꼭 켜셔야 하는 것 — 이메일 알림
+
+Forms → **Settings and usage** → **Form notifications** → Email notification
+에서 `psg8656@naver.com` 을 등록하세요.
+**켜지 않으면 상담이 들어와도 메일이 오지 않고** Forms 탭에 쌓이기만 합니다.
+
+#### 구글 시트로 자동 적재하기
+
+상담 내역을 표로 관리하고 싶으시면
+[`docs/상담접수-구글시트-연동.md`](docs/상담접수-구글시트-연동.md) 를 따라 하세요.
+Apps Script 코드와 단계별 화면 안내가 들어 있습니다. 비용은 들지 않습니다.
+
+연동을 마치시면 **개인정보처리방침의 위탁 항목에 Google 을 추가해야 합니다.**
+안내서 6단계에 적어두었습니다.
+
+#### 용량 제한
+
+Netlify 무료 요금제는 **월 100건**까지 접수됩니다.
+넘으면 그 달의 제출이 막히므로, 상담이 늘면 요금제 전환을 검토하셔야 합니다.
 
 ### 7. 변호사 광고규정
 
