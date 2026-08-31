@@ -371,37 +371,97 @@ if (roster) {
     img.loading = "lazy";
 
     /*
-      사진 파일이 아직 없으면 깨진 이미지 대신 자리표시자를 보여준다.
-      assets/ 에 실제 사진을 올리면 코드를 고치지 않아도 바로 바뀐다.
+      확장자를 바꿔가며 찾는다. .webp 로 적어두어도
+      .jpg 나 .png 로 올리시면 그대로 뜬다.
+      모두 없으면 깨진 이미지 대신 자리표시자를 보여준다.
     */
+    const base = person.image.replace(/\.[a-z]+$/i, "");
+    const now = (person.image.match(/\.([a-z]+)$/i) || ["", ""])[1].toLowerCase();
+    const rest = ["webp", "jpg", "jpeg", "png"].filter((e) => e !== now);
+    let at = 0;
+
     img.addEventListener("error", () => {
-      if (img.dataset.fallback) return;
-      img.dataset.fallback = "1";
-      img.src = "assets/lawyer-placeholder.svg";
-    }, { once: true });
+      img.src = at < rest.length
+        ? `${base}.${rest[at++]}`
+        : "assets/lawyer-placeholder.svg";
+    });
 
     const figure = el("figure", "member-figure");
     figure.append(img);
 
-    li.append(
-      figure,
-      /*
-        이름·분야를 member-head 로 묶어둔다.
-        좁은 화면에서 사진 옆에는 이 묶음만 두고,
-        경력은 아래 칸으로 내려 가로 폭을 다 쓰게 하기 위해서다.
-      */
-      el("div", "member-body", `
-        <div class="member-head">
-          <p class="member-name">${person.name}<em>${person.role}</em></p>
-          <p class="member-field">${person.field}</p>
-        </div>
-        <ul class="member-career">${
-          person.career.map((c) => `<li>${c}</li>`).join("")
-        }</ul>
-      `)
-    );
+    /*
+      경력이 길면 카드 높이가 제각각이 되어 여섯 분을 견주기 어렵다.
+      앞의 세 줄만 항상 보여주고 나머지는 접어 둔다.
+    */
+    const OPEN_COUNT = 3;
+    const shown = person.career.slice(0, OPEN_COUNT);
+    const hidden = person.career.slice(OPEN_COUNT);
+
+    /*
+      이름·분야를 member-head 로 묶어둔다.
+      좁은 화면에서 사진 옆에는 이 묶음만 두고,
+      경력은 아래 칸으로 내려 가로 폭을 다 쓰게 하기 위해서다.
+    */
+    const body = el("div", "member-body", `
+      <div class="member-head">
+        <p class="member-name">${person.name}<em>${person.role}</em></p>
+        <p class="member-field">${person.field}</p>
+      </div>
+      <ul class="member-career">${
+        shown.map((c) => `<li>${c}</li>`).join("")
+      }</ul>
+    `);
+
+    if (hidden.length) {
+      const id = `more-${person.name}`;
+
+      const wrap = el("div", "member-more",
+        `<div class="member-more-in"><ul class="member-career member-career-more">${
+          hidden.map((c) => `<li>${c}</li>`).join("")
+        }</ul></div>`);
+      wrap.id = id;
+
+      const btn = el("button", "member-toggle",
+        `<span>경력 더 보기</span><i aria-hidden="true"></i>`);
+      btn.type = "button";
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-controls", id);
+
+      btn.addEventListener("click", () => {
+        const open = btn.getAttribute("aria-expanded") !== "true";
+        btn.setAttribute("aria-expanded", String(open));
+        li.classList.toggle("is-more", open);
+        btn.querySelector("span").textContent = open ? "접기" : "경력 더 보기";
+      });
+
+      body.append(wrap, btn);
+    }
+
+    li.append(figure, body);
     return li;
   }));
+}
+
+
+/* ---------- 히어로 배경 갈아끼우기 ---------- */
+
+/*
+  assets/hero.webp · hero.jpg · hero.png 가 있으면 그것을 쓰고,
+  없으면 지금 걸린 법조타워 사진을 그대로 둔다.
+  파일만 올리면 코드를 고치지 않아도 첫 화면이 바뀐다.
+*/
+const heroBg = $(".hero-bg");
+
+if (heroBg) {
+  const candidates = ["assets/hero.webp", "assets/hero.jpg", "assets/hero.png"];
+
+  (function tryNext(i) {
+    if (i >= candidates.length) return;
+    const probe = new Image();
+    probe.onload = () => { heroBg.src = candidates[i]; };
+    probe.onerror = () => tryNext(i + 1);
+    probe.src = candidates[i];
+  })(0);
 }
 
 

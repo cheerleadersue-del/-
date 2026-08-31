@@ -1149,6 +1149,73 @@ body.no-scroll .head .burger i { background: var(--ink); }
   background: var(--gold);
 }
 
+/*
+  접힌 경력. 높이를 정해두면 사람마다 줄 수가 달라 맞출 수 없으므로
+  grid-template-rows 0fr → 1fr 로 편다.
+*/
+.member-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s var(--ease);
+}
+
+.is-more .member-more {
+  grid-template-rows: 1fr;
+}
+
+.member-more-in {
+  overflow: hidden;
+}
+
+/* 이어지는 목록이므로 위 테두리는 다시 긋지 않는다 */
+.member-career-more {
+  margin-top: 5px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.member-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 6px 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+  transition: color 0.3s ease;
+}
+
+.member-toggle:hover {
+  color: var(--gold);
+}
+
+/* + 에서 − 로 */
+.member-toggle i {
+  position: relative;
+  width: 11px;
+  height: 11px;
+}
+
+.member-toggle i::before,
+.member-toggle i::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transition: transform 0.4s var(--ease);
+}
+
+.member-toggle i::after {
+  transform: rotate(90deg);
+}
+
+.is-more .member-toggle i::after {
+  transform: rotate(0deg);
+}
+
 
 /* =====================================================================
    09. 원칙 — 어두운 구간
@@ -1967,11 +2034,24 @@ body.no-scroll .head .burger i { background: var(--ink); }
     grid-template-columns: 42% minmax(0, 1fr);
     grid-template-areas:
       "photo head"
-      "career career";
+      "career career"
+      "more   more"
+      "btn    btn";
     gap: 16px;
     align-items: start;
     padding: 14px;
     background: var(--paper-2);
+  }
+
+  /* member-body 가 display: contents 라 자식마다 칸을 지정한다 */
+  .member-more {
+    grid-area: more;
+  }
+
+  .member-toggle {
+    grid-area: btn;
+    justify-self: start;
+    margin-top: 0;
   }
 
   .member-figure {
