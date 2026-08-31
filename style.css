@@ -1979,10 +1979,23 @@ body.no-scroll .head .burger i { background: var(--ink); }
     padding-top: 12px;
   }
 
-  .principle-list li,
-  .info-list > div {
+  .principle-list li {
     grid-template-columns: 46px minmax(0, 1fr);
     gap: 12px;
+  }
+
+  /*
+    항목 이름을 좁은 칸에 두면 "상담시간" 이 "상담시 / 간" 으로 갈라진다.
+    좁은 화면에서는 이름을 위, 값을 아래로 쌓는다.
+  */
+  .info-list > div {
+    grid-template-columns: 1fr;
+    gap: 3px;
+    padding: 16px 0;
+  }
+
+  .info-list dt {
+    padding-top: 0;
   }
 
   .foot-cols {
