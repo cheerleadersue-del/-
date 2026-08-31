@@ -220,6 +220,19 @@ const attorneys = [
       "대한변협 교육이사 · 대의원",
       "방위사업청 · 한국콘텐츠진흥원 · 성동경찰서 법률자문"
     ]
+  },
+  {
+    name: "양진희", role: "변호사",
+    field: "강력범죄 · 형사",
+    /* 사진을 올리기 전까지는 자리표시자가 대신 보인다. */
+    image: "assets/lawyer-06.webp",
+    career: [
+      "제11회 변호사시험 합격",
+      "고려대학교 법학과",
+      "前 법무법인 송우",
+      "現 법무법인 유일",
+      "서울시의회 법률자문"
+    ]
   }
 ];
 
@@ -356,6 +369,16 @@ if (roster) {
     img.width = 300;
     img.height = 370;
     img.loading = "lazy";
+
+    /*
+      사진 파일이 아직 없으면 깨진 이미지 대신 자리표시자를 보여준다.
+      assets/ 에 실제 사진을 올리면 코드를 고치지 않아도 바로 바뀐다.
+    */
+    img.addEventListener("error", () => {
+      if (img.dataset.fallback) return;
+      img.dataset.fallback = "1";
+      img.src = "assets/lawyer-placeholder.svg";
+    }, { once: true });
 
     const figure = el("figure", "member-figure");
     figure.append(img);

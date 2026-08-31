@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 370" role="img"
+     aria-label="사진 준비 중">
+  <!--
+    변호사 사진이 아직 없을 때 대신 보여주는 자리표시자입니다.
+    assets/ 에 실제 사진을 올리면 자동으로 대체됩니다.
+  -->
+  <rect width="300" height="370" fill="#f1f1ef"/>
+  <g fill="none" stroke="#c9c9c5" stroke-width="2">
+    <circle cx="150" cy="150" r="42"/>
+    <path d="M78 300c0-40 32-72 72-72s72 32 72 72"/>
+  </g>
+  <text x="150" y="342" text-anchor="middle"
+        font-family="Noto Sans KR, sans-serif" font-size="13" fill="#a3a39f">
+    사진 준비 중
+  </text>
+</svg>
