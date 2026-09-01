@@ -521,6 +521,20 @@ if (heroBg) {
 */
 const heroSlot = $(".hero");
 
+/*
+  ┌─ 손봐도 되는 값 ────────────────────────────────────────────┐
+  │ 화면 너비가 이 값보다 좁으면 동영상 대신 사진을 보여준다.   │
+  │                                                             │
+  │   0    → 휴대폰에서도 동영상 (지금 설정)                    │
+  │   820  → 휴대폰은 사진, 태블릿·PC 는 동영상                 │
+  │                                                             │
+  │ 지금 영상은 가로로 매우 긴 비율(1920 × 800)이라             │
+  │ 세로로 긴 휴대폰 화면에서는 가운데 부분만 크게 잘려 보인다. │
+  │ 휴대폰에서 보시고 어색하면 이 값을 820 으로 바꾸십시오.     │
+  └─────────────────────────────────────────────────────────────┘
+*/
+const HERO_VIDEO_MIN_WIDTH = 0;
+
 const motionOff =
   window.matchMedia &&
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -528,7 +542,9 @@ const motionOff =
 /* 데이터 절약 모드를 켜 둔 분에게 몇 MB 를 내려받게 하지 않는다 */
 const saveData = !!(navigator.connection && navigator.connection.saveData);
 
-if (heroSlot && heroBg && !motionOff && !saveData) {
+const wideEnough = window.innerWidth >= HERO_VIDEO_MIN_WIDTH;
+
+if (heroSlot && heroBg && wideEnough && !motionOff && !saveData) {
   const clips = ["assets/hero.mp4", "assets/hero.webm"];
 
   (function tryNext(i) {
