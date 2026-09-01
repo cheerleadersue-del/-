@@ -103,7 +103,7 @@ const practices = [
   {
     name: "형사",
     en: "CRIMINAL",
-    credit: "정호길 대표변호사 · 법조경력 25년",
+    credit: "정호길 대표변호사 · 양진희 변호사(성범죄)",
     image: "assets/center-criminal.webp",
     desc: "수사 단계부터 재판까지 같은 변호인이 맡습니다. " +
           "진술의 모순과 기록의 공백을 먼저 찾습니다.",
