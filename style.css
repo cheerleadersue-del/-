@@ -1054,7 +1054,11 @@ body.no-scroll .head .burger i { background: var(--ink); }
   padding-top: 16px;
 }
 
-.panel-tags span {
+.panel-tags span,
+.panel-tags a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 6px 14px;
   border: 1px solid rgba(252, 252, 251, 0.32);
   border-radius: 999px;
@@ -1063,50 +1067,31 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /*
-  형사 안의 세부 분야. 페이지가 있으면 a, 없으면 i 로 그려진다.
-  링크가 걸린 것만 밑줄과 손가락 커서가 붙어 구분된다.
+  상세 페이지가 있는 항목만 링크가 된다.
+  화살표와 밝은 테두리로 "눌리는 것" 임을 알린다.
 */
-.panel-topics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 18px;
-  overflow: hidden;
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(252, 252, 251, 0.18);
-}
-
-.panel-topics a,
-.panel-topics i {
-  font-size: 13px;
-  font-style: normal;
-  white-space: nowrap;
-}
-
-.panel-topics i {
-  color: rgba(252, 252, 251, 0.42);
-}
-
-.panel-topics a {
-  position: relative;
+.panel-tags a {
+  border-color: var(--cream);
   color: var(--cream);
-  padding-bottom: 2px;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.panel-topics a::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.4;
-  transition: opacity 0.3s ease;
+.panel-tags a i {
+  width: 9px;
+  height: 9px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.3s var(--ease);
 }
 
-.panel-topics a:hover::after {
-  opacity: 1;
+.panel-tags a:hover {
+  background: var(--cream);
+  color: var(--dark);
+}
+
+.panel-tags a:hover i {
+  transform: rotate(45deg) translate(2px, -2px);
 }
 
 
@@ -1864,6 +1849,266 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 
 /* =====================================================================
+   11-d. 세부 분야 페이지 (criminal-*.html)
+===================================================================== */
+
+.topic-hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: min(560px, 76svh);
+  padding: calc(var(--head-h) + 70px) 0 clamp(56px, 6vw, 84px);
+  overflow: hidden;
+  background: var(--dark);
+  color: var(--paper);
+}
+
+.topic-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.topic-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    rgba(14, 14, 16, 0.92) 0%,
+    rgba(14, 14, 16, 0.74) 48%,
+    rgba(14, 14, 16, 0.42) 100%
+  );
+}
+
+.topic-hero-in {
+  position: relative;
+  z-index: 2;
+}
+
+/* 지금 어디에 있는지 */
+.crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 30px;
+  color: rgba(252, 252, 251, 0.5);
+  font-size: 13px;
+}
+
+.crumb a {
+  transition: color 0.3s ease;
+}
+
+.crumb a:hover {
+  color: var(--cream);
+}
+
+.crumb b {
+  color: var(--paper);
+  font-weight: 400;
+}
+
+.topic-title {
+  font-family: var(--font-serif);
+  font-size: clamp(38px, 5.2vw, 68px);
+  font-weight: 200;
+  line-height: 1.3;
+  letter-spacing: -0.045em;
+  word-break: keep-all;
+}
+
+.topic-lead {
+  max-width: 34em;
+  margin-top: 24px;
+  color: rgba(252, 252, 251, 0.76);
+  font-size: 16.5px;
+  line-height: 2.05;
+  word-break: keep-all;
+}
+
+.topic-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 38px;
+}
+
+/* ---- 본문 구간 ---- */
+
+.topic-sec {
+  padding: clamp(80px, 9vw, 140px) 0;
+  background: var(--paper);
+}
+
+.topic-sec-alt {
+  background: var(--paper-2);
+}
+
+/* 이런 상황이신가요 */
+.sit-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(30px, 3.4vw, 52px) clamp(30px, 4vw, 64px);
+}
+
+.sit-list li {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 20px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+
+.sit-no {
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.2em;
+  padding-top: 4px;
+}
+
+.sit-list h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+
+.sit-list p {
+  margin-top: 12px;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 2;
+  word-break: keep-all;
+}
+
+/* 절차 — 어두운 구간 */
+.topic-flow {
+  padding: clamp(80px, 9vw, 140px) 0;
+  background: var(--dark);
+  color: var(--paper);
+}
+
+.flow-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 34px);
+}
+
+.flow-list li {
+  padding-top: 24px;
+  border-top: 1px solid rgba(228, 213, 183, 0.24);
+}
+
+.flow-step {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+}
+
+.flow-list h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 1.9vw, 24px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.flow-list p {
+  margin-top: 13px;
+  color: rgba(252, 252, 251, 0.66);
+  font-size: 14.5px;
+  line-height: 1.95;
+  word-break: keep-all;
+}
+
+.flow-note {
+  margin-top: clamp(34px, 4vw, 54px);
+  color: rgba(252, 252, 251, 0.42);
+  font-size: 13px;
+}
+
+/* 무엇을 하는가 */
+.work-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 3.2vw, 48px);
+}
+
+.work-list li {
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.work-list h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 1.8vw, 21px);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+
+.work-list p {
+  margin-top: 12px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 2;
+  word-break: keep-all;
+}
+
+/* 담당 변호사 두 명만 세울 때 */
+.roster-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 760px;
+}
+
+/* 마무리 상담 */
+.topic-cta {
+  padding: clamp(80px, 9vw, 130px) 0;
+  background: var(--dark);
+  color: var(--paper);
+  text-align: center;
+}
+
+.topic-cta-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.6vw, 46px);
+  font-weight: 200;
+  line-height: 1.44;
+  letter-spacing: -0.04em;
+  word-break: keep-all;
+}
+
+.topic-cta-lead {
+  max-width: 32em;
+  margin: 24px auto 0;
+  color: rgba(252, 252, 251, 0.68);
+  font-size: 15.5px;
+  line-height: 2.05;
+  word-break: keep-all;
+}
+
+.topic-cta-in .done-tel {
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+.topic-cta-act {
+  margin-top: 38px;
+}
+
+
+/* =====================================================================
    12. 모바일 하단 바
 ===================================================================== */
 
@@ -1960,6 +2205,16 @@ body.no-scroll .head .burger i { background: var(--ink); }
   }
 
   .roster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* 세부 분야 페이지 */
+  .sit-list,
+  .work-list {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -2066,8 +2321,30 @@ body.no-scroll .head .burger i { background: var(--ink); }
     left: 18px;
   }
 
+  /* 세부 분야 페이지 */
+  .topic-hero {
+    padding-top: calc(var(--head-h) + 44px);
+  }
+
+  .topic-acts .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    height: 52px;
+    padding: 0 18px;
+  }
+
+  .sit-list li {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .flow-list {
+    grid-template-columns: 1fr;
+  }
+
   /* 변호인단 — 왼쪽 사진 · 오른쪽 정보 */
-  .roster {
+  .roster,
+  .roster-two {
     grid-template-columns: 1fr;
     gap: 14px;
   }

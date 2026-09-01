@@ -5,7 +5,13 @@
    ⚠️ 법률 절차를 설명하는 문구(questions)는 반드시 변호사 검토를 거치세요.
 ===================================================================== */
 
-const questions = [
+/*
+  세부 분야 페이지(criminal-*.html)는 자기 데이터를 window.PAGE_DATA 에
+  담아 먼저 불러옵니다. 있으면 그것을 쓰고, 없으면 아래 기본값을 씁니다.
+*/
+const PAGE = window.PAGE_DATA || {};
+
+const questions = PAGE.questions || [
   {
     tag: "형사",
     q: "수사기관에서 연락이 왔습니다. 변호사는 언제 선임해야 하나요?",
@@ -107,21 +113,19 @@ const practices = [
     image: "assets/center-criminal.webp",
     desc: "수사 단계부터 재판까지 같은 변호인이 맡습니다. " +
           "진술의 모순과 기록의 공백을 먼저 찾습니다.",
-    tags: ["구속영장", "압수수색", "조사 동행", "고소·고발"],
     /*
-      형사 안의 세부 분야. 각각 별도 페이지로 이어진다.
-      페이지를 아직 안 만든 항목은 href 를 비워두면
-      링크 대신 그냥 글자로만 나온다.
+      태그에 href 를 넣으면 링크가 되고, 없으면 그냥 글자로 나온다.
+      상세 페이지를 만들 때마다 href 를 채우면 된다.
     */
-    topics: [
-      { name: "마약",        href: "" },
-      { name: "도박",        href: "" },
-      { name: "해외조직범죄", href: "" },
-      { name: "금융범죄",     href: "" },
+    tags: [
+      { name: "마약",         href: "criminal-drug.html" },
+      { name: "도박",         href: "" },
+      { name: "해외조직범죄",  href: "" },
+      { name: "금융범죄",      href: "" },
       { name: "폭행 · 성범죄", href: "" },
-      { name: "코인 OTC",    href: "" },
-      { name: "헤르페스",     href: "" },
-      { name: "교통사고",     href: "" }
+      { name: "코인 OTC",     href: "" },
+      { name: "헤르페스",      href: "" },
+      { name: "교통사고",      href: "" }
     ]
   },
   {
@@ -354,13 +358,13 @@ if (panels) {
           ${p.credit ? `<span class="panel-credit">${p.credit}</span>` : ""}
           <span class="panel-desc">${p.desc}</span>
           <span class="panel-tags">${
-            p.tags.map((t) => `<span>${t}</span>`).join("")
+            p.tags.map((t) => {
+              if (typeof t === "string") return `<span>${t}</span>`;
+              return t.href
+                ? `<a href="${t.href}">${t.name}<i aria-hidden="true"></i></a>`
+                : `<span>${t.name}</span>`;
+            }).join("")
           }</span>
-          ${p.topics ? `<span class="panel-topics">${
-            p.topics.map((t) => t.href
-              ? `<a href="${t.href}">${t.name}</a>`
-              : `<i>${t.name}</i>`).join("")
-          }</span>` : ""}
         </span>
       `)
     );
@@ -394,7 +398,12 @@ if (panels) {
 const roster = $("#roster");
 
 if (roster) {
-  roster.replaceChildren(...attorneys.map((person) => {
+  /* 세부 분야 페이지에서는 그 분야를 맡는 변호사만 세운다 */
+  const people = PAGE.attorneyNames
+    ? attorneys.filter((a) => PAGE.attorneyNames.includes(a.name))
+    : attorneys;
+
+  roster.replaceChildren(...people.map((person) => {
     const li = el("li", "member");
 
     const img = el("img", "member-photo");
@@ -511,15 +520,21 @@ if (head) {
     히어로 위에서는 헤더가 투명하게 떠 있고, 히어로를 지나면
     밝은 막대로 바뀐다. 12px 만에 바꾸면 사진 위에 크림색 막대가
     걸쳐 어색하다.
-  */
-  const onScroll = () => {
-    const limit = hero ? hero.offsetHeight - 120 : 12;
-    head.classList.toggle("is-stuck", window.scrollY > limit);
-  };
 
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
+    세부 분야 페이지에는 .hero 가 없다. 그런 페이지에서는
+    처음부터 밝은 막대로 두고 스크롤을 보지 않는다.
+  */
+  if (!hero) {
+    head.classList.add("is-stuck");
+  } else {
+    const onScroll = () => {
+      head.classList.toggle("is-stuck", window.scrollY > hero.offsetHeight - 120);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+  }
 }
 
 const burger = $("#burger");
