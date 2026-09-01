@@ -1062,6 +1062,53 @@ body.no-scroll .head .burger i { background: var(--ink); }
   white-space: nowrap;
 }
 
+/*
+  형사 안의 세부 분야. 페이지가 있으면 a, 없으면 i 로 그려진다.
+  링크가 걸린 것만 밑줄과 손가락 커서가 붙어 구분된다.
+*/
+.panel-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  overflow: hidden;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(252, 252, 251, 0.18);
+}
+
+.panel-topics a,
+.panel-topics i {
+  font-size: 13px;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.panel-topics i {
+  color: rgba(252, 252, 251, 0.42);
+}
+
+.panel-topics a {
+  position: relative;
+  color: var(--cream);
+  padding-bottom: 2px;
+}
+
+.panel-topics a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.panel-topics a:hover::after {
+  opacity: 1;
+}
+
 
 /* =====================================================================
    08. 변호인단

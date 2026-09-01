@@ -107,7 +107,22 @@ const practices = [
     image: "assets/center-criminal.webp",
     desc: "수사 단계부터 재판까지 같은 변호인이 맡습니다. " +
           "진술의 모순과 기록의 공백을 먼저 찾습니다.",
-    tags: ["구속영장", "압수수색", "조사 동행", "고소·고발"]
+    tags: ["구속영장", "압수수색", "조사 동행", "고소·고발"],
+    /*
+      형사 안의 세부 분야. 각각 별도 페이지로 이어진다.
+      페이지를 아직 안 만든 항목은 href 를 비워두면
+      링크 대신 그냥 글자로만 나온다.
+    */
+    topics: [
+      { name: "마약",        href: "" },
+      { name: "도박",        href: "" },
+      { name: "해외조직범죄", href: "" },
+      { name: "금융범죄",     href: "" },
+      { name: "폭행 · 성범죄", href: "" },
+      { name: "코인 OTC",    href: "" },
+      { name: "헤르페스",     href: "" },
+      { name: "교통사고",     href: "" }
+    ]
   },
   {
     name: "민사",
@@ -341,6 +356,11 @@ if (panels) {
           <span class="panel-tags">${
             p.tags.map((t) => `<span>${t}</span>`).join("")
           }</span>
+          ${p.topics ? `<span class="panel-topics">${
+            p.topics.map((t) => t.href
+              ? `<a href="${t.href}">${t.name}</a>`
+              : `<i>${t.name}</i>`).join("")
+          }</span>` : ""}
         </span>
       `)
     );
