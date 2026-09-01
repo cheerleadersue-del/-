@@ -112,7 +112,7 @@ const practices = [
   {
     name: "민사",
     en: "CIVIL",
-    credit: "정주현 변호사 · 前 서울중앙지방법원 조정위원",
+    credit: "정주현 변호사(부동산) · 김제도 변호사(의료사고)",
     image: "assets/center-civil.webp",
     desc: "다투기 전에 회수 가능성을 먼저 봅니다. " +
           "이길 수 있는지와 받을 수 있는지는 다른 문제입니다.",
@@ -139,7 +139,7 @@ const practices = [
   {
     name: "공증",
     en: "NOTARY",
-    credit: "김제도 변호사 · 前 서울서부지방검찰청 검사 직무대리",
+    /* 담당 변호사 미정. credit 을 비워두면 그 줄은 아예 나오지 않는다. */
     image: "assets/center-notary.webp",
     desc: "분쟁이 생기기 전에 문서로 정리합니다. " +
           "나중에 다투는 비용보다 지금 확인하는 비용이 적습니다.",
