@@ -509,6 +509,78 @@ if (heroBg) {
 }
 
 
+/* ---------- 히어로 동영상 ---------- */
+
+/*
+  assets/hero.mp4 (또는 hero.webm) 를 올리면 첫 화면이 동영상으로 바뀝니다.
+  파일이 없으면 위의 사진이 그대로 남습니다. 코드는 건드리지 않습니다.
+
+  동영상은 "재생이 실제로 시작된 뒤에" 서서히 덮습니다.
+  파일이 없거나, 브라우저가 자동재생을 막거나, 통신이 느려 첫 프레임이
+  안 나오면 — 사진이 그대로 보입니다. 검은 네모가 뜨는 일은 없습니다.
+*/
+const heroSlot = $(".hero");
+
+const motionOff =
+  window.matchMedia &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* 데이터 절약 모드를 켜 둔 분에게 몇 MB 를 내려받게 하지 않는다 */
+const saveData = !!(navigator.connection && navigator.connection.saveData);
+
+if (heroSlot && heroBg && !motionOff && !saveData) {
+  const clips = ["assets/hero.mp4", "assets/hero.webm"];
+
+  (function tryNext(i) {
+    if (i >= clips.length) return;
+
+    const v = document.createElement("video");
+    v.className = "hero-video";
+
+    /*
+      iOS 는 muted / playsinline 이 "속성"으로도 붙어 있어야
+      전체화면으로 튀지 않고 조용히 자동재생합니다.
+      property 만 넣으면 기기에 따라 막힙니다.
+    */
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+    v.autoplay = true;
+    v.loop = true;
+    v.preload = "auto";
+    v.setAttribute("aria-hidden", "true");
+    v.src = clips[i];
+
+    let settled = false;
+
+    v.addEventListener("error", () => {
+      if (settled) return;
+      settled = true;
+      v.remove();
+      tryNext(i + 1);          /* mp4 가 없으면 webm 을 찾아본다 */
+    });
+
+    v.addEventListener("playing", () => {
+      settled = true;
+      v.classList.add("is-on");
+    }, { once: true });
+
+    heroBg.after(v);           /* 사진 바로 위, 그늘막 아래 */
+
+    const started = v.play();
+    if (started && started.catch) {
+      started.catch(() => {
+        if (settled) return;
+        settled = true;
+        v.remove();            /* 자동재생이 막히면 조용히 사진으로 돌아간다 */
+      });
+    }
+  })(0);
+}
+
+
 /* ---------- 헤더 · 모바일 메뉴 ---------- */
 
 const head = $("#head");

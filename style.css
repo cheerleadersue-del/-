@@ -528,6 +528,24 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /*
+  동영상은 사진 위에 겹쳐 두고, 재생이 시작된 뒤에 서서히 나타난다.
+  (main.js 가 .is-on 을 붙여준다)
+  느린 통신에서 검은 네모가 잠깐 스치는 것을 막기 위함이다.
+*/
+.hero-video {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  pointer-events: none;
+}
+
+.hero-video.is-on { opacity: 1; }
+
+/* 움직임을 줄이도록 설정한 분에게는 동영상을 틀지 않는다 */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
+}
+
+/*
   글자가 가운데 있으므로 가운데를 눌러준다.
   균일하게 덮으면 사진이 죽고, 안 덮으면 글자가 안 읽힌다.
 */
