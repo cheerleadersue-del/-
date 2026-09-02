@@ -162,7 +162,12 @@ const practices = [
     image: "assets/center-notary.webp",
     desc: "분쟁이 생기기 전에 문서로 정리합니다. " +
           "나중에 다투는 비용보다 지금 확인하는 비용이 적습니다.",
-    tags: ["공증", "계약검토", "법률자문", "내용증명"]
+    tags: [
+      { name: "공증",     href: "notary.html" },
+      { name: "계약검토", href: "" },
+      { name: "법률자문", href: "" },
+      { name: "내용증명", href: "" }
+    ]
   }
 ];
 

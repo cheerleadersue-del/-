@@ -2084,6 +2084,55 @@ body.no-scroll .head .burger i { background: var(--ink); }
   word-break: keep-all;
 }
 
+/* 양식 내려받기 — 공증 페이지 */
+.form-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 3vw, 44px);
+}
+
+.form-list li {
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.form-list h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 1.8vw, 21px);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+
+.form-list > li > p {
+  margin-top: 10px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 2;
+  word-break: keep-all;
+}
+
+.form-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* 목록 안에서는 버튼을 낮고 작게 — 본문을 누르지 않도록 */
+.form-btns .btn {
+  height: 42px;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 720px) {
+  .form-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* 사건의 유형 */
 .type-grid {
   display: grid;
