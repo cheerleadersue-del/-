@@ -120,7 +120,7 @@ const practices = [
     tags: [
       { name: "마약",         href: "criminal-drug.html" },
       { name: "도박",         href: "criminal-gambling.html" },
-      { name: "해외조직범죄",  href: "" },
+      { name: "해외조직범죄",  href: "criminal-organized.html" },
       { name: "금융범죄",      href: "" },
       { name: "폭행 · 성범죄", href: "" },
       { name: "코인 OTC",     href: "" },
