@@ -2251,12 +2251,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   white-space: nowrap;
 }
 
-/* 담당 변호사 두 명만 세울 때 */
-.roster-two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  max-width: 760px;
-}
-
 /* 마무리 상담 */
 .topic-cta {
   padding: clamp(80px, 9vw, 130px) 0;
@@ -2529,8 +2523,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
   }
 
   /* 변호인단 — 왼쪽 사진 · 오른쪽 정보 */
-  .roster,
-  .roster-two {
+  .roster {
     grid-template-columns: 1fr;
     gap: 14px;
   }
