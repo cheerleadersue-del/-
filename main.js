@@ -125,7 +125,8 @@ const practices = [
       { name: "성범죄",       href: "criminal-sex.html" },
       { name: "코인 OTC",     href: "criminal-crypto.html" },
       { name: "헤르페스",      href: "" },
-      { name: "교통사고",      href: "" }
+      /* 교통형사전문로펌.com — 법인이 따로 운영하는 사이트로 나간다 */
+      { name: "교통사고",      href: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/" }
     ]
   },
   {
@@ -365,9 +366,19 @@ if (panels) {
           <span class="panel-tags">${
             p.tags.map((t) => {
               if (typeof t === "string") return `<span>${t}</span>`;
-              return t.href
-                ? `<a href="${t.href}">${t.name}<i aria-hidden="true"></i></a>`
-                : `<span>${t.name}</span>`;
+              if (!t.href) return `<span>${t.name}</span>`;
+
+              /*
+                바깥 사이트로 나가는 링크는 새 탭에서 연다.
+                보고 있던 페이지를 잃지 않게 하기 위함이다.
+                눈으로도 구분되도록 화살표를 비스듬히 눕힌다(.is-out).
+              */
+              const out = /^https?:/i.test(t.href);
+              return `<a href="${t.href}"${
+                out ? ` class="is-out" target="_blank" rel="noopener noreferrer"` : ""
+              }>${t.name}${
+                out ? `<span class="sr-only">(새 창)</span>` : ""
+              }<i aria-hidden="true"></i></a>`;
             }).join("")
           }</span>
         </span>
