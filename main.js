@@ -123,7 +123,7 @@ const practices = [
       { name: "해외조직범죄",  href: "criminal-organized.html" },
       { name: "금융범죄",      href: "" },
       { name: "폭행 · 성범죄", href: "" },
-      { name: "코인 OTC",     href: "" },
+      { name: "코인 OTC",     href: "criminal-crypto.html" },
       { name: "헤르페스",      href: "" },
       { name: "교통사고",      href: "" }
     ]
