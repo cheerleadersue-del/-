@@ -34,6 +34,14 @@
   --dark-up:    #1f1f22;
   --cream:      #e4d5b7;   /* 로고 글자색 */
 
+  /*
+    카카오톡 버튼 전용. 사이트에서 색을 가진 유일한 자리다.
+    카카오가 정한 값이라 임의로 바꾸면 카톡 버튼으로 읽히지 않는다.
+  */
+  --kakao:      #fee500;
+  --kakao-up:   #ffed4d;   /* 손을 올렸을 때 */
+  --kakao-ink:  #1b1508;   /* 노란 바탕 위 글자 */
+
   --font-display: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
   --font-serif: "Noto Serif KR", Georgia, serif;
   --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont,
@@ -261,6 +269,78 @@ ol, ul {
 .btn-wide {
   width: 100%;
   justify-content: center;
+}
+
+
+/* ---------------------------------------------------------------------
+   카카오톡 상담 버튼
+
+   노란색은 이 버튼에서만 쓴다.
+   사이트 전체가 무채색이라, 이 하나만 색을 가지면
+   찾으라고 하지 않아도 눈이 먼저 간다.
+
+   색은 카카오가 정해 둔 값을 그대로 쓴다(#FEE500).
+   다른 노랑을 쓰면 카톡 버튼으로 읽히지 않는다.
+--------------------------------------------------------------------- */
+
+.btn-kakao {
+  background: var(--kakao);
+  color: var(--kakao-ink);
+}
+
+.btn-kakao:hover {
+  background: var(--kakao-up);
+}
+
+
+/* ---------------------------------------------------------------------
+   버튼 아이콘
+
+   그림은 CSS 안에 들어 있다(mask). 파일을 따로 올리지 않아도 되고,
+   글자색을 따라가므로 어두운 자리에서도 밝은 자리에서도 맞는다.
+
+   어느 버튼에 무엇이 붙는지는 링크 주소로 정한다.
+     tel:  로 시작하면        → 수화기
+     #contact 로 끝나면       → 서류
+     카톡 버튼               → 말풍선
+   그래서 HTML 을 고치지 않아도 자동으로 붙는다.
+--------------------------------------------------------------------- */
+
+.bar a::before,
+.topic-acts .btn[href^="tel:"]::before,
+.topic-acts .btn[href$="#contact"]::before,
+.topic-cta-act .btn[href$="#contact"]::before,
+.hero-acts .btn[href$="#contact"]::before,
+.drawer-foot .btn[href^="tel:"]::before,
+.btn-kakao::before {
+  content: "";
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+  background: currentColor;
+  -webkit-mask: center / contain no-repeat var(--ico);
+  mask: center / contain no-repeat var(--ico);
+}
+
+/* 수화기 */
+.bar-call,
+.topic-acts .btn[href^="tel:"],
+.drawer-foot .btn[href^="tel:"] {
+  --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z'/%3E%3C/svg%3E");
+}
+
+/* 말풍선 */
+.bar-kakao,
+.btn-kakao {
+  --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z'/%3E%3C/svg%3E");
+}
+
+/* 서류 */
+.bar-form,
+.topic-acts .btn[href$="#contact"],
+.topic-cta-act .btn[href$="#contact"],
+.hero-acts .btn[href$="#contact"] {
+  --ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3C/svg%3E");
 }
 
 /* 등장 */
@@ -2692,17 +2772,38 @@ body.no-scroll .head .burger i { background: var(--ink); }
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
+  /* 카톡 자리가 생기면 셋으로 나눈다 */
+  .bar.has-kakao {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   .bar a {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 7px;
     height: 62px;
     font-size: 15px;
     font-weight: 500;
   }
 
+  /*
+    셋으로 나뉘면 한 칸이 좁아진다.
+    글자를 줄이는 대신 좌우 여백을 줄이고 자간을 조인다.
+  */
+  .bar.has-kakao a {
+    gap: 6px;
+    font-size: 14px;
+    letter-spacing: -0.04em;
+  }
+
   .bar-call {
     border-right: 1px solid var(--line);
+  }
+
+  .bar-kakao {
+    background: var(--kakao);
+    color: var(--kakao-ink);
   }
 
   .bar-form {

@@ -5,6 +5,26 @@
    ⚠️ 법률 절차를 설명하는 문구(questions)는 반드시 변호사 검토를 거치세요.
 ===================================================================== */
 
+/* ---------------------------------------------------------------------
+   ★ 카카오톡 상담 주소 ★
+
+   여기 한 줄만 고치시면 모든 페이지에 노란 카톡 버튼이 나타납니다.
+   HTML 파일은 하나도 손대지 않으셔도 됩니다.
+
+   1. 카카오톡 채널 관리자센터(business.kakao.com)에 들어가십시오.
+   2. [채널] → [상세설정] 에 "채널 홈 URL" 이 있습니다.
+   3. 그 주소를 아래 따옴표 안에 그대로 붙여 넣으십시오.
+      예)  const KAKAO_URL = "http://pf.kakao.com/_abcdEF";
+
+   오픈채팅방을 쓰신다면 그 초대 주소를 넣으셔도 됩니다.
+
+   비워 두면 카톡 버튼이 아예 나오지 않습니다.
+   주소가 정해지기 전까지는 비워 두는 편이 낫습니다.
+   눌리지 않는 버튼을 보여드리는 것보다 없는 편이 낫기 때문입니다.
+--------------------------------------------------------------------- */
+const KAKAO_URL = "";
+
+
 /*
   세부 분야 페이지(criminal-*.html)는 자기 데이터를 window.PAGE_DATA 에
   담아 먼저 불러옵니다. 있으면 그것을 쓰고, 없으면 아래 기본값을 씁니다.
@@ -772,4 +792,63 @@ if (!reduceMotion && "IntersectionObserver" in window) {
 
   document.querySelectorAll(".sec-head, .q-item, .member, .principle-list li")
     .forEach((node) => { node.classList.add("rise"); io.observe(node); });
+}
+
+
+/* =====================================================================
+   카카오톡 상담 버튼
+
+   맨 위의 KAKAO_URL 이 채워져 있을 때만 만들어진다.
+   비어 있으면 아무것도 하지 않는다 — 눌리지 않는 버튼은 없느니만 못하다.
+
+   버튼이 들어가는 자리는 셋이다.
+     · 아래 고정 막대 (휴대폰에서만 보인다)
+     · 페이지 머리말의 큰 버튼 줄
+     · 맨 아래 상담 안내의 버튼 줄
+   HTML 을 고치지 않고 여기서 한 번에 넣는 이유는,
+   주소가 바뀌었을 때 고칠 곳을 한 군데로 두기 위해서다.
+===================================================================== */
+
+if (KAKAO_URL) {
+  const kakaoLink = (cls, label, arrow) => {
+    const a = document.createElement("a");
+    a.className = cls;
+    a.href = KAKAO_URL;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.textContent = label;
+
+    /* 새 창으로 열린다는 것은 화면 낭독기에만 따로 알린다 */
+    const note = document.createElement("span");
+    note.className = "sr-only";
+    note.textContent = "(새 창)";
+    a.append(note);
+
+    if (arrow) {
+      const i = document.createElement("i");
+      i.setAttribute("aria-hidden", "true");
+      a.append(i);
+    }
+    return a;
+  };
+
+  /* ---- 아래 고정 막대 ---- */
+  const bar = $(".bar");
+  const barForm = $(".bar-form");
+  if (bar && barForm) {
+    barForm.before(kakaoLink("bar-kakao", "카톡 상담", false));
+    bar.classList.add("has-kakao");
+  }
+
+  /* ----- 큰 버튼 줄 -----
+     맨 뒤가 아니라 첫 버튼 바로 뒤에 넣는다.
+     줄 끝에는 "업무분야 보기" 같은 둘러보기 버튼이 오는데,
+     그 뒤에 노란 버튼을 두면 순서가 어색해진다. */
+  document.querySelectorAll(".topic-acts, .topic-cta-act, .hero-acts")
+    .forEach((row) => {
+      const kakao = kakaoLink("btn btn-kakao", "카톡 상담", true);
+      const first = row.firstElementChild;
+      if (first) first.after(kakao);
+      else row.append(kakao);
+    });
 }
