@@ -124,7 +124,7 @@ const practices = [
       { name: "금융범죄",      href: "criminal-finance.html" },
       { name: "성범죄",       href: "criminal-sex.html" },
       { name: "코인 OTC",     href: "criminal-crypto.html" },
-      { name: "헤르페스",      href: "" },
+      { name: "성병감염",      href: "criminal-std.html" },
       /* 교통형사전문로펌.com — 법인이 따로 운영하는 사이트로 나간다 */
       { name: "교통사고",      href: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/" }
     ]
