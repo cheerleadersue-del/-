@@ -14,15 +14,17 @@
    1. 카카오톡 채널 관리자센터(business.kakao.com)에 들어가십시오.
    2. [채널] → [상세설정] 에 "채널 홈 URL" 이 있습니다.
    3. 그 주소를 아래 따옴표 안에 그대로 붙여 넣으십시오.
-      예)  const KAKAO_URL = "http://pf.kakao.com/_abcdEF";
+      예)  const KAKAO_URL = "https://pf.kakao.com/_abcdEF/chat";
 
    오픈채팅방을 쓰신다면 그 초대 주소를 넣으셔도 됩니다.
 
    비워 두면 카톡 버튼이 아예 나오지 않습니다.
-   주소가 정해지기 전까지는 비워 두는 편이 낫습니다.
    눌리지 않는 버튼을 보여드리는 것보다 없는 편이 낫기 때문입니다.
+
+   지금 들어 있는 주소는 법무법인 유일 채널의 채팅 화면입니다.
+   끝의 /chat 이 있으면 채널 소개를 건너뛰고 바로 대화창이 열립니다.
 --------------------------------------------------------------------- */
-const KAKAO_URL = "";
+const KAKAO_URL = "https://pf.kakao.com/_YxiDPX/chat";
 
 
 /*
@@ -860,7 +862,7 @@ if (KAKAO_URL) {
      맨 뒤가 아니라 첫 버튼 바로 뒤에 넣는다.
      줄 끝에는 "업무분야 보기" 같은 둘러보기 버튼이 오는데,
      그 뒤에 노란 버튼을 두면 순서가 어색해진다. */
-  document.querySelectorAll(".topic-acts, .topic-cta-act, .hero-acts")
+  document.querySelectorAll(".topic-acts, .topic-cta-act, .hero-acts, .done-back")
     .forEach((row) => {
       const kakao = kakaoLink("btn btn-kakao", "카톡 상담", true);
       const first = row.firstElementChild;
