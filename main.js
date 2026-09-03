@@ -169,12 +169,7 @@ const practices = [
     ]
   },
   {
-    name: "공증",
-    /*
-      제목이 길면 닫힌 칸(175px)에서 잘린다.
-      그래서 둘째 줄로 내려 작게 적는다. sub 는 없으면 아예 안 나온다.
-    */
-    sub: "법인/부동산 등기",
+    name: "공증 · 법인/부동산 등기",
     en: "NOTARY & REGISTRATION",
     /* 담당 변호사 미정. credit 을 비워두면 그 줄은 아예 나오지 않는다. */
     image: "assets/center-notary.webp",
@@ -378,7 +373,6 @@ if (panels) {
       el("span", "panel-body", `
         <span class="panel-en">${p.en}</span>
         <span class="panel-name">${p.name}</span>
-        ${p.sub ? `<span class="panel-sub">${p.sub}</span>` : ""}
         <span class="panel-detail">
           ${p.credit ? `<span class="panel-credit">${p.credit}</span>` : ""}
           <span class="panel-desc">${p.desc}</span>
