@@ -1028,6 +1028,16 @@ body.no-scroll .head .burger i { background: var(--ink); }
   white-space: nowrap;
 }
 
+/* 제목이 길 때 둘째 줄. 닫힌 칸에서도 잘리지 않도록 작게 둔다 */
+.panel-sub {
+  display: block;
+  margin-top: 4px;
+  color: rgba(252, 252, 251, 0.72);
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
 /* 펼쳐진 칸에서만 설명이 보인다 */
 .panel-detail {
   display: grid;
