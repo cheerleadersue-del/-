@@ -136,7 +136,14 @@ const practices = [
     image: "assets/center-civil.webp",
     desc: "다투기 전에 회수 가능성을 먼저 봅니다. " +
           "이길 수 있는지와 받을 수 있는지는 다른 문제입니다.",
-    tags: ["손해배상", "계약분쟁", "채권추심", "가압류"]
+    tags: [
+      { name: "의료사고", href: "" },
+      { name: "부동산",   href: "" },
+      { name: "대여금",   href: "" },
+      { name: "계약분쟁", href: "" },
+      { name: "전세사기", href: "" },
+      { name: "손해배상", href: "" }
+    ]
   },
   {
     name: "가사",
@@ -154,7 +161,12 @@ const practices = [
     image: "assets/center-recovery.webp",
     desc: "폐업과 회생 사이에서 남길 것을 정합니다. " +
           "채권자 구성과 현금 흐름을 먼저 확인합니다.",
-    tags: ["법인회생", "개인회생", "파산", "채무조정"]
+    tags: [
+      { name: "법인회생",    href: "" },
+      { name: "개인회생",    href: "" },
+      { name: "파산",        href: "" },
+      { name: "복권 · 면책", href: "" }
+    ]
   },
   {
     name: "공증",
