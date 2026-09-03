@@ -376,9 +376,24 @@ const panels = $("#panels");
 
 if (panels) {
   panels.replaceChildren(...practices.map((p, i) => {
-    const btn = el("button", "panel" + (i === 0 ? " is-open" : ""));
+    /*
+      칸 전체는 <div> 이고, 그 위를 덮는 <button> 을 따로 둔다.
+
+      전에는 칸 자체가 <button> 이었고 세부 분야 링크가 그 안에 들어 있었다.
+      버튼 안에 링크를 넣는 것은 규칙에 어긋나는 구조라,
+      휴대폰에서 칸을 누르려다 링크에 닿아 그대로 다른 페이지로
+      넘어가는 일이 있었다. 형사 칸은 아래쪽 38% 가 링크였다.
+
+      이제는 이렇게 나뉜다.
+        · 링크 알약을 누르면  → 그 페이지로 간다
+        · 그 밖의 아무 데나 누르면 → 칸이 펼쳐진다
+    */
+    const box = el("div", "panel" + (i === 0 ? " is-open" : ""));
+
+    const btn = el("button", "panel-hit");
     btn.type = "button";
     btn.setAttribute("aria-expanded", i === 0 ? "true" : "false");
+    btn.append(el("span", "sr-only", `${p.name} 분야 자세히 보기`));
 
     const img = el("img", "panel-img");
     img.src = p.image;
@@ -387,13 +402,14 @@ if (panels) {
     img.height = 800;
     img.loading = i === 0 ? "eager" : "lazy";
 
-    btn.append(
+    box.append(
       img,
       el("span", "panel-veil"),
+      btn,
       el("span", "panel-body", `
         <span class="panel-en">${p.en}</span>
         <span class="panel-name">${p.name}</span>
-        <span class="panel-detail">
+        <span class="panel-detail"><span class="panel-detail-in">
           ${p.credit ? `<span class="panel-credit">${p.credit}</span>` : ""}
           <span class="panel-desc">${p.desc}</span>
           <span class="panel-tags">${
@@ -417,12 +433,12 @@ if (panels) {
               }<i aria-hidden="true"></i></a>`;
             }).join("")
           }</span>
-        </span>
+        </span></span>
       `)
     );
 
     btn.addEventListener("click", () => open(i));
-    return btn;
+    return box;
   }));
 
   const all = [...panels.children];
@@ -431,7 +447,7 @@ if (panels) {
     all.forEach((node, i) => {
       const on = i === index;
       node.classList.toggle("is-open", on);
-      node.setAttribute("aria-expanded", String(on));
+      node.querySelector(".panel-hit").setAttribute("aria-expanded", String(on));
     });
   }
 
