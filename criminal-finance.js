@@ -105,32 +105,3 @@ window.PAGE_DATA = {
     }
   ]
 };
-
-
-/* ---------------------------------------------------------------------
-   사진 띠
-
-   assets/finance-1.* , finance-2.* 가 있으면 그 자리에 사진이 들어가고,
-   없으면 글자만 남습니다. 파일만 올리면 코드를 고칠 필요가 없습니다.
---------------------------------------------------------------------- */
-
-document.querySelectorAll("[data-photo]").forEach((band) => {
-  const base = "assets/" + band.dataset.photo;
-  const exts = ["webp", "jpg", "jpeg", "png"];
-
-  (function tryNext(i) {
-    if (i >= exts.length) return;
-    const probe = new Image();
-    probe.onload = () => {
-      const img = document.createElement("img");
-      img.className = "band-photo";
-      img.src = probe.src;
-      img.alt = "";
-      img.loading = "lazy";
-      band.prepend(img);
-      band.classList.add("has-photo");
-    };
-    probe.onerror = () => tryNext(i + 1);
-    probe.src = `${base}.${exts[i]}`;
-  })(0);
-});

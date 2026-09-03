@@ -852,3 +852,36 @@ if (KAKAO_URL) {
       else row.append(kakao);
     });
 }
+
+
+/* =====================================================================
+   사진 띠
+
+   data-photo="이름" 이 붙은 자리에 assets/이름.jpg 를 찾아 넣는다.
+   webp · jpg · jpeg · png 를 차례로 시도하고, 없으면 글자만 남는다.
+   그래서 사진을 나중에 올리셔도 되고, 코드는 고치지 않는다.
+
+   전에는 페이지마다 이 코드가 하나씩 들어 있었다(아홉 벌).
+   같은 내용이라 이리로 모았다. 고칠 일이 생기면 여기 한 곳만 고친다.
+===================================================================== */
+
+document.querySelectorAll("[data-photo]").forEach((band) => {
+  const base = "assets/" + band.dataset.photo;
+  const exts = ["webp", "jpg", "jpeg", "png"];
+
+  (function tryNext(i) {
+    if (i >= exts.length) return;
+    const probe = new Image();
+    probe.onload = () => {
+      const img = document.createElement("img");
+      img.className = "band-photo";
+      img.src = probe.src;
+      img.alt = "";
+      img.loading = "lazy";
+      band.prepend(img);
+      band.classList.add("has-photo");
+    };
+    probe.onerror = () => tryNext(i + 1);
+    probe.src = `${base}.${exts[i]}`;
+  })(0);
+});
