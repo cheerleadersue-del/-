@@ -137,7 +137,7 @@ const practices = [
     desc: "다투기 전에 회수 가능성을 먼저 봅니다. " +
           "이길 수 있는지와 받을 수 있는지는 다른 문제입니다.",
     tags: [
-      { name: "의료사고", href: "" },
+      { name: "의료사고", href: "civil-medical.html" },
       { name: "부동산",   href: "" },
       { name: "대여금",   href: "" },
       { name: "계약분쟁", href: "" },
