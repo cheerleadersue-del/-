@@ -525,6 +525,31 @@ if (heroBg) {
 }
 
 
+
+/* ---------- 세부 분야 머리말 배경 ---------- */
+
+/*
+  세부 분야 페이지(마약 · 도박 · 성범죄 …)는 지금 모두 같은 사진을 쓴다.
+  assets/topic-<이름>.webp · jpg · png 를 올리면 그 페이지만 바뀐다.
+
+  이름은 각 페이지 <img class="topic-hero-bg" data-topic="drug"> 의
+  data-topic 값이다. 파일이 없으면 지금 사진이 그대로 남는다.
+*/
+const topicBg = $(".topic-hero-bg[data-topic]");
+
+if (topicBg) {
+  const base = "assets/topic-" + topicBg.dataset.topic;
+  const exts = ["webp", "jpg", "png"];
+
+  (function tryNext(i) {
+    if (i >= exts.length) return;
+    const probe = new Image();
+    probe.onload = () => { topicBg.src = probe.src; };
+    probe.onerror = () => tryNext(i + 1);
+    probe.src = `${base}.${exts[i]}`;
+  })(0);
+}
+
 /* ---------- 히어로 동영상 ---------- */
 
 /*
