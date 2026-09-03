@@ -2101,20 +2101,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   word-break: keep-all;
 }
 
-/*
-  바깥 사이트로 나가는 태그.
-  안쪽 링크의 화살표는 오른쪽(→)을 가리키고,
-  바깥으로 나가는 것은 비스듬히 위(↗)를 가리킨다.
-  새 탭에서 열린다는 것을 눈으로 알리는 표시다.
-*/
-.panel-tags a.is-out i {
-  transform: rotate(0deg);
-}
-
-.panel-tags a.is-out:hover i {
-  transform: rotate(0deg) translate(2px, -2px);
-}
-
 /* 양식 내려받기 — 공증 페이지 */
 .form-list {
   display: grid;
