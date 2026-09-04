@@ -562,6 +562,71 @@ if (roster) {
 }
 
 
+/* ---------- 언론보도 ---------- */
+
+/*
+  ★ 기사를 늘리거나 고치실 자리 ★
+
+  아래 목록에 한 줄 추가하시면 그대로 화면에 나옵니다. 최신 기사가
+  위로 가게 순서대로 적어 주십시오.
+
+    outlet  매체 이름          예) 중앙일보
+    date    실린 날짜          예) 2026.09.02   ← 점으로 구분
+    title   기사 제목 그대로   ← 임의로 줄이지 마십시오
+    url     기사 주소
+
+  title 이 비어 있는 기사는 화면에 나오지 않습니다.
+  전부 비어 있으면 언론보도 칸 자체가 통째로 사라집니다.
+  그래서 제목을 아직 안 채우셔도 손님에게 빈 칸이 보이지 않습니다.
+*/
+const press = [
+  {
+    outlet: "중앙일보",
+    date: "",
+    title: "",
+    url: "https://www.joongang.co.kr/article/25392580"
+  },
+  {
+    outlet: "중앙일보",
+    date: "",
+    title: "",
+    url: "https://www.joongang.co.kr/article/25393910"
+  }
+];
+
+const pressList = $("#pressList");
+
+if (pressList) {
+  /* 제목이 채워진 것만 내보낸다. 제목 없는 링크는 손님에게 의미가 없다. */
+  const ready = press.filter((item) => item.title && item.url);
+
+  if (!ready.length) {
+    /* 하나도 준비되지 않았으면 칸을 통째로 감춘다 */
+    const section = pressList.closest(".press");
+    if (section) section.remove();
+  } else {
+    pressList.replaceChildren(...ready.map((item) => {
+      const li = el("li", "press-item");
+      const a = el("a", "press-link");
+      a.href = item.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+
+      const meta = el("span", "press-meta");
+      meta.append(el("b", "press-outlet", item.outlet));
+      if (item.date) meta.append(el("span", "press-date", item.date));
+
+      a.append(meta, el("span", "press-title", item.title));
+      /* 숨은 글자는 화면 낭독기가 읽지 않으므로 이름에 직접 박아 둔다 */
+      a.setAttribute("aria-label", `${item.outlet} ${item.title} (새 창)`);
+
+      li.append(a);
+      return li;
+    }));
+  }
+}
+
+
 /* ---------- 히어로 배경 갈아끼우기 ---------- */
 
 /*

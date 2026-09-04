@@ -1596,7 +1596,80 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 
 /* =====================================================================
-   10. 오시는 길 · 상담
+   10. 언론보도
+===================================================================== */
+
+.press {
+  padding: clamp(80px, 9vw, 130px) 0;
+  background: var(--paper-2);
+}
+
+/*
+  기사 한 줄을 통째로 누를 수 있게 한다. 제목만 링크로 두면
+  손가락으로 정확히 짚기 어렵다.
+*/
+.press-list {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.press-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.press-link {
+  display: grid;
+  grid-template-columns: minmax(0, 210px) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 6px 40px;
+  padding: 26px 0;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.3s var(--ease), padding-left 0.3s var(--ease);
+}
+
+.press-link:hover,
+.press-link:focus-visible {
+  color: var(--gold);
+  padding-left: 8px;
+}
+
+.press-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  color: var(--ink-faint);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.press-outlet {
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.press-title {
+  font-family: var(--font-serif);
+  font-size: clamp(16.5px, 1.5vw, 19px);
+  font-weight: 300;
+  line-height: 1.72;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+  text-wrap: pretty;
+}
+
+@media (max-width: 780px) {
+  .press-link {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    padding: 22px 0;
+  }
+}
+
+
+/* =====================================================================
+   10-B. 오시는 길 · 상담
 ===================================================================== */
 
 .contact-in {
