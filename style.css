@@ -244,7 +244,8 @@ h3 {
 @media (max-width: 620px) {
   .sec-title br,
   .topic-cta-title br,
-  .done-title br {
+  .done-title br,
+  .hero-lead br {
     display: none;
   }
 
