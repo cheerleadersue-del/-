@@ -1579,21 +1579,29 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /*
-  사진은 16:9 로 잘라 쓴다. 기사마다 원본 비율이 달라도
+  사진은 4:3 으로 잘라 쓴다. 기사마다 원본 비율이 달라도
   카드 높이가 흐트러지지 않는다.
+
+  16:9 로 두면 세로로 긴 인물 사진이 들어왔을 때 가로띠처럼 잘려
+  얼굴이 날아간다. 4:3 이 세로 사진과 가로 사진 모두를 견딘다.
 */
 .press-figure {
   margin: 0;
   overflow: hidden;
   background: var(--sand);
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
 }
 
+/*
+  위쪽을 기준으로 자른다. 인물 사진은 얼굴이 위에 있고,
+  건물이나 행사 사진도 중요한 것이 대개 위쪽에 있다.
+*/
 .press-photo {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 22%;
   transition: transform 0.7s var(--ease);
 }
 

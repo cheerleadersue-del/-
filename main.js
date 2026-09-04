@@ -580,7 +580,9 @@ if (roster) {
   제목만 나옵니다. 확장자는 webp 로 적어두셔도 jpg · png 로 올리시면
   알아서 찾습니다.
 
-    사진 크기는 1200 × 675 (16:9), 200KB 이하를 권합니다.
+    가로 1200px 이상, 200KB 이하를 권합니다.
+    세로 사진이든 가로 사진이든 카드 안에서 4 : 3 으로 잘립니다.
+    사람 사진이라면 얼굴이 위쪽에 오게 찍힌 것이 잘 나옵니다.
 
   title 이 비어 있는 기사는 화면에 나오지 않습니다.
   전부 비어 있으면 언론보도 칸 자체가 통째로 사라집니다.
@@ -598,7 +600,7 @@ const press = [
     date: "2025.12.24",
     title: "법무법인 유일, 형사 전담센터 출범",
     url: "https://www.joongang.co.kr/article/25392580",
-    image: "assets/press-centre.webp"
+    image: "assets/press-center.webp"
   }
 ];
 
