@@ -1492,49 +1492,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   transform: rotate(0deg);
 }
 
-/*
-  형사전담센터 — 변호인단 목록 아래의 별도 칸.
-
-  변호사 카드와 같은 모양으로 만들면 안 된다. 센터장은 변호사가 아니므로
-  손님이 변호사 목록의 일곱 번째 사람으로 읽으면 오인이 된다.
-  그래서 사진도 카드도 없이, 선 하나로 구분된 낮은 칸으로 둔다.
-*/
-.centre-note {
-  display: grid;
-  grid-template-columns: minmax(0, 210px) minmax(0, 1fr);
-  align-items: start;
-  gap: 12px 40px;
-  margin-top: clamp(46px, 5vw, 72px);
-  padding-top: clamp(30px, 3.4vw, 44px);
-  border-top: 1px solid var(--line);
-}
-
-.centre-note dt {
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  line-height: 1.9;
-}
-
-.centre-note dd {
-  max-width: 46ch;
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 15.5px;
-  line-height: 1.95;
-  word-break: keep-all;
-  text-wrap: pretty;
-}
-
-@media (max-width: 780px) {
-  .centre-note {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 10px;
-  }
-}
-
-
 /* =====================================================================
    09. 원칙 — 어두운 구간
 ===================================================================== */
