@@ -1291,19 +1291,22 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 /*
   설명 문구(desc) 없이 이 줄만 있는 패널은 이 줄이 본문 노릇을 한다.
-  그때는 금색이 아니라 흰 글자로 두고, 경력 부분만 금색으로 남긴다.
+  그때는 금색이 아니라 흰 글자로 둔다.
   담당자 이름과 설명이 함께 있는 패널은 지금처럼 금색으로 구분해야
   두 줄이 서로 다른 역할이라는 게 보인다.
+
+  사진 위에 얹히는 글자라 금색은 밝은 부분에서 잘 묻힌다.
+  그래서 이 줄 안에서는 tint 도 색을 바꾸지 않고 굵기로만 구분한다.
 */
 .panel-credit-solo {
   max-width: 34em;
-  color: rgba(252, 252, 251, 0.92);
+  color: rgba(252, 252, 251, 0.94);
   font-size: 14px;
   line-height: 1.85;
 }
 
 .panel-credit-solo .tint {
-  color: var(--gold-soft);
+  color: inherit;
 }
 
 .panel-desc {
