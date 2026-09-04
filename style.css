@@ -1605,33 +1605,55 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /*
-  기사 한 줄을 통째로 누를 수 있게 한다. 제목만 링크로 두면
-  손가락으로 정확히 짚기 어렵다.
+  기사 한 건이 카드 하나다. 카드 전체가 눌린다.
+  auto-fit 이라 기사가 두 건이면 두 칸, 세 건이면 세 칸으로 알아서 나뉜다.
 */
 .press-list {
   display: grid;
-  border-top: 1px solid var(--line);
-}
-
-.press-item {
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(28px, 3.4vw, 48px);
 }
 
 .press-link {
   display: grid;
-  grid-template-columns: minmax(0, 210px) minmax(0, 1fr);
-  align-items: baseline;
-  gap: 6px 40px;
-  padding: 26px 0;
+  gap: 18px;
   color: var(--ink);
   text-decoration: none;
-  transition: color 0.3s var(--ease), padding-left 0.3s var(--ease);
 }
 
-.press-link:hover,
-.press-link:focus-visible {
-  color: var(--gold);
-  padding-left: 8px;
+/*
+  사진은 16:9 로 잘라 쓴다. 기사마다 원본 비율이 달라도
+  카드 높이가 흐트러지지 않는다.
+*/
+.press-figure {
+  margin: 0;
+  overflow: hidden;
+  background: var(--sand);
+  aspect-ratio: 16 / 9;
+}
+
+.press-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+}
+
+.press-link:hover .press-photo,
+.press-link:focus-visible .press-photo {
+  transform: scale(1.035);
+}
+
+/* 사진이 없는 카드는 위쪽에 선을 그어 시작점을 만들어 준다 */
+.press-item:not(.has-photo) .press-body {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.press-body {
+  display: grid;
+  gap: 9px;
 }
 
 .press-meta {
@@ -1651,19 +1673,23 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .press-title {
   font-family: var(--font-serif);
-  font-size: clamp(16.5px, 1.5vw, 19px);
+  font-size: clamp(17px, 1.6vw, 20px);
   font-weight: 300;
-  line-height: 1.72;
+  line-height: 1.65;
   letter-spacing: -0.02em;
   word-break: keep-all;
   text-wrap: pretty;
+  transition: color 0.3s var(--ease);
 }
 
-@media (max-width: 780px) {
-  .press-link {
+.press-link:hover .press-title,
+.press-link:focus-visible .press-title {
+  color: var(--gold);
+}
+
+@media (max-width: 620px) {
+  .press-list {
     grid-template-columns: minmax(0, 1fr);
-    gap: 8px;
-    padding: 22px 0;
   }
 }
 

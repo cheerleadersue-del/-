@@ -571,26 +571,34 @@ if (roster) {
   위로 가게 순서대로 적어 주십시오.
 
     outlet  매체 이름          예) 중앙일보
-    date    실린 날짜          예) 2026.09.02   ← 점으로 구분
+    date    실린 날짜          예) 2025.12.30   ← 점으로 구분
     title   기사 제목 그대로   ← 임의로 줄이지 마십시오
     url     기사 주소
+    image   기사 사진 파일     예) assets/press-drug.webp
+
+  image 는 파일을 올리기만 하면 자동으로 뜹니다. 아직 없으면 사진 없이
+  제목만 나옵니다. 확장자는 webp 로 적어두셔도 jpg · png 로 올리시면
+  알아서 찾습니다.
+
+    사진 크기는 1200 × 675 (16:9), 200KB 이하를 권합니다.
 
   title 이 비어 있는 기사는 화면에 나오지 않습니다.
   전부 비어 있으면 언론보도 칸 자체가 통째로 사라집니다.
-  그래서 제목을 아직 안 채우셔도 손님에게 빈 칸이 보이지 않습니다.
 */
 const press = [
   {
     outlet: "중앙일보",
-    date: "",
-    title: "",
-    url: "https://www.joongang.co.kr/article/25392580"
+    date: "2025.12.30",
+    title: "법무법인 유일, 마약 사건 대응 체계 강화",
+    url: "https://www.joongang.co.kr/article/25393910",
+    image: "assets/press-drug.webp"
   },
   {
     outlet: "중앙일보",
-    date: "",
-    title: "",
-    url: "https://www.joongang.co.kr/article/25393910"
+    date: "2025.12.24",
+    title: "법무법인 유일, 형사 전담센터 출범",
+    url: "https://www.joongang.co.kr/article/25392580",
+    image: "assets/press-centre.webp"
   }
 ];
 
@@ -611,15 +619,46 @@ if (pressList) {
       a.href = item.url;
       a.target = "_blank";
       a.rel = "noopener noreferrer";
+      /* 숨은 글자는 화면 낭독기가 읽지 않으므로 이름에 직접 박아 둔다 */
+      a.setAttribute("aria-label", `${item.outlet} ${item.title} (새 창)`);
 
       const meta = el("span", "press-meta");
       meta.append(el("b", "press-outlet", item.outlet));
       if (item.date) meta.append(el("span", "press-date", item.date));
 
-      a.append(meta, el("span", "press-title", item.title));
-      /* 숨은 글자는 화면 낭독기가 읽지 않으므로 이름에 직접 박아 둔다 */
-      a.setAttribute("aria-label", `${item.outlet} ${item.title} (새 창)`);
+      const body = el("span", "press-body");
+      body.append(meta, el("span", "press-title", item.title));
 
+      /*
+        사진은 있으면 붙이고 없으면 아예 만들지 않는다.
+        빈 회색 네모가 남는 것보다 글자만 있는 편이 낫다.
+        제목이 이미 링크 글이므로 사진에는 대체글을 비워 둔다.
+      */
+      if (item.image) {
+        const base = item.image.replace(/\.[a-z]+$/i, "");
+        const exts = ["webp", "jpg", "jpeg", "png"];
+
+        (function tryNext(i) {
+          if (i >= exts.length) return;
+          const probe = new Image();
+          probe.onload = () => {
+            const img = el("img", "press-photo");
+            img.src = probe.src;
+            img.alt = "";
+            img.width = 1200;
+            img.height = 675;
+            img.loading = "lazy";
+            const figure = el("figure", "press-figure");
+            figure.append(img);
+            a.prepend(figure);
+            li.classList.add("has-photo");
+          };
+          probe.onerror = () => tryNext(i + 1);
+          probe.src = `${base}.${exts[i]}`;
+        })(0);
+      }
+
+      a.append(body);
       li.append(a);
       return li;
     }));
