@@ -163,7 +163,7 @@ const practices = [
       { name: "부동산",   href: "" },
       { name: "대여금",   href: "" },
       { name: "계약분쟁", href: "" },
-      { name: "전세사기", href: "" },
+      { name: "전세사기", href: "civil-jeonse.html" },
       { name: "손해배상", href: "" }
     ]
   },
