@@ -3048,8 +3048,13 @@ body.no-scroll .head .burger i { background: var(--ink); }
     height: 108px;
   }
 
+  /*
+    높이를 고정해 두는 것은 여닫을 때 애니메이션을 주기 위해서다.
+    그래서 가장 내용이 많은 형사 패널(담당 안내 세 줄 + 배너 여덟 개)에
+    맞춰 둔다. 내용이 적은 패널은 아래쪽 여백이 조금 더 생길 뿐이다.
+  */
   .panel.is-open {
-    height: 372px;
+    height: 430px;
   }
 
   .panel-body {
