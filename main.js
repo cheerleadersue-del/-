@@ -134,8 +134,7 @@ const practices = [
     credit: "법조 경력 25년 변호사와 경찰 경력 15년(광수대, 여청수사계) " +
             "형사전담센터장이 사건을 함께 검토합니다.",
     image: "assets/center-criminal.webp",
-    desc: "수사 단계부터 재판까지 같은 변호인이 맡습니다. " +
-          "진술의 모순과 기록의 공백을 먼저 찾습니다.",
+    /* desc 를 비워두면 그 줄은 아예 나오지 않는다 */
     /*
       태그에 href 를 넣으면 링크가 되고, 없으면 그냥 글자로 나온다.
       상세 페이지를 만들 때마다 href 를 채우면 된다.
@@ -419,7 +418,7 @@ if (panels) {
         <span class="panel-name">${p.name}</span>
         <span class="panel-detail"><span class="panel-detail-in">
           ${p.credit ? `<span class="panel-credit">${p.credit}</span>` : ""}
-          <span class="panel-desc">${p.desc}</span>
+          ${p.desc ? `<span class="panel-desc">${p.desc}</span>` : ""}
           <span class="panel-tags">${
             p.tags.map((t) => {
               if (typeof t === "string") return `<span>${t}</span>`;
