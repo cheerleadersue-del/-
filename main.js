@@ -133,7 +133,7 @@ const practices = [
     en: "CRIMINAL",
     /* <b class="tint"> 로 감싼 부분만 글자색이 달라진다 */
     credit: "<b class=\"tint\">법조 경력 25년 변호사</b>와 " +
-            "<b class=\"tint\">경찰 경력 15년(광수대, 여청수사계) 형사전담센터장</b>이 " +
+            "<b class=\"tint\">경찰 경력 18년(광역/마약수사대, 성폭력수사대) 형사전담센터장</b>이 " +
             "사건을 함께 검토합니다.",
     image: "assets/center-criminal.webp",
     /* desc 를 비워두면 그 줄은 아예 나오지 않는다 */
