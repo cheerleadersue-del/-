@@ -903,3 +903,84 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
     probe.src = `${base}.${exts[i]}`;
   })(0);
 });
+
+
+/* =====================================================================
+   넓은 화면의 빠른 상담 (오른쪽 아래)
+
+   전화 · 카톡 · 상담신청 세 개와 맨 위로 버튼을 세워 둔다.
+
+   번호와 주소는 새로 적지 않고 그 페이지의 아래 막대(.bar)에서
+   그대로 가져온다. 페이지마다 상담 번호가 다르고(첫 화면은 상담,
+   공증 페이지는 공증 상담), 나중에 번호를 고칠 때 두 군데를
+   고쳐야 하는 일을 만들지 않기 위해서다.
+
+   첫 화면을 보고 계실 때는 나오지 않는다.
+   머리말을 지나 내려가면 그때 올라온다.
+===================================================================== */
+
+(function buildRail() {
+  const bar = $(".bar");
+  if (!bar) return;
+
+  const src = {
+    tel: $(".bar-call", bar),
+    form: $(".bar-form", bar)
+  };
+  if (!src.tel || !src.form) return;
+
+  const rail = el("aside", "rail");
+  rail.setAttribute("aria-label", "빠른 상담");
+
+  const tile = (cls, href, label, out) => {
+    const a = el("a", "rail-btn " + cls);
+    a.href = href;
+    if (out) {
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+    }
+    a.append(el("span", "", label));
+    if (out) a.append(el("span", "sr-only", "(새 창)"));
+    return a;
+  };
+
+  /*
+    전화 — 번호는 그 페이지의 것을 그대로 쓰되 이름은 "전화상담" 으로 고정한다.
+    아래 막대의 이름("상담")을 그대로 가져오면
+    바로 밑의 "상담신청" 과 헷갈린다.
+  */
+  rail.append(tile("rail-tel", src.tel.getAttribute("href"), "전화상담"));
+
+  /* 카톡 — 주소가 채워져 있을 때만 */
+  if (KAKAO_URL) {
+    rail.append(tile("rail-kakao", KAKAO_URL, "카톡상담", true));
+  }
+
+  rail.append(tile("rail-form", src.form.getAttribute("href"), "상담신청"));
+
+  /* 맨 위로 */
+  const top = el("button", "rail-top");
+  top.type = "button";
+  top.setAttribute("aria-label", "맨 위로");
+  top.append(el("i", ""));
+  top.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  });
+  rail.append(top);
+
+  document.body.append(rail);
+
+  /*
+    머리말이 화면에서 사라지면 나타난다.
+    머리말이 없는 페이지(개인정보처리방침 등)에서는 바로 보인다.
+  */
+  const hero = $(".hero") || $(".topic-hero") || $(".doc-head");
+  if (!hero || !("IntersectionObserver" in window)) {
+    rail.classList.add("is-on");
+    return;
+  }
+
+  new IntersectionObserver((entries) => {
+    entries.forEach((e) => rail.classList.toggle("is-on", !e.isIntersecting));
+  }, { threshold: 0 }).observe(hero);
+})();
