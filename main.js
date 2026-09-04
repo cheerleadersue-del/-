@@ -850,14 +850,6 @@ if (KAKAO_URL) {
     return a;
   };
 
-  /* ---- 아래 고정 막대 ---- */
-  const bar = $(".bar");
-  const barForm = $(".bar-form");
-  if (bar && barForm) {
-    barForm.before(kakaoLink("bar-kakao", "카톡 상담", false));
-    bar.classList.add("has-kakao");
-  }
-
   /* ----- 큰 버튼 줄 -----
      맨 뒤가 아니라 첫 버튼 바로 뒤에 넣는다.
      줄 끝에는 "업무분야 보기" 같은 둘러보기 버튼이 오는데,
@@ -935,12 +927,17 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
   const tile = (cls, href, label, out) => {
     const a = el("a", "rail-btn " + cls);
     a.href = href;
+    /*
+      이름을 aria-label 로도 박아 둔다.
+      안쪽 이름표는 손가락으로 쓰는 기기에서 숨는데(hover 가 없다),
+      숨은 글자는 화면 낭독기도 읽지 않아 이름 없는 단추가 되어 버린다.
+    */
+    a.setAttribute("aria-label", label + (out ? " (새 창)" : ""));
     if (out) {
       a.target = "_blank";
       a.rel = "noopener noreferrer";
     }
     a.append(el("span", "", label));
-    if (out) a.append(el("span", "sr-only", "(새 창)"));
     return a;
   };
 
