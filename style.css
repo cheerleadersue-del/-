@@ -232,6 +232,16 @@ h3 {
   text-wrap: pretty;
 }
 
+/*
+  글 안에서 한 부분만 색을 달리할 때 쓴다.
+  밝은 구간에서는 금색, 어두운 구간에서는 각 자리에서 다시 지정한다.
+  굵기를 조금만 올리는 것은 색만으로는 색맹인 분께 구분이 안 되기 때문이다.
+*/
+.tint {
+  color: var(--gold);
+  font-weight: 500;
+}
+
 
 /*
   좁은 화면에서는 손으로 넣은 <br> 을 무시한다.
@@ -1277,6 +1287,23 @@ body.no-scroll .head .burger i { background: var(--ink); }
   font-size: 12.5px;
   letter-spacing: 0.01em;
   word-break: keep-all;
+}
+
+/*
+  설명 문구(desc) 없이 이 줄만 있는 패널은 이 줄이 본문 노릇을 한다.
+  그때는 금색이 아니라 흰 글자로 두고, 경력 부분만 금색으로 남긴다.
+  담당자 이름과 설명이 함께 있는 패널은 지금처럼 금색으로 구분해야
+  두 줄이 서로 다른 역할이라는 게 보인다.
+*/
+.panel-credit-solo {
+  max-width: 34em;
+  color: rgba(252, 252, 251, 0.92);
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.panel-credit-solo .tint {
+  color: var(--gold-soft);
 }
 
 .panel-desc {
@@ -3042,6 +3069,21 @@ body.no-scroll .head .burger i { background: var(--ink); }
   .q-inner p {
     margin-left: 0;
     font-size: 15px;
+  }
+
+  /*
+    검은 막은 위에서 아래로 짙어진다. 넓은 화면에서는 패널이 높아
+    글자가 아래쪽 짙은 자리에 놓이는데, 좁은 화면에서는 패널이 낮아
+    글자가 아직 옅은 자리에 걸린다. 사진에 밝은 부분이 있으면
+    금색 글자가 묻힌다. 그래서 좁은 화면에서는 더 일찍 짙어지게 한다.
+  */
+  .panel-veil {
+    background: linear-gradient(
+      180deg,
+      rgba(20, 18, 15, 0.06) 6%,
+      rgba(20, 18, 15, 0.72) 46%,
+      rgba(20, 18, 15, 0.86) 100%
+    );
   }
 
   .panel {

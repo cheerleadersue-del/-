@@ -131,8 +131,10 @@ const practices = [
   {
     name: "형사",
     en: "CRIMINAL",
-    credit: "법조 경력 25년 변호사와 경찰 경력 15년(광수대, 여청수사계) " +
-            "형사전담센터장이 사건을 함께 검토합니다.",
+    /* <b class="tint"> 로 감싼 부분만 글자색이 달라진다 */
+    credit: "<b class=\"tint\">법조 경력 25년 변호사</b>와 " +
+            "<b class=\"tint\">경찰 경력 15년(광수대, 여청수사계) 형사전담센터장</b>이 " +
+            "사건을 함께 검토합니다.",
     image: "assets/center-criminal.webp",
     /* desc 를 비워두면 그 줄은 아예 나오지 않는다 */
     /*
@@ -417,7 +419,7 @@ if (panels) {
         <span class="panel-en">${p.en}</span>
         <span class="panel-name">${p.name}</span>
         <span class="panel-detail"><span class="panel-detail-in">
-          ${p.credit ? `<span class="panel-credit">${p.credit}</span>` : ""}
+          ${p.credit ? `<span class="panel-credit${p.desc ? "" : " panel-credit-solo"}">${p.credit}</span>` : ""}
           ${p.desc ? `<span class="panel-desc">${p.desc}</span>` : ""}
           <span class="panel-tags">${
             p.tags.map((t) => {
