@@ -240,7 +240,7 @@ const attorneys = [
   },
   {
     name: "양진희", role: "변호사",
-    field: "강력범죄 · 성범죄 · 성감염",
+    field: "강력범죄 · 성범죄",
     /* 사진을 올리기 전까지는 자리표시자가 대신 보인다. */
     image: "assets/lawyer-06.webp",
     career: [
