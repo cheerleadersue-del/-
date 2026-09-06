@@ -837,14 +837,43 @@ if (heroSlot && heroBg && wideEnough && !motionOff && !saveData) {
 
     heroBg.after(v);           /* 사진 바로 위, 그늘막 아래 */
 
-    const started = v.play();
-    if (started && started.catch) {
-      started.catch(() => {
-        if (settled) return;
-        settled = true;
-        v.remove();            /* 자동재생이 막히면 조용히 사진으로 돌아간다 */
-      });
-    }
+    /*
+      휴대폰은 자동재생을 막을 때가 있다.
+      저전력 모드, 절전 설정, 브라우저 정책 등 이유가 여럿이다.
+
+      예전에는 막히면 곧바로 영상을 지워 사진만 남겼는데,
+      그러면 손님이 화면을 한 번 만져도 영상이 영영 나오지 않았다.
+      이제는 지우지 않고 기다렸다가, 손님이 화면을 처음 만지거나
+      넘길 때 한 번 더 재생을 시도한다. 그래도 안 되면 그때 지운다.
+    */
+    const tryPlay = () => {
+      const started = v.play();
+      return started && started.catch ? started : Promise.resolve();
+    };
+
+    tryPlay().catch(() => {
+      if (settled) return;
+
+      const events = ["pointerdown", "touchstart", "keydown", "scroll"];
+      let done = false;
+
+      const retry = () => {
+        if (done) return;
+        done = true;
+        events.forEach((e) => window.removeEventListener(e, retry));
+        tryPlay().catch(() => {
+          if (!settled) { settled = true; v.remove(); }
+        });
+      };
+
+      events.forEach((e) =>
+        window.addEventListener(e, retry, { once: true, passive: true }));
+
+      /* 아무 반응이 없으면 12초 뒤 조용히 사진으로 돌아간다 */
+      setTimeout(() => {
+        if (!done && !settled) { done = true; settled = true; v.remove(); }
+      }, 12000);
+    });
   })(0);
 }
 
