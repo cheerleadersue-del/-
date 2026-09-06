@@ -773,19 +773,40 @@ if (topicBg) {
 */
 const heroSlot = $(".hero");
 
+/* ---------------------------------------------------------------------
+   ★ 첫 화면 동영상 파일 ★
+
+   올리기만 하면 자동으로 재생됩니다. 코드는 손대지 않으셔도 됩니다.
+
+     assets/hero.mp4          PC · 태블릿용   가로  16:9 권장
+     assets/hero-mobile.mp4   휴대폰용        세로  9:16 권장
+
+   휴대폰에서는 hero-mobile 을 먼저 찾고, 없으면 hero 를 씁니다.
+   둘 다 없으면 사진이 그대로 남습니다. 검은 네모가 뜨는 일은 없습니다.
+
+   ⚠️ 가로 영상 한 개만 올리시면 휴대폰에서는 가운데만 크게 잘립니다.
+      화면이 세로로 길기 때문입니다. 지금 들어 있는 1920×800 영상은
+      휴대폰에서 가로폭의 21% 만 보입니다.
+
+   만드실 때 권하는 값
+     길이   10 ~ 15초 (짧으면 반복되는 게 눈에 띕니다)
+     용량   3MB 이하
+     소리   없어야 합니다
+     움직임 아주 느리게 — 빠르면 위에 얹힌 글자가 읽히지 않습니다
+--------------------------------------------------------------------- */
+
 /*
   ┌─ 손봐도 되는 값 ────────────────────────────────────────────┐
   │ 화면 너비가 이 값보다 좁으면 동영상 대신 사진을 보여준다.   │
   │                                                             │
   │   0    → 휴대폰에서도 동영상 (지금 설정)                    │
   │   820  → 휴대폰은 사진, 태블릿·PC 는 동영상                 │
-  │                                                             │
-  │ 지금 영상은 가로로 매우 긴 비율(1920 × 800)이라             │
-  │ 세로로 긴 휴대폰 화면에서는 가운데 부분만 크게 잘려 보인다. │
-  │ 휴대폰에서 보시고 어색하면 이 값을 820 으로 바꾸십시오.     │
   └─────────────────────────────────────────────────────────────┘
 */
 const HERO_VIDEO_MIN_WIDTH = 0;
+
+/* 세로 화면으로 볼 때는 휴대폰용 영상을 먼저 찾는다 */
+const NARROW_SCREEN = window.innerWidth < 820;
 
 const motionOff =
   window.matchMedia &&
@@ -797,7 +818,14 @@ const saveData = !!(navigator.connection && navigator.connection.saveData);
 const wideEnough = window.innerWidth >= HERO_VIDEO_MIN_WIDTH;
 
 if (heroSlot && heroBg && wideEnough && !motionOff && !saveData) {
-  const clips = ["assets/hero.mp4", "assets/hero.webm"];
+  /*
+    앞에서부터 하나씩 찾아본다. 없는 파일은 건너뛴다.
+    좁은 화면에서는 휴대폰용을 먼저 보고, 없으면 가로 영상으로 내려간다.
+  */
+  const clips = NARROW_SCREEN
+    ? ["assets/hero-mobile.mp4", "assets/hero-mobile.webm",
+       "assets/hero.mp4", "assets/hero.webm"]
+    : ["assets/hero.mp4", "assets/hero.webm"];
 
   (function tryNext(i) {
     if (i >= clips.length) return;
