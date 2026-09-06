@@ -27,6 +27,31 @@
 const KAKAO_URL = "https://pf.kakao.com/_YxiDPX/chat";
 
 
+/* ---------------------------------------------------------------------
+   ★ 상담신청 받는 주소 ★
+
+   이 홈페이지는 두 곳에 떠 있습니다.
+
+     넷리파이  … 상담신청이 넷리파이 관리화면 Forms 탭에 쌓입니다.
+                 아래 칸을 비워두셔도 그대로 작동합니다.
+     깃허브    … 넷리파이 기능이 없어서 받아줄 곳이 따로 필요합니다.
+                 비워두면 폼 대신 "전화나 카톡으로 연락 주세요" 안내가
+                 나옵니다. 눌리지 않는 폼을 보여드리지 않기 위해서입니다.
+
+   깃허브 쪽에서도 상담신청을 받으시려면:
+
+     1. https://formsubmit.co 에 들어가십시오. 가입은 필요 없습니다.
+     2. 상담신청을 받으실 이메일 주소를 넣고 나온 주소를 복사하십시오.
+        (형식:  https://formsubmit.co/xxxxxxxxxxxx )
+     3. 그 주소를 아래 따옴표 안에 붙여 넣으십시오.
+     4. 첫 신청이 오면 확인 메일이 한 번 옵니다. 눌러주시면 그때부터
+        모든 신청이 그 이메일로 들어옵니다.
+
+   무료이고, 한 달에 받을 수 있는 건수도 넉넉합니다.
+--------------------------------------------------------------------- */
+const FORM_ENDPOINT = "";
+
+
 /*
   세부 분야 페이지(criminal-*.html)는 자기 데이터를 window.PAGE_DATA 에
   담아 먼저 불러옵니다. 있으면 그것을 쓰고, 없으면 아래 기본값을 씁니다.
@@ -899,10 +924,40 @@ if (form && formStatus) {
   };
 
   /*
+    넷리파이에는 Forms 기능이 있지만 깃허브 페이지스에는 없다.
+    주소를 보고 갈라 쓴다. 두 곳 다 옳게 동작해야 한다.
+  */
+  const onGithub = /\.github\.io$/i.test(location.hostname);
+
+  if (onGithub && FORM_ENDPOINT) {
+    /* 받아줄 곳이 정해져 있으면 그리로 보낸다 */
+    form.setAttribute("action", FORM_ENDPOINT);
+    form.setAttribute("method", "POST");
+
+    const hidden = (name, value) => {
+      const i = document.createElement("input");
+      i.type = "hidden";
+      i.name = name;
+      i.value = value;
+      form.append(i);
+    };
+    /* 보내고 나면 감사 페이지로 돌려보낸다 */
+    hidden("_next", new URL("thanks.html", location.href).href);
+    hidden("_subject", "홈페이지 상담신청");
+    hidden("_template", "table");
+  }
+
+  /*
     검증만 여기서 하고, 통과하면 브라우저가 그대로 제출한다.
-    제출은 Netlify Forms 가 받아 /thanks.html 로 보낸다.
   */
   form.addEventListener("submit", (event) => {
+    if (onGithub && !FORM_ENDPOINT) {
+      /* 받아줄 곳이 없으면 조용히 실패시키지 않고 다른 길을 알려드린다 */
+      event.preventDefault();
+      say("지금은 상담신청서를 받을 수 없습니다. 전화 010-8227-8485 또는 카톡으로 연락 주세요.");
+      return;
+    }
+
     const name = $("#fName").value.trim();
     const tel = $("#fTel").value.replace(/\D/g, "");
     const agreed = $("#fAgree").checked;

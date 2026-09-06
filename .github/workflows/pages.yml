@@ -1,0 +1,60 @@
+# =====================================================================
+#  깃허브 페이지스 배포
+#
+#  이 브랜치에 파일이 올라가면 자동으로 홈페이지에 반영됩니다.
+#  넷리파이와는 아무 상관이 없습니다. 두 곳에 동시에 떠 있습니다.
+#
+#  처음 한 번만 설정이 필요합니다:
+#    저장소 → Settings → Pages → Source 를 "GitHub Actions" 로
+# =====================================================================
+name: 홈페이지 배포
+
+on:
+  push:
+    branches: [claude/law-firm-website-recode-phtrgb]
+  workflow_dispatch:        # 설정 화면에서 손으로도 돌릴 수 있게
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 손님에게 보여줄 파일만 모은다
+        run: |
+          mkdir -p _site
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='docs' \
+            --exclude='netlify' \
+            --exclude='netlify.toml' \
+            --exclude='README.md' \
+            --exclude='_site' \
+            ./ _site/
+          # Jekyll 이 파일을 건드리지 않게 한다
+          touch _site/.nojekyll
+          echo "올라가는 파일 수: $(find _site -type f | wc -l)"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
