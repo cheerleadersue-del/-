@@ -3114,6 +3114,18 @@ body.no-scroll .head .burger i { background: var(--ink); }
     padding-top: calc(var(--head-h) + 44px);
   }
 
+  /*
+    좁은 화면에서는 가로로 긴 머리 사진의 가운데 27% 만 보인다.
+    사람이 오른쪽에 큼직하게 있는 사진은 그 부분만 확대되어
+    무엇인지 알아볼 수 없게 된다. 그런 사진만 잡는 자리를 옮긴다.
+
+    양육권 — 아이가 오른쪽에 있어 뒷머리만 크게 나왔다.
+             왼쪽을 잡아 방과 부모가 함께 보이게 한다.
+  */
+  .topic-hero-bg[data-topic="custody"] {
+    object-position: 40% 50%;
+  }
+
   .topic-acts .btn {
     flex: 1 1 auto;
     justify-content: center;
