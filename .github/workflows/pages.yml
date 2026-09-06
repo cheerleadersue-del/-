@@ -36,6 +36,7 @@ jobs:
             --exclude='.git' \
             --exclude='.github' \
             --exclude='docs' \
+            --exclude='_incoming' \
             --exclude='netlify' \
             --exclude='netlify.toml' \
             --exclude='README.md' \
