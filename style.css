@@ -3126,6 +3126,15 @@ body.no-scroll .head .burger i { background: var(--ink); }
     object-position: 40% 50%;
   }
 
+  /*
+    학교폭력 · 교권침해 — 의자 두 개와 가방이 오른쪽에 몰려 있다.
+    좁은 화면에서는 가로폭의 28% 만 보이므로 둘을 다 담을 수 없다.
+    학생 의자와 가방이 한 장면으로 들어오는 자리를 잡는다.
+  */
+  .topic-hero-bg[data-topic="school"] {
+    object-position: 63% 50%;
+  }
+
   .topic-acts .btn {
     flex: 1 1 auto;
     justify-content: center;
