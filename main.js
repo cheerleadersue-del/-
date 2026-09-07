@@ -253,7 +253,7 @@ const practices = [
 const attorneys = [
   {
     name: "정호길", role: "대표변호사",
-    field: "강력범죄 · 형사 · 교통사고",
+    field: "강력범죄 · 마약 · 교통사고",
     /*
       lawyer-01.webp 은 전신 컷아웃이라 목록에 넣으면 얼굴이 작아
       다른 분들과 크기가 안 맞는다. 목록에는 상반신 컷을 쓴다.
