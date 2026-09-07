@@ -3282,6 +3282,19 @@ body.no-scroll .head .burger i { background: var(--ink); }
     object-position: 63% 50%;
   }
 
+  /*
+    교통사고 — 구급차와 대원이 오른쪽에 몰려 있다.
+    가운데를 잡으면 빈 도로만 나온다.
+
+    선택자를 파일 이름으로 잡은 이유: 교통사고 페이지 열두 장이
+    같은 머리말 사진을 함께 쓴다. 나중에 어느 한 장에만 다른 사진을
+    올리시면(assets/topic-dui.webp 처럼) 그 페이지는 이 규칙에서
+    자동으로 빠진다. 새 사진에는 새 자리가 필요하기 때문이다.
+  */
+  .topic-hero-bg[src$="topic-traffic.webp"] {
+    object-position: 72% 50%;
+  }
+
   .topic-acts .btn {
     flex: 1 1 auto;
     justify-content: center;
