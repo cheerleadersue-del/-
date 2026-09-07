@@ -181,9 +181,9 @@ const practices = [
       { name: "성병감염",      href: "criminal-std.html" },
       { name: "학교폭력·교권침해", href: "criminal-school.html" },
       /*
-        교통사고는 세부 분야가 열한 갈래라 홈페이지 안에 따로 모아 두었다.
+        교통사고는 세부 분야가 열두 갈래라 홈페이지 안에 따로 모아 두었다.
         traffic.html 에서 각 분야로 갈라진다.
-        법인이 따로 운영하는 교통형사전문로펌.com 은 그 페이지 안에서 연결한다.
+        예전에 쓰던 바깥 사이트로는 더 이상 나가지 않는다.
       */
       { name: "교통사고",      href: "traffic.html" }
     ]

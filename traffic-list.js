@@ -22,62 +22,69 @@ window.TRAFFIC_AREAS = [
   },
   {
     no:   "03",
-    name: "무보험 · 중상해",
-    en:   "UNINSURED & SERIOUS INJURY",
+    name: "무보험 (책임보험)",
+    en:   "UNINSURED DRIVING",
     href: "traffic-uninsured.html",
-    line: "종합보험이 없으면 가벼운 부상도 형사처벌 대상이 됩니다. 중상해는 합의가 결론을 바꿉니다."
+    line: "종합보험이 없으면 가벼운 부상도 형사처벌 대상이 됩니다. 초과 손해도 그대로 남습니다."
   },
   {
     no:   "04",
-    name: "사망사고",
-    en:   "FATAL TRAFFIC ACCIDENT",
-    href: "traffic-fatal.html",
-    line: "합의 여부로 실형과 집행유예가 갈립니다. 조문이 무엇인지가 그 앞에 있습니다."
-  },
-  {
-    no:   "05",
-    name: "스쿨존 (민식이법)",
-    en:   "SCHOOL ZONE",
-    href: "traffic-schoolzone.html",
-    line: "세 가지 요건이 모두 갖춰져야 특가법이 적용됩니다. 하나라도 빠지면 달라집니다."
-  },
-  {
-    no:   "06",
     name: "뺑소니 (도주치상 · 도주치사)",
     en:   "HIT AND RUN",
     href: "traffic-hitrun.html",
     line: "몰랐다는 말로는 부족합니다. 도주의 고의가 없었음을 자료로 세워야 합니다."
   },
   {
+    no:   "05",
+    name: "사망사고",
+    en:   "FATAL TRAFFIC ACCIDENT",
+    href: "traffic-fatal.html",
+    line: "합의 여부로 실형과 집행유예가 갈립니다. 조문이 무엇인지가 그 앞에 있습니다."
+  },
+  {
+    no:   "06",
+    name: "중상해사고",
+    en:   "SERIOUS INJURY",
+    href: "traffic-serious.html",
+    line: "12대 중과실이 아니라면 합의로 공소기각까지 갑니다. 누가 합의하느냐가 갈림길입니다."
+  },
+  {
     no:   "07",
+    name: "스쿨존 (민식이법)",
+    en:   "SCHOOL ZONE",
+    href: "traffic-schoolzone.html",
+    line: "세 가지 요건이 모두 갖춰져야 특가법이 적용됩니다. 하나라도 빠지면 달라집니다."
+  },
+  {
+    no:   "08",
     name: "무면허운전",
     en:   "DRIVING WITHOUT A LICENSE",
     href: "traffic-unlicensed.html",
     line: "취소 통지 전이었는지, 면허 종별이 맞는지 — 무면허가 아닌 경우가 있습니다."
   },
   {
-    no:   "08",
+    no:   "09",
     name: "음주운전 (윤창호법)",
     en:   "DRIVING UNDER THE INFLUENCE",
     href: "traffic-dui.html",
     line: "수치와 절차를 먼저 봅니다. 측정이 적법했는지가 사건을 바꾸기도 합니다."
   },
   {
-    no:   "09",
+    no:   "10",
     name: "음주측정거부",
     en:   "REFUSAL OF BREATH TEST",
     href: "traffic-refusal.html",
     line: "거부로 인정되면 수치와 무관하게 무겁게 처벌됩니다. 요구가 적법했는지를 봅니다."
   },
   {
-    no:   "10",
+    no:   "11",
     name: "난폭운전 · 보복운전",
     en:   "RECKLESS & RETALIATORY DRIVING",
     href: "traffic-roadrage.html",
     line: "난폭은 도로교통법, 보복은 형법입니다. 어느 쪽이냐로 사건의 크기가 달라집니다."
   },
   {
-    no:   "11",
+    no:   "12",
     name: "보험사기",
     en:   "INSURANCE FRAUD",
     href: "traffic-fraud.html",
