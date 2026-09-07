@@ -923,10 +923,12 @@ body.no-scroll .head .burger i { background: var(--ink); }
 .greeting-sign {
   display: flex;
   align-items: baseline;
+  justify-content: center;
   gap: 14px;
   margin-top: 38px;
   padding-top: 26px;
   border-top: 1px solid var(--line);
+  text-align: center;
 }
 
 .greeting-sign span {
@@ -949,10 +951,10 @@ body.no-scroll .head .burger i { background: var(--ink); }
 */
 .greeting-sign-mark {
   position: relative;
-  top: 6px;
+  top: 9px;
   width: auto;
-  height: 38px;
-  margin-left: 4px;
+  height: 56px;
+  margin-left: 2px;
   opacity: 0.92;
 }
 
@@ -3075,8 +3077,8 @@ body.no-scroll .head .burger i { background: var(--ink); }
   }
 
   .greeting-sign-mark {
-    top: 4px;
-    height: 32px;
+    top: 7px;
+    height: 44px;
   }
 
   /*
