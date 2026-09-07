@@ -951,9 +951,9 @@ body.no-scroll .head .burger i { background: var(--ink); }
 */
 .greeting-sign-mark {
   position: relative;
-  top: 9px;
+  top: 13px;
   width: auto;
-  height: 56px;
+  height: 80px;
   margin-left: 2px;
   opacity: 0.92;
 }
@@ -3077,8 +3077,8 @@ body.no-scroll .head .burger i { background: var(--ink); }
   }
 
   .greeting-sign-mark {
-    top: 7px;
-    height: 44px;
+    top: 9px;
+    height: 60px;
   }
 
   /*
