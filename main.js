@@ -179,6 +179,7 @@ const practices = [
       { name: "성범죄",       href: "criminal-sex.html" },
       { name: "코인 OTC",     href: "criminal-crypto.html" },
       { name: "성병감염",      href: "criminal-std.html" },
+      { name: "학교폭력·교권침해", href: "criminal-school.html" },
       /* 교통형사전문로펌.com — 법인이 따로 운영하는 사이트로 나간다 */
       { name: "교통사고",      href: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/" }
     ]
