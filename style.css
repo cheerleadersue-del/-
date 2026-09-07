@@ -941,6 +941,21 @@ body.no-scroll .head .burger i { background: var(--ink); }
   letter-spacing: -0.04em;
 }
 
+/*
+  친필 서명. 글자로 적은 이름 옆에 나란히 둔다.
+  height 만 정하고 width 는 auto 로 두어야 서명의 가로세로 비가
+  그대로 유지된다. top 으로 조금 내려 손으로 쓴 것처럼 기준선을
+  살짝 넘게 한다.
+*/
+.greeting-sign-mark {
+  position: relative;
+  top: 6px;
+  width: auto;
+  height: 38px;
+  margin-left: 4px;
+  opacity: 0.92;
+}
+
 /* 인물 — 사진 위에 아무것도 덮지 않는다 */
 .greeting-figure {
   position: relative;
@@ -3040,8 +3055,28 @@ body.no-scroll .head .burger i { background: var(--ink); }
     max-height: 320px;
   }
 
+  /*
+    좁은 화면에서는 직함 · 이름 · 서명 셋을 한 줄에 넣을 수 없다.
+    그냥 두면 "대표변" / "호사", "정호" / "길" 처럼 글자 가운데가
+    끊긴다. 직함을 윗줄로 올리고, 아랫줄에 이름과 서명을 나란히 둔다.
+  */
+  .greeting-sign {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+  }
+
+  .greeting-sign span {
+    flex: 1 0 100%;
+  }
+
   .greeting-sign strong {
     font-size: 22px;
+    white-space: nowrap;
+  }
+
+  .greeting-sign-mark {
+    top: 4px;
+    height: 32px;
   }
 
   /*
