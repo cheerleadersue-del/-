@@ -567,8 +567,15 @@ body.no-scroll .head .burger i { background: var(--ink); }
   전담센터 — 커서를 올리면 바로 아래로 여섯 센터가 펼쳐진다.
   메뉴는 main.js 가 practices 를 보고 만든다.
 */
+/*
+  이 칸을 그냥 감싸기만 하면 안쪽 글자가 옆 메뉴보다 6px 위로 올라간다.
+  감싼 순간 링크가 줄 안의 글자로 바뀌어 위아래 여백이 높이에 안 잡히기 때문이다.
+  flex 로 두어 링크를 다시 한 덩어리로 만들고 가운데 맞춘다.
+*/
 .nav-drop {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 /*
