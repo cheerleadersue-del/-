@@ -160,6 +160,7 @@ const questions = PAGE.questions || [
 const practices = [
   {
     name: "형사",
+    slug: "criminal",
     en: "CRIMINAL",
     /* <b class="tint"> 로 감싼 부분만 글자색이 달라진다 */
     credit: "<b class=\"tint\">법조 경력 25년 변호사</b>와 " +
@@ -179,17 +180,38 @@ const practices = [
       { name: "성범죄",       href: "criminal-sex.html" },
       { name: "코인 OTC",     href: "criminal-crypto.html" },
       { name: "성병감염",      href: "criminal-std.html" },
-      { name: "학교폭력·교권침해", href: "criminal-school.html" },
-      /*
-        교통사고는 세부 분야가 열두 갈래라 홈페이지 안에 따로 모아 두었다.
-        traffic.html 에서 각 분야로 갈라진다.
-        예전에 쓰던 바깥 사이트로는 더 이상 나가지 않는다.
-      */
-      { name: "교통사고",      href: "traffic.html" }
+      { name: "학교폭력·교권침해", href: "criminal-school.html" }
+    ]
+  },
+  /*
+    교통형사는 세부 분야가 열두 갈래라 형사에서 떼어 따로 센터를 두었다.
+    태그를 열두 개 다 늘어놓으면 칸이 넘치니 자주 찾는 것만 앞에 두고,
+    나머지는 traffic.html 로 들어가 보시게 했다.
+  */
+  {
+    name: "교통형사",
+    slug: "traffic",
+    en: "TRAFFIC CRIMINAL",
+    /* 이 센터만 홈페이지 안에 따로 대문 페이지가 있다 */
+    page: "traffic.html",
+    credit: "<b class=\"tint\">정호길 대표변호사</b>가 교통형사 사건을 직접 맡습니다.",
+    image: "assets/center-traffic.webp",
+    desc: "보험 처리와 형사 절차는 별개로 흘러갑니다. " +
+          "합의와 공탁의 시기를 놓치면 되돌리기 어렵습니다.",
+    tags: [
+      { name: "형사합의 · 공탁",  href: "traffic-settlement.html" },
+      { name: "12대 중과실",     href: "traffic-negligence.html" },
+      { name: "뺑소니",          href: "traffic-hitrun.html" },
+      { name: "사망사고",        href: "traffic-fatal.html" },
+      { name: "중상해사고",      href: "traffic-serious.html" },
+      { name: "음주운전",        href: "traffic-dui.html" },
+      { name: "스쿨존(민식이법)", href: "traffic-schoolzone.html" },
+      { name: "열두 분야 전체",   href: "traffic.html" }
     ]
   },
   {
     name: "민사",
+    slug: "civil",
     en: "CIVIL",
     credit: "정주현 변호사(부동산) · 김제도 변호사(의료사고)",
     image: "assets/center-civil.webp",
@@ -206,6 +228,7 @@ const practices = [
   },
   {
     name: "가사",
+    slug: "family",
     en: "FAMILY",
     credit: "이경숙 변호사 · 대한변협 가사법 전문분야 등록",
     image: "assets/center-family.webp",
@@ -220,6 +243,7 @@ const practices = [
   },
   {
     name: "회생",
+    slug: "rehab",
     en: "REHABILITATION",
     credit: "심상한 변호사 · 前 서울지방노동위원회 공익위원",
     image: "assets/center-recovery.webp",
@@ -234,6 +258,9 @@ const practices = [
   },
   {
     name: "공증 · 법인/부동산 등기",
+    /* 닫힌 칸은 좁아 긴 이름이 네 줄로 쪼개진다. 그 자리에는 이것을 쓴다 */
+    nameShort: "공증 · 등기",
+    slug: "notary",
     en: "NOTARY & REGISTRATION",
     /* 담당 변호사 미정. credit 을 비워두면 그 줄은 아예 나오지 않는다. */
     image: "assets/center-notary.webp",
@@ -428,7 +455,102 @@ if (qList) {
 }
 
 
-/* ---------- 업무분야 ---------- */
+/* ---------- 최상단 전담센터 메뉴 ---------- */
+
+/*
+  머리말의 "전담센터" 에 커서를 올리면 바로 아래로 여섯 센터가 펼쳐진다.
+
+  이 메뉴를 자바스크립트로 만드는 까닭은, 같은 메뉴가 마흔 장이 넘는
+  페이지에 똑같이 들어가기 때문이다. 한 곳에서 만들어 두면
+  센터가 늘거나 이름이 바뀔 때 practices 하나만 고치면 된다.
+
+  커서를 올리는 것만으로는 손가락으로 쓰는 기기와 키보드에서 열리지 않는다.
+  그래서 초점이 들어와도, 눌러도 열리게 해 두었다.
+*/
+const centerHome = /(^|\/)(index\.html)?$/.test(location.pathname);
+
+function centerHref(p) {
+  /* 교통형사만 홈페이지 안에 따로 대문 페이지가 있다 */
+  if (p.page) return p.page;
+  return (centerHome ? "" : "index.html") + "?center=" + p.slug + "#practice";
+}
+
+(function buildCenterMenu() {
+  const top = $('.nav a[href$="#practice"]');
+  if (!top) return;
+
+  const wrap = el("div", "nav-drop");
+  top.replaceWith(wrap);
+  wrap.append(top);
+  top.setAttribute("aria-expanded", "false");
+  top.setAttribute("aria-haspopup", "true");
+
+  const menu = el("div", "nav-menu");
+  menu.append(...practices.map((p) => {
+    const a = el("a", null, p.name + " 센터");
+    a.href = centerHref(p);
+    return a;
+  }));
+  wrap.append(menu);
+
+  let timer = 0;
+  const set = (on) => {
+    clearTimeout(timer);
+    wrap.classList.toggle("is-open", on);
+    top.setAttribute("aria-expanded", String(on));
+  };
+
+  /*
+    닫을 때만 조금 늦춘다. 메뉴로 커서를 옮기는 사이 틈을 지나가면
+    그대로 닫혀버려 누를 수 없기 때문이다.
+  */
+  wrap.addEventListener("mouseenter", () => set(true));
+  wrap.addEventListener("mouseleave", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => set(false), 160);
+  });
+
+  wrap.addEventListener("focusin", () => set(true));
+  wrap.addEventListener("focusout", (e) => {
+    if (!wrap.contains(e.relatedTarget)) set(false);
+  });
+
+  /* 커서가 없는 기기에서는 첫 번째 누름이 메뉴를 여는 몫을 한다 */
+  top.addEventListener("click", (e) => {
+    if (window.matchMedia("(hover: hover)").matches) return;
+    if (wrap.classList.contains("is-open")) return;
+    e.preventDefault();
+    set(true);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || !wrap.classList.contains("is-open")) return;
+    set(false);
+    top.focus();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!wrap.contains(e.target)) set(false);
+  });
+})();
+
+/* 서랍(휴대폰) 메뉴에도 같은 목록을 여섯 줄로 펼쳐 둔다 */
+(function buildDrawerCenters() {
+  const top = $('.drawer-nav a[href$="#practice"]');
+  if (!top) return;
+
+  const list = el("span", "drawer-sub");
+  list.append(...practices.map((p) => {
+    /* 좁은 화면이라 이름이 긴 센터는 짧은 쪽을 쓴다 */
+    const a = el("a", null, p.nameShort || p.name);
+    a.href = centerHref(p);
+    return a;
+  }));
+  top.after(list);
+})();
+
+
+/* ---------- 전담센터 ---------- */
 
 const panels = $("#panels");
 
@@ -466,7 +588,9 @@ if (panels) {
       btn,
       el("span", "panel-body", `
         <span class="panel-en">${p.en}</span>
-        <span class="panel-name">${p.name}</span>
+        <span class="panel-name${p.nameShort ? " panel-name-full" : ""}">${p.name}</span>${
+          p.nameShort ? `<span class="panel-name panel-name-short">${p.nameShort}</span>` : ""
+        }
         <span class="panel-detail"><span class="panel-detail-in">
           ${p.credit ? `<span class="panel-credit${p.desc ? "" : " panel-credit-solo"}">${p.credit}</span>` : ""}
           ${p.desc ? `<span class="panel-desc">${p.desc}</span>` : ""}
@@ -516,6 +640,38 @@ if (panels) {
   if (window.matchMedia("(hover: hover) and (min-width: 900px)").matches) {
     all.forEach((node, i) => node.addEventListener("mouseenter", () => open(i)));
   }
+
+  /*
+    최상단 전담센터 메뉴에서 넘어오면 주소 끝에 ?center=criminal 처럼 붙는다.
+    그 센터의 칸을 펼친 채로 보여준다.
+  */
+  const want = new URLSearchParams(location.search).get("center");
+  if (want) {
+    const i = practices.findIndex((p) => p.slug === want);
+    if (i > -1) open(i);
+  }
+
+  /*
+    이미 첫 화면에 있을 때는 페이지를 다시 불러올 것 없이
+    그 자리에서 칸만 펼치고 내려간다.
+  */
+  document.querySelectorAll('.nav-menu a, .drawer-sub a').forEach((a) => {
+    const slug = new URL(a.href, location.href).searchParams.get("center");
+    const i = slug ? practices.findIndex((p) => p.slug === slug) : -1;
+    if (i < 0) return;
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      open(i);
+      /*
+        서랍에서 눌렀다면 서랍이 닫히면서 body 의 스크롤 잠금이 풀린다.
+        그 처리가 끝난 뒤에 움직여야 실제로 내려간다.
+      */
+      requestAnimationFrame(() => {
+        document.querySelector("#practice")
+          .scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+      });
+    });
+  });
 }
 
 
@@ -1101,7 +1257,7 @@ if (KAKAO_URL) {
 
   /* ----- 큰 버튼 줄 -----
      맨 뒤가 아니라 첫 버튼 바로 뒤에 넣는다.
-     줄 끝에는 "업무분야 보기" 같은 둘러보기 버튼이 오는데,
+     줄 끝에는 "전담센터 보기" 같은 둘러보기 버튼이 오는데,
      그 뒤에 노란 버튼을 두면 순서가 어색해진다. */
   document.querySelectorAll(".topic-acts, .topic-cta-act, .hero-acts, .done-back")
     .forEach((row) => {

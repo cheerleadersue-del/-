@@ -2,7 +2,7 @@
    법무법인 유일 — style.css
 
    01 토큰      02 기본     03 공통    04 헤더     05 히어로
-   06 질문      07 업무분야  08 변호인단 09 원칙     10 상담
+   06 질문      07 전담센터  08 변호인단 09 원칙     10 상담
    11 푸터      12 모바일 바 13 반응형  14 모션 최소화
 ===================================================================== */
 
@@ -563,6 +563,78 @@ body.no-scroll .head .burger i { background: var(--ink); }
   width: 100%;
 }
 
+/*
+  전담센터 — 커서를 올리면 바로 아래로 여섯 센터가 펼쳐진다.
+  메뉴는 main.js 가 practices 를 보고 만든다.
+*/
+.nav-drop {
+  position: relative;
+}
+
+/*
+  머리말 아래 8px 은 비워 두되, 그 빈 자리도 메뉴의 몸에 포함시킨다(padding).
+  띄우기만 하면 커서가 그 틈을 지나는 사이 메뉴가 닫힌다.
+*/
+.nav-menu {
+  position: absolute;
+  top: 100%;
+  left: -18px;
+  z-index: 5;
+  visibility: hidden;
+  min-width: 208px;
+  padding-top: 14px;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.28s var(--ease), transform 0.28s var(--ease),
+              visibility 0s linear 0.28s;
+}
+
+.nav-drop.is-open .nav-menu {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.nav-menu a {
+  display: block;
+  padding: 11px 18px;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-bottom: 0;
+  font-size: 14.5px;
+  white-space: nowrap;
+}
+
+.nav-menu a:first-child {
+  padding-top: 14px;
+}
+
+.nav-menu a:last-child {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+/* 밑줄 표시는 최상단 줄에만 둔다. 목록 안에서는 바탕색으로 알린다. */
+.nav-menu a::after {
+  display: none;
+}
+
+/*
+  헤더가 밝든 어둡든 메뉴 자체는 밝은 종이색이므로
+  글자색은 늘 어둡게 고정한다.
+*/
+.head .nav-menu a,
+.head.is-stuck .nav-menu a {
+  color: var(--ink-soft);
+}
+
+.head .nav-menu a:hover,
+.head.is-stuck .nav-menu a:hover {
+  background: var(--cream);
+  color: var(--ink);
+}
+
 .head-call {
   text-align: right;
   line-height: 1.35;
@@ -648,6 +720,29 @@ body.no-scroll .head .burger i { background: var(--ink); }
   font-size: 25px;
   font-weight: 300;
   letter-spacing: -0.035em;
+}
+
+/*
+  서랍 메뉴의 전담센터 아래에 여섯 센터를 작은 알약으로 편다.
+  윗줄과 같은 크기로 두면 서랍이 화면보다 길어진다.
+*/
+.drawer-sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -2px 0 8px;
+  padding-left: 30px;
+}
+
+.drawer-nav .drawer-sub a {
+  padding: 7px 13px;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .drawer-nav em {
@@ -1133,7 +1228,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 
 /* =====================================================================
-   07. 업무분야
+   07. 전담센터
 ===================================================================== */
 
 .panels {
@@ -1230,6 +1325,36 @@ body.no-scroll .head .burger i { background: var(--ink); }
 */
 .panel:not(.is-open) .panel-name {
   font-size: 22px;
+}
+
+/*
+  센터가 여섯으로 늘면서 닫힌 칸이 170px 에서 146px 로 좁아졌다.
+  좌우 여백과 영문 자간을 조금 줄여야 REHABILITATION 이 잘리지 않는다.
+*/
+.panel:not(.is-open) .panel-body {
+  right: 18px;
+  left: 18px;
+}
+
+.panel:not(.is-open) .panel-en {
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+}
+
+/*
+  이름이 아주 긴 센터만 닫힌 칸에서 짧은 이름을 쓴다(nameShort).
+  없는 센터는 그대로 한 가지 이름만 나온다.
+*/
+.panel-name-short {
+  display: none;
+}
+
+.panel:not(.is-open) .panel-name-short {
+  display: block;
+}
+
+.panel:not(.is-open) .panel-name-full {
+  display: none;
 }
 
 /* 펼쳐진 칸에서만 설명이 보인다 */
@@ -3078,7 +3203,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
     margin-left: 66px;
   }
 
-  /* 업무분야 — 가로 아코디언을 세로로 쌓는다 */
+  /* 전담센터 — 가로 아코디언을 세로로 쌓는다 */
   .panels {
     flex-direction: column;
     height: auto;
@@ -3093,6 +3218,26 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
   .panel.is-open {
     height: 330px;
+  }
+
+  /* 세로로 쌓으면 닫힌 칸도 화면 너비를 다 쓴다. 여백을 되돌린다. */
+  .panel:not(.is-open) .panel-body {
+    right: 26px;
+    left: 26px;
+  }
+
+  .panel:not(.is-open) .panel-en {
+    font-size: 10.5px;
+    letter-spacing: 0.3em;
+  }
+
+  /* 너비가 넉넉하므로 긴 이름도 그대로 한 줄에 들어간다 */
+  .panel:not(.is-open) .panel-name-full {
+    display: block;
+  }
+
+  .panel:not(.is-open) .panel-name-short {
+    display: none;
   }
 
   .roster {
