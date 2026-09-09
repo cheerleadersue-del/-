@@ -271,7 +271,8 @@ const practices = [
       /* moadg.com — 법인 · 부동산 등기 사이트로 나간다 */
       { name: "법인/부동산 등기", href: "https://moadg.com/" },
       { name: "계약검토",        href: "notary-review.html" },
-      { name: "내용증명",        href: "notary-content.html" }
+      { name: "내용증명",        href: "notary-content.html" },
+      { name: "임차권등기명령",   href: "notary-lease.html" }
     ]
   }
 ];
@@ -487,7 +488,8 @@ function centerHref(p) {
 
   const menu = el("div", "nav-menu");
   menu.append(...practices.map((p) => {
-    const a = el("a", null, p.name + " 센터");
+    /* 이름이 긴 센터는 메뉴에서도 짧은 쪽을 쓴다 */
+    const a = el("a", null, (p.nameShort || p.name) + " 센터");
     a.href = centerHref(p);
     return a;
   }));

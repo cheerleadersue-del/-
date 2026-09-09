@@ -3447,6 +3447,15 @@ body.no-scroll .head .burger i { background: var(--ink); }
     object-position: 72% 50%;
   }
 
+  /*
+    임차권등기명령 — 열쇠를 든 사람과 이삿짐 상자가 오른쪽에 있다.
+    좁은 화면은 가로폭의 절반쯤만 보이므로 그쪽으로 당긴다.
+    왼쪽에는 빈 방이 남아 글자가 얹힐 자리가 된다.
+  */
+  .topic-hero-bg[data-topic="lease"] {
+    object-position: 66% 50%;
+  }
+
   .topic-acts .btn {
     flex: 1 1 auto;
     justify-content: center;
