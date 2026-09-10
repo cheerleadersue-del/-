@@ -17,7 +17,7 @@ window.PAGE_DATA = {
   // 특정 변호사만 세우고 싶으시면 아래 줄 맨 앞의 // 두 글자를 지우고
   // 이름을 고치십시오. 그러면 그분들만 나옵니다.
   //
-  // attorneyNames: ["정호길", "심상한"],
+  // attorneyNames: ["정호길"],
 
   questions: [
     {

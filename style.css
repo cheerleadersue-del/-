@@ -1522,10 +1522,25 @@ body.no-scroll .head .burger i { background: var(--ink); }
    08. 변호인단
 ===================================================================== */
 
+/*
+  변호인단 — 두 칸씩 세우고, 사진 옆에 이름과 경력을 나란히 둔다.
+
+  전에는 세 칸이었다. 네 분을 세 칸에 넣으면 둘째 줄에 한 분만 남아
+  두 칸이 비고, 그 구멍이 인원이 적어 보이는 원인이 된다.
+  두 칸으로 두면 빈 자리가 없고, 한 분에게 주어지는 가로 폭이 넓어져
+  수가 적어도 각자가 또렷하게 보인다.
+*/
 .roster {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(34px, 4vw, 62px) clamp(24px, 3vw, 44px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(40px, 4.4vw, 64px) clamp(30px, 3.4vw, 56px);
+}
+
+.member {
+  display: grid;
+  grid-template-columns: 42% minmax(0, 1fr);
+  gap: clamp(20px, 2vw, 32px);
+  align-items: start;
 }
 
 .member-figure {
@@ -1537,10 +1552,15 @@ body.no-scroll .head .burger i { background: var(--ink); }
   height: auto 가 없으면 img 의 height 속성이 아래 aspect-ratio 를 눌러
   사진이 세로로 늘어난다. 속성은 로딩 중 자리만 잡는 용도로 둔다.
 */
+/*
+  사진 옆에 글이 나란히 놓이므로 두 기둥의 키를 맞춘다.
+  3 / 3.7 로 두면 사진이 글보다 44px 더 길어져 오른쪽 아래가 빈다.
+  3 / 3.2 가 지금 경력 줄 수(세 줄 + 더 보기)와 거의 맞아떨어진다.
+*/
 .member-photo {
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 3.7;
+  aspect-ratio: 3 / 3.2;
   object-fit: cover;
   object-position: center 12%;
   transition: transform 0.9s var(--ease);
@@ -1551,12 +1571,12 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 .member-body {
-  padding-top: 22px;
+  padding-top: 3px;
 }
 
 .member-name {
   font-family: var(--font-serif);
-  font-size: 23px;
+  font-size: 26px;
   font-weight: 400;
   letter-spacing: -0.035em;
 }
@@ -3164,6 +3184,23 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 
 @media (max-width: 900px) {
+  /*
+    두 칸으로는 사진과 글이 서로 밀어 둘 다 좁아진다.
+    한 칸으로 내려 한 분이 가로 한 줄을 쓰게 한다.
+
+    이때 사진을 비율(%)로 두면 카드가 넓어진 만큼 사진만 길어지고,
+    글 기둥은 화면 끝까지 늘어나 경력 위의 가로선만 휑하게 남는다.
+    그래서 사진은 240px, 글은 520px 로 둘 다 묶는다.
+  */
+  .roster {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .member {
+    grid-template-columns: minmax(0, 240px) minmax(0, 520px);
+  }
+
   :root {
     --head-h: 68px;
   }
@@ -3245,10 +3282,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
   .panel:not(.is-open) .panel-name-short {
     display: none;
-  }
-
-  .roster {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   /* 세부 분야 페이지 */
