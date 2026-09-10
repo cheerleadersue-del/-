@@ -3468,6 +3468,69 @@ body.no-scroll .head .burger i { background: var(--ink); }
     gap: 12px;
   }
 
+  /*
+    두 가지를 나란히 놓고 견주는 표(주택 · 상가).
+
+    보통 표는 좁은 화면에서 옆으로 밀어 보게 되어 있다. 그런데 이 표는
+    오른쪽 칸이 본론이라, 미는 줄 모르는 분께는 절반이 없는 셈이 된다.
+    그래서 이 표만 한 줄씩 세로로 풀어 두 칸을 다 보이게 한다.
+    칸 이름은 td 의 data-head 에서 가져온다.
+  */
+  .ptable-compare {
+    min-width: 0;
+  }
+
+  .ptable-compare thead {
+    display: none;
+  }
+
+  .ptable-compare,
+  .ptable-compare tbody,
+  .ptable-compare tbody tr,
+  .ptable-compare tbody th,
+  .ptable-compare tbody td {
+    display: block;
+  }
+
+  .ptable-compare tbody tr {
+    padding: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .ptable-compare tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .ptable-compare tbody th {
+    padding: 0 0 12px;
+    border-bottom: 0;
+    font-size: 18px;
+  }
+
+  /* 줄바꿈은 넓은 표에서 칸을 맞추려고 넣은 것이라 여기서는 지운다 */
+  .ptable-compare tbody th br {
+    display: none;
+  }
+
+  .ptable-compare tbody td {
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .ptable-compare tbody td + td {
+    margin-top: 14px;
+  }
+
+  .ptable-compare tbody td::before {
+    content: attr(data-head);
+    display: block;
+    margin-bottom: 4px;
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+  }
+
   .flow-list {
     grid-template-columns: 1fr;
   }
