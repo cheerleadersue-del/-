@@ -1348,22 +1348,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   letter-spacing: 0.16em;
 }
 
-/*
-  이름이 아주 긴 센터만 닫힌 칸에서 짧은 이름을 쓴다(nameShort).
-  없는 센터는 그대로 한 가지 이름만 나온다.
-*/
-.panel-name-short {
-  display: none;
-}
-
-.panel:not(.is-open) .panel-name-short {
-  display: block;
-}
-
-.panel:not(.is-open) .panel-name-full {
-  display: none;
-}
-
 /* 펼쳐진 칸에서만 설명이 보인다 */
 /*
   칸 전체를 덮는 펼치기 버튼.
@@ -3273,15 +3257,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   .panel:not(.is-open) .panel-en {
     font-size: 10.5px;
     letter-spacing: 0.3em;
-  }
-
-  /* 너비가 넉넉하므로 긴 이름도 그대로 한 줄에 들어간다 */
-  .panel:not(.is-open) .panel-name-full {
-    display: block;
-  }
-
-  .panel:not(.is-open) .panel-name-short {
-    display: none;
   }
 
   /* 세부 분야 페이지 */

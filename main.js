@@ -255,9 +255,12 @@ const practices = [
     ]
   },
   {
-    name: "공증 · 법인/부동산 등기",
-    /* 닫힌 칸은 좁아 긴 이름이 네 줄로 쪼개진다. 그 자리에는 이것을 쓴다 */
-    nameShort: "공증 · 등기",
+    /*
+      법인 · 부동산 등기까지 맡지만 이름은 "공증 · 등기" 로 줄여 부른다.
+      칸 안에 그대로 쓰면 네 줄로 쪼개지고, 무엇을 하는지는
+      아래 세부 분야 알약에 이미 적혀 있다.
+    */
+    name: "공증 · 등기",
     slug: "notary",
     en: "NOTARY & REGISTRATION",
     /* 담당 변호사 미정. credit 을 비워두면 그 줄은 아예 나오지 않는다. */
@@ -460,7 +463,7 @@ function centerHref(p) {
   const menu = el("div", "nav-menu");
   menu.append(...practices.map((p) => {
     /* 이름이 긴 센터는 메뉴에서도 짧은 쪽을 쓴다 */
-    const a = el("a", null, (p.nameShort || p.name) + " 센터");
+    const a = el("a", null, p.name + " 센터");
     a.href = centerHref(p);
     return a;
   }));
@@ -514,8 +517,7 @@ function centerHref(p) {
 
   const list = el("span", "drawer-sub");
   list.append(...practices.map((p) => {
-    /* 좁은 화면이라 이름이 긴 센터는 짧은 쪽을 쓴다 */
-    const a = el("a", null, p.nameShort || p.name);
+    const a = el("a", null, p.name);
     a.href = centerHref(p);
     return a;
   }));
@@ -546,7 +548,7 @@ if (panels) {
     const btn = el("button", "panel-hit");
     btn.type = "button";
     btn.setAttribute("aria-expanded", i === 0 ? "true" : "false");
-    btn.append(el("span", "sr-only", `${p.name} 분야 자세히 보기`));
+    btn.append(el("span", "sr-only", `${p.name} 센터 자세히 보기`));
 
     const img = el("img", "panel-img");
     img.src = p.image;
@@ -561,9 +563,7 @@ if (panels) {
       btn,
       el("span", "panel-body", `
         <span class="panel-en">${p.en}</span>
-        <span class="panel-name${p.nameShort ? " panel-name-full" : ""}">${p.name}</span>${
-          p.nameShort ? `<span class="panel-name panel-name-short">${p.nameShort}</span>` : ""
-        }
+        <span class="panel-name">${p.name} 센터</span>
         <span class="panel-detail"><span class="panel-detail-in">
           ${p.credit ? `<span class="panel-credit${p.desc ? "" : " panel-credit-solo"}">${p.credit}</span>` : ""}
           ${p.desc ? `<span class="panel-desc">${p.desc}</span>` : ""}
