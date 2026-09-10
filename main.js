@@ -209,7 +209,7 @@ const practices = [
       { name: "중상해사고",      href: "traffic-serious.html" },
       { name: "음주운전",        href: "traffic-dui.html" },
       { name: "스쿨존(민식이법)", href: "traffic-schoolzone.html" },
-      { name: "열두 분야 전체",   href: "traffic.html" }
+      { name: "교통형사 전체",   href: "traffic.html" }
     ]
   },
   {
