@@ -162,6 +162,8 @@ const practices = [
     name: "형사",
     slug: "criminal",
     en: "CRIMINAL",
+    /* 이 센터의 대문 페이지. 최상단 메뉴가 여기로 간다. */
+    page: "criminal.html",
     /* <b class="tint"> 로 감싼 부분만 글자색이 달라진다 */
     credit: "<b class=\"tint\">법조 경력 25년 변호사</b>와 " +
             "<b class=\"tint\">경찰 경력 18년(광역/마약수사대, 성폭력수사대) 형사전담센터장</b>이 " +
@@ -180,7 +182,8 @@ const practices = [
       { name: "성범죄",       href: "criminal-sex.html" },
       { name: "코인 OTC",     href: "criminal-crypto.html" },
       { name: "성병감염",      href: "criminal-std.html" },
-      { name: "학교폭력·교권침해", href: "criminal-school.html" }
+      { name: "학교폭력·교권침해", href: "criminal-school.html" },
+      { name: "형사 센터 전체",    href: "criminal.html" }
     ]
   },
   /*
@@ -445,7 +448,7 @@ if (qList) {
 const centerHome = /(^|\/)(index\.html)?$/.test(location.pathname);
 
 function centerHref(p) {
-  /* 교통형사만 홈페이지 안에 따로 대문 페이지가 있다 */
+  /* 대문 페이지가 있는 센터는 그리로 보낸다(page). 없으면 첫 화면의 칸을 편다. */
   if (p.page) return p.page;
   return (centerHome ? "" : "index.html") + "?center=" + p.slug + "#practice";
 }

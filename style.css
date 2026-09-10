@@ -2719,6 +2719,16 @@ body.no-scroll .head .burger i { background: var(--ink); }
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+/*
+  네 칸으로 두면 영문 이름이 긴 것만 두 줄이 되어, 그 칸의 한글 이름만
+  한 줄 아래로 내려간다. 줄 사이에서 이름의 높이가 어긋나 보인다.
+  영문 자리를 늘 두 줄로 잡아두어 어느 칸이든 같은 자리에서 시작하게 한다.
+*/
+.tile-grid-small .tile-en {
+  min-height: 33px;
+  line-height: 1.5;
+}
+
 .tile a {
   position: relative;
   display: flex;
