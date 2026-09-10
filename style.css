@@ -1554,13 +1554,13 @@ body.no-scroll .head .burger i { background: var(--ink); }
 */
 /*
   사진 옆에 글이 나란히 놓이므로 두 기둥의 키를 맞춘다.
-  3 / 3.7 로 두면 사진이 글보다 44px 더 길어져 오른쪽 아래가 빈다.
-  3 / 3.2 가 지금 경력 줄 수(세 줄 + 더 보기)와 거의 맞아떨어진다.
+  지금은 경력을 다섯 줄까지 펴 두었고, 3 / 4 가 그 높이와 맞아떨어진다.
+  경력 줄 수를 바꾸시면(main.js 의 OPEN_COUNT) 이 값도 함께 손보셔야 한다.
 */
 .member-photo {
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 3.2;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: center 12%;
   transition: transform 0.9s var(--ease);
@@ -3158,6 +3158,23 @@ body.no-scroll .head .burger i { background: var(--ink); }
 ===================================================================== */
 
 @media (max-width: 1080px) {
+  /*
+    두 칸으로는 사진과 글이 서로 밀어 둘 다 좁아진다.
+    한 칸으로 내려 한 분이 가로 한 줄을 쓰게 한다.
+
+    이때 사진을 비율(%)로 두면 카드가 넓어진 만큼 사진만 길어지고,
+    글 기둥은 화면 끝까지 늘어나 경력 위의 가로선만 휑하게 남는다.
+    그래서 사진은 240px, 글은 520px 로 둘 다 묶는다.
+  */
+  .roster {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .member {
+    grid-template-columns: minmax(0, 240px) minmax(0, 520px);
+  }
+
 
   /* 분야 배너 — 세 칸이 좁아져 글자가 끊긴다 */
   .tile-grid,
@@ -3184,23 +3201,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 
 @media (max-width: 900px) {
-  /*
-    두 칸으로는 사진과 글이 서로 밀어 둘 다 좁아진다.
-    한 칸으로 내려 한 분이 가로 한 줄을 쓰게 한다.
-
-    이때 사진을 비율(%)로 두면 카드가 넓어진 만큼 사진만 길어지고,
-    글 기둥은 화면 끝까지 늘어나 경력 위의 가로선만 휑하게 남는다.
-    그래서 사진은 240px, 글은 520px 로 둘 다 묶는다.
-  */
-  .roster {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .member {
-    grid-template-columns: minmax(0, 240px) minmax(0, 520px);
-  }
-
   :root {
     --head-h: 68px;
   }

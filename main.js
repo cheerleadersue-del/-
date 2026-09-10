@@ -689,10 +689,13 @@ if (roster) {
     figure.append(img);
 
     /*
-      경력이 길면 카드 높이가 제각각이 되어 여섯 분을 견주기 어렵다.
-      앞의 세 줄만 항상 보여주고 나머지는 접어 둔다.
+      경력이 길면 카드 높이가 제각각이 되어 서로 견주기 어렵다.
+      앞의 다섯 줄만 항상 보여주고 나머지는 접어 둔다.
+
+      전에는 세 줄이었다. 명단이 네 분으로 줄면서 한 분에게 주어지는
+      자리가 넓어졌으므로, 두 줄을 더 펴 각자를 두툼하게 보여준다.
     */
-    const OPEN_COUNT = 3;
+    const OPEN_COUNT = 5;
     const shown = person.career.slice(0, OPEN_COUNT);
     const hidden = person.career.slice(OPEN_COUNT);
 
