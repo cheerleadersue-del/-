@@ -216,6 +216,7 @@ const practices = [
     name: "민사",
     slug: "civil",
     en: "CIVIL",
+    page: "civil.html",
     credit: "정주현 변호사(부동산) · 김제도 변호사(의료사고)",
     image: "assets/center-civil.webp",
     desc: "다투기 전에 회수 가능성을 먼저 봅니다. " +
@@ -226,13 +227,15 @@ const practices = [
       { name: "대여금",   href: "civil-loan.html" },
       { name: "계약분쟁", href: "civil-contract.html" },
       { name: "전세사기", href: "civil-jeonse.html" },
-      { name: "손해배상", href: "civil-damages.html" }
+      { name: "손해배상", href: "civil-damages.html" },
+      { name: "민사 센터 전체", href: "civil.html" }
     ]
   },
   {
     name: "가사",
     slug: "family",
     en: "FAMILY",
+    page: "family.html",
     image: "assets/center-family.webp",
     desc: "재산과 양육은 감정과 분리해 다룹니다. " +
           "합의로 끝낼 수 있는 부분과 아닌 부분을 나눕니다.",
@@ -240,13 +243,15 @@ const practices = [
       { name: "이혼",     href: "family-divorce.html" },
       { name: "재산분할", href: "family-property.html" },
       { name: "양육권",   href: "family-custody.html" },
-      { name: "상속",     href: "family-inheritance.html" }
+      { name: "상속",     href: "family-inheritance.html" },
+      { name: "가사 센터 전체", href: "family.html" }
     ]
   },
   {
     name: "회생",
     slug: "rehab",
     en: "REHABILITATION",
+    page: "rehab.html",
     image: "assets/center-recovery.webp",
     desc: "폐업과 회생 사이에서 남길 것을 정합니다. " +
           "채권자 구성과 현금 흐름을 먼저 확인합니다.",
@@ -254,7 +259,8 @@ const practices = [
       { name: "법인회생",    href: "rehab-corporate.html" },
       { name: "개인회생",    href: "rehab-personal.html" },
       { name: "파산",        href: "rehab-bankruptcy.html" },
-      { name: "복권 · 면책", href: "rehab-discharge.html" }
+      { name: "복권 · 면책", href: "rehab-discharge.html" },
+      { name: "회생 센터 전체", href: "rehab.html" }
     ]
   },
   {
@@ -266,17 +272,19 @@ const practices = [
     name: "공증 · 등기",
     slug: "notary",
     en: "NOTARY & REGISTRATION",
+    page: "notary.html",
     /* 담당 변호사 미정. credit 을 비워두면 그 줄은 아예 나오지 않는다. */
     image: "assets/center-notary.webp",
     desc: "분쟁이 생기기 전에 문서로 정리합니다. " +
           "나중에 다투는 비용보다 지금 확인하는 비용이 적습니다.",
     tags: [
-      { name: "공증",           href: "notary.html" },
+      { name: "공증",           href: "notary-deed.html" },
       /* moadg.com — 법인 · 부동산 등기 사이트로 나간다 */
       { name: "법인/부동산 등기", href: "https://moadg.com/" },
       { name: "계약검토",        href: "notary-review.html" },
       { name: "내용증명",        href: "notary-content.html" },
-      { name: "임차권등기명령",   href: "notary-lease.html" }
+      { name: "임차권등기명령",   href: "notary-lease.html" },
+      { name: "공증 · 등기 센터 전체", href: "notary.html" }
     ]
   }
 ];
@@ -448,7 +456,11 @@ if (qList) {
 const centerHome = /(^|\/)(index\.html)?$/.test(location.pathname);
 
 function centerHref(p) {
-  /* 대문 페이지가 있는 센터는 그리로 보낸다(page). 없으면 첫 화면의 칸을 편다. */
+  /*
+    여섯 센터 모두 대문 페이지가 있다.
+    새 센터를 만드셨는데 아직 대문이 없다면 page 를 비워두시면 되고,
+    그때는 첫 화면의 그 칸이 펼쳐진 채로 열린다.
+  */
   if (p.page) return p.page;
   return (centerHome ? "" : "index.html") + "?center=" + p.slug + "#practice";
 }
