@@ -195,8 +195,11 @@ const practices = [
     name: "교통형사",
     slug: "traffic",
     en: "TRAFFIC CRIMINAL",
-    /* 이 센터만 홈페이지 안에 따로 대문 페이지가 있다 */
-    page: "traffic.html",
+    /*
+      교통형사는 예전부터 쓰던 바깥 사이트(교통형사전문로펌.com)가 대문이다.
+      홈페이지 안에 두었던 대문 페이지(traffic.html)는 지웠다.
+    */
+    page: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/",
     credit: "<b class=\"tint\">정호길 대표변호사</b>가 교통형사 사건을 직접 맡습니다.",
     image: "assets/center-traffic.webp",
     desc: "보험 처리와 형사 절차는 별개로 흘러갑니다. " +
@@ -209,7 +212,7 @@ const practices = [
       { name: "중상해사고",      href: "traffic-serious.html" },
       { name: "음주운전",        href: "traffic-dui.html" },
       { name: "스쿨존(민식이법)", href: "traffic-schoolzone.html" },
-      { name: "교통형사 센터 전체", href: "traffic.html" }
+      { name: "교통형사 센터 전체", href: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/" }
     ]
   },
   {
@@ -455,6 +458,18 @@ if (qList) {
 */
 const centerHome = /(^|\/)(index\.html)?$/.test(location.pathname);
 
+/*
+  바깥 사이트로 나가는 링크는 새 탭에서 연다.
+  보고 있던 페이지를 잃지 않게 하기 위함이고,
+  새 창으로 열린다는 것은 화면 낭독기에만 따로 알린다.
+*/
+function markOutbound(a) {
+  if (!/^https?:/i.test(a.getAttribute("href"))) return;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  a.append(el("span", "sr-only", "(새 창)"));
+}
+
 function centerHref(p) {
   /*
     여섯 센터 모두 대문 페이지가 있다.
@@ -477,9 +492,9 @@ function centerHref(p) {
 
   const menu = el("div", "nav-menu");
   menu.append(...practices.map((p) => {
-    /* 이름이 긴 센터는 메뉴에서도 짧은 쪽을 쓴다 */
     const a = el("a", null, p.name + " 센터");
     a.href = centerHref(p);
+    markOutbound(a);
     return a;
   }));
   wrap.append(menu);
@@ -534,6 +549,7 @@ function centerHref(p) {
   list.append(...practices.map((p) => {
     const a = el("a", null, p.name);
     a.href = centerHref(p);
+    markOutbound(a);
     return a;
   }));
   top.after(list);
