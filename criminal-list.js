@@ -75,7 +75,7 @@ window.CRIMINAL_AREAS = [
    #criminalGrid — 형사 센터 첫 화면의 여덟 칸
    #criminalMore — 세부 페이지 아래의 "다른 분야" (지금 보는 곳은 뺀다)
 
-   교통형사(traffic-list.js)와 같은 모양으로 그린다.
+   다른 센터의 목록 파일과 같은 모양으로 그린다.
 ------------------------------------------------------------------ */
 (function () {
   const here = location.pathname.split("/").pop();

@@ -188,8 +188,7 @@ const practices = [
   },
   /*
     교통형사는 세부 분야가 열두 갈래라 형사에서 떼어 따로 센터를 두었다.
-    태그를 열두 개 다 늘어놓으면 칸이 넘치니 자주 찾는 것만 앞에 두고,
-    나머지는 traffic.html 로 들어가 보시게 했다.
+    그 내용은 예전부터 쓰던 바깥 사이트(교통형사전문로펌.com)에 있다.
   */
   {
     name: "교통형사",
@@ -203,15 +202,15 @@ const practices = [
     credit: "<b class=\"tint\">정호길 대표변호사</b>가 교통형사 사건을 직접 맡습니다.",
     image: "assets/center-traffic.webp",
     desc: "보험 처리와 형사 절차는 별개로 흘러갑니다. " +
-          "합의와 공탁의 시기를 놓치면 되돌리기 어렵습니다.",
+          "합의와 공탁의 시기를 놓치면 되돌리기 어렵습니다. " +
+          "형사합의와 공탁, 12대 중과실, 뺑소니, 사망사고, 음주운전까지 " +
+          "교통형사만 따로 다루는 사이트에서 이어집니다.",
+    /*
+      세부 분야 페이지는 바깥 사이트에 있다.
+      같은 곳으로 가는 알약을 열두 개 늘어놓는 대신 하나만 둔다.
+      무엇을 다루는지는 바로 위 desc 에 적어 두었다.
+    */
     tags: [
-      { name: "형사합의 · 공탁",  href: "traffic-settlement.html" },
-      { name: "12대 중과실",     href: "traffic-negligence.html" },
-      { name: "뺑소니",          href: "traffic-hitrun.html" },
-      { name: "사망사고",        href: "traffic-fatal.html" },
-      { name: "중상해사고",      href: "traffic-serious.html" },
-      { name: "음주운전",        href: "traffic-dui.html" },
-      { name: "스쿨존(민식이법)", href: "traffic-schoolzone.html" },
       { name: "교통형사 센터 전체", href: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/" }
     ]
   },
