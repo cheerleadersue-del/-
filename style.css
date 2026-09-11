@@ -931,6 +931,29 @@ body.no-scroll .head .burger i { background: var(--ink); }
   word-break: keep-all;
 }
 
+/*
+  첫 화면 문구의 두 마디.
+
+  두 마디를 같은 칸(grid-area)에 겹쳐 두면 상자 높이가 둘 중
+  긴 쪽에 맞춰져, 문구가 바뀔 때 아래 버튼이 움찔거리지 않는다.
+  보이지 않는 마디도 글자는 그대로 있어 검색엔진이 둘 다 읽는다.
+*/
+.hero-beats {
+  display: grid;
+}
+
+.hero-beat {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.hero-beat.is-on {
+  opacity: 1;
+  transform: none;
+}
+
 .hero-lead {
   max-width: 34em;
   margin: 26px auto 0;
@@ -3678,6 +3701,11 @@ body.no-scroll .head .burger i { background: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .hero-beat {
+    transform: none;
+    transition: opacity 0.3s linear;
   }
 
   *,

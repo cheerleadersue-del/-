@@ -1261,6 +1261,40 @@ if (KAKAO_URL) {
 
 
 /* =====================================================================
+   첫 화면 문구 — 두 마디를 번갈아 보여준다
+
+   첫째 마디에서 왜 사건을 맡는지를 말하고,
+   둘째 마디에서 어떻게 하는지를 말한다.
+
+   문구 자체는 index.html 의 hero-beat 에 있다. 여기서는 순서만 돌린다.
+   마디를 더 넣으셔도 이 코드는 고치지 않아도 된다.
+
+   ⚠️ 순서를 바꾸고 싶으시면 index.html 에서 두 hero-beat 의 자리를
+      맞바꾸고, is-on 을 맨 앞 것에 붙이시면 된다.
+===================================================================== */
+
+const heroBeats = [...document.querySelectorAll(".hero-beats")];
+
+if (heroBeats.length) {
+  const count = Math.min(...heroBeats.map((g) => g.children.length));
+
+  /*
+    한 마디를 6초씩 보여준다.
+    처음 글자가 떠오르는 데 2.8초쯤 걸리므로 첫 교체는 그 뒤에 온다.
+  */
+  if (count > 1) {
+    let at = 0;
+    setInterval(() => {
+      at = (at + 1) % count;
+      heroBeats.forEach((g) => {
+        [...g.children].forEach((c, i) => c.classList.toggle("is-on", i === at));
+      });
+    }, 6000);
+  }
+}
+
+
+/* =====================================================================
    사진 띠
 
    data-photo="이름" 이 붙은 자리에 assets/이름.jpg 를 찾아 넣는다.
