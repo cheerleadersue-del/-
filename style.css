@@ -3594,24 +3594,34 @@ body.no-scroll .head .burger i { background: var(--ink); }
   }
 
   /*
-    사진과 이름을 위에 나란히, 경력은 아래 칸에서 가로 폭을 다 쓴다.
-    셋을 한 줄에 넣으면 경력 글줄이 12자마다 끊겨 읽기 어렵다.
+    사진을 카드 가로 한 줄로 올리고, 이름·분야·경력을 그 아래로 쌓는다.
 
-    사진 기둥은 48%. 옆에는 이름과 분야 두 줄만 놓이므로
-    사진을 키워도 글이 밀리지 않는다.
+    전에는 사진 옆에 이름을 나란히 두었다. 그 자리에서는 사진을 키울수록
+    이름 칸이 좁아져 "정호길 대표변호사" 가 두 줄로 접히고,
+    이름 아래로는 쓰지 못하는 흰 자리가 길게 남았다.
+    한 줄로 올리면 사진이 카드 폭을 다 쓰고 이름도 온전한 폭을 되찾는다.
   */
   .member {
     display: grid;
-    grid-template-columns: 48% minmax(0, 1fr);
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "photo head"
-      "career career"
-      "more   more"
-      "btn    btn";
+      "photo"
+      "head"
+      "career"
+      "more"
+      "btn";
     gap: 16px;
     align-items: start;
     padding: 14px;
     background: var(--paper-2);
+  }
+
+  /*
+    폰을 가로로 눕힌 600px 언저리에서 사진만 700px 가까이 치솟는 것을 막는다.
+    세워 쥔 화면에서는 걸리지 않는 빗장이다.
+  */
+  .member-figure {
+    max-width: 400px;
   }
 
   /* member-body 가 display: contents 라 자식마다 칸을 지정한다 */
@@ -3629,8 +3639,14 @@ body.no-scroll .head .burger i { background: var(--ink); }
     grid-area: photo;
   }
 
+  /*
+    사진 원본이 1024×1280, 곧 정확히 4 : 5 다.
+    가로 한 줄을 다 쓰는 자리에서는 굳이 자를 까닭이 없으므로
+    원본 비율 그대로 두어 사진사가 잡은 화면을 한 점도 잘라내지 않는다.
+    (두 칸으로 놓이는 큰 화면에서는 옆 글과 키를 맞추느라 5/6 로 자른다.)
+  */
   .member-photo {
-    aspect-ratio: 3 / 3.9;
+    aspect-ratio: 4 / 5;
   }
 
   /* 자식들이 직접 그리드 칸에 놓이도록 껍데기를 비운다 */
