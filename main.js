@@ -1025,9 +1025,23 @@ if (heroSlot && heroBg && wideEnough && !motionOff && !saveData) {
       tryNext(i + 1);          /* mp4 가 없으면 webm 을 찾아본다 */
     });
 
+    /*
+      영상이 준비됐다고 곧바로 덮지 않는다.
+
+      첫 장면은 "로고 → 사진 → 글자" 순으로 열린다(style.css 의 heroBgIn).
+      영상 파일이 가까이 있으면 그 차례가 끝나기도 전에 재생이 시작되어
+      사진이 떠오르는 장면을 잡아먹는다. 그래서 페이지가 열린 뒤
+      아래 시간이 지날 때까지는 기다렸다가 덮는다.
+
+      style.css 의 첫 장면 시간을 고치시면 이 값도 함께 보셔야 한다.
+    */
+    const HERO_VIDEO_HOLD = 3400;
+
     v.addEventListener("playing", () => {
       settled = true;
-      v.classList.add("is-on");
+      /* performance.now() 는 페이지가 열린 때부터 잰 시간이다 */
+      const wait = Math.max(0, HERO_VIDEO_HOLD - performance.now());
+      setTimeout(() => v.classList.add("is-on"), wait);
     }, { once: true });
 
     heroBg.after(v);           /* 사진 바로 위, 그늘막 아래 */

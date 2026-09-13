@@ -800,6 +800,30 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /*
+  첫 장면의 차례.
+
+    1. 어두운 바탕에 Y 로고만 그려진다
+    2. 로고가 다 그려지면 사진이 뒤에서 천천히 떠오른다
+    3. 이름과 글자가 차례로 올라온다
+    4. 영상이 준비되면 사진 위를 덮는다 (main.js 가 때를 맞춘다)
+
+  사진을 처음부터 보여주면 로고가 사진에 묻힌다.
+  로고 혼자 있는 짧은 시간이 무게를 만든다.
+
+  아래 시간을 고치실 때는 main.js 의 HERO_VIDEO_HOLD 도 함께 보십시오.
+  그 값이 이 차례가 끝나기 전에 영상이 끼어드는 것을 막고 있다.
+*/
+.hero-bg {
+  opacity: 0;
+  transform: scale(1.06);
+  animation: heroBgIn 1.9s var(--ease) 1.35s forwards;
+}
+
+@keyframes heroBgIn {
+  to { opacity: 1; transform: none; }
+}
+
+/*
   동영상은 사진 위에 겹쳐 두고, 재생이 시작된 뒤에 서서히 나타난다.
   (main.js 가 .is-on 을 붙여준다)
   느린 통신에서 검은 네모가 잠깐 스치는 것을 막기 위함이다.
@@ -861,8 +885,8 @@ body.no-scroll .head .burger i { background: var(--ink); }
   animation: draw 1.15s var(--ease) forwards;
 }
 
-.hero-logo-a { animation-delay: 0.2s; }
-.hero-logo-b { animation-delay: 0.5s; }
+.hero-logo-a { animation-delay: 0.25s; }
+.hero-logo-b { animation-delay: 0.55s; }
 
 @keyframes draw {
   to { stroke-dashoffset: 0; }
@@ -899,10 +923,11 @@ body.no-scroll .head .burger i { background: var(--ink); }
   animation: heroUp 1s var(--ease) forwards;
 }
 
-.hero-word  { animation-delay: 1.25s; }
-.hero-title { animation-delay: 1.45s; }
-.hero-lead  { animation-delay: 1.65s; }
-.hero-acts  { animation-delay: 1.8s; }
+/* 사진이 떠오르기 시작한(1.35s) 뒤에 이름부터 차례로 얹는다 */
+.hero-word  { animation-delay: 1.75s; }
+.hero-title { animation-delay: 1.95s; }
+.hero-lead  { animation-delay: 2.15s; }
+.hero-acts  { animation-delay: 2.3s; }
 
 @keyframes heroUp {
   to { opacity: 1; transform: none; }
@@ -3759,6 +3784,13 @@ body.no-scroll .head .burger i { background: var(--ink); }
   /* 히어로는 그려지는 과정 없이 완성된 모습으로 둔다 */
   .hero-logo path {
     stroke-dashoffset: 0;
+  }
+
+  /* 사진도 떠오르지 않고 처음부터 제자리에 있다 */
+  .hero-bg {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 
   .hero-word,
