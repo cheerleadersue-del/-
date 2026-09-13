@@ -301,11 +301,11 @@ const attorneys = [
     name: "정호길", role: "대표변호사",
     field: "강력범죄 · 마약 · 교통사고",
     /*
-      lawyer-01.webp 은 전신 컷아웃이라 목록에 넣으면 얼굴이 작아
+      lawyer-01-v2.webp 은 전신 컷아웃이라 목록에 넣으면 얼굴이 작아
       다른 분들과 크기가 안 맞는다. 목록에는 상반신 컷을 쓴다.
       전신 컷은 인사말 섹션에서 그대로 쓴다.
     */
-    image: "assets/lawyer-01-portrait.webp",
+    image: "assets/lawyer-01-portrait-v2.webp",
     career: [
       "법조경력 25년 차",
       "제40회 사법시험 합격 · 사법연수원 30기",
