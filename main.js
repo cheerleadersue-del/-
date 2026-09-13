@@ -941,6 +941,41 @@ if (topicBg) {
 const heroSlot = $(".hero");
 
 /* ---------------------------------------------------------------------
+   ★ 첫 장면이 열리는 때 ★
+
+   첫 장면은 세 걸음으로 열린다.
+
+     1. 어두운 바탕에 Y 로고와 이름만            0 ~ 1.7초
+     2. 그 뒤로 빌딩 사진이 떠오른다             1.7 ~ 3.1초  (글자 없음)
+     3. 영상이 사진을 덮고 "증거주의" 가 올라온다  아래 값부터
+
+   아래 숫자를 줄이면 전체가 빨라지고, 늘리면 사진을 오래 보여준다.
+   1·2번의 시간은 style.css 의 hero-logo / heroBgIn 에 있다.
+--------------------------------------------------------------------- */
+const HERO_REVEAL = 4200;
+
+/*
+  때가 되면 .hero 에 is-ready 를 붙인다. 제목 · 설명 · 상담 버튼이
+  이 표를 보고 올라온다(style.css).
+
+  영상이 있든 없든, 자동재생이 막히든 말든 반드시 붙인다.
+  이것을 영상에 매어두면 영상이 안 뜨는 기기에서 제목도 상담 버튼도
+  영영 나오지 않는다. 움직임을 줄이도록 설정하신 분에게는 기다리지 않는다.
+*/
+if (heroSlot) {
+  const noMotion =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (noMotion) {
+    heroSlot.classList.add("is-ready");
+  } else {
+    setTimeout(() => heroSlot.classList.add("is-ready"),
+               Math.max(0, HERO_REVEAL - performance.now()));
+  }
+}
+
+/* ---------------------------------------------------------------------
    ★ 첫 화면 동영상 파일 ★
 
    올리기만 하면 자동으로 재생됩니다. 코드는 손대지 않으셔도 됩니다.
@@ -1025,22 +1060,10 @@ if (heroSlot && heroBg && wideEnough && !motionOff && !saveData) {
       tryNext(i + 1);          /* mp4 가 없으면 webm 을 찾아본다 */
     });
 
-    /*
-      영상이 준비됐다고 곧바로 덮지 않는다.
-
-      첫 장면은 "로고 → 사진 → 글자" 순으로 열린다(style.css 의 heroBgIn).
-      영상 파일이 가까이 있으면 그 차례가 끝나기도 전에 재생이 시작되어
-      사진이 떠오르는 장면을 잡아먹는다. 그래서 페이지가 열린 뒤
-      아래 시간이 지날 때까지는 기다렸다가 덮는다.
-
-      style.css 의 첫 장면 시간을 고치시면 이 값도 함께 보셔야 한다.
-    */
-    const HERO_VIDEO_HOLD = 3400;
-
     v.addEventListener("playing", () => {
       settled = true;
       /* performance.now() 는 페이지가 열린 때부터 잰 시간이다 */
-      const wait = Math.max(0, HERO_VIDEO_HOLD - performance.now());
+      const wait = Math.max(0, HERO_REVEAL - performance.now());
       setTimeout(() => v.classList.add("is-on"), wait);
     }, { once: true });
 
