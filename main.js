@@ -168,7 +168,7 @@ const practices = [
     credit: "<b class=\"tint\">법조 경력 25년 변호사</b>와 " +
             "<b class=\"tint\">경찰 경력 18년(광역/마약수사대, 성폭력수사대) 형사전담센터장</b>이 " +
             "사건을 함께 검토합니다.",
-    image: "assets/center-criminal-v2.webp",
+    image: "assets/center-criminal.webp",
     /* desc 를 비워두면 그 줄은 아예 나오지 않는다 */
     /*
       태그에 href 를 넣으면 링크가 되고, 없으면 그냥 글자로 나온다.
@@ -220,7 +220,7 @@ const practices = [
     en: "CIVIL",
     page: "civil.html",
     credit: "정주현 변호사(부동산) · 김제도 변호사(의료사고)",
-    image: "assets/center-civil-v2.webp",
+    image: "assets/center-civil.webp",
     desc: "다투기 전에 회수 가능성을 먼저 봅니다. " +
           "이길 수 있는지와 받을 수 있는지는 다른 문제입니다.",
     tags: [
@@ -254,7 +254,7 @@ const practices = [
     slug: "rehab",
     en: "REHABILITATION",
     page: "rehab.html",
-    image: "assets/center-recovery-v2.webp",
+    image: "assets/center-recovery.webp",
     desc: "폐업과 회생 사이에서 남길 것을 정합니다. " +
           "채권자 구성과 현금 흐름을 먼저 확인합니다.",
     tags: [
@@ -319,7 +319,7 @@ const attorneys = [
     name: "양진희", role: "변호사",
     field: "강력범죄 · 성범죄",
     /* 사진을 올리기 전까지는 자리표시자가 대신 보인다. */
-    image: "assets/lawyer-06-v2.webp",
+    image: "assets/lawyer-06.webp",
     career: [
       "제11회 변호사시험 합격",
       "제주대학교 법학전문대학원 11기",
@@ -345,7 +345,7 @@ const attorneys = [
   {
     name: "정주현", role: "변호사",
     field: "부동산 소송 · 민사 · 형사",
-    image: "assets/lawyer-03-v2.webp",
+    image: "assets/lawyer-03.webp",
     career: [
       "1998년 사법시험 합격 · 사법연수원 30기",
       "고려대학교 법학과",
@@ -359,7 +359,7 @@ const attorneys = [
   {
     name: "김제도", role: "변호사",
     field: "의료사고 · 형사 · 민사",
-    image: "assets/lawyer-04-v2.webp",
+    image: "assets/lawyer-04.webp",
     /*
       수행 사건은 '결과' 가 아니라 '어떤 사건을 다뤘는가' 로 적는다.
       무죄·승소 같은 결과 표현은 광고규정 검토가 필요해 넣지 않는다.
