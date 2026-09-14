@@ -3188,6 +3188,23 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /*
+  전화 창구가 둘인 페이지(공증 · 등기 센터)의 단추.
+  수화기 그림을 빼고 그 자리에 낱말을 박는다.
+  같은 그림 둘이 나란히 서면 손가락으로 쓰는 기기에서 — 이름표가
+  안 나오는 기기에서 — 어느 쪽이 무엇인지 알 길이 없기 때문이다.
+*/
+.rail-btn-named::before {
+  display: none;
+}
+
+.rail-tag {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+/*
   이름표. 평소에는 숨어 있다가 손을 올리면 왼쪽으로 나온다.
   손가락으로 쓰는 기기에는 hover 가 없으므로 아예 두지 않는다.
 */

@@ -356,7 +356,14 @@
 
 
 <div class="bar">
-  <a class="bar-call" href="tel:02-567-4377">상담</a>
+  <!--
+    이 센터만 전화 창구가 둘이다. bar-call 을 둘 두면
+    오른쪽 아래 동그란 단추도 둘로 늘어난다(main.js 가 이 줄을 읽는다).
+    그때는 수화기 그림 대신 "공증" · "등기" 글자가 단추에 박힌다.
+    같은 수화기 그림 두 개면 손가락으로 쓰는 기기에서 구별할 길이 없다.
+  -->
+  <a class="bar-call" href="tel:02-567-4377">공증 상담</a>
+  <a class="bar-call" href="tel:02-522-2006">등기 상담</a>
   <a class="bar-form" href="index.html#contact">상담 신청</a>
 </div>
 

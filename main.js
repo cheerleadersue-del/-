@@ -1403,18 +1403,24 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
   const bar = $(".bar");
   if (!bar) return;
 
-  const src = {
-    tel: $(".bar-call", bar),
-    form: $(".bar-form", bar)
-  };
-  if (!src.tel || !src.form) return;
+  const tels = [...bar.querySelectorAll(".bar-call")];
+  const src = { form: $(".bar-form", bar) };
+  if (!tels.length || !src.form) return;
 
   const rail = el("aside", "rail");
   rail.setAttribute("aria-label", "빠른 상담");
 
-  const tile = (cls, href, label, out) => {
+  const tile = (cls, href, label, out, tag) => {
     const a = el("a", "rail-btn " + cls);
     a.href = href;
+    /*
+      tag 가 있으면 수화기 그림 대신 그 글자를 단추에 박는다.
+      전화 창구가 둘 이상인 페이지에서만 쓴다.
+    */
+    if (tag) {
+      a.classList.add("rail-btn-named");
+      a.append(el("b", "rail-tag", tag));
+    }
     /*
       이름을 aria-label 로도 박아 둔다.
       안쪽 이름표는 손가락으로 쓰는 기기에서 숨는데(hover 가 없다),
@@ -1430,11 +1436,27 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
   };
 
   /*
-    전화 — 번호는 그 페이지의 것을 그대로 쓰되 이름은 "전화상담" 으로 고정한다.
+    전화 — 번호는 그 페이지의 것을 그대로 쓴다.
+
+    창구가 하나인 페이지(거의 전부)는 이름을 "전화상담" 으로 고정한다.
     아래 막대의 이름("상담")을 그대로 가져오면
-    바로 밑의 "상담신청" 과 헷갈린다.
+    바로 밑의 "상담신청" 과 헷갈리기 때문이다.
+
+    창구가 둘 이상인 페이지(공증 · 등기 센터)는 이름을 고정할 수 없다.
+    같은 수화기 그림이 둘 나란히 서면 어느 쪽이 무엇인지 알 길이 없다.
+    그래서 막대에 적힌 이름("공증 상담")을 그대로 이름표로 쓰고,
+    앞 낱말("공증")을 그림 대신 단추에 박는다.
   */
-  rail.append(tile("rail-tel", src.tel.getAttribute("href"), "전화상담"));
+  const many = tels.length > 1;
+
+  tels.forEach((t) => {
+    const name = t.textContent.trim();          /* 예: "공증 상담" */
+    const short = name.split(/\s+/)[0];          /* 예: "공증" */
+    rail.append(tile("rail-tel", t.getAttribute("href"),
+                     many ? name : "전화상담",
+                     false,
+                     many ? short : null));
+  });
 
   /* 카톡 — 주소가 채워져 있을 때만 */
   if (KAKAO_URL) {
