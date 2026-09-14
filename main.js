@@ -1299,14 +1299,20 @@ if (KAKAO_URL) {
   };
 
   /* ----- 큰 버튼 줄 -----
-     맨 뒤가 아니라 첫 버튼 바로 뒤에 넣는다.
+     맨 뒤가 아니라 전화 버튼 바로 뒤에 넣는다.
      줄 끝에는 "전담센터 보기" 같은 둘러보기 버튼이 오는데,
-     그 뒤에 노란 버튼을 두면 순서가 어색해진다. */
+     그 뒤에 노란 버튼을 두면 순서가 어색해진다.
+
+     전화 버튼이 둘인 줄도 있다(공증 · 등기 센터). 그때는 마지막
+     전화 버튼 뒤에 넣어야 두 번호가 붙어 있는다. 첫 버튼 뒤에 넣으면
+     노란 버튼이 두 번호 사이를 갈라놓는다. */
   document.querySelectorAll(".topic-acts, .topic-cta-act, .hero-acts, .done-back")
     .forEach((row) => {
       const kakao = kakaoLink("btn btn-kakao", "카톡 상담", true);
-      const first = row.firstElementChild;
-      if (first) first.after(kakao);
+      const tels = [...row.children]
+        .filter((c) => (c.getAttribute("href") || "").startsWith("tel:"));
+      const anchor = tels.length ? tels[tels.length - 1] : row.firstElementChild;
+      if (anchor) anchor.after(kakao);
       else row.append(kakao);
     });
 }
