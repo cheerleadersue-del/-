@@ -338,7 +338,7 @@ const attorneys = [
   },
   {
     name: "정주현", role: "변호사",
-    field: "부동산 소송 · 민사 · 형사",
+    field: "부동산 · 민사 · 형사",
     image: "assets/lawyer-03.webp",
     career: [
       "1998년 사법시험 합격 · 사법연수원 30기",
