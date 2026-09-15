@@ -1548,6 +1548,11 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /* 분야마다 "왜 우리가 맡는가" 를 검증 가능한 경력 한 줄로 */
+/* 한 덩어리로 묶어 줄을 넘기지 않는다 (담당자 이름 등) */
+.nb {
+  white-space: nowrap;
+}
+
 .panel-credit {
   display: block;
   overflow: hidden;
