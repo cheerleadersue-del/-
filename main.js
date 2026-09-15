@@ -158,6 +158,35 @@ const questions = PAGE.questions || [
 ];
 
 const practices = [
+  /*
+    민사 중심으로 잠시 바꾸면서 이 차례가 되었다.
+    맨 앞이 대문에서 가장 먼저 펼쳐지는 센터다.
+
+    교통형사 칸을 통째로 뺐다. 그 칸이 홈페이지에서 바깥 사이트
+    (교통형사전문로펌.com)로 가는 하나뿐인 문이었으므로,
+    지금은 홈페이지 어디에서도 그 사이트로 갈 수 없다.
+    바깥 사이트 자체는 그대로 떠 있다.
+    형사 중심으로 되돌리실 때는 docs/민사중심-되돌리기.md 를 보십시오.
+  */
+  {
+    name: "민사",
+    slug: "civil",
+    en: "CIVIL",
+    page: "civil.html",
+    credit: "정주현 변호사(부동산) · 김제도 변호사(의료사고)",
+    image: "assets/center-civil.webp",
+    desc: "다투기 전에 회수 가능성을 먼저 봅니다. " +
+          "이길 수 있는지와 받을 수 있는지는 다른 문제입니다.",
+    tags: [
+      { name: "부동산",   href: "civil-realestate.html" },
+      { name: "대여금",   href: "civil-loan.html" },
+      { name: "계약분쟁", href: "civil-contract.html" },
+      { name: "전세사기", href: "civil-jeonse.html" },
+      { name: "손해배상", href: "civil-damages.html" },
+      { name: "의료사고", href: "civil-medical.html" },
+      { name: "민사 센터 전체", href: "civil.html" }
+    ]
+  },
   {
     name: "형사",
     slug: "criminal",
@@ -184,53 +213,6 @@ const practices = [
       { name: "성병감염",      href: "criminal-std.html" },
       { name: "학교폭력·교권침해", href: "criminal-school.html" },
       { name: "형사 센터 전체",    href: "criminal.html" }
-    ]
-  },
-  /*
-    교통형사는 세부 분야가 열두 갈래라 형사에서 떼어 따로 센터를 두었다.
-    그 내용은 예전부터 쓰던 바깥 사이트(교통형사전문로펌.com)에 있다.
-  */
-  {
-    name: "교통형사",
-    slug: "traffic",
-    en: "TRAFFIC CRIMINAL",
-    /*
-      교통형사는 예전부터 쓰던 바깥 사이트(교통형사전문로펌.com)가 대문이다.
-      홈페이지 안에 두었던 대문 페이지(traffic.html)는 지웠다.
-    */
-    page: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/",
-    credit: "<b class=\"tint\">정호길 대표변호사</b>가 교통형사 사건을 직접 맡습니다.",
-    image: "assets/center-traffic.webp",
-    desc: "보험 처리와 형사 절차는 별개로 흘러갑니다. " +
-          "합의와 공탁의 시기를 놓치면 되돌리기 어렵습니다. " +
-          "형사합의와 공탁, 12대 중과실, 뺑소니, 사망사고, 음주운전까지 " +
-          "교통형사만 따로 다루는 사이트에서 이어집니다.",
-    /*
-      세부 분야 페이지는 바깥 사이트에 있다.
-      같은 곳으로 가는 알약을 열두 개 늘어놓는 대신 하나만 둔다.
-      무엇을 다루는지는 바로 위 desc 에 적어 두었다.
-    */
-    tags: [
-      { name: "교통형사 센터 전체", href: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/" }
-    ]
-  },
-  {
-    name: "민사",
-    slug: "civil",
-    en: "CIVIL",
-    page: "civil.html",
-    credit: "정주현 변호사(부동산) · 김제도 변호사(의료사고)",
-    image: "assets/center-civil.webp",
-    desc: "다투기 전에 회수 가능성을 먼저 봅니다. " +
-          "이길 수 있는지와 받을 수 있는지는 다른 문제입니다.",
-    tags: [
-      { name: "의료사고", href: "civil-medical.html" },
-      { name: "부동산",   href: "civil-realestate.html" },
-      { name: "대여금",   href: "civil-loan.html" },
-      { name: "계약분쟁", href: "civil-contract.html" },
-      { name: "전세사기", href: "civil-jeonse.html" },
-      { name: "손해배상", href: "civil-damages.html" },
-      { name: "민사 센터 전체", href: "civil.html" }
     ]
   },
   {
@@ -265,7 +247,7 @@ const practices = [
       { name: "회생 센터 전체", href: "rehab.html" }
     ]
   },
-  {
+{
     /*
       법인 · 부동산 등기까지 맡지만 이름은 "공증 · 등기" 로 줄여 부른다.
       칸 안에 그대로 쓰면 네 줄로 쪼개지고, 무엇을 하는지는
@@ -299,7 +281,7 @@ const practices = [
 const attorneys = [
   {
     name: "정호길", role: "대표변호사",
-    field: "강력범죄 · 마약 · 교통사고",
+    field: "일반민사 · 건설 · 부동산 · 형사 · 강력범죄",
     /*
       lawyer-01-v2.webp 은 전신 컷아웃이라 목록에 넣으면 얼굴이 작아
       다른 분들과 크기가 안 맞는다. 목록에는 상반신 컷을 쓴다.
@@ -317,15 +299,12 @@ const attorneys = [
   },
   {
     name: "양진희", role: "변호사",
-    field: "강력범죄 · 성범죄",
+    field: "일반민사 · 건설 · 부동산",
     /* 사진을 올리기 전까지는 자리표시자가 대신 보인다. */
     image: "assets/lawyer-06.webp",
     career: [
-      "제11회 변호사시험 합격",
-      "제주대학교 법학전문대학원 11기",
       "고려대학교 법학과",
-      "중국 북경이공대학 수료",
-      "미국 Golden Gate University 마케팅 과정 수료",
+      "제주대학교 법학전문대학원 11기",
       "건설 · 부동산 연수 11기 수료",
       "前 법률사무소 범우",
       "前 법무법인 송우",

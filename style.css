@@ -903,8 +903,13 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 /* ---- 로고 등장 ---- */
 
+/*
+  로고. 민사 중심으로 바꾸면서 "증거주의" 제목이 빠졌으므로
+  그 무게를 로고와 법인 이름이 나눠 진다. 전보다 키웠다.
+  (전: clamp(64px, 7vw, 96px))
+*/
 .hero-logo {
-  width: clamp(64px, 7vw, 96px);
+  width: clamp(86px, 9.2vw, 128px);
   margin: 0 auto;
   color: var(--cream);
 }
@@ -928,6 +933,34 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .hero-word {
   margin-top: 26px;
+}
+
+/*
+  법인 이름이 첫 화면의 제목 노릇을 할 때의 크기.
+
+  전에는 이 이름이 로고 밑에 붙는 작은 글씨였고, 그 아래에
+  "증거주의 / 수사 · 재판 대응" 이라는 큰 제목이 따로 있었다.
+  민사 중심으로 바꾸면서 그 제목을 뺐으므로, 이름이 그 무게를 대신한다.
+  로고도 함께 키워 둘이 한 덩어리로 보이게 한다.
+
+  제목이 없어진 빈자리만큼만 키운다. 이름은 문장이 아니라 이름이어서
+  문장만큼 크면 외치는 것처럼 보인다.
+*/
+.hero-word-lead {
+  margin-top: 30px;
+  font-weight: 400;
+}
+
+.hero-word-lead .hero-word-ko {
+  font-size: clamp(32px, 4.4vw, 58px);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+}
+
+.hero-word-lead .hero-word-en {
+  margin-top: 14px;
+  font-size: clamp(10.5px, 1.05vw, 13.5px);
+  letter-spacing: 0.46em;
 }
 
 .hero-word-ko {

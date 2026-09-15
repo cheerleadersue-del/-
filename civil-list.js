@@ -12,45 +12,45 @@
 window.CIVIL_AREAS = [
   {
     no:   "01",
-    name: "의료사고 손해배상",
-    en:   "MEDICAL MALPRACTICE",
-    href: "civil-medical.html",
-    line: "입증 책임이 환자 쪽에 있습니다. 그래서 기록을 모으는 일이 무엇보다 먼저입니다."
-  },
-  {
-    no:   "02",
     name: "부동산",
     en:   "REAL ESTATE",
     href: "civil-realestate.html",
     line: "등기부에 적힌 것과 실제가 어긋나는 지점 — 다툼은 거의 언제나 거기서 시작됩니다."
   },
   {
-    no:   "03",
+    no:   "02",
     name: "대여금",
     en:   "MONEY LENT",
     href: "civil-loan.html",
     line: "차용증이 없어도 받을 수 있습니다. 다만 받아낼 수 있는지부터 계산합니다."
   },
   {
-    no:   "04",
+    no:   "03",
     name: "계약분쟁",
     en:   "CONTRACT DISPUTE",
     href: "civil-contract.html",
     line: "계약서에 적힌 것보다 적히지 않은 것이 문제되는 일이 더 많습니다."
   },
   {
-    no:   "05",
+    no:   "04",
     name: "전세사기",
     en:   "DEPOSIT FRAUD",
     href: "civil-jeonse.html",
     line: "그냥 이사부터 가시면 안 됩니다. 순서를 지키는 것만으로 결과가 달라집니다."
   },
   {
-    no:   "06",
+    no:   "05",
     name: "손해배상",
     en:   "DAMAGES",
     href: "civil-damages.html",
     line: "항목을 하나씩 더해서 만들어집니다. 하나라도 빠뜨리면 그만큼 못 받습니다."
+  },
+  {
+    no:   "06",
+    name: "의료사고 손해배상",
+    en:   "MEDICAL MALPRACTICE",
+    href: "civil-medical.html",
+    line: "입증 책임이 환자 쪽에 있습니다. 그래서 기록을 모으는 일이 무엇보다 먼저입니다."
   }
 ];
 
