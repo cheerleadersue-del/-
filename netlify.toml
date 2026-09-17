@@ -17,6 +17,12 @@
   to = "/404.html"
   status = 404
 
+# 아직 공개하지 않은 초안. 배포에서 빼지만 혹시 몰라 한 번 더 막는다.
+[[redirects]]
+  from = "/_draft/*"
+  to = "/404.html"
+  status = 404
+
 # HTML 은 항상 최신본을 받아야 하므로 캐시하지 않는다.
 [[headers]]
   for = "/*.html"
