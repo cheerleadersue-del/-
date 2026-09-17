@@ -194,6 +194,7 @@ const practices = [
           "이길 수 있는지와 받을 수 있는지는 다른 문제입니다.",
     tags: [
       { name: "부동산",   href: "civil-realestate.html" },
+      { name: "건설",     href: "civil-construction.html" },
       { name: "대여금",   href: "civil-loan.html" },
       { name: "계약분쟁", href: "civil-contract.html" },
       { name: "전세사기", href: "civil-jeonse.html" },
