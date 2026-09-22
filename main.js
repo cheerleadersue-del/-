@@ -279,7 +279,10 @@ const practices = [
           "나중에 다투는 비용보다 지금 확인하는 비용이 적습니다.",
     tags: [
       { name: "공증",           href: "notary-deed.html" },
-      /* moadg.com — 법인 · 부동산 등기 사이트로 나간다 */
+      /* moadg.com — 법인 · 부동산 등기.
+         ⚠️ 법인 소유 사이트가 아니다. 바깥 링크로만 두고,
+            이 홈페이지 안으로 내용을 가져오지 않는다.
+            (notary-list.js 의 02 번 항목도 같은 곳이다) */
       { name: "법인/부동산 등기", href: "https://moadg.com/" },
       { name: "계약검토",        href: "notary-review.html" },
       { name: "내용증명",        href: "notary-content.html" },
