@@ -62,7 +62,7 @@
 
    ```xml
    <url>
-     <loc>https://cheerleadersue-del.github.io/-/civil-construction.html</loc>
+     <loc>https://yuillawfirm.com/civil-construction.html</loc>
      <lastmod>날짜</lastmod>
      <priority>0.7</priority>
    </url>
