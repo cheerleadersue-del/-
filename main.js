@@ -973,16 +973,30 @@ const heroSlot = $(".hero");
 /* ---------------------------------------------------------------------
    ★ 첫 장면이 열리는 때 ★
 
-   첫 장면은 세 걸음으로 열린다.
+   첫 장면은 네 걸음으로 열린다.
 
-     1. 어두운 바탕에 Y 로고와 이름만            0 ~ 1.7초
-     2. 그 뒤로 빌딩 사진이 떠오른다             1.7 ~ 3.1초  (글자 없음)
-     3. 영상이 사진을 덮고 "증거주의" 가 올라온다  아래 값부터
+     1. 어두운 바탕에 Y 로고와 법인 이름만       0 ~ 1.7초
+     2. 그 뒤로 파란 빌딩 사진이 떠오른다        1.7 ~ 3.1초
+     3. 설명과 상담 버튼이 올라온다              HERO_REVEAL 부터
+     4. 영상이 사진을 덮는다                     HERO_VIDEO 부터
 
-   아래 숫자를 줄이면 전체가 빨라지고, 늘리면 사진을 오래 보여준다.
+   숫자가 둘인 이유.
+
+   전에는 하나였다. 그런데 사진을 더 오래 보여드리려고 그 값을 늘리면
+   상담 버튼까지 같이 늦어진다. 전화를 걸려고 들어오신 분을 그만큼
+   기다리게 하는 셈이라, 글자와 영상을 갈라 두었다.
+
+     HERO_REVEAL  줄이면 글자가 빨리 올라온다
+     HERO_VIDEO   늘리면 빌딩 사진이 오래 남는다
+
+   2026-09-24. 사진을 조금 더 길게 보고 싶다고 하셔서 영상 쪽만
+   4.2초에서 6.2초로 미뤘다. 사진만 보이는 시간이 2.5초에서
+   4.5초로 늘었다. 글자가 올라오는 때는 그대로다.
+
    1·2번의 시간은 style.css 의 hero-logo / heroBgIn 에 있다.
 --------------------------------------------------------------------- */
 const HERO_REVEAL = 4200;
+const HERO_VIDEO  = 6200;
 
 /*
   때가 되면 .hero 에 is-ready 를 붙인다. 제목 · 설명 · 상담 버튼이
@@ -1092,8 +1106,9 @@ if (heroSlot && heroBg && wideEnough && !motionOff && !saveData) {
 
     v.addEventListener("playing", () => {
       settled = true;
-      /* performance.now() 는 페이지가 열린 때부터 잰 시간이다 */
-      const wait = Math.max(0, HERO_REVEAL - performance.now());
+      /* performance.now() 는 페이지가 열린 때부터 잰 시간이다.
+         글자(HERO_REVEAL)보다 늦게 덮는다. 위 주석을 보십시오. */
+      const wait = Math.max(0, HERO_VIDEO - performance.now());
       setTimeout(() => v.classList.add("is-on"), wait);
     }, { once: true });
 
