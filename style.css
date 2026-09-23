@@ -292,6 +292,24 @@ h3 {
   margin-bottom: clamp(52px, 6vw, 86px);
 }
 
+/*
+  한 칸 안에서 묶음을 나눌 때 쓰는 작은 제목.
+  sec-title 은 너무 크고 h3 만으로는 구분이 되지 않는 자리에 쓴다.
+  글이 긴 쪽에서 「여기부터 다른 이야기」를 보여준다.
+*/
+.sub-head {
+  margin-top: clamp(52px, 5.4vw, 80px);
+  margin-bottom: clamp(26px, 2.8vw, 36px);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 2vw, 24px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+
 .sec-head-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
