@@ -5,9 +5,12 @@
 #  옛 도메인을 새 주소로 넘긴다 (301)
 #
 #  2026-09-24. 두 도메인의 등록 명의를 법무법인 유일로 넘겨받았다.
+#  그중 하나만 넘긴다.
 #
-#    법무법인유일.com      → yuillawfirm.com 의 같은 자리
-#    교통형사전문로펌.com   → yuillawfirm.com/traffic.html
+#    법무법인유일.com      → yuillawfirm.com 의 같은 자리   (넘긴다)
+#    교통형사전문로펌.com   → 예전 서버 그대로              (안 넘긴다)
+#
+#  교통형사 쪽을 넘기지 않는 이유는 아래 따로 적었다.
 #
 #  한글 주소는 퓨니코드(xn--…)로 적는다. 넷리파이가 읽는 형태다.
 #
@@ -41,20 +44,25 @@
   status = 301
   force = true
 
-# 교통형사는 쪽 주소가 서로 달라 한 자리로 모은다.
-# 옛 사이트의 /dui.php 같은 주소를 새 쪽에 하나씩 맞춰 보내고
-# 싶으시면 아래에 줄을 더하면 된다. 그때는 이 규칙보다 위에 둔다.
-[[redirects]]
-  from = "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/*"
-  to = "https://yuillawfirm.com/traffic.html"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://www.xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/*"
-  to = "https://yuillawfirm.com/traffic.html"
-  status = 301
-  force = true
+# 교통형사전문로펌.com 은 넘기지 않는다.
+#
+# 2026-09-24. 잠깐 301 을 걸어두었다가 뺐다. 대표변호사님 말씀으로
+# 그 사이트를 예전 그대로 두기로 했다. 그 도메인은 예전 서버를
+# 계속 가리키고, 새 홈페이지의 교통형사 센터(traffic.html)에서
+# 그리로 나가는 링크를 둔다.
+#
+# ⚠️ 그래서 여기에 그 도메인의 301 을 다시 넣으면 안 된다.
+#    넣는 순간 traffic.html 의 링크가 제자리를 맴돈다.
+#
+# 나중에 그 사이트를 접기로 하시면 아래 네 줄을 되살리면 된다.
+#
+#   [[redirects]]
+#     from = "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/*"
+#     to = "https://yuillawfirm.com/traffic.html"
+#     status = 301
+#     force = true
+#
+#   www 도 같은 모양으로 한 벌 더.
 
 [functions]
   directory = "netlify/functions"
