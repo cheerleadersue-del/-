@@ -194,6 +194,7 @@ const practices = [
           "이길 수 있는지와 받을 수 있는지는 다른 문제입니다.",
     tags: [
       { name: "부동산",   href: "civil-realestate.html" },
+      { name: "건설",     href: "civil-construction.html" },
       { name: "집합건물", href: "civil-building.html" },
       { name: "대여금",   href: "civil-loan.html" },
       { name: "계약분쟁", href: "civil-contract.html" },
@@ -229,6 +230,45 @@ const practices = [
       { name: "성병감염",      href: "criminal-std.html" },
       { name: "학교폭력·교권침해", href: "criminal-school.html" },
       { name: "형사 센터 전체",    href: "criminal.html" }
+    ]
+  },
+  /*
+    교통형사.
+
+    이 센터만 대문이 홈페이지 밖에 있다. 예전부터 쓰던
+    교통형사전문로펌.com 이다. 주소가 한글이라 브라우저가 쓰는
+    퓨니코드(xn--…)로 적는다. 한글 그대로 적으면 어떤 프로그램에서
+    깨져 나간다.
+
+    page 가 http 로 시작하므로 위쪽 markOutbound 가 새 탭으로 열고
+    화면 낭독기에는 "(새 창)" 을 따로 알린다. 아래 tags 의
+    "교통형사 센터 전체" 도 같은 처리를 받는다.
+
+    ⚠️ 세부 분야는 href 를 비워 두었다. 글자만 나오고 눌리지 않는다.
+       예전에는 traffic-*.html 열두 장이 있었으나 2026-09 에 지웠다.
+       (되살리시려면 50a88be 바로 앞 커밋에 파일이 그대로 있다)
+       일곱 개를 전부 바깥 사이트로 보내면 눌러도 같은 곳만 나와
+       속은 느낌을 주므로, 들어가는 문은 맨 끝 하나로만 두었다.
+  */
+  {
+    name: "교통형사",
+    slug: "traffic",
+    en: "TRAFFIC CRIMINAL",
+    page: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/",
+    credit: "<b class=\"tint\">정호길 대표변호사</b>가 교통형사 사건을 직접 맡습니다.",
+    image: "assets/center-traffic.webp",
+    desc: "보험 처리와 형사 절차는 별개로 흘러갑니다. " +
+          "합의와 공탁의 시기를 놓치면 되돌리기 어렵습니다.",
+    tags: [
+      { name: "형사합의 · 공탁" },
+      { name: "12대 중과실" },
+      { name: "뺑소니" },
+      { name: "사망사고" },
+      { name: "중상해사고" },
+      { name: "음주운전" },
+      { name: "스쿨존(민식이법)" },
+      { name: "교통형사 센터 전체",
+        href: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/" }
     ]
   },
   {

@@ -19,41 +19,48 @@ window.CIVIL_AREAS = [
   },
   {
     no:   "02",
+    name: "건설",
+    en:   "CONSTRUCTION",
+    href: "civil-construction.html",
+    line: "공사를 맡기신 쪽의 이야기입니다. 하자 · 지연 · 추가공사비 · 유치권. 잔금이 남았을 때가 가장 강합니다."
+  },
+  {
+    no:   "03",
     name: "집합건물 관리",
     en:   "BUILDING MANAGEMENT",
     href: "civil-building.html",
     line: "관리비 · 용역비 · 주차 수입이 어디로 갔는지. 의심으로는 다툴 수 없고 장부가 있어야 합니다."
   },
   {
-    no:   "03",
+    no:   "04",
     name: "대여금",
     en:   "MONEY LENT",
     href: "civil-loan.html",
     line: "차용증이 없어도 받을 수 있습니다. 다만 받아낼 수 있는지부터 계산합니다."
   },
   {
-    no:   "04",
+    no:   "05",
     name: "계약분쟁",
     en:   "CONTRACT DISPUTE",
     href: "civil-contract.html",
     line: "계약서에 적힌 것보다 적히지 않은 것이 문제되는 일이 더 많습니다."
   },
   {
-    no:   "05",
+    no:   "06",
     name: "전세사기",
     en:   "DEPOSIT FRAUD",
     href: "civil-jeonse.html",
     line: "그냥 이사부터 가시면 안 됩니다. 순서를 지키는 것만으로 결과가 달라집니다."
   },
   {
-    no:   "06",
+    no:   "07",
     name: "손해배상",
     en:   "DAMAGES",
     href: "civil-damages.html",
     line: "항목을 하나씩 더해서 만들어집니다. 하나라도 빠뜨리면 그만큼 못 받습니다."
   },
   {
-    no:   "07",
+    no:   "08",
     name: "의료사고 손해배상",
     en:   "MEDICAL MALPRACTICE",
     href: "civil-medical.html",
