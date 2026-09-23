@@ -1,6 +1,61 @@
 [build]
   publish = "."
 
+# =====================================================================
+#  옛 도메인을 새 주소로 넘긴다 (301)
+#
+#  2026-09-24. 두 도메인의 등록 명의를 법무법인 유일로 넘겨받았다.
+#
+#    법무법인유일.com      → yuillawfirm.com 의 같은 자리
+#    교통형사전문로펌.com   → yuillawfirm.com/traffic.html
+#
+#  한글 주소는 퓨니코드(xn--…)로 적는다. 넷리파이가 읽는 형태다.
+#
+#  301 인 이유. 검색엔진에게 "이 주소는 영영 저리로 옮겼다"고
+#  알려주는 신호다. 그래야 옛 주소가 몇 해 동안 쌓아둔 것이
+#  새 주소로 넘어온다. 302(임시)로 하면 넘어오지 않는다.
+#
+#  force = true 인 이유. 이 사이트에 같은 이름의 파일이 있어도
+#  파일보다 이 규칙을 먼저 적용하라는 뜻이다. 없으면 옛 주소로
+#  들어온 분이 여기 올라와 있는 사본을 그대로 보게 되어
+#  같은 내용이 두 주소에 떠 있는 상태가 된다.
+#
+#  ⚠️ 이 규칙은 넷리파이에 그 도메인을 붙여야 작동한다.
+#     Netlify → Domain management → Add domain alias 로 두 주소를
+#     더하고, 가비아 DNS 에서 그 도메인을 넷리파이 쪽으로 돌린다.
+#     붙이기 전에는 아무 일도 일어나지 않는다(해롭지도 않다).
+#
+#  ⚠️ 넘기기 전에 가비아의 지금 DNS 레코드를 사진으로 남겨두십시오.
+#     특히 MX(메일)가 있으면 그대로 옮겨 적어야 메일이 끊기지 않는다.
+# =====================================================================
+
+[[redirects]]
+  from = "https://xn--v92b7yba019htmaza.com/*"
+  to = "https://yuillawfirm.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.xn--v92b7yba019htmaza.com/*"
+  to = "https://yuillawfirm.com/:splat"
+  status = 301
+  force = true
+
+# 교통형사는 쪽 주소가 서로 달라 한 자리로 모은다.
+# 옛 사이트의 /dui.php 같은 주소를 새 쪽에 하나씩 맞춰 보내고
+# 싶으시면 아래에 줄을 더하면 된다. 그때는 이 규칙보다 위에 둔다.
+[[redirects]]
+  from = "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/*"
+  to = "https://yuillawfirm.com/traffic.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/*"
+  to = "https://yuillawfirm.com/traffic.html"
+  status = 301
+  force = true
+
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"

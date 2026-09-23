@@ -297,6 +297,19 @@ h3 {
   sec-title 은 너무 크고 h3 만으로는 구분이 되지 않는 자리에 쓴다.
   글이 긴 쪽에서 「여기부터 다른 이야기」를 보여준다.
 */
+/*
+  교통사고 — 구급차와 대원이 오른쪽에 몰려 있다.
+  가운데를 잡으면 빈 도로만 나온다.
+
+  선택자를 파일 이름으로 잡은 이유: 교통사고 페이지 열두 장이
+  같은 머리말 사진을 함께 쓴다. 나중에 어느 한 장에만 다른 사진을
+  올리시면(assets/topic-dui.webp 처럼) 그 페이지는 이 규칙에서
+  자동으로 빠진다. 새 사진에는 새 자리가 필요하기 때문이다.
+*/
+.topic-hero-bg[src$="topic-traffic.webp"] {
+  object-position: 72% 50%;
+}
+
 .sub-head {
   margin-top: clamp(52px, 5.4vw, 80px);
   margin-bottom: clamp(26px, 2.8vw, 36px);

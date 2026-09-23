@@ -233,42 +233,34 @@ const practices = [
     ]
   },
   /*
-    교통형사.
+    교통형사는 세부 분야가 열두 갈래라 형사에서 떼어 따로 센터를 두었다.
+    태그를 열두 개 다 늘어놓으면 칸이 넘치니 자주 찾는 것만 앞에 두고,
+    나머지는 traffic.html 로 들어가 보시게 했다.
 
-    이 센터만 대문이 홈페이지 밖에 있다. 예전부터 쓰던
-    교통형사전문로펌.com 이다. 주소가 한글이라 브라우저가 쓰는
-    퓨니코드(xn--…)로 적는다. 한글 그대로 적으면 어떤 프로그램에서
-    깨져 나간다.
-
-    page 가 http 로 시작하므로 위쪽 markOutbound 가 새 탭으로 열고
-    화면 낭독기에는 "(새 창)" 을 따로 알린다. 아래 tags 의
-    "교통형사 센터 전체" 도 같은 처리를 받는다.
-
-    ⚠️ 세부 분야는 href 를 비워 두었다. 글자만 나오고 눌리지 않는다.
-       예전에는 traffic-*.html 열두 장이 있었으나 2026-09 에 지웠다.
-       (되살리시려면 50a88be 바로 앞 커밋에 파일이 그대로 있다)
-       일곱 개를 전부 바깥 사이트로 보내면 눌러도 같은 곳만 나와
-       속은 느낌을 주므로, 들어가는 문은 맨 끝 하나로만 두었다.
+    2026-09-24. 대문이 홈페이지 안으로 돌아왔다.
+    그 전에는 바깥 사이트(교통형사전문로펌.com)가 대문이었는데,
+    그 도메인이 업체 서버를 가리키고 있어 업체와 정리되면 링크가
+    끊길 자리였다. 도메인 명의를 넘겨받으면서 세부 쪽 열두 장을
+    되살리고 대문을 안으로 들였다. 옛 도메인은 이 쪽으로 301 한다.
   */
   {
     name: "교통형사",
     slug: "traffic",
     en: "TRAFFIC CRIMINAL",
-    page: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/",
+    page: "traffic.html",
     credit: "<b class=\"tint\">정호길 대표변호사</b>가 교통형사 사건을 직접 맡습니다.",
     image: "assets/center-traffic.webp",
     desc: "보험 처리와 형사 절차는 별개로 흘러갑니다. " +
           "합의와 공탁의 시기를 놓치면 되돌리기 어렵습니다.",
     tags: [
-      { name: "형사합의 · 공탁" },
-      { name: "12대 중과실" },
-      { name: "뺑소니" },
-      { name: "사망사고" },
-      { name: "중상해사고" },
-      { name: "음주운전" },
-      { name: "스쿨존(민식이법)" },
-      { name: "교통형사 센터 전체",
-        href: "https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/" }
+      { name: "형사합의 · 공탁",  href: "traffic-settlement.html" },
+      { name: "12대 중과실",     href: "traffic-negligence.html" },
+      { name: "뺑소니",          href: "traffic-hitrun.html" },
+      { name: "사망사고",        href: "traffic-fatal.html" },
+      { name: "중상해사고",      href: "traffic-serious.html" },
+      { name: "음주운전",        href: "traffic-dui.html" },
+      { name: "스쿨존(민식이법)", href: "traffic-schoolzone.html" },
+      { name: "교통형사 센터 전체", href: "traffic.html" }
     ]
   },
   {
