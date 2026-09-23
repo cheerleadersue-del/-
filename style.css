@@ -310,6 +310,17 @@ h3 {
   object-position: 72% 50%;
 }
 
+/*
+  글 아래에 단추 하나를 놓는 자리.
+
+  topic-acts 와 나누어 둔 이유. main.js 가 topic-acts 가 붙은 자리마다
+  카톡 상담 단추를 자동으로 끼워 넣는다. 상담으로 부르는 자리가 아니라
+  다른 곳으로 보내는 자리에는 그 단추가 붙으면 안 된다.
+*/
+.side-act {
+  margin-top: clamp(22px, 2.4vw, 32px);
+}
+
 .sub-head {
   margin-top: clamp(52px, 5.4vw, 80px);
   margin-bottom: clamp(26px, 2.8vw, 36px);
