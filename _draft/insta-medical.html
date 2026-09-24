@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>의료사고 카드 — 법무법인 유일</title>
+
+<!--
+  =====================================================================
+  인스타그램 그림카드 원본 (의료사고 — 진단서 편)
+
+  이 파일은 홈페이지에 올라가지 않습니다. _draft 안에 있는 것은
+  배포에서 빠지고, 넷리파이에서도 막혀 있습니다.
+
+  ─ 카드 크기
+    1080 × 1350 (세로 4:5). 인스타그램 피드에서 가장 크게 보이는
+    비율입니다. 정사각(1:1)보다 화면을 많이 차지합니다.
+
+  ─ 그림 파일로 만드는 법
+    이 파일을 브라우저에서 열고 카드마다 화면을 잘라 저장하셔도
+    되지만, 아래 방법이 정확합니다.
+
+      1) 이 저장소를 받은 컴퓨터에서
+         python3 -m http.server 8791
+      2) 브라우저에서 http://127.0.0.1:8791/_draft/insta-medical.html
+      3) 개발자도구(F12) → 기기 크기를 1080 × 1350 으로 맞추고
+         카드마다 「노드 스크린샷」
+
+    저희가 만들어 드릴 때는 이 파일을 헤드리스 브라우저로 열어
+    .card 하나하나를 1080 × 1350 그림으로 받아 냅니다.
+
+  ─ 글자를 고치실 때
+    카드 한 장이 <section class="card"> 하나입니다. 글만 고치시면
+    되고, 글이 길어지면 자동으로 줄어들지 않으니 넘치지 않는지
+    꼭 눈으로 보십시오.
+
+  ⚠️ 법률 내용을 고치실 때는 변호사 검토를 받으십시오.
+     이 카드의 내용은 civil-medical.html 의 「시작은 진단서입니다」
+     구간에서 뽑은 것입니다. 원문을 고치면 여기도 같이 고쳐야
+     두 곳의 말이 어긋나지 않습니다.
+  =====================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+
+<style>
+:root {
+  --paper:     #fcfcfb;
+  --paper-2:   #f1f1ef;
+  --ink:       #17171a;
+  --ink-soft:  #4a4a4f;
+  --ink-faint: #8a8a90;
+  --line:      #e2e2e0;
+  --gold:      #8a7248;
+  --dark:      #141416;
+  --cream:     #e4d5b7;
+  --gold-soft: #c6ab7f;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-serif:   "Noto Serif KR", Georgia, serif;
+  --font-sans:    "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #55555a;
+  padding: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 카드 한 장 ─────────────────────────────────────────────── */
+.card {
+  position: relative;
+  width: 1080px;
+  height: 1350px;
+  flex: 0 0 auto;
+  padding: 104px 96px 96px;
+  background: var(--paper);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  word-break: keep-all;
+}
+
+.card-dark { background: var(--dark); color: var(--cream); }
+
+/* 머리 — 로고와 법인 이름 */
+.mark {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 56px;
+}
+
+.mark svg { width: 30px; height: 36px; flex: 0 0 auto; }
+
+.mark-name {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.mark-en {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+.card-dark .mark-en { color: var(--gold-soft); }
+
+/* 눈썹 — 라틴 소문자 대문자 */
+.eyebrow {
+  margin-bottom: 30px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.card-dark .eyebrow { color: var(--gold-soft); }
+
+/* 큰 제목 */
+.ttl {
+  font-family: var(--font-serif);
+  font-size: 66px;
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.ttl-sm { font-size: 54px; }
+
+.ttl em {
+  font-style: normal;
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 4px;
+}
+
+.card-dark .ttl em { color: var(--gold-soft); border-bottom-color: var(--gold-soft); }
+
+/* 본문 */
+.lead {
+  margin-top: 34px;
+  font-size: 30px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  font-weight: 300;
+}
+
+.card-dark .lead { color: #bdb49f; }
+
+.lead b { font-weight: 500; color: var(--ink); }
+.card-dark .lead b { color: var(--cream); }
+
+/* 본문 영역 — 머리와 꼬리 사이를 채운다 */
+.body { flex: 1 1 auto; display: flex; flex-direction: column; }
+.body-mid { justify-content: center; }
+
+/* 줄줄이 목록 */
+.rows { margin-top: 44px; border-top: 1px solid var(--line); }
+.card-dark .rows { border-top-color: #33333a; }
+
+.rows > li {
+  list-style: none;
+  padding: 21px 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.card-dark .rows > li { border-bottom-color: #33333a; }
+
+.rows .no {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  /* 코모란트는 기본이 옛 활자체 숫자(oI o2)라 0 이 o 로 보인다.
+     번호와 쪽수는 줄맞춤 숫자로 바꿔 둔다. */
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1;
+}
+
+.rows .txt { font-size: 31px; line-height: 1.6; font-weight: 400; }
+.rows .sub {
+  display: block;
+  margin-top: 10px;
+  font-size: 25px;
+  line-height: 1.7;
+  font-weight: 300;
+  color: var(--ink-faint);
+}
+
+/* 두 칸짜리 표 */
+.duo { margin-top: 40px; border-top: 1px solid var(--line); }
+
+.duo > li {
+  list-style: none;
+  padding: 19px 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  gap: 24px;
+  align-items: baseline;
+}
+
+.duo .k { font-size: 29px; font-weight: 500; letter-spacing: -0.02em; }
+.duo .v { font-size: 27px; line-height: 1.65; font-weight: 300; color: var(--ink-soft); }
+.duo .v b { font-weight: 500; color: var(--gold); }
+
+/* 하지 말 것 / 할 것 */
+.pick { margin-top: 48px; display: grid; gap: 34px; }
+
+.pick > div {
+  padding: 40px 44px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.pick .no-s { color: #a33; font-size: 27px; font-weight: 500; margin-bottom: 16px; }
+.pick .ok-s { color: var(--gold); font-size: 27px; font-weight: 500; margin-bottom: 16px; }
+.pick p { font-size: 31px; line-height: 1.6; font-weight: 400; }
+
+/* 꼬리 */
+.foot {
+  margin-top: 40px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 22px;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}
+
+.card-dark .foot { border-top-color: #33333a; color: #8d8578; }
+
+.foot .page {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.22em;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" 1;
+}
+
+/* 마지막 카드의 연락처 */
+.call { margin-top: 48px; display: grid; gap: 22px; }
+.call div { font-size: 30px; line-height: 1.6; }
+.call .big {
+  font-family: var(--font-sans);
+  font-size: 52px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+}
+.call .lbl { color: var(--gold-soft); font-size: 22px; letter-spacing: 0.2em; text-transform: uppercase; font-family: var(--font-display); }
+
+/* 화면에서 볼 때만 붙는 라벨. 그림으로 받을 때는 안 들어간다. */
+.tag {
+  position: absolute;
+  top: -34px; left: 0;
+  font-size: 18px;
+  color: #ddd;
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ─────────────────────────── 01 표지 ─────────────────────────── -->
+<section class="card card-dark" id="c1">
+  <span class="tag">01 — 표지</span>
+  <div class="mark">
+    <svg viewBox="0 0 310 375" fill="none" aria-hidden="true">
+      <g stroke="#c9ad78" stroke-linecap="butt" stroke-linejoin="miter">
+        <path d="M30 8 L130 160 L130 367" stroke-width="62"/>
+        <path d="M286 8 L192 156 L192 367" stroke-width="38"/>
+      </g>
+    </svg>
+    <div>
+      <div class="mark-name">법무법인 유일</div>
+      <div class="mark-en">Yuil Law Firm</div>
+    </div>
+  </div>
+
+  <div class="body body-mid">
+    <p class="eyebrow">Medical Evidence</p>
+    <h1 class="ttl">
+      의료사고 손해배상,<br>
+      시작은 <em>진단서</em>입니다
+    </h1>
+    <p class="lead">
+      합의금 액수도 소송의 승패도<br>
+      결국 두 가지로 갈립니다.
+    </p>
+  </div>
+
+  <div class="foot">
+    <span>의료사고 손해배상</span>
+    <span class="page">01 / 08</span>
+  </div>
+</section>
+
+
+<!-- ─────────────────────── 02 두 가지 갈림길 ─────────────────────── -->
+<section class="card" id="c2">
+  <span class="tag">02 — 무엇이 승패를 가르나</span>
+  <div class="mark">
+    <svg viewBox="0 0 310 375" fill="none" aria-hidden="true">
+      <g stroke="#8a7248" stroke-linecap="butt" stroke-linejoin="miter">
+        <path d="M30 8 L130 160 L130 367" stroke-width="62"/>
+        <path d="M286 8 L192 156 L192 367" stroke-width="38"/>
+      </g>
+    </svg>
+    <div>
+      <div class="mark-name">법무법인 유일</div>
+      <div class="mark-en">Yuil Law Firm</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <p class="eyebrow">Two Questions</p>
+    <h2 class="ttl ttl-sm">무엇이 승패를<br>가르는가</h2>
+
+    <ul class="rows">
+      <li>
+        <span class="no">01</span>
+        <span class="txt">후유장해가 의학적으로 확인되는가
+          <span class="sub">검사 결과지에 수치로 남아 있어야 합니다</span>
+        </span>
+      </li>
+      <li>
+        <span class="no">02</span>
+        <span class="txt">그것이 의료행위 때문이라고 설명되는가
+          <span class="sub">상당인과관계 — 다른 원인을 지워 나가는 일입니다</span>
+        </span>
+      </li>
+    </ul>
+
+    <p class="lead">
+      이 둘 없이 <b>"몸이 나빠졌다"</b>고만 말씀하시면<br>
+      병원은 <b>"원래 질환의 자연경과"</b>라고 답합니다.<br>
+      협상은 그 자리에서 끝납니다.
+    </p>
+  </div>
+
+  <div class="foot">
+    <span>의료사고 손해배상</span>
+    <span class="page">02 / 08</span>
+  </div>
+</section>
+
+
+<!-- ─────────────────────── 03 서류마다 힘이 다르다 ─────────────────── -->
+<section class="card" id="c3">
+  <span class="tag">03 — 서류의 힘</span>
+  <div class="mark">
+    <svg viewBox="0 0 310 375" fill="none" aria-hidden="true">
+      <g stroke="#8a7248" stroke-linecap="butt" stroke-linejoin="miter">
+        <path d="M30 8 L130 160 L130 367" stroke-width="62"/>
+        <path d="M286 8 L192 156 L192 367" stroke-width="38"/>
+      </g>
+    </svg>
+    <div>
+      <div class="mark-name">법무법인 유일</div>
+      <div class="mark-en">Yuil Law Firm</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <p class="eyebrow">Documents</p>
+    <h2 class="ttl ttl-sm">서류마다<br>힘이 다릅니다</h2>
+
+    <ul class="duo">
+      <li><span class="k">일반진단서</span><span class="v">상병명과 치료 기간.<br>원인 기재가 빠지면 약합니다</span></li>
+      <li><span class="k">소견서</span><span class="v"><b>인과관계를 담기에 가장 유리</b><br>형식이 자유롭습니다</span></li>
+      <li><span class="k">후유장해진단서</span><span class="v"><b>노동능력상실률</b>의 바탕<br>증상 고정 뒤에 받습니다</span></li>
+      <li><span class="k">진료기록 감정</span><span class="v">법원이 제3의 의료기관에 맡깁니다<br><b>사실상 승패를 가릅니다</b></span></li>
+    </ul>
+
+    <p class="lead">
+      일반진단서 한 장보다<br>
+      <b>「검사결과지 + 소견서」 한 묶음</b>이 훨씬 강합니다.
+    </p>
+  </div>
+
+  <div class="foot">
+    <span>의료사고 손해배상</span>
+    <span class="page">03 / 08</span>
+  </div>
+</section>
+
+
+<!-- ─────────────────────── 04 인과관계는 배제로 ─────────────────── -->
+<section class="card" id="c4">
+  <span class="tag">04 — 배제</span>
+  <div class="mark">
+    <svg viewBox="0 0 310 375" fill="none" aria-hidden="true">
+      <g stroke="#8a7248" stroke-linecap="butt" stroke-linejoin="miter">
+        <path d="M30 8 L130 160 L130 367" stroke-width="62"/>
+        <path d="M286 8 L192 156 L192 367" stroke-width="38"/>
+      </g>
+    </svg>
+    <div>
+      <div class="mark-name">법무법인 유일</div>
+      <div class="mark-en">Yuil Law Firm</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <p class="eyebrow">Differential Diagnosis</p>
+    <h2 class="ttl ttl-sm">인과관계는<br><em>배제</em>로 만듭니다</h2>
+
+    <p class="lead">
+      "이것 때문이다"를 곧바로 증명하는 일은 거의 불가능합니다.<br>
+      임상의 <b>감별진단</b> 방식 그대로,
+      있을 수 있는 원인을 하나씩 지워 나갑니다.
+    </p>
+
+    <ul class="rows">
+      <li><span class="no">01</span><span class="txt">선행 질환과 기왕증</span></li>
+      <li><span class="no">02</span><span class="txt">자연경과에 따른 악화</span></li>
+      <li><span class="no">03</span><span class="txt">환자 쪽 사정</span></li>
+      <li><span class="no">04</span><span class="txt">다른 시기의 원인</span></li>
+      <li><span class="no">05</span><span class="txt">우연히 같은 때 생긴 것</span></li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    <span>의료사고 손해배상</span>
+    <span class="page">04 / 08</span>
+  </div>
+</section>
+
+
+<!-- ─────────────────────── 05 소견서 세 가지 ─────────────────────── -->
+<section class="card" id="c5">
+  <span class="tag">05 — 소견서에 담길 세 가지</span>
+  <div class="mark">
+    <svg viewBox="0 0 310 375" fill="none" aria-hidden="true">
+      <g stroke="#8a7248" stroke-linecap="butt" stroke-linejoin="miter">
+        <path d="M30 8 L130 160 L130 367" stroke-width="62"/>
+        <path d="M286 8 L192 156 L192 367" stroke-width="38"/>
+      </g>
+    </svg>
+    <div>
+      <div class="mark-name">법무법인 유일</div>
+      <div class="mark-en">Yuil Law Firm</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <p class="eyebrow">Three Sentences</p>
+    <h2 class="ttl ttl-sm">소견서에 이 셋이<br>있어야 합니다</h2>
+
+    <ul class="rows">
+      <li>
+        <span class="no">01</span>
+        <span class="txt">객관적 이상 소견
+          <span class="sub">"통증이 있다"가 아니라 "신경전도검사에서 전도속도 저하가 확인된다"</span>
+        </span>
+      </li>
+      <li>
+        <span class="no">02</span>
+        <span class="txt">발생 시점
+          <span class="sub">"시술 전 ○○검사에서는 해당 소견이 관찰되지 않음"</span>
+        </span>
+      </li>
+      <li>
+        <span class="no">03</span>
+        <span class="txt">감별진단 경과
+          <span class="sub">"다른 원인에 대한 검사를 시행하였으나 부합하는 소견 없음"</span>
+        </span>
+      </li>
+    </ul>
+
+    <p class="lead">
+      의사가 <b>"과실 때문이다"</b>라고 써 줄 필요는 없습니다.<br>
+      이 셋이면 뼈대는 세워집니다.
+    </p>
+  </div>
+
+  <div class="foot">
+    <span>의료사고 손해배상</span>
+    <span class="page">05 / 08</span>
+  </div>
+</section>
+
+
+<!-- ─────────────────────── 06 말하는 방식 ─────────────────────── -->
+<section class="card" id="c6">
+  <span class="tag">06 — 말하는 방식</span>
+  <div class="mark">
+    <svg viewBox="0 0 310 375" fill="none" aria-hidden="true">
+      <g stroke="#8a7248" stroke-linecap="butt" stroke-linejoin="miter">
+        <path d="M30 8 L130 160 L130 367" stroke-width="62"/>
+        <path d="M286 8 L192 156 L192 367" stroke-width="38"/>
+      </g>
+    </svg>
+    <div>
+      <div class="mark-name">법무법인 유일</div>
+      <div class="mark-en">Yuil Law Firm</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <p class="eyebrow">How To Ask</p>
+    <h2 class="ttl ttl-sm">진료실에서<br>말씀하시는 방식</h2>
+
+    <div class="pick">
+      <div>
+        <p class="no-s">✕ 이렇게 말씀하시면</p>
+        <p>"과실이라고 진단서에 써 주세요"</p>
+      </div>
+      <div>
+        <p class="ok-s">○ 이렇게 말씀하십시오</p>
+        <p>"○○ 검사를 받아보고 싶습니다.<br>다른 원인이 있는지도 함께 확인해 주실 수 있을까요?"</p>
+      </div>
+    </div>
+
+    <p class="lead">
+      결론을 요구하면 방어적으로 변합니다.<br>
+      <b>검사와 판단</b>을 요청하면 대부분 응해 주십니다.
+    </p>
+  </div>
+
+  <div class="foot">
+    <span>의료사고 손해배상</span>
+    <span class="page">06 / 08</span>
+  </div>
+</section>
+
+
+<!-- ─────────────────────── 07 검사 이름 ─────────────────────── -->
+<section class="card" id="c7">
+  <span class="tag">07 — 검사 이름</span>
+  <div class="mark">
+    <svg viewBox="0 0 310 375" fill="none" aria-hidden="true">
+      <g stroke="#8a7248" stroke-linecap="butt" stroke-linejoin="miter">
+        <path d="M30 8 L130 160 L130 367" stroke-width="62"/>
+        <path d="M286 8 L192 156 L192 367" stroke-width="38"/>
+      </g>
+    </svg>
+    <div>
+      <div class="mark-name">법무법인 유일</div>
+      <div class="mark-en">Yuil Law Firm</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <p class="eyebrow">Know The Name</p>
+    <h2 class="ttl ttl-sm">검사 이름을<br>알고 가십시오</h2>
+
+    <ul class="duo">
+      <li><span class="k">말초신경 손상</span><span class="v">근전도검사(EMG)<br>신경전도검사(NCS)</span></li>
+      <li><span class="k">척수 · 마미 손상</span><span class="v">척추 MRI<br>체성감각유발전위(SSEP)</span></li>
+      <li><span class="k">삼킴장애</span><span class="v">비디오투시연하검사(VFSS)<br>내시경연하검사(FEES)</span></li>
+      <li><span class="k">성대마비</span><span class="v">후두내시경 · 후두근전도<br><b>목소리가 변했다면 반드시</b></span></li>
+    </ul>
+
+    <p class="lead">
+      "어디가 아프다"가 아니라<br>
+      <b>"○○검사를 받아보고 싶다"</b>고 말씀하실 수 있습니다.
+    </p>
+  </div>
+
+  <div class="foot">
+    <span>의료사고 손해배상</span>
+    <span class="page">07 / 08</span>
+  </div>
+</section>
+
+
+<!-- ─────────────────────── 08 마무리 ─────────────────────── -->
+<section class="card card-dark" id="c8">
+  <span class="tag">08 — 마무리</span>
+  <div class="mark">
+    <svg viewBox="0 0 310 375" fill="none" aria-hidden="true">
+      <g stroke="#c9ad78" stroke-linecap="butt" stroke-linejoin="miter">
+        <path d="M30 8 L130 160 L130 367" stroke-width="62"/>
+        <path d="M286 8 L192 156 L192 367" stroke-width="38"/>
+      </g>
+    </svg>
+    <div>
+      <div class="mark-name">법무법인 유일</div>
+      <div class="mark-en">Yuil Law Firm</div>
+    </div>
+  </div>
+
+  <div class="body body-mid">
+    <p class="eyebrow">Act Early</p>
+    <h2 class="ttl ttl-sm">기록부터,<br>되도록 빨리</h2>
+
+    <p class="lead">
+      진료기록에는 종류마다 보존 기간이 있습니다.<br>
+      그 기간이 지나면 병원이 폐기해도 탓할 수 없습니다.<br>
+      <b>이 한 가지가 뒤의 모든 것을 좌우합니다.</b>
+    </p>
+
+    <div class="call">
+      <div><span class="lbl">Consultation</span><br><span class="big">010-8227-8485</span></div>
+      <div>서울 서초구 서초대로 264, 2층 (법조타워)<br>yuillawfirm.com</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>법무법인 유일 · 의료사고 손해배상</span>
+    <span class="page">08 / 08</span>
+  </div>
+</section>
+
+</body>
+</html>
