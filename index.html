@@ -335,24 +335,32 @@
       <div class="panels" id="panels"></div>
 
       <!-- ===================================================================
-           교통형사 칸에 딸린 배너 — 법인이 따로 운영해 온 교통사고 사이트.
+           교통형사 칸에 딸린 배너 둘 — 나란히 놓는다.
+
+             왼쪽  교통형사 센터 전체 보기   → traffic.html   (우리 쪽)
+             오른쪽 교통사고 사건 전용 사이트 → 옛 사이트      (바깥, 새 창)
 
            여섯 칸 바로 아래에 둔 이유.
            교통형사 칸을 눌러 펼치면 세부 분야 링크가 나오는데,
            펼쳐야 보이는 자리라 지나치기 쉽다. 여기 두면 전담센터를
            보시는 분의 눈에 그냥 들어온다.
 
-           ⚠️ 교통형사 칸 자체를 이 주소로 바꾸지 마십시오.
+           둘을 나란히 둔 이유.
+           바깥으로 나가는 문 하나만 덩그러니 놓이면 광고처럼 보인다.
+           우리 센터와 나란히 놓여야 "같은 법인의 두 곳" 으로 읽힌다.
+
+           ⚠️ 교통형사 칸 자체를 옛 사이트 주소로 바꾸지 마십시오.
               그러면 새로 만든 교통형사 센터 13쪽(형사합의·공탁,
               12대 중과실, 뺑소니, 사망사고, 중상해, 음주운전,
               스쿨존 …)에 아무도 닿지 못하고, 검색엔진도 그 쪽들을
               뒷전으로 밀어냅니다.
 
-           ⚠️ 이 배너가 살아 있으려면 교통형사전문로펌.com 이 예전 서버
+           ⚠️ 오른쪽 배너가 살아 있으려면 교통형사전문로펌.com 이 예전 서버
               (139.150.65.141)를 가리키고 있어야 합니다. 넷리파이로 돌려
               301 을 걸면 제자리를 맴돕니다. netlify.toml 에 적어 두었습니다.
 
-           ⚠️ 배너 전체가 하나의 링크입니다. 안에 또 링크를 넣지 마십시오.
+           ⚠️ 배너 한 칸이 통째로 하나의 링크입니다. 사진이든 글자든
+              어디를 눌러도 열립니다. 안에 또 링크를 넣지 마십시오.
 
            ⚠️ 이름에 topic-acts / hero-acts / topic-cta-act 를 쓰지
               마십시오. main.js 가 그 이름이 붙은 자리마다 카톡 상담
@@ -362,30 +370,60 @@
               「전문」은 대한변협 전문분야 등록을 마친 경우에만 쓸 수
               있습니다. 주소는 href 에만 두었습니다.
       ==================================================================== -->
-      <aside class="side-site" aria-label="법인이 따로 운영하는 교통사고 전용 사이트">
-        <a class="side-site-link" href="https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/"
-           target="_blank" rel="noopener noreferrer">
+      <div class="side-pair">
 
-          <span class="side-site-pic">
-            <img src="assets/center-traffic.webp" alt=""
-                 width="1200" height="1500" loading="lazy" decoding="async">
-          </span>
+        <!-- 왼쪽 — 새 홈페이지의 교통형사 센터 -->
+        <div class="side-site">
+          <a class="side-site-link" href="traffic.html">
 
-          <span class="side-site-body">
-            <span class="side-site-tag">교통형사 센터 · 법인이 따로 운영하는 사이트</span>
-            <span class="side-site-ttl">교통사고 사건 전용 사이트</span>
-            <span class="side-site-desc">
-              예전부터 교통사고 사건만 따로 모아 온 사이트입니다.
-              사건 유형별 사례와 안내를 더 보실 수 있습니다.
-              <b>정호길 대표변호사</b>가 같은 자리에서 맡습니다.
+            <span class="side-site-pic">
+              <img src="assets/topic-traffic.webp" alt=""
+                   width="3344" height="1882" loading="lazy" decoding="async">
             </span>
-            <span class="side-site-go">
-              사이트 열기<span class="sr-only">(새 창으로 열립니다)</span><i aria-hidden="true"></i>
-            </span>
-          </span>
 
-        </a>
-      </aside>
+            <span class="side-site-body">
+              <span class="side-site-tag">교통형사 센터</span>
+              <span class="side-site-ttl">교통형사 센터 전체 보기</span>
+              <span class="side-site-desc">
+                형사합의 · 공탁, 12대 중과실, 뺑소니, 사망사고, 음주운전,
+                스쿨존 등 열두 가지 사건 유형을 절차와 처벌 기준까지
+                나누어 정리해 두었습니다.
+              </span>
+              <span class="side-site-go">
+                센터 열기<i aria-hidden="true"></i>
+              </span>
+            </span>
+
+          </a>
+        </div>
+
+        <!-- 오른쪽 — 법인이 따로 운영해 온 옛 사이트. 바깥으로 나간다 -->
+        <div class="side-site">
+          <a class="side-site-link" href="https://xn--9d0bn3sz9bs7hu8jjtol6ch2g.com/"
+             target="_blank" rel="noopener noreferrer">
+
+            <span class="side-site-pic">
+              <img src="assets/center-traffic.webp" alt=""
+                   width="1200" height="1500" loading="lazy" decoding="async">
+            </span>
+
+            <span class="side-site-body">
+              <span class="side-site-tag">법인이 따로 운영하는 사이트</span>
+              <span class="side-site-ttl">교통사고 사건 전용 사이트</span>
+              <span class="side-site-desc">
+                예전부터 교통사고 사건만 따로 모아 온 사이트입니다.
+                사건 유형별 사례와 안내를 더 보실 수 있습니다.
+                <b>정호길 대표변호사</b>가 같은 자리에서 맡습니다.
+              </span>
+              <span class="side-site-go">
+                사이트 열기<span class="sr-only">(새 창으로 열립니다)</span><i aria-hidden="true"></i>
+              </span>
+            </span>
+
+          </a>
+        </div>
+
+      </div>
 
     </div>
   </section>
