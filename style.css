@@ -472,56 +472,12 @@ h3 {
 }
 
 
-/* ---------------------------------------------------------------------
-   배너 둘을 나란히 놓을 때
-
-   첫 페이지 전담센터 아래에서 쓴다. 왼쪽은 새 홈페이지의 교통형사
-   센터, 오른쪽은 법인이 따로 운영해 온 옛 사이트다.
-
-   나란히 놓이면 한 칸의 너비가 절반으로 줄어든다. 그 너비에 사진을
-   옆에 세우면 사진도 글도 다 좁아지므로, 여기서는 사진을 위로
-   글을 아래로 쌓는다. 아래 두 규칙이 위 760px 규칙을 덮는다
-   (이름이 둘이라 더 구체적이어서 순서와 상관없이 이긴다).
---------------------------------------------------------------------- */
-.side-pair {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(14px, 1.4vw, 20px);
-  margin-top: clamp(44px, 4.6vw, 68px);
-}
-
-.side-pair .side-site {
-  margin-top: 0;
-}
-
-.side-pair .side-site-link {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.side-pair .side-site-pic {
-  aspect-ratio: 16 / 10;
-  height: auto;
-  min-height: 0;
-}
-
-.side-pair .side-site-body {
-  align-self: start;
-}
-
-@media (min-width: 900px) {
-  .side-pair {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 /*
-  두 칸의 사진이 같은 현장을 찍은 것이라, 같은 자리를 보여주면
-  한 장을 두 번 쓴 것처럼 보인다. 왼쪽은 젖은 길과 도시 불빛 쪽을,
-  오른쪽은 구급차 쪽을 보이게 잘라 서로 달라 보이게 했다.
+  2026-09-24. 잠깐 배너 둘을 나란히 놓는 .side-pair 를 두었다가 뺐다.
+  첫 페이지에서 왼쪽 칸이 「교통형사 센터 전체 보기」였는데, 바로 위
+  교통형사 칸이 이미 그 센터로 가는 문이라 같은 곳으로 가는 문이
+  둘이 되어 있었다. 지금은 배너를 한 자리에 하나만 둔다.
 */
-.side-pair .side-site-pic img[src$="topic-traffic.webp"] {
-  object-position: 12% 62%;
-}
 
 .sub-head {
   margin-top: clamp(52px, 5.4vw, 80px);
