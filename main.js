@@ -30,15 +30,36 @@ const KAKAO_URL = "https://pf.kakao.com/_YxiDPX/chat";
 /* ---------------------------------------------------------------------
    ★ 상담신청 받는 주소 ★
 
-   이 홈페이지는 두 곳에 떠 있습니다.
+   2026-09-24. 상담신청이 아예 보내지지 않고 있던 것을 고쳤습니다.
 
-     넷리파이  … 상담신청이 넷리파이 관리화면 Forms 탭에 쌓입니다.
-                 아래 칸을 비워두셔도 그대로 작동합니다.
-     깃허브    … 넷리파이 기능이 없어서 받아줄 곳이 따로 필요합니다.
-                 비워두면 폼 대신 "전화나 카톡으로 연락 주세요" 안내가
-                 나옵니다. 눌리지 않는 폼을 보여드리지 않기 위해서입니다.
+   무슨 일이 있었나.
+   전에는 주소가 「…github.io」로 끝날 때만 아래 주소로 보내게 되어
+   있었습니다. 그런데 지금 홈페이지는 yuillawfirm.com 으로 열립니다.
+   이 주소는 깃허브 페이지스가 띄우고 있지만 이름은 github.io 가
+   아니어서, 그 판단이 빗나갔습니다. 그래서 신청서가 넷리파이 방식
+   그대로 남았고, 깃허브 페이지스는 넷리파이 폼을 받지 못할 뿐
+   아니라 글을 보내는 요청(POST) 자체를 거절합니다.
+   누르면 아무 데도 가지 않고 오류가 났던 까닭입니다.
 
-   깃허브 쪽에서도 상담신청을 받으시려면:
+   그래서 규칙을 하나로 줄였습니다.
+
+     아래 칸에 주소가 적혀 있으면  → 어디에 떠 있든 그리로 보냅니다.
+     아래 칸이 비어 있으면         → 넷리파이 Forms 로 보냅니다.
+                                    (넷리파이에 올렸을 때만 됩니다)
+
+   지금은 주소가 적혀 있으므로 깃허브든 넷리파이든 똑같이 됩니다.
+   주소를 보고 갈라 쓰는 방식은 다시 쓰지 마십시오. 도메인을 옮길
+   때마다 같은 자리에서 또 끊깁니다.
+
+   ⚠️ 첫 한 번은 대표님이 눌러주셔야 합니다.
+      formsubmit 은 첫 신청이 들어온 뒤 확인 메일을 한 통 보냅니다.
+      그 메일 안의 단추를 누르셔야 그때부터 신청이 들어옵니다.
+      누르기 전까지는 신청하신 분이 감사 페이지 대신 formsubmit 의
+      확인 안내 화면을 보게 됩니다.
+      ★ 홈페이지에서 한 번 시험 신청을 해보시고,
+        받은편지함(과 스팸함)에서 그 메일을 눌러주십시오.
+
+   받는 주소를 바꾸시려면:
 
      1. https://formsubmit.co 에 들어가십시오. 가입은 필요 없습니다.
      2. 상담신청을 받으실 이메일 주소를 넣고 나온 주소를 복사하십시오.
@@ -1236,15 +1257,26 @@ if (form && formStatus) {
   };
 
   /*
-    넷리파이에는 Forms 기능이 있지만 깃허브 페이지스에는 없다.
-    주소를 보고 갈라 쓴다. 두 곳 다 옳게 동작해야 한다.
-  */
-  const onGithub = /\.github\.io$/i.test(location.hostname);
+    받아줄 주소가 정해져 있으면 어디에 떠 있든 그리로 보낸다.
 
-  if (onGithub && FORM_ENDPOINT) {
-    /* 받아줄 곳이 정해져 있으면 그리로 보낸다 */
+    ⚠️ 전에는 location.hostname 이 「…github.io」인지 보고 갈라 썼다.
+       yuillawfirm.com 을 붙인 뒤로 그 판단이 빗나가 신청이 아무
+       데도 가지 않았다(2026-09-24 에 고침). 주소로 호스팅을 알아
+       맞히려 하지 마십시오. 도메인을 옮기면 또 끊긴다.
+       파일 첫머리 FORM_ENDPOINT 주석에 자세히 적어 두었다.
+  */
+  const useEndpoint = !!FORM_ENDPOINT;
+
+  if (useEndpoint) {
     form.setAttribute("action", FORM_ENDPOINT);
     form.setAttribute("method", "POST");
+
+    /*
+      넷리파이 폼 표시를 떼어낸다. 남겨 두면 넷리파이에 올렸을 때
+      넷리파이가 이 폼을 가로채려 해 두 곳으로 갈린다.
+    */
+    form.removeAttribute("data-netlify");
+    form.removeAttribute("netlify-honeypot");
 
     const hidden = (name, value) => {
       const i = document.createElement("input");
@@ -1257,14 +1289,22 @@ if (form && formStatus) {
     hidden("_next", new URL("thanks.html", location.href).href);
     hidden("_subject", "홈페이지 상담신청");
     hidden("_template", "table");
+    /* formsubmit 쪽 스팸 거르개. 빈 칸으로 두어야 사람이 보낸 것으로 본다 */
+    hidden("_honey", "");
+    /* 보내기 전에 한 번 더 묻는 화면을 띄우지 않는다 */
+    hidden("_captcha", "false");
   }
 
   /*
     검증만 여기서 하고, 통과하면 브라우저가 그대로 제출한다.
   */
   form.addEventListener("submit", (event) => {
-    if (onGithub && !FORM_ENDPOINT) {
-      /* 받아줄 곳이 없으면 조용히 실패시키지 않고 다른 길을 알려드린다 */
+    /*
+      받아줄 주소도 없고 넷리파이도 아니면, 눌러도 아무 일이 없다.
+      조용히 실패시키지 않고 다른 길을 알려드린다.
+    */
+    const onNetlify = /(^|\.)netlify\.app$/i.test(location.hostname);
+    if (!useEndpoint && !onNetlify) {
       event.preventDefault();
       say("지금은 상담신청서를 받을 수 없습니다. 전화 010-8227-8485 또는 카톡으로 연락 주세요.");
       return;
