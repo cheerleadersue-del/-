@@ -13,8 +13,11 @@
      말하는 셈이라, 새로 쓴 글을 보러 오지 않습니다.
 
      git 이 아는 날짜로 한 번에 맞추는 방법 —
-       각 쪽마다  git log -1 --format=%ad --date=short -- <파일>
-     를 물어 그 값을 lastmod 에 넣으면 됩니다.
+     쪽마다 「git log」 로 그 파일이 마지막으로 바뀐 날(%ad, date=short)
+     을 물어, 그 값을 lastmod 에 넣으면 됩니다.
+
+     (XML 주석 안에는 붙임표 두 개를 쓸 수 없어 명령을 그대로 적지
+      못했습니다. 적었다가 파일이 깨졌습니다.)
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
