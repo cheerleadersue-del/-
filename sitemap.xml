@@ -5,251 +5,261 @@
 
   주소를 바꾸시면(예: 회사 도메인 연결) 이 파일의 주소도 함께 바꿔야 합니다.
   docs/검색에-나오게-하기.md 에 방법을 적어 두었습니다.
+
+  ⚠️ lastmod 는 그 쪽을 마지막으로 고친 날입니다. 쪽을 고치면 여기도
+     같이 고쳐야 합니다. 2026-09-25 에 보니 서른일곱 쪽이 2026-09-15
+     로 남아 있었습니다. 9월 23일과 24일에 내용을 크게 더했는데도
+     그대로였습니다. 이러면 구글에게 「여기는 바뀐 것이 없다」고
+     말하는 셈이라, 새로 쓴 글을 보러 오지 않습니다.
+
+     git 이 아는 날짜로 한 번에 맞추는 방법 —
+       각 쪽마다  git log -1 --format=%ad --date=short -- <파일>
+     를 물어 그 값을 lastmod 에 넣으면 됩니다.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yuillawfirm.com/civil-contract.html</loc>
-    <lastmod>2026-09-15</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://yuillawfirm.com/civil-damages.html</loc>
-    <lastmod>2026-09-15</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://yuillawfirm.com/civil-jeonse.html</loc>
-    <lastmod>2026-09-15</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://yuillawfirm.com/civil-loan.html</loc>
-    <lastmod>2026-09-15</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://yuillawfirm.com/civil-medical.html</loc>
-    <lastmod>2026-09-15</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://yuillawfirm.com/civil-realestate.html</loc>
-    <lastmod>2026-09-15</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://yuillawfirm.com/civil-building.html</loc>
-    <lastmod>2026-09-21</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://yuillawfirm.com/civil-construction.html</loc>
     <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://yuillawfirm.com/civil-damages.html</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yuillawfirm.com/civil-jeonse.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yuillawfirm.com/civil-loan.html</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yuillawfirm.com/civil-medical.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yuillawfirm.com/civil-realestate.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yuillawfirm.com/civil-building.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yuillawfirm.com/civil-construction.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://yuillawfirm.com/medical-advisory.html</loc>
-    <lastmod>2026-09-22</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/civil.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/criminal-crypto.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/criminal-drug.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/criminal-finance.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/criminal-gambling.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/criminal-organized.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/criminal-school.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/criminal-sex.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/criminal-std.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/criminal.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/family-custody.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/family-divorce.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/family-inheritance.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/family-property.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/family.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-25</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/notary-content.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/notary-deed.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/notary-lease.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/notary-review.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/notary.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/privacy.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/rehab-bankruptcy.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/rehab-corporate.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/rehab-discharge.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/rehab-personal.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/rehab.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-dui.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-fatal.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-fraud.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-hitrun.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-negligence.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-refusal.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-roadrage.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-schoolzone.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-serious.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-settlement.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-uninsured.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://yuillawfirm.com/traffic-unlicensed.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <priority>0.7</priority>
   </url>
 </urlset>
