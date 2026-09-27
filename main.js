@@ -1255,6 +1255,138 @@ if (burger && drawer) {
 }
 
 
+/* =====================================================================
+   어디에서 오셨는지 — 유입경로 꼬리표
+
+   광고를 여러 곳에 걸면 「어느 광고가 사람을 데려왔는가」를 알아야
+   다음 달 광고비를 어디에 더 쓸지 정할 수 있습니다.
+   그런데 이 사이트에는 방문자 통계 도구가 붙어 있지 않습니다.
+
+   그래서 통계 도구 대신 상담신청서에 실어 보냅니다.
+   광고에 거는 주소 끝에 꼬리표를 붙여 두면,
+
+       yuillawfirm.com/civil-account.html?from=insta-a
+
+   그 주소로 들어오신 분이 상담을 신청하실 때
+   메일 제목과 표에 「인스타그램 · insta-a」가 함께 옵니다.
+   제목에 들어가므로 메일함 목록만 훑어도 어느 광고인지 보입니다.
+
+   ── 쓰는 법 ──────────────────────────────────────────────────
+   ?from=이름      가장 간단합니다. 이름은 마음대로 정하십시오.
+                   (insta-a · insta-b · naver-0927 …)
+   ?utm_source=…   구글·네이버 광고가 자동으로 붙이는 꼴도 그대로
+   &utm_medium=…   읽습니다. 둘을 섞어 쓰셔도 됩니다.
+   &utm_campaign=…
+
+   ⚠️ 이름은 영문과 숫자, 붙임표(-)로만 지으십시오.
+      한글을 넣으면 주소가 %EC%9D%B8… 처럼 길게 변합니다.
+
+   ⚠️ 광고마다 이름을 다르게 지으셔야 뜻이 있습니다.
+      같은 이름을 두 광고에 쓰면 둘을 구별할 수 없습니다.
+
+   ── 이 코드가 지키는 것 ──────────────────────────────────────
+   ⚠️ 처음 들어오신 자리의 꼬리표를 기억합니다(첫 접점).
+      계좌 지급정지 쪽으로 들어와 이 쪽 저 쪽 둘러보시다가
+      상담을 신청하셔도, 데려온 것은 그 광고이기 때문입니다.
+
+   ⚠️ 방문자를 뒤쫓는 것이 아닙니다. 브라우저를 닫으면 지워지는
+      자리(sessionStorage)에 꼬리표만 잠시 두고, 바깥 어디로도
+      보내지 않습니다. 상담을 신청하실 때 그 한 줄이 우리 메일로
+      함께 올 뿐입니다.
+
+   ⚠️ 꼬리표는 읽고 나면 주소창에서 지웁니다. 주소가 깨끗해야
+      그 분이 주소를 복사해 남에게 보내도 꼬리표가 따라가지
+      않습니다. 남의 유입이 이 광고 것으로 잘못 세어집니다.
+===================================================================== */
+
+const adEntry = (function readEntry() {
+  const KEY = "yuil.entry";
+
+  /* 광고 쪽 이름을 우리말로 적는다. 목록에 없으면 적힌 그대로 둔다. */
+  const NAMES = {
+    instagram: "인스타그램", insta: "인스타그램", ig: "인스타그램",
+    facebook: "페이스북", fb: "페이스북",
+    naver: "네이버", google: "구글", daum: "다음", bing: "빙",
+    kakao: "카카오", youtube: "유튜브", yt: "유튜브",
+    blog: "블로그", band: "밴드", threads: "스레드", x: "엑스",
+  };
+
+  /* 비공개 모드에서는 저장 자리가 막혀 있다. 막혀도 죽지 않게 한다. */
+  const load = () => {
+    try { return JSON.parse(sessionStorage.getItem(KEY) || "null"); }
+    catch (e) { return null; }
+  };
+  const save = (v) => {
+    try { sessionStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {}
+  };
+
+  /* 이미 기억해 둔 것이 있으면 그것을 쓴다 — 첫 접점을 지킨다 */
+  const kept = load();
+  if (kept && kept.label) return kept;
+
+  const q = new URLSearchParams(location.search);
+  const pick = (k) => (q.get(k) || "").trim().slice(0, 60);
+
+  const src = pick("from") || pick("utm_source");
+  const medium = pick("utm_medium");
+  const camp = pick("utm_campaign") || pick("utm_content");
+
+  let label;
+  if (src) {
+    /*
+      「insta-a」처럼 붙임표로 이어 지으시는 경우가 많다.
+      통째로 찾아보고 없으면 첫 낱말로 한 번 더 찾는다.
+      그래야 insta-a · insta-b 가 모두 「인스타그램」으로 읽힌다.
+    */
+    const low = src.toLowerCase();
+    if (NAMES[low]) {
+      /* 「google」처럼 이름만 적으신 경우 — 우리말 이름 하나면 된다 */
+      label = NAMES[low];
+    } else if (NAMES[low.split(/[-_.]/)[0]]) {
+      /* 「insta-a」 — 뒤의 「-a」가 어느 광고인지를 가르므로 함께 적는다 */
+      label = NAMES[low.split(/[-_.]/)[0]] + " · " + src;
+    } else {
+      label = src;
+    }
+    if (camp) label += " · " + camp;
+    if (medium) label += " (" + medium + ")";
+  } else {
+    /*
+      꼬리표가 없으면 어디서 넘어왔는지라도 적어 둔다.
+      검색으로 들어오셨는지 남의 글을 타고 오셨는지가 보인다.
+    */
+    let from = "";
+    try {
+      if (document.referrer) {
+        const h = new URL(document.referrer).hostname;
+        if (h && h !== location.hostname) from = h;
+      }
+    } catch (e) {}
+    label = from ? from + " 에서 넘어옴" : "표시 없음";
+  }
+
+  const page = (location.pathname.replace(/^\/+/, "") || "index.html");
+  const rec = { label, page, tag: src };
+  save(rec);
+
+  /*
+    읽었으면 주소창에서 꼬리표만 걷어낸다.
+    다른 물음표 값(있다면)은 그대로 둔다.
+  */
+  if (src || medium || camp) {
+    ["from", "utm_source", "utm_medium", "utm_campaign",
+     "utm_content", "utm_term"].forEach((k) => q.delete(k));
+    const rest = q.toString();
+    try {
+      history.replaceState(null, "",
+        location.pathname + (rest ? "?" + rest : "") + location.hash);
+    } catch (e) {}
+  }
+
+  return rec;
+})();
+
+
 /* ---------- 상담 폼 ---------- */
 
 const form = $("#form");
@@ -1298,12 +1430,26 @@ if (form && formStatus) {
     };
     /* 보내고 나면 감사 페이지로 돌려보낸다 */
     hidden("_next", new URL("thanks.html", location.href).href);
-    hidden("_subject", "홈페이지 상담신청");
+
+    /*
+      제목에 광고 꼬리표를 함께 적는다.
+      메일함 목록만 훑어도 어느 광고에서 온 신청인지 보이게 하기
+      위해서다. 꼬리표가 없으면 전과 똑같은 제목이 된다.
+    */
+    hidden("_subject",
+      adEntry.tag ? "홈페이지 상담신청 — " + adEntry.label : "홈페이지 상담신청");
     hidden("_template", "table");
     /* formsubmit 쪽 스팸 거르개. 빈 칸으로 두어야 사람이 보낸 것으로 본다 */
     hidden("_honey", "");
     /* 보내기 전에 한 번 더 묻는 화면을 띄우지 않는다 */
     hidden("_captcha", "false");
+
+    /*
+      어디에서 오셨는지. 메일 표의 맨 아래 두 줄로 붙는다.
+      formsubmit 은 칸 이름을 그대로 표에 적으므로 우리말로 짓는다.
+    */
+    hidden("유입경로", adEntry.label);
+    hidden("처음 연 쪽", adEntry.page);
   }
 
   /*
