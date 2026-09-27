@@ -65,6 +65,13 @@ window.CIVIL_AREAS = [
     en:   "MEDICAL MALPRACTICE",
     href: "civil-medical.html",
     line: "입증 책임이 환자 쪽에 있습니다. 그래서 기록을 모으는 일이 무엇보다 먼저입니다."
+  },
+  {
+    no:   "09",
+    name: "계좌 지급정지",
+    en:   "ACCOUNT FREEZE",
+    href: "civil-account.html",
+    line: "통장이 막히면 생활이 먼저 멈춥니다. 은행 이의제기를 기다리는 사이 두 달이 지나갑니다."
   }
 ];
 

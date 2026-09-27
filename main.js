@@ -232,6 +232,7 @@ const practices = [
       { name: "전세사기", href: "civil-jeonse.html" },
       { name: "손해배상", href: "civil-damages.html" },
       { name: "의료사고", href: "civil-medical.html" },
+      { name: "계좌 지급정지", href: "civil-account.html" },
       { name: "민사 센터 전체", href: "civil.html" }
     ]
   },
