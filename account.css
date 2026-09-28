@@ -625,7 +625,11 @@
 
 .lp-three {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /*
+    네 칸이라 둘씩 두 줄로 놓습니다.
+    셋씩 놓으면 마지막 하나가 혼자 남아 허전합니다.
+  */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 2.4vw, 30px);
   margin: 0;
   padding: 0;
@@ -1349,12 +1353,295 @@
 
 
 /* =====================================================================
+   사진과 깊이
+
+   글자만 판판하게 놓여 있으면 촌스러워 보입니다.
+   절마다 사진을 한 장씩 두고, 칸에 그림자와 층을 줍니다.
+
+   ⚠️ 사진은 모두 이미 있는 파일입니다. 바꾸시려면 HTML 의
+      src 만 고치시면 됩니다.
+===================================================================== */
+
+/* ---------- 사진과 글을 나란히 ---------- */
+
+.lp-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(28px, 4.2vw, 68px);
+  align-items: center;
+}
+
+/* flip 은 사진을 오른쪽으로 보냅니다 */
+.lp-split-flip .lp-split-pic { order: 2; }
+
+.lp-split-pic {
+  position: relative;
+  margin: 0;
+}
+
+.lp-split-pic img {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 32vw, 420px);
+  object-fit: cover;
+  box-shadow: 0 26px 60px rgba(20, 20, 22, 0.22);
+}
+
+/* 사진 위에 얹히는 설명 띠 */
+.lp-split-pic figcaption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: 88%;
+  padding: 13px 18px;
+  background: var(--dark);
+  color: rgba(252, 252, 251, 0.82);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.7;
+  letter-spacing: -0.015em;
+  word-break: keep-all;
+}
+
+/* 사진 뒤로 살짝 비치는 금색 테두리 — 층이 하나 생깁니다 */
+.lp-split-pic::before {
+  content: "";
+  position: absolute;
+  inset: 16px -16px -16px 16px;
+  z-index: -1;
+  border: 1px solid rgba(138, 114, 72, 0.45);
+}
+
+.lp-split-flip .lp-split-pic::before { inset: 16px 16px -16px -16px; }
+
+.lp-split-body .lp-sec-ttl { margin-bottom: clamp(18px, 2.4vw, 28px); }
+
+.lp-split-body p {
+  margin: 0 0 15px;
+  font-family: var(--font-sans);
+  font-size: clamp(14.5px, 1.7vw, 16px);
+  font-weight: 300;
+  line-height: 2;
+  color: var(--ink-soft);
+  word-break: keep-all;
+}
+
+.lp-split-body p:last-child { margin-bottom: 0; }
+.lp-split-body p b { font-weight: 700; color: var(--ink); }
+.lp-split-body .lp-kicker { font-size: 11px; }
+
+
+/* ---------- 절 전체에 까는 사진 ---------- */
+
+.lp-sec-pic { position: relative; overflow: hidden; }
+
+.lp-sec-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lp-sec-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(100deg,
+      rgba(12, 12, 14, 0.96) 0%,
+      rgba(12, 12, 14, 0.9) 52%,
+      rgba(12, 12, 14, 0.72) 100%);
+}
+
+.lp-sec-pic > .lp-shell { position: relative; z-index: 2; }
+
+
+/* ---------- 글 사이에 끼우는 사진 ---------- */
+
+.lp-inline-pic {
+  margin: 0 0 clamp(26px, 3.2vw, 38px);
+  max-width: 50em;
+}
+
+.lp-inline-pic img {
+  display: block;
+  width: 100%;
+  height: clamp(180px, 22vw, 280px);
+  object-fit: cover;
+  border: 1px solid rgba(252, 252, 251, 0.14);
+}
+
+.lp-inline-pic figcaption {
+  margin-top: 12px;
+  padding-left: 13px;
+  border-left: 2px solid var(--red);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(252, 252, 251, 0.6);
+  word-break: keep-all;
+}
+
+
+/* ---------- 네 가지 사례 — 그림쇠 ---------- */
+
+.lp-three-ico {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 16px;
+  background: #1f3b57;
+}
+
+.lp-three-ico svg {
+  width: 27px;
+  height: 27px;
+  fill: none;
+  stroke: var(--cream);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 번호는 그림쇠가 생겼으니 오른쪽 위로 물러납니다 */
+.lp-three > li { position: relative; }
+
+.lp-three-no {
+  position: absolute;
+  top: clamp(20px, 2.4vw, 28px);
+  right: clamp(20px, 2.4vw, 28px);
+  margin: 0;
+  font-size: clamp(30px, 3.6vw, 40px);
+  color: rgba(31, 59, 87, 0.16);
+}
+
+
+/* ---------- 바탕에 크게 깔리는 숫자 ---------- */
+
+.lp-sec-mark { position: relative; overflow: hidden; }
+
+.lp-sec-mark > .lp-shell { position: relative; }
+
+.lp-watermark {
+  position: absolute;
+  top: -0.32em;
+  right: -0.04em;
+  z-index: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(180px, 26vw, 340px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.08em;
+  color: rgba(224, 27, 27, 0.07);
+  pointer-events: none;
+  user-select: none;
+}
+
+.lp-sec-mark .lp-kicker,
+.lp-sec-mark .lp-sec-ttl,
+.lp-sec-mark .lp-track,
+.lp-sec-mark .lp-track-law,
+.lp-sec-mark .lp-warn { position: relative; z-index: 1; }
+
+
+/* ---------- 누가 검토합니까 — 사진 ---------- */
+
+.lp-who > li {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 44px rgba(20, 20, 22, 0.07);
+}
+
+.lp-who-pic {
+  margin: calc(clamp(26px, 3.2vw, 38px) * -1)
+          calc(clamp(26px, 3.2vw, 38px) * -1)
+          22px;
+  background: var(--sand);
+  overflow: hidden;
+}
+
+.lp-who-pic img {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 26vw, 300px);
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+/* 사진이 없는 자리 — 아무 얼굴이나 대신 쓰지 않습니다 */
+.lp-who-pic-none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(220px, 26vw, 300px);
+  background:
+    linear-gradient(140deg, #1f3b57 0%, #16293c 100%);
+}
+
+.lp-who-pic-none span {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 300;
+  line-height: 1.24;
+  letter-spacing: -0.04em;
+  text-align: center;
+  color: rgba(228, 213, 183, 0.5);
+}
+
+.lp-who-name {
+  margin: 0 0 10px;
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 2vw, 19px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  color: var(--ink-soft);
+}
+
+.lp-who-name b { font-weight: 700; color: var(--ink); }
+
+
+/* ---------- 카드에 깊이 ---------- */
+
+.lp-three > li,
+.lp-warn,
+.lp-case-link {
+  box-shadow: 0 14px 38px rgba(20, 20, 22, 0.06);
+}
+
+.lp-effect > li {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* 절 머리말의 영문 앞에 짧은 금색 선 */
+.lp-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 26px;
+  height: 1px;
+  margin-right: 11px;
+  vertical-align: 3px;
+  background: currentColor;
+}
+
+
+/* =====================================================================
    좁은 화면
 ===================================================================== */
 
 @media (max-width: 1000px) {
 
   .lp-hero-in { grid-template-columns: 1fr; }
+
+  .lp-split { grid-template-columns: 1fr; gap: 28px; }
+  .lp-split-flip .lp-split-pic { order: 0; }
+  .lp-split-pic::before,
+  .lp-split-flip .lp-split-pic::before { inset: 12px -12px -12px 12px; }
 
   /* 그림카드가 너무 커지지 않게 폭을 묶습니다 */
   .lp-hero-card {
