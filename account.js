@@ -152,3 +152,105 @@
   });
 
 })();
+
+
+/* =====================================================================
+   스크롤에 따라 올라오는 등장
+
+   main.js 에도 같은 것이 있지만 그쪽은 .sec-head · .q-item 처럼
+   정해진 자리만 봅니다. 이 쪽의 칸들은 이름이 달라 여기서 따로 답니다.
+
+   ⚠️ 움직임을 줄이도록 설정하신 분께는 하지 않습니다.
+      CSS 쪽에서도 같은 조건으로 한 번 더 막아 두었습니다.
+===================================================================== */
+
+(function reveal() {
+  /*
+    ⚠️ HTML 에는 class="rise" 를 적지 않습니다.
+       style.css 의 .rise 는 opacity:0 으로 시작하므로, HTML 에
+       적어 두면 자바스크립트가 막혔을 때 그 칸들이 영영 보이지
+       않습니다. 여기서 달아야 안전합니다.
+  */
+  const nodes = document.querySelectorAll(
+    ".lp-three > li, .lp-real > li, .lp-effect > li");
+  if (!nodes.length) return;
+
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (still || !("IntersectionObserver" in window)) return;   /* 그냥 보인다 */
+
+  nodes.forEach((n) => n.classList.add("rise"));
+
+  /*
+    무슨 일이 생겨 관찰이 돌지 않더라도 4초 뒤에는 모두 보이게 한다.
+    글이 영영 안 보이는 것보다 등장 효과를 놓치는 편이 낫다.
+  */
+  const safety = setTimeout(() => {
+    nodes.forEach((n) => n.classList.add("is-in"));
+  }, 4000);
+
+  const io = new IntersectionObserver((rows) => {
+    rows.forEach((row) => {
+      if (!row.isIntersecting) return;
+      /*
+        같은 줄의 칸들이 한꺼번에 뜨면 눈에 띄지 않는다.
+        형제 순서대로 조금씩 늦춰 차례로 올라오게 한다.
+      */
+      const i = [...row.target.parentNode.children].indexOf(row.target);
+      row.target.style.transitionDelay = Math.min(i, 5) * 90 + "ms";
+      row.target.classList.add("is-in");
+      io.unobserve(row.target);
+    });
+    if ([...nodes].every((n) => n.classList.contains("is-in"))) {
+      clearTimeout(safety);
+    }
+  }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+
+  nodes.forEach((n) => io.observe(n));
+})();
+
+
+/* =====================================================================
+   경력 숫자가 0 에서부터 올라간다
+
+   25 · 16 이라는 숫자가 이 쪽에서 가장 먼저 눈에 들어와야 하는
+   자리입니다. 가만히 적혀 있으면 지나칩니다.
+
+   ⚠️ 숫자는 HTML 에 이미 적혀 있습니다(data-count 와 같은 값).
+      자바스크립트가 돌지 않아도 25 와 16 은 그대로 보입니다.
+      그러니 이 부분이 사라져도 쪽이 망가지지 않습니다.
+===================================================================== */
+
+(function countUp() {
+  const nums = document.querySelectorAll(".lp-num b[data-count]");
+  if (!nums.length) return;
+
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (still || !("IntersectionObserver" in window)) return;   /* 적힌 값 그대로 */
+
+  const run = (el) => {
+    const end = parseInt(el.dataset.count, 10);
+    if (!Number.isFinite(end)) return;
+
+    const ms = 1100;
+    const t0 = performance.now();
+
+    (function step(now) {
+      const p = Math.min((now - t0) / ms, 1);
+      /* 끝에서 부드럽게 멎도록 */
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(end * eased));
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = String(end);
+    })(t0);
+  };
+
+  const io = new IntersectionObserver((rows) => {
+    rows.forEach((row) => {
+      if (!row.isIntersecting) return;
+      run(row.target);
+      io.unobserve(row.target);
+    });
+  }, { threshold: 0.6 });
+
+  nums.forEach((n) => io.observe(n));
+})();

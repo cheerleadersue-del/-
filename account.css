@@ -1,28 +1,46 @@
 /* =====================================================================
    계좌 지급정지 랜딩페이지 — 이 쪽에서만 쓰는 꾸밈
 
-   style.css 뒤에 불러옵니다. 색과 글꼴은 그대로 물려받고,
-   짜임만 다르게 씁니다.
+   style.css 뒤에 불러옵니다. 글꼴과 바탕색은 물려받고,
+   강조색과 짜임만 다르게 씁니다.
 
-   ── 왜 따로 두는가 ───────────────────────────────────────────────
+   ── 왜 다르게 쓰는가 ─────────────────────────────────────────────
    보통 쪽(civil-account.html)은 검색에 나오기 위한 자리라
    설명이 길고 차분합니다. 이 쪽은 광고를 누르고 들어오신 분이
    몇 초 안에 「내 이야기구나」 하고 전화를 거시게 하는 자리입니다.
 
-   그래서 글자를 키우고, 절의 수를 줄이고, 단추를 되풀이합니다.
-   다만 색을 요란하게 쓰지는 않습니다. 법률사무소의 쪽이 광고처럼
-   보이면 믿음을 잃습니다. 이 사이트의 차콜과 크림을 그대로 씁니다.
+   그래서 글자를 키우고, 숫자를 세우고, 붉은색을 씁니다.
+   이 사이트에서 색을 가진 자리는 원래 카톡 단추 하나뿐인데,
+   이 쪽만 예외로 둡니다. 광고 그림카드가 붉은색이라 그쪽과
+   맞추기 위해서입니다.
+
+   ⚠️ 이 붉은색을 다른 쪽으로 가져가지 마십시오.
+      사이트 전체가 광고처럼 보이면 믿음을 잃습니다.
 ===================================================================== */
 
 .lp {
-  /* 랜딩페이지에는 위에 붙는 머리띠가 없으므로 보정도 없앤다 */
+  /* 이 쪽 전용 강조색 — 그림카드의 빨강에서 가져왔습니다 */
+  --red:      #e01b1b;
+  --red-up:   #f23333;
+  --red-deep: #a51212;
+
   padding-top: 0;
 }
 
 .lp-shell {
-  width: min(100% - var(--gutter) * 2, 1100px);
+  width: min(100% - var(--gutter) * 2, 1180px);
   margin-inline: auto;
 }
+
+/*
+  스크롤에 따라 올라오는 등장은 style.css 의 .rise 를 그대로 씁니다.
+  account.js 가 칸에 그 이름을 달아 줍니다.
+
+  ⚠️ HTML 에 직접 class="rise" 를 적지 마십시오.
+     style.css 의 .rise 는 opacity:0 으로 시작하므로,
+     자바스크립트가 막히면 그 칸들이 영영 보이지 않습니다.
+     자바스크립트가 살아 있을 때만 달아야 안전합니다.
+*/
 
 
 /* ---------- 머리 ---------- */
@@ -32,6 +50,7 @@
   z-index: 20;
   background: var(--dark);
   color: var(--paper);
+  border-bottom: 3px solid var(--red);
 }
 
 .lp-head-in {
@@ -48,7 +67,7 @@
 .lp-head-call {
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  gap: 9px;
   color: var(--paper);
   text-decoration: none;
   white-space: nowrap;
@@ -56,16 +75,17 @@
 
 .lp-head-call span {
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.16em;
-  color: var(--gold-soft);
+  color: var(--red-up);
 }
 
 .lp-head-call b {
   font-family: var(--font-sans);
-  font-size: clamp(15px, 2.2vw, 19px);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  /* 숫자는 반드시 고딕으로 — 세리프는 옛날식 숫자가 나온다 */
+  font-size: clamp(16px, 2.3vw, 21px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  /* 번호는 반드시 고딕으로 — 세리프는 옛날식 숫자가 나옵니다 */
 }
 
 
@@ -73,9 +93,7 @@
 
 .lp-hero {
   position: relative;
-  display: flex;
-  align-items: center;
-  padding: clamp(40px, 5vw, 64px) 0 clamp(48px, 6vw, 80px);
+  padding: clamp(36px, 4.5vw, 60px) 0 clamp(48px, 6vw, 80px);
   overflow: hidden;
   background: var(--dark);
   color: var(--paper);
@@ -101,85 +119,165 @@
   */
   background:
     linear-gradient(100deg,
-      rgba(14, 14, 16, 0.94) 0%,
-      rgba(14, 14, 16, 0.80) 42%,
-      rgba(14, 14, 16, 0.38) 100%);
+      rgba(12, 12, 14, 0.95) 0%,
+      rgba(12, 12, 14, 0.88) 46%,
+      rgba(12, 12, 14, 0.58) 100%);
 }
 
 .lp-hero-in {
   position: relative;
   z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
 }
 
-.lp-eyebrow {
-  margin: 0 0 18px;
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.32em;
-  color: var(--gold-soft);
+/* 광고 그림카드 */
+.lp-hero-card {
+  margin: 0;
+  border: 1px solid rgba(252, 252, 251, 0.14);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
 }
+
+.lp-hero-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+
+/* 경력 딱지 */
+
+.lp-creds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-creds li {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 7px 13px;
+  border: 1px solid rgba(224, 27, 27, 0.55);
+  background: rgba(224, 27, 27, 0.13);
+  font-family: var(--font-sans);
+  white-space: nowrap;
+}
+
+.lp-creds b {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ff8d8d;
+}
+
+.lp-creds span {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: rgba(252, 252, 251, 0.66);
+}
+
 
 .lp-title {
-  margin: 0 0 22px;
-  max-width: 14em;
-  font-family: var(--font-display);
-  font-size: clamp(40px, 7vw, 78px);
-  font-weight: 300;
-  line-height: 1.06;
-  letter-spacing: -0.045em;
+  margin: 0 0 20px;
+  font-family: var(--font-serif);
+  font-size: clamp(38px, 6.2vw, 72px);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.055em;
   word-break: keep-all;
+}
+
+/* 붉은 글자 밑에 굵은 밑줄 — 그림카드의 짜임을 따릅니다 */
+.lp-title em {
+  position: relative;
+  font-style: normal;
+  color: var(--red-up);
+}
+
+.lp-title em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.06em;
+  height: 0.08em;
+  background: var(--red);
 }
 
 .lp-lead {
-  margin: 0 0 clamp(24px, 3vw, 34px);
-  max-width: 34em;
-  font-family: var(--font-serif);
-  font-size: clamp(16px, 1.9vw, 20px);
-  font-weight: 200;
-  line-height: 1.86;
+  margin: 0 0 clamp(22px, 3vw, 32px);
+  max-width: 32em;
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 1.75vw, 18px);
+  font-weight: 300;
+  line-height: 1.92;
   letter-spacing: -0.02em;
-  color: rgba(252, 252, 251, 0.76);
+  color: rgba(252, 252, 251, 0.74);
   word-break: keep-all;
 }
 
-.lp-lead b {
-  font-weight: 400;
-  color: var(--paper);
-}
+.lp-lead b { font-weight: 700; color: var(--paper); }
 
 
 /* ---------- 남은 기간 계산기 ---------- */
 
 .lp-calc {
-  max-width: 660px;
-  margin-bottom: clamp(26px, 3.4vw, 38px);
-  padding: clamp(22px, 3vw, 30px) clamp(20px, 3vw, 30px) clamp(20px, 2.6vw, 26px);
-  border: 1px solid rgba(228, 213, 183, 0.24);
-  background: rgba(31, 31, 34, 0.72);
+  margin-bottom: clamp(20px, 2.6vw, 28px);
+  padding: clamp(20px, 2.6vw, 26px);
+  border: 1px solid rgba(252, 252, 251, 0.16);
+  border-top: 3px solid var(--red);
+  background: rgba(24, 24, 27, 0.82);
   backdrop-filter: blur(3px);
 }
 
 .lp-calc-ttl {
-  margin: 0 0 18px;
-  font-family: var(--font-serif);
-  font-size: clamp(17px, 2.1vw, 21px);
-  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 16px;
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 1.9vw, 18px);
+  font-weight: 700;
   letter-spacing: -0.03em;
-  color: var(--cream);
+  color: var(--paper);
+}
+
+/* 깜박이는 점 — 눈이 여기로 옵니다 */
+.lp-calc-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red-up);
+  animation: lpPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes lpPulse {
+  0%, 100% { opacity: 1;   box-shadow: 0 0 0 0 rgba(242, 51, 51, 0.6); }
+  70%      { opacity: 0.7; box-shadow: 0 0 0 8px rgba(242, 51, 51, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-calc-dot { animation: none; }
 }
 
 .lp-calc-row {
   display: grid;
   grid-template-columns: 1fr 1fr auto;
-  gap: 12px;
+  gap: 11px;
   align-items: end;
 }
 
 .lp-field {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
   min-width: 0;
 }
 
@@ -187,7 +285,7 @@
   font-family: var(--font-sans);
   font-size: 11.5px;
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: rgba(252, 252, 251, 0.6);
 }
 
@@ -195,11 +293,11 @@
 .lp-field input {
   width: 100%;
   min-width: 0;
-  height: 46px;
+  height: 48px;
   padding: 0 12px;
-  border: 1px solid rgba(252, 252, 251, 0.22);
+  border: 1px solid rgba(252, 252, 251, 0.24);
   border-radius: 0;
-  background: rgba(20, 20, 22, 0.86);
+  background: rgba(14, 14, 16, 0.9);
   color: var(--paper);
   font-family: var(--font-sans);
   font-size: 15px;
@@ -209,7 +307,7 @@
   appearance: none;
 }
 
-/* 날짜 칸의 달력 그림이 어두운 바탕에서 보이지 않는 것을 고친다 */
+/* 날짜 칸의 달력 그림이 어두운 바탕에서 보이지 않는 것을 고칩니다 */
 .lp-field input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   opacity: 0.55;
@@ -217,11 +315,11 @@
 }
 
 .lp-field select {
-  /* 직접 그린 화살표 — appearance:none 으로 기본 화살표가 사라졌다 */
+  /* 직접 그린 화살표 — appearance:none 으로 기본 화살표가 사라졌습니다 */
   background-image:
     linear-gradient(45deg, transparent 50%, rgba(252,252,251,0.6) 50%),
     linear-gradient(135deg, rgba(252,252,251,0.6) 50%, transparent 50%);
-  background-position: calc(100% - 17px) 21px, calc(100% - 12px) 21px;
+  background-position: calc(100% - 17px) 22px, calc(100% - 12px) 22px;
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
   padding-right: 34px;
@@ -229,29 +327,29 @@
 
 .lp-field select:focus-visible,
 .lp-field input:focus-visible {
-  outline: 2px solid var(--gold-soft);
+  outline: 2px solid var(--red-up);
   outline-offset: 1px;
 }
 
 .lp-calc-go {
-  height: 46px;
+  height: 48px;
   padding: 0 22px;
   border: 0;
-  background: var(--cream);
-  color: var(--dark);
+  background: var(--red);
+  color: #fff;
   font-family: var(--font-sans);
-  font-size: 14.5px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   white-space: nowrap;
   cursor: pointer;
-  transition: background 0.25s var(--ease);
+  transition: background 0.22s var(--ease);
 }
 
-.lp-calc-go:hover { background: #f0e4ca; }
+.lp-calc-go:hover { background: var(--red-up); }
 
 .lp-calc-hint {
-  margin: 13px 0 0;
+  margin: 12px 0 0;
   font-family: var(--font-sans);
   font-size: 12.5px;
   font-weight: 300;
@@ -267,16 +365,16 @@
 
 /*
   ⚠️ output 에 display:block 을 주면 [hidden] 이 먹지 않습니다.
-     그래서 결과 칸이 빈 채로 보였습니다. 아래 한 줄이 그것을 막습니다.
+     아래 한 줄이 그것을 막습니다. 지우면 빈 칸이 늘 보입니다.
 */
 .lp-calc-out[hidden] { display: none; }
 
 .lp-calc-out {
   display: block;
-  margin-top: 18px;
-  padding: 18px 18px 16px;
+  margin-top: 16px;
+  padding: 17px 17px 15px;
   border-left: 3px solid var(--gold-soft);
-  background: rgba(20, 20, 22, 0.76);
+  background: rgba(14, 14, 16, 0.82);
   font-family: var(--font-sans);
   font-size: 13.5px;
   font-weight: 300;
@@ -290,33 +388,33 @@
 
 .lp-calc-head {
   display: block;
-  margin-bottom: 7px;
-  font-family: var(--font-serif);
-  font-size: clamp(18px, 2.4vw, 23px);
-  font-weight: 400;
-  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+  font-family: var(--font-sans);
+  font-size: clamp(17px, 2.2vw, 21px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
   color: var(--paper);
 }
 
 .lp-calc-head em {
-  font-family: var(--font-sans);
   font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  /* 숫자가 크게 서야 한다 — D-11 이 이 화면의 주인공이다 */
-  font-size: 1.24em;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  /* 숫자가 크게 서야 합니다 — D-11 이 이 화면의 주인공입니다 */
+  font-size: 1.5em;
 }
 
-.lp-calc-out.is-urgent { border-left-color: #c8553d; }
-.lp-calc-out.is-urgent .lp-calc-head em { color: #e88b74; }
-.lp-calc-out.is-over   { border-left-color: #8a8a90; }
-.lp-calc-out.is-ok     { border-left-color: var(--cream); }
-.lp-calc-out.is-wait   { border-left-color: rgba(252, 252, 251, 0.3); }
+.lp-calc-out.is-urgent                  { border-left-color: var(--red); }
+.lp-calc-out.is-urgent .lp-calc-head em { color: var(--red-up); }
+.lp-calc-out.is-over                    { border-left-color: #8a8a90; }
+.lp-calc-out.is-ok                      { border-left-color: var(--cream); }
+.lp-calc-out.is-ok .lp-calc-head em     { color: var(--cream); }
+.lp-calc-out.is-wait                    { border-left-color: rgba(252, 252, 251, 0.3); }
 
 .lp-calc-caveat {
   display: block;
-  margin-top: 11px;
-  padding-top: 11px;
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1px solid rgba(252, 252, 251, 0.14);
   font-size: 12px;
   color: rgba(252, 252, 251, 0.5);
@@ -330,31 +428,32 @@
 .lp-acts {
   display: flex;
   flex-wrap: wrap;
-  gap: 11px;
+  gap: 10px;
 }
 
 .lp-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 54px;
+  min-height: 56px;
   padding: 0 26px;
   border: 1px solid transparent;
   font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   text-decoration: none;
   white-space: nowrap;
-  transition: background 0.25s var(--ease), color 0.25s var(--ease),
-              border-color 0.25s var(--ease);
+  transition: background 0.22s var(--ease), color 0.22s var(--ease),
+              border-color 0.22s var(--ease), transform 0.22s var(--ease);
 }
 
-.lp-btn-cream {
-  background: var(--cream);
-  color: var(--dark);
+.lp-btn-red {
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(224, 27, 27, 0.3);
 }
-.lp-btn-cream:hover { background: #f0e4ca; }
+.lp-btn-red:hover { background: var(--red-up); transform: translateY(-1px); }
 
 .lp-btn-kakao {
   background: var(--kakao);
@@ -363,7 +462,7 @@
 .lp-btn-kakao:hover { background: var(--kakao-up); }
 
 .lp-btn-line {
-  border-color: rgba(20, 20, 22, 0.3);
+  border-color: rgba(20, 20, 22, 0.32);
   color: var(--ink);
 }
 .lp-btn-line:hover {
@@ -372,21 +471,23 @@
   color: var(--paper);
 }
 
-/* 어두운 구간에 놓일 때는 테두리 단추의 색을 뒤집는다 */
+/* 어두운 구간에서는 테두리 단추의 색을 뒤집습니다 */
 .lp-hero .lp-btn-line,
-.lp-sec-dark .lp-btn-line {
+.lp-sec-dark .lp-btn-line,
+.lp-cta .lp-btn-line {
   border-color: rgba(252, 252, 251, 0.34);
   color: var(--paper);
 }
 .lp-hero .lp-btn-line:hover,
-.lp-sec-dark .lp-btn-line:hover {
+.lp-sec-dark .lp-btn-line:hover,
+.lp-cta .lp-btn-line:hover {
   background: var(--paper);
   color: var(--dark);
   border-color: var(--paper);
 }
 
 .lp-hero-note {
-  margin: 18px 0 0;
+  margin: 15px 0 0;
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 300;
@@ -397,32 +498,180 @@
 .lp-hero-note b { font-weight: 500; color: rgba(252, 252, 251, 0.82); }
 
 
+/* ---------- 경력 띠 ---------- */
+
+.lp-band {
+  padding: clamp(34px, 4vw, 52px) 0;
+  color: #fff;
+  /* 위아래를 살짝 다른 붉은색으로 — 띠가 판판해 보이지 않게 */
+  background-image: linear-gradient(180deg, #b91616 0%, #93100f 100%);
+}
+
+.lp-band-list {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: clamp(22px, 3.4vw, 48px);
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-num {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  margin: 0 0 4px;
+  font-family: var(--font-sans);
+  line-height: 1;
+}
+
+.lp-num b {
+  font-size: clamp(42px, 6.4vw, 72px);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  font-variant-numeric: lining-nums;
+}
+
+.lp-num i {
+  font-style: normal;
+  font-size: clamp(15px, 2vw, 21px);
+  font-weight: 500;
+}
+
+.lp-num-cap {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.78);
+  word-break: keep-all;
+}
+
+.lp-num-cap em { font-style: normal; font-weight: 700; color: #fff; }
+
+.lp-band-word p {
+  margin: 0;
+  padding-left: clamp(18px, 2.4vw, 32px);
+  border-left: 1px solid rgba(255, 255, 255, 0.28);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.84);
+  word-break: keep-all;
+}
+
+.lp-band-word b { font-weight: 700; color: #fff; }
+
+
 /* ---------- 절 ---------- */
 
 .lp-sec {
-  padding: clamp(56px, 7.5vw, 104px) 0;
+  padding: clamp(56px, 7.5vw, 110px) 0;
   background: var(--paper);
 }
 
 .lp-sec-alt  { background: var(--paper-2); }
 .lp-sec-dark { background: var(--dark); color: var(--paper); }
 
+.lp-kicker {
+  margin: 0 0 12px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--red);
+}
+
+.lp-kicker-light { color: var(--red-up); }
+
 .lp-sec-ttl {
-  margin: 0 0 clamp(30px, 4vw, 48px);
-  font-family: var(--font-display);
-  font-size: clamp(28px, 4.6vw, 50px);
-  font-weight: 300;
-  line-height: 1.16;
-  letter-spacing: -0.04em;
+  margin: 0 0 clamp(28px, 3.6vw, 48px);
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4.6vw, 52px);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.05em;
   color: var(--ink);
   word-break: keep-all;
 }
 
-.lp-sec-ttl-light { color: var(--paper); }
+.lp-sec-ttl em { font-style: normal; color: var(--red); }
 
-.lp-note {
-  margin: clamp(26px, 3vw, 36px) 0 0;
-  max-width: 52em;
+.lp-sec-ttl-light { color: var(--paper); }
+.lp-sec-ttl-light em { color: var(--red-up); }
+
+.lp-big {
+  margin: 0 0 clamp(26px, 3.2vw, 40px);
+  max-width: 44em;
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 1.8vw, 18px);
+  font-weight: 300;
+  line-height: 1.95;
+  letter-spacing: -0.02em;
+  color: var(--ink-soft);
+  word-break: keep-all;
+}
+
+.lp-big b { font-weight: 700; color: var(--ink); }
+
+.lp-sec-dark .lp-big   { color: rgba(252, 252, 251, 0.74); }
+.lp-sec-dark .lp-big b { color: var(--paper); }
+
+
+/* ---------- 세 가지 사례 ---------- */
+
+.lp-three {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 30px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lp-three > li {
+  position: relative;
+  padding: clamp(26px, 3.2vw, 38px) clamp(22px, 2.6vw, 30px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--red);
+  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.lp-three > li:hover {
+  box-shadow: 0 18px 46px rgba(20, 20, 22, 0.1);
+  transform: translateY(-3px);
+}
+
+.lp-three-no {
+  display: block;
+  margin-bottom: 14px;
+  font-family: var(--font-sans);
+  font-size: clamp(34px, 4.4vw, 48px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: rgba(224, 27, 27, 0.22);
+}
+
+.lp-three h3 {
+  margin: 0 0 13px;
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 2.4vw, 25px);
+  font-weight: 700;
+  line-height: 1.34;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+  word-break: keep-all;
+}
+
+.lp-three h3 em { font-style: normal; color: var(--red); }
+
+.lp-three p {
+  margin: 0;
   font-family: var(--font-sans);
   font-size: 13.5px;
   font-weight: 300;
@@ -431,12 +680,64 @@
   word-break: keep-all;
 }
 
-.lp-note b { font-weight: 500; color: var(--ink); }
+.lp-three p b { font-weight: 700; color: var(--ink); }
 
 
-/* ---------- 단계 ---------- */
+/* ---------- 실제 사례 ---------- */
 
-.lp-steps {
+.lp-real {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 40px);
+  margin: 0 0 clamp(30px, 3.6vw, 44px);
+  padding: 0;
+  list-style: none;
+}
+
+.lp-real h3 {
+  margin: 0 0 11px;
+  padding-top: 15px;
+  border-top: 2px solid var(--red);
+  font-family: var(--font-serif);
+  font-size: clamp(15.5px, 1.9vw, 18px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--paper);
+  word-break: keep-all;
+}
+
+.lp-real p {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.88;
+  color: rgba(252, 252, 251, 0.66);
+  word-break: keep-all;
+}
+
+.lp-real p b { font-weight: 700; color: var(--paper); }
+
+.lp-quote {
+  margin: 0;
+  max-width: 54em;
+  padding: clamp(22px, 2.8vw, 30px);
+  border-left: 4px solid var(--red);
+  background: rgba(224, 27, 27, 0.09);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.95;
+  color: rgba(252, 252, 251, 0.78);
+  word-break: keep-all;
+}
+
+.lp-quote b { font-weight: 700; color: #ff9c9c; }
+
+
+/* ---------- 기한 띠 ---------- */
+
+.lp-track {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
@@ -444,253 +745,234 @@
   padding: 0;
   list-style: none;
   background: var(--line);
-  /* 칸 사이의 1px 은 배경색이 비쳐 나온 선이다 */
 }
 
-.lp-steps > li {
-  padding: 22px 20px 24px;
+.lp-track > li {
+  padding: 24px 20px 26px;
   background: var(--paper);
 }
 
-.lp-sec-alt .lp-steps > li { background: var(--paper-2); }
-
-.lp-steps > li > b {
+.lp-track > li > b {
   display: block;
   margin-bottom: 12px;
   font-family: var(--font-sans);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--ink-faint);
 }
 
-.lp-steps h3 {
-  margin: 0 0 7px;
+.lp-track h3 {
+  margin: 0 0 8px;
   font-family: var(--font-serif);
-  font-size: clamp(14.5px, 1.7vw, 16.5px);
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-  word-break: keep-all;
-}
-
-.lp-steps p {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 12.5px;
-  font-weight: 300;
-  line-height: 1.7;
-  color: var(--ink-soft);
-  word-break: keep-all;
-}
-
-/* 2개월이 시작되는 칸 — 여기만 어둡게 세운다 */
-.lp-steps > li.is-mark,
-.lp-sec-alt .lp-steps > li.is-mark {
-  background: var(--dark);
-}
-.lp-steps > li.is-mark > b { color: var(--gold-soft); }
-.lp-steps > li.is-mark h3  { color: var(--paper); }
-.lp-steps > li.is-mark p   { color: rgba(252, 252, 251, 0.62); }
-.lp-steps > li.is-mark em  {
-  font-style: normal;
-  font-weight: 500;
-  color: var(--cream);
-}
-
-
-/* ---------- 이런 경우입니까 ---------- */
-
-.lp-cards {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(20px, 2.6vw, 32px);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.lp-cards > li {
-  padding: clamp(22px, 2.8vw, 30px);
-  background: var(--paper);
-  border: 1px solid var(--line);
-}
-
-.lp-cards h3 {
-  margin: 0 0 10px;
-  font-family: var(--font-display);
-  font-size: clamp(21px, 2.8vw, 29px);
-  font-weight: 400;
-  line-height: 1.3;
+  font-size: clamp(15px, 1.8vw, 17.5px);
+  font-weight: 700;
+  line-height: 1.46;
   letter-spacing: -0.035em;
   color: var(--ink);
   word-break: keep-all;
 }
 
-.lp-cards p {
+.lp-track p {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: 13.5px;
+  font-size: 12.5px;
   font-weight: 300;
-  line-height: 1.86;
+  line-height: 1.72;
   color: var(--ink-soft);
   word-break: keep-all;
 }
 
-.lp-cards b { font-weight: 500; color: var(--ink); }
+/* 2개월이 시작되는 칸 */
+.lp-track > li.is-hot     { background: var(--red); }
+.lp-track > li.is-hot > b { color: rgba(255, 255, 255, 0.72); }
+.lp-track > li.is-hot h3  { color: #fff; }
+.lp-track > li.is-hot p   { color: rgba(255, 255, 255, 0.9); }
+.lp-track > li.is-hot em  { font-style: normal; font-weight: 700; color: #fff; }
 
+/* 돈이 넘어가는 칸 */
+.lp-track > li.is-end     { background: var(--dark); }
+.lp-track > li.is-end > b { color: var(--gold-soft); }
+.lp-track > li.is-end h3  { color: var(--paper); }
+.lp-track > li.is-end p   { color: rgba(252, 252, 251, 0.62); }
 
-/* ---------- 이의제기 vs 소 ---------- */
-
-.lp-vs {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(18px, 2.4vw, 28px);
-}
-
-.lp-vs-col {
-  padding: clamp(24px, 3vw, 34px);
-  border: 1px solid var(--line);
-  background: var(--paper);
-}
-
-.lp-vs-col.is-ours {
-  border-color: var(--dark);
-  background: var(--dark);
-  color: var(--paper);
-}
-
-.lp-vs-tag {
-  margin: 0 0 18px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--line);
-  font-family: var(--font-serif);
-  font-size: clamp(16px, 2.1vw, 20px);
-  font-weight: 500;
-  letter-spacing: -0.03em;
+.lp-track-law {
+  margin: 14px 0 0;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
   color: var(--ink-faint);
 }
 
-.lp-vs-col.is-ours .lp-vs-tag {
-  border-bottom-color: rgba(228, 213, 183, 0.28);
-  color: var(--cream);
+.lp-track-law b { font-weight: 700; color: var(--ink-soft); }
+
+
+/* ---------- 은행 이의제기의 한계 ---------- */
+
+.lp-warn {
+  margin-top: clamp(30px, 3.6vw, 46px);
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--ink);
+  background: var(--paper);
 }
 
-.lp-vs-col ul {
+.lp-warn h3 {
+  margin: 0 0 12px;
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 2.2vw, 21px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.lp-warn p {
   margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 13px;
-}
-
-.lp-vs-col li {
-  position: relative;
-  padding-left: 17px;
+  max-width: 50em;
   font-family: var(--font-sans);
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 300;
-  line-height: 1.82;
+  line-height: 1.95;
   color: var(--ink-soft);
   word-break: keep-all;
 }
 
-.lp-vs-col li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 11px;
-  width: 6px;
-  height: 1px;
-  background: var(--ink-faint);
+.lp-warn p b { font-weight: 700; color: var(--ink); }
+
+
+/* ---------- 소송의 효과 ---------- */
+
+.lp-law-note {
+  margin: 0 0 clamp(26px, 3.2vw, 38px);
+  max-width: 50em;
+  padding: clamp(18px, 2.2vw, 24px);
+  border: 1px solid rgba(252, 252, 251, 0.18);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.92;
+  color: rgba(252, 252, 251, 0.7);
+  word-break: keep-all;
 }
 
-.lp-vs-col li b { font-weight: 500; color: var(--ink); }
+.lp-law-note b { font-weight: 700; color: var(--cream); }
 
-.lp-vs-col.is-ours li { color: rgba(252, 252, 251, 0.72); }
-.lp-vs-col.is-ours li b { color: var(--paper); }
-.lp-vs-col.is-ours li::before { background: var(--gold-soft); }
-
-
-/* ---------- 하지 마십시오 ---------- */
-
-.lp-dont {
+.lp-effect {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(24px, 3.2vw, 44px);
+  gap: clamp(18px, 2.4vw, 28px);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.lp-dont h3 {
-  margin: 0 0 11px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(252, 252, 251, 0.2);
-  font-family: var(--font-serif);
-  font-size: clamp(15.5px, 1.9vw, 18px);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  color: var(--paper);
-  word-break: keep-all;
+.lp-effect > li {
+  padding: clamp(24px, 3vw, 32px);
+  background: rgba(252, 252, 251, 0.05);
+  border-top: 3px solid var(--red);
 }
 
-.lp-dont p {
+.lp-effect > li > b {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 3.6vw, 38px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: var(--red-up);
+}
+
+.lp-effect p {
   margin: 0;
   font-family: var(--font-sans);
   font-size: 13.5px;
   font-weight: 300;
-  line-height: 1.86;
-  color: rgba(252, 252, 251, 0.64);
+  line-height: 1.9;
+  color: rgba(252, 252, 251, 0.7);
   word-break: keep-all;
 }
 
-.lp-dont b { font-weight: 500; color: var(--paper); }
+.lp-effect p b {
+  font-size: inherit;
+  font-weight: 700;
+  color: var(--paper);
+}
+
+
+/* ---------- 시간 싸움 ---------- */
+
+.lp-time {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(26px, 4vw, 60px);
+  align-items: start;
+}
+
+.lp-time .lp-sec-ttl { margin-bottom: 0; }
+
+.lp-time-body p {
+  margin: 0 0 16px;
+  font-family: var(--font-sans);
+  font-size: clamp(14.5px, 1.7vw, 16.5px);
+  font-weight: 300;
+  line-height: 1.98;
+  color: var(--ink-soft);
+  word-break: keep-all;
+}
+
+.lp-time-body p:last-child { margin-bottom: 0; }
+.lp-time-body b { font-weight: 700; color: var(--ink); }
 
 
 /* ---------- 맺음 ---------- */
 
 .lp-cta {
-  padding: clamp(60px, 8vw, 116px) 0;
-  background: var(--paper-2);
+  padding: clamp(60px, 8vw, 120px) 0;
+  background: var(--dark);
+  color: var(--paper);
+  border-top: 5px solid var(--red);
 }
 
 .lp-cta-ttl {
-  margin: 0 0 20px;
-  font-family: var(--font-display);
-  font-size: clamp(32px, 5.6vw, 62px);
-  font-weight: 300;
-  line-height: 1.12;
-  letter-spacing: -0.045em;
-  color: var(--ink);
+  margin: 0 0 22px;
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5.4vw, 62px);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -0.055em;
+  color: var(--paper);
   word-break: keep-all;
 }
+
+.lp-cta-ttl em { font-style: normal; color: var(--red-up); }
 
 .lp-cta-lead {
-  margin: 0 0 clamp(28px, 3.4vw, 40px);
-  max-width: 40em;
-  font-family: var(--font-serif);
-  font-size: clamp(15px, 1.8vw, 18px);
+  margin: 0 0 16px;
+  max-width: 44em;
+  font-family: var(--font-sans);
+  font-size: clamp(14.5px, 1.7vw, 17px);
   font-weight: 300;
-  line-height: 1.92;
+  line-height: 1.95;
   letter-spacing: -0.02em;
-  color: var(--ink-soft);
+  color: rgba(252, 252, 251, 0.72);
   word-break: keep-all;
 }
 
-.lp-cta-lead b { font-weight: 500; color: var(--ink); }
+.lp-cta-lead:last-of-type { margin-bottom: clamp(28px, 3.4vw, 40px); }
+.lp-cta-lead b { font-weight: 700; color: var(--paper); }
 
 .lp-cta-more {
   margin: 26px 0 0;
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 300;
-  color: var(--ink-faint);
+  color: rgba(252, 252, 251, 0.45);
 }
 
 .lp-cta-more a {
-  color: var(--ink-soft);
+  color: rgba(252, 252, 251, 0.75);
   text-underline-offset: 3px;
 }
 
@@ -699,11 +981,40 @@
    좁은 화면
 ===================================================================== */
 
+@media (max-width: 1000px) {
+
+  .lp-hero-in { grid-template-columns: 1fr; }
+
+  /* 그림카드가 너무 커지지 않게 폭을 묶습니다 */
+  .lp-hero-card {
+    max-width: 400px;
+    margin-inline: auto;
+  }
+
+  .lp-time { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 860px) {
 
-  .lp-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .lp-dont  { grid-template-columns: 1fr; gap: 26px; }
-  .lp-vs    { grid-template-columns: 1fr; }
+  .lp-band-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .lp-band-word { grid-column: 1 / -1; }
+
+  .lp-band-word p {
+    padding-left: 0;
+    padding-top: 20px;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.28);
+  }
+
+  .lp-three,
+  .lp-real,
+  .lp-effect { grid-template-columns: 1fr; }
+
+  .lp-track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 640px) {
@@ -715,34 +1026,25 @@
   .lp-hero-scrim {
     background:
       linear-gradient(180deg,
-        rgba(14, 14, 16, 0.90) 0%,
-        rgba(14, 14, 16, 0.86) 55%,
-        rgba(14, 14, 16, 0.92) 100%);
+        rgba(12, 12, 14, 0.92) 0%,
+        rgba(12, 12, 14, 0.88) 55%,
+        rgba(12, 12, 14, 0.94) 100%);
   }
 
   .lp-head-in { min-height: 62px; }
 
-  .lp-calc-row {
-    grid-template-columns: 1fr;
-    gap: 13px;
-  }
-
-  .lp-calc-go { width: 100%; }
-
-  .lp-cards { grid-template-columns: 1fr; }
+  .lp-calc-row { grid-template-columns: 1fr; gap: 12px; }
+  .lp-calc-go  { width: 100%; }
 
   .lp-acts { flex-direction: column; align-items: stretch; }
   .lp-btn  { width: 100%; }
 
-  /*
-    아래에 붙는 막대가 맺음말을 가리지 않게 자리를 비워 둔다.
-    막대의 높이는 style.css 의 .bar 에서 정합니다.
-  */
+  /* 아래 막대가 맺음말을 가리지 않게 자리를 비워 둡니다 */
   .lp-cta { padding-bottom: clamp(96px, 20vw, 130px); }
 }
 
 @media (max-width: 400px) {
 
   .lp-head .brand-text small { display: none; }
-  .lp-steps { grid-template-columns: 1fr; }
+  .lp-track { grid-template-columns: 1fr; }
 }
