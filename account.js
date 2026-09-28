@@ -254,3 +254,152 @@
 
   nums.forEach((n) => io.observe(n));
 })();
+
+
+/* =====================================================================
+   해결한 사건 — 카드와 상세 쪽
+
+   내용은 account-cases.js 한 곳에만 있습니다.
+   여기서는 그것을 읽어 랜딩페이지의 카드와
+   account-case.html 의 본문을 그려 넣습니다.
+
+   ⚠️ 사례가 하나도 없으면 랜딩페이지의 그 절이 통째로 사라집니다.
+      빈 자리가 남아 있는 것보다 낫고, 없는 사례를 지어 넣는 일을
+      막기 위해서이기도 합니다.
+
+   ⚠️ 글은 모두 글자로만 넣습니다(textContent).
+      판결문에서 옮겨 적은 글에 꺾쇠(< >)가 섞여 있어도
+      쪽이 깨지지 않습니다.
+===================================================================== */
+
+(function cases() {
+
+  const list = Array.isArray(window.ACCOUNT_CASES) ? window.ACCOUNT_CASES : [];
+
+  const make = (tag, cls, text) => {
+    const el = document.createElement(tag);
+    if (cls) el.className = cls;
+    if (text != null) el.textContent = text;
+    return el;
+  };
+
+  /* ---------- 랜딩페이지의 카드 ---------- */
+
+  const grid = document.getElementById("caseGrid");
+  const sec  = document.getElementById("cases");
+
+  if (grid && sec) {
+    if (!list.length) {
+      /* 아직 넣은 사례가 없습니다 — 절을 통째로 감춥니다 */
+      sec.hidden = true;
+    } else {
+      list.forEach((c) => {
+        const card = make("li", "lp-case");
+
+        const link = make("a", "lp-case-link");
+        link.href = "account-case.html?case=" + encodeURIComponent(c.id);
+
+        const badge = make("span",
+          "lp-case-badge" + (c.tone === "none" ? " is-none" : ""),
+          c.badge || "");
+        link.append(badge);
+
+        link.append(make("span", "lp-case-ttl", c.title || ""));
+        link.append(make("span", "lp-case-sum", c.summary || ""));
+
+        if (Array.isArray(c.tags) && c.tags.length) {
+          const tags = make("span", "lp-case-tags");
+          c.tags.forEach((t) => tags.append(make("i", "", "#" + t)));
+          link.append(tags);
+        }
+
+        link.append(make("span", "lp-case-go", "이 사건 보기"));
+        card.append(link);
+        grid.append(card);
+      });
+    }
+  }
+
+  /* ---------- 상세 쪽 ---------- */
+
+  const body = document.getElementById("caseBody");
+  if (!body) return;
+
+  const want = new URLSearchParams(location.search).get("case");
+  const c = list.find((x) => x.id === want);
+
+  /* 없는 사례를 부르셨거나 아직 사례를 넣지 않으신 경우 */
+  if (!c) {
+    const box = make("div", "lp-shell lp-detail-none");
+    box.append(make("h1", "lp-detail-ttl", "사건을 찾지 못했습니다"));
+    box.append(make("p", "",
+      "주소가 잘못되었거나, 내려간 사건입니다. 계좌 지급정지 안내로 돌아가 주십시오."));
+    const a = make("a", "lp-btn lp-btn-red", "계좌 지급정지 안내로");
+    a.href = "account.html";
+    box.append(a);
+    body.append(box);
+    return;
+  }
+
+  document.title = (c.title || "해결한 사건") + " | 법무법인 유일";
+
+  const head = make("header", "lp-detail-head");
+  const hin  = make("div", "lp-shell");
+  hin.append(make("p", "lp-detail-crumb", "해결한 사건"));
+  hin.append(make("span",
+    "lp-case-badge" + (c.tone === "none" ? " is-none" : ""), c.badge || ""));
+  hin.append(make("h1", "lp-detail-ttl", c.title || ""));
+  if (c.summary) hin.append(make("p", "lp-detail-sum", c.summary));
+  head.append(hin);
+  body.append(head);
+
+  const wrap = make("div", "lp-shell lp-detail-body");
+
+  (c.steps || []).forEach((s, i) => {
+    const step = make("section", "lp-step");
+
+    step.append(make("p", "lp-step-no",
+      "STEP " + String(i + 1).padStart(2, "0")));
+    step.append(make("h2", "lp-step-head", s.head || ""));
+
+    if (s.body) step.append(make("p", "lp-step-body", s.body));
+
+    if (Array.isArray(s.list) && s.list.length) {
+      const ul = make("ul", "lp-step-list");
+      s.list.forEach((t) => ul.append(make("li", "", t)));
+      step.append(ul);
+    }
+
+    wrap.append(step);
+  });
+
+  if (Array.isArray(c.docs) && c.docs.length) {
+    const docs = make("section", "lp-docs");
+    docs.append(make("h2", "lp-step-head", "서류"));
+
+    c.docs.forEach((d) => {
+      const fig = make("figure", "lp-doc");
+      const img = document.createElement("img");
+      img.src = d.src;
+      img.alt = d.cap || "";
+      img.loading = "lazy";
+      img.decoding = "async";
+      /*
+        파일이 아직 없을 수 있습니다. 그때는 깨진 그림 대신
+        그 칸을 지우고, 남은 칸이 없으면 「서류」 머리글까지 지웁니다.
+        머리글만 덩그러니 남아 있으면 빠뜨린 것처럼 보입니다.
+      */
+      img.addEventListener("error", () => {
+        fig.remove();
+        if (!docs.querySelector(".lp-doc")) docs.remove();
+      });
+      fig.append(img);
+      if (d.cap) fig.append(make("figcaption", "", d.cap));
+      docs.append(fig);
+    });
+
+    wrap.append(docs);
+  }
+
+  body.append(wrap);
+})();
