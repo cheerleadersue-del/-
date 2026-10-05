@@ -1,2 +1,14 @@
 .DS_Store
 node_modules/
+
+# 로컬 비밀값 — 커밋 금지
+.env
+.env.*
+!.env.example
+.netlify/
+
+# 파운더 OS 를 이 저장소에 함께 두게 될 경우를 대비
+config/settings.local.json
+config/crm_sheets.json
+**/keys.local.js
+**/brand.local.js
