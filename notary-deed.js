@@ -145,6 +145,16 @@ document.querySelectorAll("a[data-file]").forEach((link) => {
 
 window.addEventListener("load", () => {
   setTimeout(() => {
+    /*
+      한 줄의 단추가 둘 다 숨었으면 이름만 남습니다.
+      그런 줄은 줄째로 숨깁니다.
+    */
+    document.querySelectorAll(".dl-one").forEach((row) => {
+      const live = [...row.querySelectorAll(".dl-btn")]
+        .filter((b) => !b.classList.contains("is-off"));
+      if (!live.length) row.classList.add("is-off");
+    });
+
     const hwp = [...document.querySelectorAll('.dl-btn[data-kind="hwp"]')];
     const note = document.getElementById("hwpNote");
     if (!note) return;

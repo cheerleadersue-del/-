@@ -3030,6 +3030,37 @@ body.no-scroll .head .burger i { background: var(--ink); }
 */
 .dl-btn.is-off { display: none; }
 
+/*
+  한 칸에 양식이 여럿일 때 — 이름을 달고 줄로 쌓습니다.
+  의사록인증처럼 일곱 가지가 들어가는 자리를 위한 것입니다.
+*/
+.dl-stack {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 7px;
+}
+
+.dl-one {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dl-one > b {
+  flex: 1 1 auto;
+  min-width: 7em;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* 단추가 둘 다 숨으면 이름만 남으므로 줄째로 숨깁니다 */
+.dl-one.is-off { display: none; }
+
+
 .dl-none {
   font-family: var(--font-sans);
   font-size: 12px;
