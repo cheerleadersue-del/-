@@ -99,29 +99,56 @@ window.PAGE_DATA = {
 
 
 /* ---------------------------------------------------------------------
-   위임장 양식 내려받기
+   양식 내려받기
 
-   양식 파일을 assets/forms/ 에 올려두면 그것을 쓰고,
-   아직 없으면 기존 홈페이지의 파일로 연결합니다.
+   양식 파일은 assets/forms/ 에 둡니다.
+   파일 이름은 각 단추의 data-file 값과 같아야 합니다.
 
-   나중에 파일만 올리시면 코드를 고치지 않아도 새 파일로 바뀝니다.
-   파일 이름은 각 버튼의 data-file 값과 같게 맞춰 주십시오.
+   ⚠️ 지금 워드(.docx)만 들어 있고 한글(.hwp)은 없습니다.
+      그래서 한글 단추는 기본으로 숨겨 둡니다.
+      assets/forms/ 에 같은 이름의 .hwp 를 넣으시면
+      이 코드가 찾아서 단추를 저절로 드러냅니다.
+      코드는 고치지 않으셔도 됩니다.
+
+   ⚠️ 없는 파일로 가는 단추를 보여주지 않는 것이 이 코드의 일입니다.
+      눌렀는데 아무것도 받아지지 않으면 그 자체로 믿음을 잃습니다.
 --------------------------------------------------------------------- */
 
 document.querySelectorAll("a[data-file]").forEach((link) => {
-  const local = "assets/forms/" + link.dataset.file;
+  const path = "assets/forms/" + link.dataset.file;
+  const inTable = link.classList.contains("dl-btn");
 
-  /*
-    HEAD 로 물어봐서 있으면 그쪽으로 바꾼다.
-    없거나 확인에 실패하면 지금 걸린 주소를 그대로 둔다.
-  */
-  fetch(local, { method: "HEAD" })
+  /* 표 안의 단추는 확인될 때까지 감춰 둔다 */
+  if (inTable) link.classList.add("is-off");
+
+  fetch(path, { method: "HEAD" })
     .then((res) => {
       if (res.ok) {
-        link.href = local;
+        link.href = path;
         link.removeAttribute("target");
         link.removeAttribute("rel");
+        link.classList.remove("is-off");
+      } else if (!inTable) {
+        /*
+          양식 절의 단추는 예전 홈페이지로 걸려 있다.
+          파일이 없으면 그 주소를 그대로 둔다.
+        */
       }
     })
-    .catch(() => { /* 그대로 둔다 */ });
+    .catch(() => { /* 확인에 실패하면 손대지 않는다 */ });
+});
+
+
+/* ---------------------------------------------------------------------
+   표에 한글 파일이 하나도 없으면 안내 한 줄을 띄운다
+--------------------------------------------------------------------- */
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    const hwp = [...document.querySelectorAll('.dl-btn[data-kind="hwp"]')];
+    const note = document.getElementById("hwpNote");
+    if (!note) return;
+    const none = hwp.length && hwp.every((b) => b.classList.contains("is-off"));
+    note.hidden = !none;
+  }, 1200);
 });

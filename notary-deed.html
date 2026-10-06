@@ -51,6 +51,7 @@
 
     <nav class="nav" aria-label="주요 메뉴">
       <a href="index.html#practice">전담센터</a>
+      <a href="notary.html">공증센터</a>
       <a href="index.html#lawyers">구성원</a>
       <a href="index.html#location">오시는 길</a>
     </nav>
@@ -72,9 +73,10 @@
 <div class="drawer" id="drawer" inert>
   <nav class="drawer-nav" aria-label="모바일 메뉴">
     <a href="index.html#practice"><em>01</em>전담센터</a>
-    <a href="index.html#lawyers"><em>02</em>구성원</a>
-    <a href="index.html#location"><em>03</em>오시는 길</a>
-    <a href="index.html#contact"><em>04</em>상담 신청</a>
+    <a href="notary.html"><em>02</em>공증센터</a>
+    <a href="index.html#lawyers"><em>03</em>구성원</a>
+    <a href="index.html#location"><em>04</em>오시는 길</a>
+    <a href="index.html#contact"><em>05</em>상담 신청</a>
   </nav>
   <div class="drawer-foot">
     <a class="btn btn-fill" href="tel:02-567-4377">공증 상담 02-567-4377</a>
@@ -269,6 +271,7 @@
               <th scope="col">업무</th>
               <th scope="col">직접 오실 때</th>
               <th scope="col">대리인을 보내실 때</th>
+              <th scope="col">양식</th>
             </tr>
           </thead>
           <tbody>
@@ -276,35 +279,48 @@
               <th scope="row">금전 집행증서</th>
               <td>신분증 · 도장<br>법인은 대표권 증빙서류</td>
               <td>공증용 위임장<br>인감증명서 · 대리인 신분증 · 도장</td>
+              <td><span class="dl"><a class="dl-btn" data-file="위임장-금전.hwp" data-kind="hwp" href="assets/forms/위임장-금전.hwp" download>한글</a><a class="dl-btn" data-file="위임장-금전.docx" data-kind="docx" href="assets/forms/위임장-금전.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">인도 집행증서</th>
               <td>신분증 · 도장<br>계약서 · 등기부등본</td>
               <td>공증용 위임장 · 인감증명서<br>대리인 신분증 · 도장 · 관련자료</td>
+              <td><span class="dl"><a class="dl-btn" data-file="위임장-인도.hwp" data-kind="hwp" href="assets/forms/위임장-인도.hwp" download>한글</a><a class="dl-btn" data-file="위임장-인도.docx" data-kind="docx" href="assets/forms/위임장-인도.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">유언공정증서</th>
               <td>신분증 · 도장 · 가족관계증명서<br>주민등록등본 · 받으실 분의 등본<br><b>증인 2인 동석</b></td>
               <td><b>대리 불가</b><br>유언하시는 분이 직접 오셔야 합니다</td>
+              <td><span class="dl-none">대리 불가</span></td>
             </tr>
             <tr>
               <th scope="row">사서증서인증</th>
               <td>인증받으실 서류 원본 1부<br>신분증</td>
               <td>공증용 위임장 · 인감증명서<br>대리인 신분증 · 도장</td>
+              <td><span class="dl"><a class="dl-btn" data-file="위임장-사서증서.hwp" data-kind="hwp" href="assets/forms/위임장-사서증서.hwp" download>한글</a><a class="dl-btn" data-file="위임장-사서증서.docx" data-kind="docx" href="assets/forms/위임장-사서증서.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">번역문인증</th>
               <td>원문과 번역문<br>번역인의 어학 능력 증빙<br>신분증 · 도장</td>
               <td>공증용 위임장 · 인감증명서<br>대리인 신분증 · 도장</td>
+              <td><span class="dl"><a class="dl-btn" data-file="위임장-번역문.hwp" data-kind="hwp" href="assets/forms/위임장-번역문.hwp" download>한글</a><a class="dl-btn" data-file="위임장-번역문.docx" data-kind="docx" href="assets/forms/위임장-번역문.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">의사록인증</th>
               <td>의사록 원본 2부 · 정관<br>주주명부 또는 이사 인감증명서<br>법인등기부등본 · 법인인감증명서</td>
               <td>공증용 위임장 · 확인서 · 진술서<br>대리인 신분증</td>
+              <td><a class="dl-more" href="#forms">아래 7종</a></td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <p class="table-note" id="hwpNote" hidden>
+        <b>한글(.hwp) 파일은 아직 올리지 않았습니다.</b>
+        내려받으신 <b>워드(.docx) 파일은 한글 프로그램에서도 그대로 열립니다.</b>
+        한글 파일이 올라가면 이 안내는 저절로 사라지고
+        「한글」 단추가 나타납니다.
+      </p>
 
       <p class="table-note">
         <b>인감증명서와 법인등기부등본은 발급일로부터 3개월 이내</b>여야 합니다.
@@ -325,7 +341,7 @@
   <!-- ===================================================================
        04-b. 양식 내려받기
   ==================================================================== -->
-  <section class="topic-sec topic-sec-alt" aria-labelledby="formTitle">
+  <section class="topic-sec topic-sec-alt" id="forms" aria-labelledby="formTitle">
     <div class="shell">
       <header class="sec-head">
         <p class="eyebrow">FORMS</p>
@@ -338,85 +354,137 @@
       </header>
 
       <!--
-        아래 링크는 assets/forms/ 에 같은 이름의 파일이 있으면
-        자동으로 그쪽을 가리킵니다. (notary.js 참고)
-        아직 없으므로 지금은 기존 홈페이지 파일로 연결됩니다.
+        파일은 assets/forms/ 에 있습니다. 이름은 data-file 값과 같습니다.
+
+        ⚠️ 지금 워드(.docx)만 들어 있습니다. 한글(.hwp)을 같은 이름으로
+           그 폴더에 넣으시면 「한글」 단추가 저절로 나타납니다.
+           없는 동안에는 notary-deed.js 가 그 단추를 감춥니다.
+           없는 파일로 가는 단추를 보여주지 않기 위해서입니다.
+
+        ⚠️ 예전 홈페이지(법무법인유일.com)로 걸려 있던 주소는 모두
+           떼어냈습니다. http 라서 https 쪽에서 열면 브라우저가
+           막습니다. 되돌리지 마십시오.
       -->
       <ul class="form-list">
         <li>
-          <h3>공증용 위임장</h3>
+          <h3>공증용 위임장 — 금전</h3>
           <p>금전 집행증서용입니다.</p>
           <span class="form-btns">
-            <a class="btn btn-line" data-file="위임장-금전.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=1.hwp">한글 hwp</a>
-            <a class="btn btn-line" data-file="위임장-금전.docx" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=1.docx">워드 docx</a>
-          </span>
-        </li>
-        <li>
-          <h3>집행문 위임장</h3>
-          <p>집행문을 받으실 때 쓰는 위임장입니다.</p>
-          <span class="form-btns">
-            <a class="btn btn-line" data-file="집행문위임장.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=20.hwp">한글 hwp</a>
-            <a class="btn btn-line" data-file="집행문위임장.docx" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=20.docx">워드 docx</a>
+            <span class="form-row">
+              <a class="dl-btn" data-file="위임장-금전.hwp" data-kind="hwp"
+                 href="assets/forms/위임장-금전.hwp" download>한글</a>
+              <a class="dl-btn" data-file="위임장-금전.docx" data-kind="docx"
+                 href="assets/forms/위임장-금전.docx" download>워드</a>
+            </span>
           </span>
         </li>
         <li>
           <h3>공증용 위임장 — 인도</h3>
           <p>임차건물 · 토지 인도 집행증서용입니다.</p>
           <span class="form-btns">
-            <a class="btn btn-line" data-file="위임장-인도.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=2.hwp">한글 hwp</a>
-            <a class="btn btn-line" data-file="위임장-인도.docx" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=2.docx">워드 docx</a>
+            <span class="form-row">
+              <a class="dl-btn" data-file="위임장-인도.hwp" data-kind="hwp"
+                 href="assets/forms/위임장-인도.hwp" download>한글</a>
+              <a class="dl-btn" data-file="위임장-인도.docx" data-kind="docx"
+                 href="assets/forms/위임장-인도.docx" download>워드</a>
+            </span>
           </span>
         </li>
         <li>
           <h3>공증용 위임장 — 사서증서인증</h3>
           <p>계약서 · 합의서 · 각서 인증용입니다.</p>
           <span class="form-btns">
-            <a class="btn btn-line" data-file="위임장-사서증서.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=3.hwp">한글 hwp</a>
-            <a class="btn btn-line" data-file="위임장-사서증서.docx" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=3.docx">워드 docx</a>
+            <span class="form-row">
+              <a class="dl-btn" data-file="위임장-사서증서.hwp" data-kind="hwp"
+                 href="assets/forms/위임장-사서증서.hwp" download>한글</a>
+              <a class="dl-btn" data-file="위임장-사서증서.docx" data-kind="docx"
+                 href="assets/forms/위임장-사서증서.docx" download>워드</a>
+            </span>
           </span>
         </li>
         <li>
           <h3>공증용 위임장 — 번역문인증</h3>
           <p>번역문 인증용입니다.</p>
           <span class="form-btns">
-            <a class="btn btn-line" data-file="위임장-번역문.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=4.hwp">한글 hwp</a>
-            <a class="btn btn-line" data-file="위임장-번역문.docx" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=4.docx">워드 docx</a>
+            <span class="form-row">
+              <a class="dl-btn" data-file="위임장-번역문.hwp" data-kind="hwp"
+                 href="assets/forms/위임장-번역문.hwp" download>한글</a>
+              <a class="dl-btn" data-file="위임장-번역문.docx" data-kind="docx"
+                 href="assets/forms/위임장-번역문.docx" download>워드</a>
+            </span>
+          </span>
+        </li>
+        <li>
+          <h3>집행문 위임장</h3>
+          <p>집행문을 받으실 때 쓰는 위임장입니다.</p>
+          <span class="form-btns">
+            <span class="form-row">
+              <a class="dl-btn" data-file="집행문위임장.hwp" data-kind="hwp"
+                 href="assets/forms/집행문위임장.hwp" download>한글</a>
+              <a class="dl-btn" data-file="집행문위임장.docx" data-kind="docx"
+                 href="assets/forms/집행문위임장.docx" download>워드</a>
+            </span>
           </span>
         </li>
         <li>
           <h3>주주총회 의사록 — 4종</h3>
           <p>위임장 · 주주명부 · 확인서 · 진술서입니다.</p>
           <span class="form-btns">
-            <a class="btn btn-line" data-file="주총-위임장.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=5.hwp">위임장</a>
-            <a class="btn btn-line" data-file="주총-주주명부.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=6.hwp">주주명부</a>
-            <a class="btn btn-line" data-file="주총-확인서.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=8.hwp">확인서</a>
-            <a class="btn btn-line" data-file="주총-진술서.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=7.hwp">진술서</a>
+            <span class="form-row">
+              <b>위임장</b>
+              <a class="dl-btn" data-file="주총-위임장.hwp" data-kind="hwp"
+                 href="assets/forms/주총-위임장.hwp" download>한글</a>
+              <a class="dl-btn" data-file="주총-위임장.docx" data-kind="docx"
+                 href="assets/forms/주총-위임장.docx" download>워드</a>
+            </span>
+            <span class="form-row">
+              <b>주주명부</b>
+              <a class="dl-btn" data-file="주총-주주명부.hwp" data-kind="hwp"
+                 href="assets/forms/주총-주주명부.hwp" download>한글</a>
+              <a class="dl-btn" data-file="주총-주주명부.docx" data-kind="docx"
+                 href="assets/forms/주총-주주명부.docx" download>워드</a>
+            </span>
+            <span class="form-row">
+              <b>확인서</b>
+              <a class="dl-btn" data-file="주총-확인서.hwp" data-kind="hwp"
+                 href="assets/forms/주총-확인서.hwp" download>한글</a>
+              <a class="dl-btn" data-file="주총-확인서.docx" data-kind="docx"
+                 href="assets/forms/주총-확인서.docx" download>워드</a>
+            </span>
+            <span class="form-row">
+              <b>진술서</b>
+              <a class="dl-btn" data-file="주총-진술서.hwp" data-kind="hwp"
+                 href="assets/forms/주총-진술서.hwp" download>한글</a>
+              <a class="dl-btn" data-file="주총-진술서.docx" data-kind="docx"
+                 href="assets/forms/주총-진술서.docx" download>워드</a>
+            </span>
           </span>
         </li>
         <li>
           <h3>이사회 의사록 — 3종</h3>
           <p>위임장 · 확인서 · 진술서입니다.</p>
           <span class="form-btns">
-            <a class="btn btn-line" data-file="이사회-위임장.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=9.hwp">위임장</a>
-            <a class="btn btn-line" data-file="이사회-확인서.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=10.hwp">확인서</a>
-            <a class="btn btn-line" data-file="이사회-진술서.hwp" target="_blank" rel="noopener"
-               href="http://xn--v92b7yba019htmaza.com/view_upload2.php?file_name2=11.hwp">진술서</a>
+            <span class="form-row">
+              <b>위임장</b>
+              <a class="dl-btn" data-file="이사회-위임장.hwp" data-kind="hwp"
+                 href="assets/forms/이사회-위임장.hwp" download>한글</a>
+              <a class="dl-btn" data-file="이사회-위임장.docx" data-kind="docx"
+                 href="assets/forms/이사회-위임장.docx" download>워드</a>
+            </span>
+            <span class="form-row">
+              <b>확인서</b>
+              <a class="dl-btn" data-file="이사회-확인서.hwp" data-kind="hwp"
+                 href="assets/forms/이사회-확인서.hwp" download>한글</a>
+              <a class="dl-btn" data-file="이사회-확인서.docx" data-kind="docx"
+                 href="assets/forms/이사회-확인서.docx" download>워드</a>
+            </span>
+            <span class="form-row">
+              <b>진술서</b>
+              <a class="dl-btn" data-file="이사회-진술서.hwp" data-kind="hwp"
+                 href="assets/forms/이사회-진술서.hwp" download>한글</a>
+              <a class="dl-btn" data-file="이사회-진술서.docx" data-kind="docx"
+                 href="assets/forms/이사회-진술서.docx" download>워드</a>
+            </span>
           </span>
         </li>
       </ul>

@@ -3000,6 +3000,79 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /* 양식 내려받기 — 공증 페이지 */
+/* =====================================================================
+   표 안의 양식 내려받기 단추
+
+   「무엇을 가져오면 되는가」 표의 마지막 칸에 들어갑니다.
+   좁은 화면에서는 단추를 위아래로 쌓습니다.
+===================================================================== */
+
+.dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease),
+              color 0.2s var(--ease);
+}
+
+.dl-btn::before {
+  content: "\2193";
+  margin-right: 5px;
+  font-size: 11px;
+  color: var(--gold);
+}
+
+.dl-btn:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.dl-btn:hover::before { color: var(--cream); }
+
+/*
+  아직 파일이 없는 단추는 notary-deed.js 가 이 이름을 답니다.
+  없는 파일로 가는 단추를 보여주지 않기 위해서입니다.
+*/
+.dl-btn.is-off { display: none; }
+
+.dl-none {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.dl-more {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .dl { flex-direction: column; align-items: flex-start; }
+}
+
+
 .form-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3028,10 +3101,27 @@ body.no-scroll .head .burger i { background: var(--ink); }
   word-break: keep-all;
 }
 
+/* 양식 절 — 한 항목에 여러 양식이 들어갈 때 줄로 나눕니다 */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-row b {
+  min-width: 4.5em;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-faint);
+}
+
 .form-btns {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  /* 한 항목에 양식이 여럿일 때 줄로 쌓입니다 */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   margin-top: 20px;
 }
 
