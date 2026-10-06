@@ -54,7 +54,6 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-
 /* =====================================================================
    02. 기본
 ===================================================================== */
@@ -145,7 +144,6 @@ ol, ul {
   transform: none;
 }
 
-
 /* =====================================================================
    03. 공통
 ===================================================================== */
@@ -179,7 +177,6 @@ ol, ul {
 .eyebrow-light {
   color: var(--gold-soft);
 }
-
 
 /* ---------------------------------------------------------------------
    줄바꿈 다듬기
@@ -241,7 +238,6 @@ h3 {
   color: var(--gold);
   font-weight: 500;
 }
-
 
 /*
   좁은 화면에서는 손으로 넣은 <br> 을 무시한다.
@@ -471,7 +467,6 @@ h3 {
   }
 }
 
-
 /*
   2026-09-24. 잠깐 배너 둘을 나란히 놓는 .side-pair 를 두었다가 뺐다.
   첫 페이지에서 왼쪽 칸이 「교통형사 센터 전체 보기」였는데, 바로 위
@@ -579,7 +574,6 @@ h3 {
   justify-content: center;
 }
 
-
 /* ---------------------------------------------------------------------
    카카오톡 상담 버튼
 
@@ -599,7 +593,6 @@ h3 {
 .btn-kakao:hover {
   background: var(--kakao-up);
 }
-
 
 /* ---------------------------------------------------------------------
    버튼 아이콘
@@ -661,7 +654,6 @@ h3 {
   opacity: 1;
   transform: none;
 }
-
 
 /* =====================================================================
    04. 헤더
@@ -907,7 +899,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   transform: translateY(-4px) rotate(-45deg);
 }
 
-
 /* 모바일 서랍 */
 .drawer {
   position: fixed;
@@ -987,7 +978,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   color: var(--ink-faint);
   font-size: 13.5px;
 }
-
 
 /* =====================================================================
    05. 히어로
@@ -1347,7 +1337,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   100% { transform: translateY(118%); }
 }
 
-
 /* =====================================================================
    05-b. 대표변호사 인사말
 ===================================================================== */
@@ -1436,7 +1425,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   max-height: min(560px, 60vh);
   object-fit: contain;
 }
-
 
 /* =====================================================================
    06. 의뢰인의 질문
@@ -1585,7 +1573,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   color: var(--gold);
   border-bottom: 1px solid currentColor;
 }
-
 
 /* =====================================================================
    07. 전담센터
@@ -1859,7 +1846,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   transform: rotate(45deg) translate(2px, -2px);
 }
 
-
 /* =====================================================================
    08. 변호인단
 ===================================================================== */
@@ -2117,7 +2103,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   word-break: keep-all;
 }
 
-
 /* =====================================================================
    10. 언론보도
 ===================================================================== */
@@ -2223,7 +2208,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
     grid-template-columns: minmax(0, 1fr);
   }
 }
-
 
 /* =====================================================================
    10-B. 오시는 길 · 상담
@@ -2449,7 +2433,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   color: var(--ink-soft);
 }
 
-
 /* =====================================================================
    11. 푸터
 ===================================================================== */
@@ -2544,7 +2527,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   font-size: 12.5px;
   letter-spacing: 0.1em;
 }
-
 
 /* =====================================================================
    11-b. 문서 페이지 (개인정보처리방침 등)
@@ -2669,7 +2651,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   border-top: 1px solid var(--line);
 }
 
-
 /* ---------- 스팸 덫. 사람에게는 보이지 않는다 ---------- */
 
 .hp {
@@ -2680,7 +2661,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   clip-path: inset(50%);
   white-space: nowrap;
 }
-
 
 /* =====================================================================
    11-c. 접수 완료 페이지
@@ -2762,7 +2742,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
 .done-back {
   margin-top: 40px;
 }
-
 
 /* =====================================================================
    11-d. 세부 분야 페이지 (criminal-*.html)
@@ -3072,70 +3051,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
   .dl { flex-direction: column; align-items: flex-start; }
 }
 
-
-.form-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(28px, 3vw, 44px);
-}
-
-.form-list li {
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
-}
-
-.form-list h3 {
-  font-family: var(--font-serif);
-  font-size: clamp(18px, 1.8vw, 21px);
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: -0.035em;
-  word-break: keep-all;
-}
-
-.form-list > li > p {
-  margin-top: 10px;
-  color: var(--ink-soft);
-  font-size: 14.5px;
-  line-height: 2;
-  word-break: keep-all;
-}
-
-/* 양식 절 — 한 항목에 여러 양식이 들어갈 때 줄로 나눕니다 */
-.form-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.form-row b {
-  min-width: 4.5em;
-  font-family: var(--font-sans);
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--ink-faint);
-}
-
-.form-btns {
-  display: flex;
-  /* 한 항목에 양식이 여럿일 때 줄로 쌓입니다 */
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  margin-top: 20px;
-}
-
-/* 목록 안에서는 버튼을 낮고 작게 — 본문을 누르지 않도록 */
-.form-btns .btn {
-  height: 42px;
-  padding: 0 20px;
-  font-size: 14px;
-}
-
 @media (max-width: 720px) {
-  .form-list {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* 사건의 유형 */
@@ -3283,7 +3199,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
     width: 44px;
   }
 }
-
 
 /*
   사진 띠. 사진이 없으면 어두운 바탕에 문장만 남고,
@@ -3451,7 +3366,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   margin-top: 38px;
 }
 
-
 /* =====================================================================
    12. 모바일 하단 바
 ===================================================================== */
@@ -3459,7 +3373,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
 .bar {
   display: none;
 }
-
 
 /* =====================================================================
    12-b. 빠른 상담 (오른쪽 아래)
@@ -3505,7 +3418,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   transform: none;
   pointer-events: auto;
 }
-
 
 .rail-btn {
   position: relative;
@@ -3636,7 +3548,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   transform: translateY(2px) rotate(-45deg);
 }
 
-
 /* =====================================================================
    13. 반응형
 ===================================================================== */
@@ -3663,7 +3574,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
   }
 }
 
-
 @media (max-width: 1080px) {
   /* 분야 배너 — 세 칸이 좁아져 글자가 끊긴다 */
   .tile-grid,
@@ -3687,7 +3597,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
     display: none;
   }
 }
-
 
 @media (max-width: 900px) {
   :root {
@@ -3791,7 +3700,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
     gap: 40px;
   }
 }
-
 
 @media (max-width: 620px) {
   :root {
@@ -4146,7 +4054,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 }
 
-
 /* 휴대폰에서는 조금 더 작게, 화면 아래 안전영역도 피한다 */
 @media (max-width: 620px) {
   .rail {
@@ -4170,7 +4077,6 @@ body.no-scroll .head .burger i { background: var(--ink); }
     height: 34px;
   }
 }
-
 
 /* =====================================================================
    14. 모션 최소화
