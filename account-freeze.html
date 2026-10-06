@@ -12,8 +12,7 @@
   ── 계좌 지급정지 광고 랜딩페이지 (2차안) ──────────────────────────
 
   docs/지급정지-랜딩페이지-프롬프트.md 를 그대로 옮긴 쪽입니다.
-  기존 account.html 은 건드리지 않았습니다. 두 쪽을 견주어 보시고
-  하나를 고르십시오.
+  기존 account.html 은 건드리지 않았습니다(같은 광고 번호를 씁니다).
 
   ⚠️ 전화번호 010-2069-7699 는 account.html 과 같은 광고 전용 번호입니다.
      광고 전화를 따로 세려고 일부러 다르게 둔 번호이니 대표번호로
@@ -22,17 +21,17 @@
   ⚠️ 광고로 들어오시는 분만 보는 쪽이라 noindex 입니다.
      검색용 쪽은 civil-account.html 입니다.
 
-  ⚠️ 노란 점선 상자(class="ph")는 아직 채우지 않은 자리입니다.
-     실제 내용으로 바꾸신 뒤 class="ph" 를 지우십시오.
-     확인되지 않은 숫자 · 후기 · 성공사례는 넣지 마십시오
-     (변호사법 제23조 제2항).
+  ⚠️ 확인되지 않은 숫자 · 후기 · 성공사례는 넣지 마십시오
+     (변호사법 제23조 제2항). 처리 건수 · 기간 칸은 그래서 뺐습니다.
 
-  ⚠️ 경력 표시 「26년」은 프롬프트 그대로입니다. account.html 에는
-     「법조경력 25년」으로 적혀 있습니다. 둘 중 맞는 쪽으로 맞추십시오.
+  ⚠️ 「대한변협 등록 형사법 전문」은 2026-10-06 에 의뢰인께서 등록을
+     확인해 주셔서 넣었습니다. main.js 의 「등록 확인된 분 없음」 메모보다
+     이 확인이 나중입니다. 등록증 사진이 생기면 변호사 칸에 넣으십시오.
 
-  ⚠️ 모양새가 두 벌입니다. 기본은 mobbin/DESIGN.md 구조에 네이비 · 앰버,
-     주소 끝에 ?look=bugatti 를 붙이면 DESIGN.md(부가티) 검정 모양새입니다.
-     하나로 정하시면 account-freeze.js 의 LOOK 한 줄로 고정할 수 있습니다.
+  ⚠️ 경력은 account.html 과 같은 「25년」(사법연수원 30기)입니다.
+
+  ⚠️ 모양새는 mobbin 으로 고정했습니다(아래 LOOK). 부가티 모양새 규칙은
+     account-freeze.css 에 남아 있어 LOOK 을 "bugatti" 로 바꾸면 돌아옵니다.
 
   ⚠️ 법 조항(통신사기피해환급법 제5조 · 제9조)은 공개 전에
      law.go.kr 의 현행 조문과 대조해 주십시오.
@@ -70,7 +69,7 @@
 -->
 <script>
   (function () {
-    var LOOK = "";
+    var LOOK = "mobbin";
     var q = new URLSearchParams(location.search).get("look");
     var look = LOOK || (q === "bugatti" ? "bugatti" : "mobbin");
     document.documentElement.setAttribute("data-look", look);
@@ -129,7 +128,7 @@
         <p class="trust">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.8-4.8 1.4 1.4-6.2 6.2z"/></svg>
           <span>
-            <span class="trust-l">대한변협 등록 형사법 전문 변호사<span class="trust-x"> · 사법시험 출신 26년 경력</span></span>
+            <span class="trust-l">대한변협 등록 형사법 전문 변호사<span class="trust-x"> · 사법시험 출신 25년 경력</span></span>
             <span class="trust-l">+ <span class="trust-x">경찰 </span>지능범죄 수사 16년 경력 자문위원 공동 검토</span>
           </span>
         </p>
@@ -374,23 +373,26 @@
 
       <div class="people">
         <article class="person">
-          <img class="person-photo" src="assets/lawyer-placeholder.svg" alt="변호사 사진 준비 중"
-               width="300" height="370" loading="lazy">
+          <img class="person-photo" src="assets/lawyer-01-portrait-v2.webp" alt="법무법인 유일 대표변호사 정호길"
+               width="600" height="750" loading="lazy">
           <div class="person-body">
             <span class="badge">대한변협 등록 형사법 전문</span>
-            <h3><span class="ph">[변호사 이름]</span> 변호사</h3>
-            <p class="person-career">사법시험 출신 · 26년 법조 경력</p>
+            <h3>정호길 대표변호사</h3>
+            <p class="person-career">사법시험 출신 · 25년 법조 경력</p>
+            <p class="person-sub">제40회 사법시험 · 사법연수원 30기</p>
             <p>거래 경위와 증거를 법리적으로 분석해 이의제기 · 합의 · 소송 중 가장 적합한 대응을 설계합니다.</p>
-            <div class="cert ph">[전문분야 등록증 이미지]</div>
+            <!-- 전문분야 등록증 사진이 생기면 여기에:
+                 <img class="cert" src="assets/(파일).webp" alt="대한변협 형사법 전문분야 등록증"> -->
           </div>
         </article>
 
         <article class="person">
-          <img class="person-photo" src="assets/lawyer-placeholder.svg" alt="자문위원 사진 준비 중"
-               width="300" height="370" loading="lazy">
+          <!-- 자문의 사진 · 이름은 넣지 않습니다(account.html 과 같음).
+               본인 동의를 받으면 위 변호사 칸처럼 img 를 넣으십시오. -->
+          <div class="person-photo person-photo-none" aria-hidden="true"><span>수사<br>실무</span></div>
           <div class="person-body">
             <span class="badge badge-line">수사 실무 자문</span>
-            <h3><span class="ph">[자문위원 이름]</span> 자문위원</h3>
+            <h3>광역수사대 형사 출신 자문위원</h3>
             <p class="person-career">경찰 지능범죄 수사 16년 경력 (광역수사대 출신)</p>
             <p>금융사기 사건이 실제로 어떻게 수사되는지 알기에, 계좌 명의인이 준비해야 할 소명 자료를 꼼꼼히 짚어드립니다.</p>
           </div>
@@ -404,11 +406,9 @@
         <li><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg></span>변호사가 직접 상담하고, 진행 상황을 수시로 안내합니다</li>
       </ul>
 
-      <!-- 확인된 숫자만 넣으십시오. 지어낸 숫자는 넣지 않습니다. -->
-      <dl class="stats">
-        <div><dt>지급정지 사건 처리</dt><dd class="ph">[ ]건</dd></div>
-        <div><dt>평균 진행 기간</dt><dd class="ph">[ ]</dd></div>
-      </dl>
+      <!-- 처리 건수 · 진행 기간 같은 숫자는 확인된 것만 넣으십시오.
+           넣으실 때의 모양:
+           <dl class="stats"><div><dt>지급정지 사건 처리</dt><dd>00건</dd></div></dl> -->
 
       <div class="cta-center">
         <a class="btn btn-amber btn-lg" href="#apply">변호사와 직접 상담하기</a>
@@ -453,7 +453,7 @@
         </details>
         <details>
           <summary>상담 비용이 있나요?</summary>
-          <p><span class="ph">[첫 상담 비용 안내 — 확인 후 기입]</span> 사건을 맡기실 경우의 비용은 사건 내용을 확인한 뒤 미리 안내해 드립니다.</p>
+          <p>첫 상담은 무료입니다. 사건을 맡기실 경우의 비용은 사건 내용을 확인한 뒤 미리 안내해 드립니다.</p>
         </details>
       </div>
 
@@ -566,7 +566,7 @@
       <li>주소 서울특별시 서초구 서초대로 264, 2층 (서초동, 법조타워)</li>
       <li>대표변호사 정호길</li>
       <li>사업자등록번호 120-86-64302</li>
-      <li>광고책임변호사 <span class="ph">[이름]</span></li>
+      <li>광고책임변호사 정호길</li>
       <li>홈페이지 <a href="https://yuillawfirm.com">yuillawfirm.com</a></li>
     </ul>
     <p class="foot-note">

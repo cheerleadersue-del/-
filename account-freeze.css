@@ -545,8 +545,14 @@ mark { background: none; color: var(--amber-ink); }
 }
 .person-photo { width: 104px; height: 128px; object-fit: cover; border-radius: var(--r-media); background: var(--card-soft); }
 .person-body h3 { font-size: 21px; font-weight: 800; margin: 10px 0 2px; }
-.person-career { font-size: 15px; font-weight: 700; color: var(--amber-ink); margin-bottom: 8px; }
-.person-body p:not(.person-career) { font-size: 15.5px; }
+.person-career { font-size: 15px; font-weight: 700; color: var(--amber-ink); }
+.person-sub { font-size: 13.5px; color: var(--muted); margin-bottom: 8px; }
+.person-photo { object-position: 50% 15%; }
+.person-photo-none {
+  display: grid; place-items: center; text-align: center;
+  font-size: 15px; font-weight: 800; line-height: 1.35; color: var(--muted);
+}
+.person-body p:not(.person-career):not(.person-sub) { font-size: 15.5px; }
 
 .badge {
   display: inline-block;
