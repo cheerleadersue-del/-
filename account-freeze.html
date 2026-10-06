@@ -110,7 +110,7 @@
   <!-- =================================================================
        1. 히어로
   ================================================================== -->
-  <section class="hero">
+  <section class="hero dark">
     <div class="shell hero-in">
 
       <div class="hero-copy">
@@ -140,37 +140,10 @@
         </div>
       </div>
 
-      <!-- 가상의 은행 앱 화면. 실존 은행 로고 · 화면을 쓰지 않습니다. -->
-      <figure class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 320 420" class="phone">
-          <defs>
-            <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F59E0B" stop-opacity=".35"/>
-              <stop offset="1" stop-color="#F59E0B" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-          <circle cx="160" cy="200" r="170" fill="url(#glow)"/>
-          <rect x="70" y="20" width="180" height="370" rx="28" fill="#0a1d33" stroke="#2b4a70" stroke-width="2"/>
-          <rect x="80" y="34" width="160" height="342" rx="20" fill="#f4f7fa"/>
-          <rect x="135" y="40" width="50" height="8" rx="4" fill="#0a1d33"/>
-          <text x="96" y="76" font-size="11" font-weight="700" fill="#0F2A4A">MY BANK</text>
-          <rect x="96" y="88" width="128" height="74" rx="12" fill="#0F2A4A"/>
-          <text x="108" y="108" font-size="8" fill="#9fb3c8">입출금 계좌</text>
-          <text x="108" y="132" font-size="15" font-weight="700" fill="#fff">•••,•••원</text>
-          <rect x="108" y="142" width="54" height="12" rx="6" fill="#F59E0B"/>
-          <text x="114" y="151" font-size="7.5" font-weight="700" fill="#0F2A4A">지급정지</text>
-          <rect x="96" y="174" width="128" height="20" rx="6" fill="#e3e8ee"/>
-          <rect x="96" y="200" width="100" height="20" rx="6" fill="#e3e8ee"/>
-          <rect x="96" y="226" width="116" height="20" rx="6" fill="#e3e8ee"/>
-          <rect x="60" y="256" width="200" height="84" rx="14" fill="#fff" stroke="#F59E0B" stroke-width="2"/>
-          <circle cx="88" cy="284" r="14" fill="#FEF3C7"/>
-          <path d="M83 283v-3a5 5 0 0 1 10 0v3" fill="none" stroke="#B45309" stroke-width="2"/>
-          <rect x="80" y="283" width="16" height="11" rx="2" fill="#B45309"/>
-          <text x="110" y="281" font-size="10.5" font-weight="700" fill="#0F2A4A">거래가 제한된 계좌입니다</text>
-          <text x="110" y="297" font-size="8.5" fill="#5b6878">입출금 · 이체가 제한되었습니다.</text>
-          <rect x="76" y="312" width="168" height="18" rx="9" fill="#f4f7fa"/>
-          <text x="160" y="324" font-size="8" text-anchor="middle" fill="#5b6878">자세한 내용은 고객센터로 문의하세요</text>
-        </svg>
+      <!-- 사진: assets/freeze-exit.webp — 막힌 곳에서 나가는 출구.
+           위쪽이 검정이라 바탕(#000)과 이어지게 둡니다. -->
+      <figure class="hero-art">
+        <img src="assets/freeze-exit.webp" alt="" width="736" height="1103" fetchpriority="high">
       </figure>
 
     </div>
@@ -183,19 +156,9 @@
   ================================================================== -->
   <section class="sec">
     <div class="shell split">
-      <div class="split-art" aria-hidden="true">
-        <svg viewBox="0 0 280 240">
-          <rect class="a-bg" x="20" y="20" width="240" height="200" rx="24"/>
-          <g font-size="11">
-            <rect class="a-msg" x="44" y="44" width="176" height="40" rx="12"/>
-            <text class="a-txt" x="58" y="68">[알림] 출금이 제한되었습니다</text>
-            <rect class="a-msg" x="60" y="96" width="176" height="40" rx="12"/>
-            <text class="a-txt" x="74" y="120">[알림] 카드 사용이 중지되었습니다</text>
-            <rect class="a-hot" x="44" y="148" width="176" height="40" rx="12"/>
-            <text class="a-hot-txt" x="58" y="172">타 계좌 비대면 거래 제한 안내</text>
-          </g>
-        </svg>
-      </div>
+      <figure class="split-art">
+        <img src="assets/freeze-hands.webp" alt="" width="736" height="1288" loading="lazy">
+      </figure>
       <div>
         <h2 class="sec-title">범죄에 가담한 적 없는데,<br>왜 내 통장이 멈췄을까요?</h2>
         <p class="sec-lead">
@@ -221,6 +184,10 @@
     <div class="shell">
       <p class="eyebrow">WHY</p>
       <h2 class="sec-title">이런 경우 지급정지됩니다</h2>
+
+      <figure class="band-img">
+        <img src="assets/freeze-keyboard.webp" alt="" width="736" height="920" loading="lazy">
+      </figure>
 
       <ul class="cards cards-4">
         <li class="card">
@@ -331,8 +298,7 @@
 
       <div class="suit">
         <div class="suit-photo">
-          <img src="assets/account-1.webp" alt="변호사가 의뢰인과 서류를 검토하는 상담 장면"
-               width="1200" height="600" loading="lazy">
+          <img src="assets/freeze-bulb.webp" alt="" width="736" height="1472" loading="lazy">
         </div>
         <div class="suit-body">
           <span class="unlock" aria-hidden="true">
@@ -495,6 +461,21 @@
         <p>궁금한 점이 남았다면 직접 물어보세요.</p>
         <a class="btn btn-kakao" href="https://pf.kakao.com/_YxiDPX/chat" target="_blank" rel="noopener noreferrer">카카오톡 상담</a>
       </div>
+    </div>
+  </section>
+
+
+  <!-- =================================================================
+       8-b. 마무리 띠 — 사진: assets/freeze-path.webp (빨간 바탕 · 흰 길)
+       바탕색 #cb1d18 은 사진의 빨강과 같습니다. 사진 가장자리가
+       티 나지 않게 하려는 것이니 바꾸지 마십시오.
+  ================================================================== -->
+  <section class="exit-band" aria-labelledby="exitTitle">
+    <img class="exit-band-img" src="assets/freeze-path.webp" alt="" width="736" height="952" loading="lazy">
+    <div class="shell exit-band-in">
+      <h2 class="exit-band-title" id="exitTitle">억울하게 묶인 계좌에도<br>나갈 길은 있습니다</h2>
+      <p class="exit-band-lead">시한이 지나기 전에, 내 상황에 맞는 길부터 확인하세요.</p>
+      <a class="btn btn-white btn-lg" href="#apply">무료 상담 신청하기</a>
     </div>
   </section>
 

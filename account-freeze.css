@@ -287,10 +287,10 @@ mark { background: none; color: var(--amber-ink); }
 .hero {
   position: relative; overflow: hidden;
   padding: 56px 0 88px;
-  background:
-    radial-gradient(70% 60% at 85% 30%, var(--amber-soft), transparent 70%),
-    var(--bg);
+  background: var(--bg);
 }
+/* 히어로는 두 모양새 모두 검정 — 사진(freeze-exit)의 검정과 이어지게 */
+.hero.dark, [data-look="bugatti"] .hero.dark { --bg: #000000; --card-soft: rgba(255, 255, 255, .08); }
 .hero-in { display: grid; gap: 40px; align-items: center; }
 
 .hero-tag {
@@ -326,15 +326,20 @@ mark { background: none; color: var(--amber-ink); }
 .acts { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
 .acts .btn { flex: 1 1 150px; }
 
-.hero-art { margin: 0; justify-self: center; width: min(320px, 80%); }
+.hero-art { margin: 8px -16px -88px; }
+.hero-art img {
+  width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 36% 78%;
+}
 
-[data-look="bugatti"] .hero { padding: 72px 0 110px; }
+[data-look="bugatti"] .hero { padding: 72px 0 88px; }
 [data-look="bugatti"] .hero-tag { background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 0 0 12px; font-weight: 500; color: var(--muted); }
 [data-look="bugatti"] .hero-title { letter-spacing: -.02em; font-weight: 700; }
 
 @media (min-width: 900px) {
   .hero { padding: 104px 0 128px; }
-  .hero-in { grid-template-columns: 1.25fr .75fr; }
+  .hero-in { grid-template-columns: 1.2fr .8fr; }
+  .hero-art { margin: -104px 0 -128px; align-self: stretch; }
+  .hero-art img { height: 100%; aspect-ratio: auto; min-height: 640px; object-position: 38% 70%; }
   .trust-x { display: inline; }
   .acts .btn { flex: 0 0 auto; }
 }
@@ -352,11 +357,18 @@ mark { background: none; color: var(--amber-ink); }
 /* ---------- 2. 공감 ---------- */
 
 .split { display: grid; gap: 40px; align-items: center; }
-.split-art { order: 2; max-width: 420px; }
+.split-art { order: 2; margin: 0; max-width: 460px; border-radius: var(--r-card); overflow: hidden; background: #000; }
+.split-art img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 60%; }
 @media (min-width: 900px) {
   .split { grid-template-columns: .8fr 1.2fr; gap: 80px; }
   .split-art { order: 0; }
 }
+
+
+/* 원인 섹션 위 사진 띠 */
+.band-img { margin: 8px 0 20px; border-radius: var(--r-card); overflow: hidden; background: #05070c; }
+.band-img img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 60% 62%; }
+@media (min-width: 900px) { .band-img img { aspect-ratio: 21 / 8; object-position: 60% 66%; } }
 
 
 /* ---------- 카드 ---------- */
@@ -466,7 +478,8 @@ mark { background: none; color: var(--amber-ink); }
   margin-top: 40px; display: grid; overflow: hidden;
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card);
 }
-.suit-photo img { width: 100%; height: 100%; min-height: 220px; max-height: 360px; object-fit: cover; object-position: 70% 50%; }
+.suit-photo { background: #07090c; }
+.suit-photo img { width: 100%; height: 100%; min-height: 220px; max-height: 340px; object-fit: cover; object-position: 50% 52%; }
 .suit-body { padding: 32px 22px; }
 .unlock {
   display: inline-grid; place-items: center;
@@ -481,7 +494,6 @@ mark { background: none; color: var(--amber-ink); }
 .points b { display: block; font-size: 17px; margin-bottom: 2px; color: var(--ink); }
 .points span { font-size: 16px; }
 .points small { color: var(--muted); font-size: 13px; }
-[data-look="bugatti"] .suit-photo img { filter: grayscale(.35) contrast(1.05); }
 [data-look="bugatti"] .unlock { background: transparent; border: 1px solid var(--amber); }
 [data-look="bugatti"] .unlock svg { stroke: var(--amber); }
 @media (min-width: 900px) {
@@ -601,6 +613,32 @@ mark { background: none; color: var(--amber-ink); }
 [data-look="bugatti"] .faq details { background: transparent; border: 0; border-bottom: 1px solid var(--line-strong); }
 [data-look="bugatti"] .faq summary { padding-inline: 2px; }
 [data-look="bugatti"] .faq details p { padding-inline: 2px; }
+
+
+/* ---------- 8-b. 마무리 띠 (빨간 사진) ----------
+   바탕색은 사진(freeze-path)의 빨강 그대로. 페이지에서 빨강은 이 띠 하나뿐입니다. */
+
+.exit-band {
+  position: relative; overflow: hidden;
+  background: #cb1d18; color: #fff;
+  min-height: 720px; padding: 72px 0 0;
+}
+.exit-band-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 68% 100%;
+}
+.exit-band-in { position: relative; }
+.exit-band-title {
+  color: #fff; font-size: clamp(30px, 7.4vw, 52px); font-weight: 800;
+  line-height: 1.25; letter-spacing: -.03em;
+}
+.exit-band-lead { margin: 18px 0 28px; font-size: 18px; color: rgba(255, 255, 255, .9); max-width: 420px; }
+.btn-white { background: #fff; border-color: #fff; color: #111; }
+.btn-white:hover { background: #111; border-color: #111; color: #fff; }
+@media (min-width: 900px) {
+  .exit-band { min-height: 560px; padding: 120px 0; }
+  .exit-band-img { left: auto; width: auto; height: 100%; object-position: right bottom; }
+}
 
 
 /* ---------- 9. 상담 신청 ---------- */
