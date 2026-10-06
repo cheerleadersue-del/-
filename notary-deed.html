@@ -279,13 +279,13 @@
               <th scope="row">금전 집행증서</th>
               <td>신분증 · 도장<br>법인은 대표권 증빙서류</td>
               <td>공증용 위임장<br>인감증명서 · 대리인 신분증 · 도장</td>
-              <td><span class="dl"><a class="dl-btn" data-file="위임장-금전.hwp" data-kind="hwp" href="assets/forms/위임장-금전.hwp" download>한글</a><a class="dl-btn" data-file="위임장-금전.docx" data-kind="docx" href="assets/forms/위임장-금전.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="위임장-금전.hwpx" data-kind="hwp" href="assets/forms/위임장-금전.hwpx" download>한글</a><a class="dl-btn" data-file="위임장-금전.docx" data-kind="docx" href="assets/forms/위임장-금전.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">인도 집행증서</th>
               <td>신분증 · 도장<br>계약서 · 등기부등본</td>
               <td>공증용 위임장 · 인감증명서<br>대리인 신분증 · 도장 · 관련자료</td>
-              <td><span class="dl"><a class="dl-btn" data-file="위임장-인도.hwp" data-kind="hwp" href="assets/forms/위임장-인도.hwp" download>한글</a><a class="dl-btn" data-file="위임장-인도.docx" data-kind="docx" href="assets/forms/위임장-인도.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="위임장-인도.hwpx" data-kind="hwp" href="assets/forms/위임장-인도.hwpx" download>한글</a><a class="dl-btn" data-file="위임장-인도.docx" data-kind="docx" href="assets/forms/위임장-인도.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">유언공정증서</th>
@@ -297,13 +297,13 @@
               <th scope="row">사서증서인증</th>
               <td>인증받으실 서류 원본 1부<br>신분증</td>
               <td>공증용 위임장 · 인감증명서<br>대리인 신분증 · 도장</td>
-              <td><span class="dl"><a class="dl-btn" data-file="위임장-사서증서.hwp" data-kind="hwp" href="assets/forms/위임장-사서증서.hwp" download>한글</a><a class="dl-btn" data-file="위임장-사서증서.docx" data-kind="docx" href="assets/forms/위임장-사서증서.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="위임장-사서증서.hwpx" data-kind="hwp" href="assets/forms/위임장-사서증서.hwpx" download>한글</a><a class="dl-btn" data-file="위임장-사서증서.docx" data-kind="docx" href="assets/forms/위임장-사서증서.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">번역문인증</th>
               <td>원문과 번역문<br>번역인의 어학 능력 증빙<br>신분증 · 도장</td>
               <td>공증용 위임장 · 인감증명서<br>대리인 신분증 · 도장</td>
-              <td><span class="dl"><a class="dl-btn" data-file="위임장-번역문.hwp" data-kind="hwp" href="assets/forms/위임장-번역문.hwp" download>한글</a><a class="dl-btn" data-file="위임장-번역문.docx" data-kind="docx" href="assets/forms/위임장-번역문.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="위임장-번역문.hwpx" data-kind="hwp" href="assets/forms/위임장-번역문.hwpx" download>한글</a><a class="dl-btn" data-file="위임장-번역문.docx" data-kind="docx" href="assets/forms/위임장-번역문.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">의사록인증</th>
@@ -316,10 +316,8 @@
       </div>
 
       <p class="table-note" id="hwpNote" hidden>
-        <b>한글(.hwp) 파일은 아직 올리지 않았습니다.</b>
-        내려받으신 <b>워드(.docx) 파일은 한글 프로그램에서도 그대로 열립니다.</b>
-        한글 파일이 올라가면 이 안내는 저절로 사라지고
-        「한글」 단추가 나타납니다.
+        <b>한글 파일을 불러오지 못했습니다.</b>
+        <b>워드(.docx) 파일은 한글 프로그램에서도 그대로 열립니다.</b>
       </p>
 
       <p class="table-note">
@@ -356,9 +354,16 @@
       <!--
         파일은 assets/forms/ 에 있습니다. 이름은 data-file 값과 같습니다.
 
-        ⚠️ 지금 워드(.docx)만 들어 있습니다. 한글(.hwp)을 같은 이름으로
-           그 폴더에 넣으시면 「한글」 단추가 저절로 나타납니다.
-           없는 동안에는 notary-deed.js 가 그 단추를 감춥니다.
+        한글 파일은 .hwp 가 아니라 .hwpx 입니다.
+        .hwp 는 한컴의 이진 형식이라 만들 수 없고, .hwpx 는 한글 2010
+        이후 판이 여는 공개 형식입니다. 파일을 만든 라이브러리로
+        같은 자리에서 검사까지 했습니다.
+
+        ⚠️ 한글 2007 이전 판에서는 .hwpx 가 열리지 않습니다.
+           그런 분을 위해 워드 단추를 나란히 두었습니다.
+           한글은 .docx 도 그대로 엽니다.
+
+        ⚠️ 파일이 없으면 notary-deed.js 가 그 단추를 감춥니다.
            없는 파일로 가는 단추를 보여주지 않기 위해서입니다.
 
         ⚠️ 예전 홈페이지(법무법인유일.com)로 걸려 있던 주소는 모두
@@ -371,8 +376,8 @@
           <p>금전 집행증서용입니다.</p>
           <span class="form-btns">
             <span class="form-row">
-              <a class="dl-btn" data-file="위임장-금전.hwp" data-kind="hwp"
-                 href="assets/forms/위임장-금전.hwp" download>한글</a>
+              <a class="dl-btn" data-file="위임장-금전.hwpx" data-kind="hwp"
+                 href="assets/forms/위임장-금전.hwpx" download>한글</a>
               <a class="dl-btn" data-file="위임장-금전.docx" data-kind="docx"
                  href="assets/forms/위임장-금전.docx" download>워드</a>
             </span>
@@ -383,8 +388,8 @@
           <p>임차건물 · 토지 인도 집행증서용입니다.</p>
           <span class="form-btns">
             <span class="form-row">
-              <a class="dl-btn" data-file="위임장-인도.hwp" data-kind="hwp"
-                 href="assets/forms/위임장-인도.hwp" download>한글</a>
+              <a class="dl-btn" data-file="위임장-인도.hwpx" data-kind="hwp"
+                 href="assets/forms/위임장-인도.hwpx" download>한글</a>
               <a class="dl-btn" data-file="위임장-인도.docx" data-kind="docx"
                  href="assets/forms/위임장-인도.docx" download>워드</a>
             </span>
@@ -395,8 +400,8 @@
           <p>계약서 · 합의서 · 각서 인증용입니다.</p>
           <span class="form-btns">
             <span class="form-row">
-              <a class="dl-btn" data-file="위임장-사서증서.hwp" data-kind="hwp"
-                 href="assets/forms/위임장-사서증서.hwp" download>한글</a>
+              <a class="dl-btn" data-file="위임장-사서증서.hwpx" data-kind="hwp"
+                 href="assets/forms/위임장-사서증서.hwpx" download>한글</a>
               <a class="dl-btn" data-file="위임장-사서증서.docx" data-kind="docx"
                  href="assets/forms/위임장-사서증서.docx" download>워드</a>
             </span>
@@ -407,8 +412,8 @@
           <p>번역문 인증용입니다.</p>
           <span class="form-btns">
             <span class="form-row">
-              <a class="dl-btn" data-file="위임장-번역문.hwp" data-kind="hwp"
-                 href="assets/forms/위임장-번역문.hwp" download>한글</a>
+              <a class="dl-btn" data-file="위임장-번역문.hwpx" data-kind="hwp"
+                 href="assets/forms/위임장-번역문.hwpx" download>한글</a>
               <a class="dl-btn" data-file="위임장-번역문.docx" data-kind="docx"
                  href="assets/forms/위임장-번역문.docx" download>워드</a>
             </span>
@@ -419,8 +424,8 @@
           <p>집행문을 받으실 때 쓰는 위임장입니다.</p>
           <span class="form-btns">
             <span class="form-row">
-              <a class="dl-btn" data-file="집행문위임장.hwp" data-kind="hwp"
-                 href="assets/forms/집행문위임장.hwp" download>한글</a>
+              <a class="dl-btn" data-file="집행문위임장.hwpx" data-kind="hwp"
+                 href="assets/forms/집행문위임장.hwpx" download>한글</a>
               <a class="dl-btn" data-file="집행문위임장.docx" data-kind="docx"
                  href="assets/forms/집행문위임장.docx" download>워드</a>
             </span>
@@ -432,29 +437,29 @@
           <span class="form-btns">
             <span class="form-row">
               <b>위임장</b>
-              <a class="dl-btn" data-file="주총-위임장.hwp" data-kind="hwp"
-                 href="assets/forms/주총-위임장.hwp" download>한글</a>
+              <a class="dl-btn" data-file="주총-위임장.hwpx" data-kind="hwp"
+                 href="assets/forms/주총-위임장.hwpx" download>한글</a>
               <a class="dl-btn" data-file="주총-위임장.docx" data-kind="docx"
                  href="assets/forms/주총-위임장.docx" download>워드</a>
             </span>
             <span class="form-row">
               <b>주주명부</b>
-              <a class="dl-btn" data-file="주총-주주명부.hwp" data-kind="hwp"
-                 href="assets/forms/주총-주주명부.hwp" download>한글</a>
+              <a class="dl-btn" data-file="주총-주주명부.hwpx" data-kind="hwp"
+                 href="assets/forms/주총-주주명부.hwpx" download>한글</a>
               <a class="dl-btn" data-file="주총-주주명부.docx" data-kind="docx"
                  href="assets/forms/주총-주주명부.docx" download>워드</a>
             </span>
             <span class="form-row">
               <b>확인서</b>
-              <a class="dl-btn" data-file="주총-확인서.hwp" data-kind="hwp"
-                 href="assets/forms/주총-확인서.hwp" download>한글</a>
+              <a class="dl-btn" data-file="주총-확인서.hwpx" data-kind="hwp"
+                 href="assets/forms/주총-확인서.hwpx" download>한글</a>
               <a class="dl-btn" data-file="주총-확인서.docx" data-kind="docx"
                  href="assets/forms/주총-확인서.docx" download>워드</a>
             </span>
             <span class="form-row">
               <b>진술서</b>
-              <a class="dl-btn" data-file="주총-진술서.hwp" data-kind="hwp"
-                 href="assets/forms/주총-진술서.hwp" download>한글</a>
+              <a class="dl-btn" data-file="주총-진술서.hwpx" data-kind="hwp"
+                 href="assets/forms/주총-진술서.hwpx" download>한글</a>
               <a class="dl-btn" data-file="주총-진술서.docx" data-kind="docx"
                  href="assets/forms/주총-진술서.docx" download>워드</a>
             </span>
@@ -466,22 +471,22 @@
           <span class="form-btns">
             <span class="form-row">
               <b>위임장</b>
-              <a class="dl-btn" data-file="이사회-위임장.hwp" data-kind="hwp"
-                 href="assets/forms/이사회-위임장.hwp" download>한글</a>
+              <a class="dl-btn" data-file="이사회-위임장.hwpx" data-kind="hwp"
+                 href="assets/forms/이사회-위임장.hwpx" download>한글</a>
               <a class="dl-btn" data-file="이사회-위임장.docx" data-kind="docx"
                  href="assets/forms/이사회-위임장.docx" download>워드</a>
             </span>
             <span class="form-row">
               <b>확인서</b>
-              <a class="dl-btn" data-file="이사회-확인서.hwp" data-kind="hwp"
-                 href="assets/forms/이사회-확인서.hwp" download>한글</a>
+              <a class="dl-btn" data-file="이사회-확인서.hwpx" data-kind="hwp"
+                 href="assets/forms/이사회-확인서.hwpx" download>한글</a>
               <a class="dl-btn" data-file="이사회-확인서.docx" data-kind="docx"
                  href="assets/forms/이사회-확인서.docx" download>워드</a>
             </span>
             <span class="form-row">
               <b>진술서</b>
-              <a class="dl-btn" data-file="이사회-진술서.hwp" data-kind="hwp"
-                 href="assets/forms/이사회-진술서.hwp" download>한글</a>
+              <a class="dl-btn" data-file="이사회-진술서.hwpx" data-kind="hwp"
+                 href="assets/forms/이사회-진술서.hwpx" download>한글</a>
               <a class="dl-btn" data-file="이사회-진술서.docx" data-kind="docx"
                  href="assets/forms/이사회-진술서.docx" download>워드</a>
             </span>
@@ -532,27 +537,27 @@
             <tr>
               <th scope="row">법인설립</th>
               <td>설립등기</td>
-              <td><span class="dl"><a class="dl-btn" data-file="등기-법인설립.hwp" data-kind="hwp" href="assets/forms/등기-법인설립.hwp" download>한글</a><a class="dl-btn" data-file="등기-법인설립.docx" data-kind="docx" href="assets/forms/등기-법인설립.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="등기-법인설립.hwpx" data-kind="hwp" href="assets/forms/등기-법인설립.hwpx" download>한글</a><a class="dl-btn" data-file="등기-법인설립.docx" data-kind="docx" href="assets/forms/등기-법인설립.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">임원변경</th>
               <td>취임 · 중임 · 사임 · 퇴임</td>
-              <td><span class="dl"><a class="dl-btn" data-file="등기-임원변경.hwp" data-kind="hwp" href="assets/forms/등기-임원변경.hwp" download>한글</a><a class="dl-btn" data-file="등기-임원변경.docx" data-kind="docx" href="assets/forms/등기-임원변경.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="등기-임원변경.hwpx" data-kind="hwp" href="assets/forms/등기-임원변경.hwpx" download>한글</a><a class="dl-btn" data-file="등기-임원변경.docx" data-kind="docx" href="assets/forms/등기-임원변경.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">본점이전</th>
               <td>본점 주소를 옮길 때</td>
-              <td><span class="dl"><a class="dl-btn" data-file="등기-본점이전.hwp" data-kind="hwp" href="assets/forms/등기-본점이전.hwp" download>한글</a><a class="dl-btn" data-file="등기-본점이전.docx" data-kind="docx" href="assets/forms/등기-본점이전.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="등기-본점이전.hwpx" data-kind="hwp" href="assets/forms/등기-본점이전.hwpx" download>한글</a><a class="dl-btn" data-file="등기-본점이전.docx" data-kind="docx" href="assets/forms/등기-본점이전.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">상호 · 목적 변경</th>
               <td>상호나 사업목적을 바꿀 때</td>
-              <td><span class="dl"><a class="dl-btn" data-file="등기-상호목적변경.hwp" data-kind="hwp" href="assets/forms/등기-상호목적변경.hwp" download>한글</a><a class="dl-btn" data-file="등기-상호목적변경.docx" data-kind="docx" href="assets/forms/등기-상호목적변경.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="등기-상호목적변경.hwpx" data-kind="hwp" href="assets/forms/등기-상호목적변경.hwpx" download>한글</a><a class="dl-btn" data-file="등기-상호목적변경.docx" data-kind="docx" href="assets/forms/등기-상호목적변경.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">자본금 증자</th>
               <td>신주를 발행할 때</td>
-              <td><span class="dl"><a class="dl-btn" data-file="등기-증자.hwp" data-kind="hwp" href="assets/forms/등기-증자.hwp" download>한글</a><a class="dl-btn" data-file="등기-증자.docx" data-kind="docx" href="assets/forms/등기-증자.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="등기-증자.hwpx" data-kind="hwp" href="assets/forms/등기-증자.hwpx" download>한글</a><a class="dl-btn" data-file="등기-증자.docx" data-kind="docx" href="assets/forms/등기-증자.docx" download>워드</a></span></td>
             </tr>
           </tbody>
         </table>
@@ -574,22 +579,22 @@
             <tr>
               <th scope="row">소유권이전</th>
               <td>매매 · 증여 · 상속</td>
-              <td><span class="dl"><a class="dl-btn" data-file="등기-소유권이전.hwp" data-kind="hwp" href="assets/forms/등기-소유권이전.hwp" download>한글</a><a class="dl-btn" data-file="등기-소유권이전.docx" data-kind="docx" href="assets/forms/등기-소유권이전.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="등기-소유권이전.hwpx" data-kind="hwp" href="assets/forms/등기-소유권이전.hwpx" download>한글</a><a class="dl-btn" data-file="등기-소유권이전.docx" data-kind="docx" href="assets/forms/등기-소유권이전.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">근저당권설정</th>
               <td>담보를 설정할 때</td>
-              <td><span class="dl"><a class="dl-btn" data-file="등기-근저당권설정.hwp" data-kind="hwp" href="assets/forms/등기-근저당권설정.hwp" download>한글</a><a class="dl-btn" data-file="등기-근저당권설정.docx" data-kind="docx" href="assets/forms/등기-근저당권설정.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="등기-근저당권설정.hwpx" data-kind="hwp" href="assets/forms/등기-근저당권설정.hwpx" download>한글</a><a class="dl-btn" data-file="등기-근저당권설정.docx" data-kind="docx" href="assets/forms/등기-근저당권설정.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">근저당권말소</th>
               <td>다 갚고 지울 때</td>
-              <td><span class="dl"><a class="dl-btn" data-file="등기-근저당권말소.hwp" data-kind="hwp" href="assets/forms/등기-근저당권말소.hwp" download>한글</a><a class="dl-btn" data-file="등기-근저당권말소.docx" data-kind="docx" href="assets/forms/등기-근저당권말소.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="등기-근저당권말소.hwpx" data-kind="hwp" href="assets/forms/등기-근저당권말소.hwpx" download>한글</a><a class="dl-btn" data-file="등기-근저당권말소.docx" data-kind="docx" href="assets/forms/등기-근저당권말소.docx" download>워드</a></span></td>
             </tr>
             <tr>
               <th scope="row">전세권설정</th>
               <td>전세권을 등기할 때</td>
-              <td><span class="dl"><a class="dl-btn" data-file="등기-전세권설정.hwp" data-kind="hwp" href="assets/forms/등기-전세권설정.hwp" download>한글</a><a class="dl-btn" data-file="등기-전세권설정.docx" data-kind="docx" href="assets/forms/등기-전세권설정.docx" download>워드</a></span></td>
+              <td><span class="dl"><a class="dl-btn" data-file="등기-전세권설정.hwpx" data-kind="hwp" href="assets/forms/등기-전세권설정.hwpx" download>한글</a><a class="dl-btn" data-file="등기-전세권설정.docx" data-kind="docx" href="assets/forms/등기-전세권설정.docx" download>워드</a></span></td>
             </tr>
           </tbody>
         </table>
