@@ -104,11 +104,10 @@ window.PAGE_DATA = {
    양식 파일은 assets/forms/ 에 둡니다.
    파일 이름은 각 단추의 data-file 값과 같아야 합니다.
 
-   ⚠️ 지금 워드(.docx)만 들어 있고 한글(.hwp)은 없습니다.
-      그래서 한글 단추는 기본으로 숨겨 둡니다.
-      assets/forms/ 에 같은 이름의 .hwp 를 넣으시면
-      이 코드가 찾아서 단추를 저절로 드러냅니다.
-      코드는 고치지 않으셔도 됩니다.
+   ⚠️ 지금은 워드(.docx)와 한글(.hwpx) 두 가지가 들어 있습니다.
+      파일을 지우거나 이름을 바꾸시면 그 단추는 저절로 사라집니다.
+      새 양식을 넣으실 때도 코드는 고치지 않으셔도 됩니다.
+      표의 data-file 값과 파일 이름만 같게 맞추시면 됩니다.
 
    ⚠️ 없는 파일로 가는 단추를 보여주지 않는 것이 이 코드의 일입니다.
       눌렀는데 아무것도 받아지지 않으면 그 자체로 믿음을 잃습니다.
@@ -153,6 +152,16 @@ window.addEventListener("load", () => {
       const live = [...row.querySelectorAll(".dl-btn")]
         .filter((b) => !b.classList.contains("is-off"));
       if (!live.length) row.classList.add("is-off");
+    });
+
+    /*
+      한 묶음의 양식이 모두 사라지면 「주주총회」 같은
+      묶음 이름만 덩그러니 남습니다. 그런 묶음도 숨깁니다.
+    */
+    document.querySelectorAll(".dl-grp").forEach((grp) => {
+      const live = [...grp.querySelectorAll(".dl-one")]
+        .filter((o) => !o.classList.contains("is-off"));
+      if (!live.length) grp.classList.add("is-off");
     });
 
     const hwp = [...document.querySelectorAll('.dl-btn[data-kind="hwp"]')];

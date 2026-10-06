@@ -264,8 +264,18 @@
       </header>
 
       <div class="table-wrap">
-        <table class="ptable">
+        <table class="ptable ptable-docs">
           <caption class="sr-only">공증 업무별 필요서류</caption>
+          <!--
+            양식 칸을 가로로 늘어놓으면 내용이 긴 쪽으로 칸이 끌려가
+            설명 칸이 좁아집니다. 그래서 네 칸의 너비를 미리 정해 둡니다.
+          -->
+          <colgroup>
+            <col class="c-job">
+            <col class="c-self">
+            <col class="c-agent">
+            <col class="c-form">
+          </colgroup>
           <thead>
             <tr>
               <th scope="col">업무</th>
@@ -279,7 +289,7 @@
               <th scope="row">금전 집행증서</th>
               <td>신분증 · 도장<br>법인은 대표권 증빙서류</td>
               <td>공증용 위임장<br>인감증명서 · 대리인 신분증 · 도장</td>
-              <td><span class="dl dl-stack"><span class="dl-one"><b>공증용 위임장</b><a class="dl-btn" data-file="위임장-금전.hwpx" data-kind="hwp" href="assets/forms/위임장-금전.hwpx" download>한글</a><a class="dl-btn" data-file="위임장-금전.docx" data-kind="docx" href="assets/forms/위임장-금전.docx" download>워드</a></span><span class="dl-one"><b>집행문 위임장</b><a class="dl-btn" data-file="집행문위임장.hwpx" data-kind="hwp" href="assets/forms/집행문위임장.hwpx" download>한글</a><a class="dl-btn" data-file="집행문위임장.docx" data-kind="docx" href="assets/forms/집행문위임장.docx" download>워드</a></span></span></td>
+              <td><span class="dl dl-stack"><span class="dl-grp"><span class="dl-one"><b>공증용 위임장</b><a class="dl-btn" data-file="위임장-금전.hwpx" data-kind="hwp" href="assets/forms/위임장-금전.hwpx" download>한글</a><a class="dl-btn" data-file="위임장-금전.docx" data-kind="docx" href="assets/forms/위임장-금전.docx" download>워드</a></span><span class="dl-one"><b>집행문 위임장</b><a class="dl-btn" data-file="집행문위임장.hwpx" data-kind="hwp" href="assets/forms/집행문위임장.hwpx" download>한글</a><a class="dl-btn" data-file="집행문위임장.docx" data-kind="docx" href="assets/forms/집행문위임장.docx" download>워드</a></span></span></span></td>
             </tr>
             <tr>
               <th scope="row">인도 집행증서</th>
@@ -309,7 +319,7 @@
               <th scope="row">의사록인증</th>
               <td>의사록 원본 2부 · 정관<br>주주명부 또는 이사 인감증명서<br>법인등기부등본 · 법인인감증명서</td>
               <td>공증용 위임장 · 확인서 · 진술서<br>대리인 신분증</td>
-              <td><span class="dl dl-stack"><span class="dl-one"><b>주총 위임장</b><a class="dl-btn" data-file="주총-위임장.hwpx" data-kind="hwp" href="assets/forms/주총-위임장.hwpx" download>한글</a><a class="dl-btn" data-file="주총-위임장.docx" data-kind="docx" href="assets/forms/주총-위임장.docx" download>워드</a></span><span class="dl-one"><b>주총 주주명부</b><a class="dl-btn" data-file="주총-주주명부.hwpx" data-kind="hwp" href="assets/forms/주총-주주명부.hwpx" download>한글</a><a class="dl-btn" data-file="주총-주주명부.docx" data-kind="docx" href="assets/forms/주총-주주명부.docx" download>워드</a></span><span class="dl-one"><b>주총 확인서</b><a class="dl-btn" data-file="주총-확인서.hwpx" data-kind="hwp" href="assets/forms/주총-확인서.hwpx" download>한글</a><a class="dl-btn" data-file="주총-확인서.docx" data-kind="docx" href="assets/forms/주총-확인서.docx" download>워드</a></span><span class="dl-one"><b>주총 진술서</b><a class="dl-btn" data-file="주총-진술서.hwpx" data-kind="hwp" href="assets/forms/주총-진술서.hwpx" download>한글</a><a class="dl-btn" data-file="주총-진술서.docx" data-kind="docx" href="assets/forms/주총-진술서.docx" download>워드</a></span><span class="dl-one"><b>이사회 위임장</b><a class="dl-btn" data-file="이사회-위임장.hwpx" data-kind="hwp" href="assets/forms/이사회-위임장.hwpx" download>한글</a><a class="dl-btn" data-file="이사회-위임장.docx" data-kind="docx" href="assets/forms/이사회-위임장.docx" download>워드</a></span><span class="dl-one"><b>이사회 확인서</b><a class="dl-btn" data-file="이사회-확인서.hwpx" data-kind="hwp" href="assets/forms/이사회-확인서.hwpx" download>한글</a><a class="dl-btn" data-file="이사회-확인서.docx" data-kind="docx" href="assets/forms/이사회-확인서.docx" download>워드</a></span><span class="dl-one"><b>이사회 진술서</b><a class="dl-btn" data-file="이사회-진술서.hwpx" data-kind="hwp" href="assets/forms/이사회-진술서.hwpx" download>한글</a><a class="dl-btn" data-file="이사회-진술서.docx" data-kind="docx" href="assets/forms/이사회-진술서.docx" download>워드</a></span></span></td>
+              <td><span class="dl dl-stack"><span class="dl-grp"><b class="dl-tag">주주총회</b><span class="dl-one"><b>위임장</b><a class="dl-btn" data-file="주총-위임장.hwpx" data-kind="hwp" href="assets/forms/주총-위임장.hwpx" download>한글</a><a class="dl-btn" data-file="주총-위임장.docx" data-kind="docx" href="assets/forms/주총-위임장.docx" download>워드</a></span><span class="dl-one"><b>주주명부</b><a class="dl-btn" data-file="주총-주주명부.hwpx" data-kind="hwp" href="assets/forms/주총-주주명부.hwpx" download>한글</a><a class="dl-btn" data-file="주총-주주명부.docx" data-kind="docx" href="assets/forms/주총-주주명부.docx" download>워드</a></span><span class="dl-one"><b>확인서</b><a class="dl-btn" data-file="주총-확인서.hwpx" data-kind="hwp" href="assets/forms/주총-확인서.hwpx" download>한글</a><a class="dl-btn" data-file="주총-확인서.docx" data-kind="docx" href="assets/forms/주총-확인서.docx" download>워드</a></span><span class="dl-one"><b>진술서</b><a class="dl-btn" data-file="주총-진술서.hwpx" data-kind="hwp" href="assets/forms/주총-진술서.hwpx" download>한글</a><a class="dl-btn" data-file="주총-진술서.docx" data-kind="docx" href="assets/forms/주총-진술서.docx" download>워드</a></span></span><span class="dl-grp"><b class="dl-tag">이사회</b><span class="dl-one"><b>위임장</b><a class="dl-btn" data-file="이사회-위임장.hwpx" data-kind="hwp" href="assets/forms/이사회-위임장.hwpx" download>한글</a><a class="dl-btn" data-file="이사회-위임장.docx" data-kind="docx" href="assets/forms/이사회-위임장.docx" download>워드</a></span><span class="dl-one"><b>확인서</b><a class="dl-btn" data-file="이사회-확인서.hwpx" data-kind="hwp" href="assets/forms/이사회-확인서.hwpx" download>한글</a><a class="dl-btn" data-file="이사회-확인서.docx" data-kind="docx" href="assets/forms/이사회-확인서.docx" download>워드</a></span><span class="dl-one"><b>진술서</b><a class="dl-btn" data-file="이사회-진술서.hwpx" data-kind="hwp" href="assets/forms/이사회-진술서.hwpx" download>한글</a><a class="dl-btn" data-file="이사회-진술서.docx" data-kind="docx" href="assets/forms/이사회-진술서.docx" download>워드</a></span></span></span></td>
             </tr>
           </tbody>
         </table>
