@@ -536,6 +536,57 @@
 
 <script src="traffic-serious.js"></script>
 <script src="traffic-list.js"></script>
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://yuillawfirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "교통형사 센터",
+      "item": "https://yuillawfirm.com/traffic.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "중상해사고",
+      "item": "https://yuillawfirm.com/traffic-serious.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "중상해사고",
+  "serviceType": "중상해사고",
+  "url": "https://yuillawfirm.com/traffic-serious.html",
+  "areaServed": "KR",
+  "provider": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/"
+  },
+  "description": "중상해 교통사고. 중상해의 판단 기준, 반의사불벌과 공소기각, 대법원 2021도11126 전원합의체. 법무법인 유일.",
+  "isPartOf": {
+    "@type": "WebPage",
+    "name": "교통형사 센터",
+    "url": "https://yuillawfirm.com/traffic.html"
+  }
+}
+</script>
+
 <script src="main.js"></script>
 
 </body>

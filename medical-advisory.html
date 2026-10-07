@@ -593,6 +593,46 @@
 
 
 <script src="medical-advisory.js"></script>
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://yuillawfirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "의료기관 자문",
+      "item": "https://yuillawfirm.com/medical-advisory.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "의료기관 자문",
+  "serviceType": "의료기관 법률자문",
+  "url": "https://yuillawfirm.com/medical-advisory.html",
+  "areaServed": "KR",
+  "provider": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/"
+  },
+  "description": "취소소송만 내고 기다리시면 그사이 업무정지와 면허정지가 그대로 집행됩니다. 집행정지를 함께 봅니다. 요양급여 환수, 현지조사, 의료광고 검토."
+}
+</script>
+
 <script src="main.js"></script>
 
 </body>

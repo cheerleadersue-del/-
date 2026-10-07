@@ -670,6 +670,57 @@
 
 
 <script src="civil-realestate.js"></script>
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://yuillawfirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "민사",
+      "item": "https://yuillawfirm.com/civil.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "부동산",
+      "item": "https://yuillawfirm.com/civil-realestate.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "부동산",
+  "serviceType": "부동산",
+  "url": "https://yuillawfirm.com/civil-realestate.html",
+  "areaServed": "KR",
+  "provider": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/"
+  },
+  "description": "부동산 사건은 어느 시점에 무엇이 정해졌느냐로 갈립니다. 매매 파기, 잔금 미지급, 하자, 이중매매, 명의 분쟁 — 등기부와 계약서에서 시작합니다.",
+  "isPartOf": {
+    "@type": "WebPage",
+    "name": "민사 센터",
+    "url": "https://yuillawfirm.com/civil.html"
+  }
+}
+</script>
+
 <script src="main.js"></script>
 
 </body>

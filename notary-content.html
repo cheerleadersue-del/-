@@ -543,6 +543,57 @@
 
 
 <script src="notary-content.js"></script>
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://yuillawfirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "공증 · 등기",
+      "item": "https://yuillawfirm.com/notary.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "내용증명",
+      "item": "https://yuillawfirm.com/notary-content.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "내용증명",
+  "serviceType": "내용증명",
+  "url": "https://yuillawfirm.com/notary-content.html",
+  "areaServed": "KR",
+  "provider": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/"
+  },
+  "description": "무엇을 언제 보냈는지 우체국이 증명하는 문서입니다. 그 자체로 강제력은 없지만 시효를 붙잡고 절차의 출발점이 됩니다. 잘못 쓰면 법정에서 불리해집니다.",
+  "isPartOf": {
+    "@type": "WebPage",
+    "name": "공증 · 등기 센터",
+    "url": "https://yuillawfirm.com/notary.html"
+  }
+}
+</script>
+
 <script src="main.js"></script>
 
 </body>

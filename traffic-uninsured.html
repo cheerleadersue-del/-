@@ -536,6 +536,57 @@
 
 <script src="traffic-uninsured.js"></script>
 <script src="traffic-list.js"></script>
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://yuillawfirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "교통형사 센터",
+      "item": "https://yuillawfirm.com/traffic.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "무보험 (책임보험)",
+      "item": "https://yuillawfirm.com/traffic-uninsured.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "무보험 (책임보험)",
+  "serviceType": "무보험 (책임보험)",
+  "url": "https://yuillawfirm.com/traffic-uninsured.html",
+  "areaServed": "KR",
+  "provider": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/"
+  },
+  "description": "무보험·책임보험만 가입한 상태의 교통사고. 교특법 특례 배제, 책임보험 초과 손해, 정부 보장사업. 법무법인 유일.",
+  "isPartOf": {
+    "@type": "WebPage",
+    "name": "교통형사 센터",
+    "url": "https://yuillawfirm.com/traffic.html"
+  }
+}
+</script>
+
 <script src="main.js"></script>
 
 </body>

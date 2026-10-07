@@ -483,6 +483,46 @@
 
 
 <script src="criminal-list.js"></script>
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://yuillawfirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "형사 센터",
+      "item": "https://yuillawfirm.com/criminal.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "형사 센터",
+  "serviceType": "형사변호",
+  "url": "https://yuillawfirm.com/criminal.html",
+  "areaServed": "KR",
+  "provider": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/"
+  },
+  "description": "법조 경력 25년 변호사와 경찰 경력 18년 형사전담센터장이 함께 봅니다. 마약·도박·해외조직범죄·금융범죄·성범죄·코인 OTC·성병감염·학교폭력."
+}
+</script>
+
 <script src="main.js"></script>
 
 </body>

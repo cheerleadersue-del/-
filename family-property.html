@@ -543,6 +543,57 @@
 
 
 <script src="family-property.js"></script>
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://yuillawfirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "가사",
+      "item": "https://yuillawfirm.com/family.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "재산분할",
+      "item": "https://yuillawfirm.com/family-property.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "재산분할",
+  "serviceType": "재산분할",
+  "url": "https://yuillawfirm.com/family-property.html",
+  "areaServed": "KR",
+  "provider": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/"
+  },
+  "description": "재산분할은 반씩이 아닙니다. 이름이 누구 앞이든 함께 만든 것이면 나눕니다. 기여도, 특유재산, 퇴직금과 연금, 숨긴 재산 찾기. 기간은 이혼한 날부터.",
+  "isPartOf": {
+    "@type": "WebPage",
+    "name": "가사 센터",
+    "url": "https://yuillawfirm.com/family.html"
+  }
+}
+</script>
+
 <script src="main.js"></script>
 
 </body>

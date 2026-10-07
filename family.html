@@ -479,6 +479,46 @@
 
 
 <script src="family-list.js"></script>
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://yuillawfirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "가사 센터",
+      "item": "https://yuillawfirm.com/family.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "가사 센터",
+  "serviceType": "가사소송",
+  "url": "https://yuillawfirm.com/family.html",
+  "areaServed": "KR",
+  "provider": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/"
+  },
+  "description": "이혼·재산분할·양육권·상속은 한 덩어리로 움직입니다. 재산과 아이는 감정과 분리해 다룹니다. 합의로 끝낼 수 있는 부분과 아닌 부분을 나눕니다."
+}
+</script>
+
 <script src="main.js"></script>
 
 </body>

@@ -554,6 +554,57 @@
 
 
 <script src="notary-deed.js"></script>
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://yuillawfirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "공증 · 등기 센터",
+      "item": "https://yuillawfirm.com/notary.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "공증",
+      "item": "https://yuillawfirm.com/notary-deed.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "공증",
+  "serviceType": "공증",
+  "url": "https://yuillawfirm.com/notary-deed.html",
+  "areaServed": "KR",
+  "provider": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/"
+  },
+  "description": "금전 집행증서·임차건물 인도·유언공정증서·사서증서인증·번역문인증·의사록인증. 무엇을 가져오면 되는지와 한글·워드 양식을 한 표에 모았습니다.",
+  "isPartOf": {
+    "@type": "WebPage",
+    "name": "공증 · 등기 센터",
+    "url": "https://yuillawfirm.com/notary.html"
+  }
+}
+</script>
+
 <script src="main.js"></script>
 
 </body>

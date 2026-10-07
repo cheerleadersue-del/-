@@ -902,6 +902,57 @@
 
 
 <script src="civil-account.js"></script>
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "https://yuillawfirm.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "민사",
+      "item": "https://yuillawfirm.com/civil.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "계좌 지급정지",
+      "item": "https://yuillawfirm.com/civil-account.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "계좌 지급정지",
+  "serviceType": "계좌 지급정지",
+  "url": "https://yuillawfirm.com/civil-account.html",
+  "areaServed": "KR",
+  "provider": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/"
+  },
+  "description": "가담한 적이 없어도 신고가 들어오면 계좌가 먼저 묶입니다. 통신사기피해환급법상 지급정지와 채권소멸절차 개시공고, 채무부존재확인의 소로 푸는 절차까지.",
+  "isPartOf": {
+    "@type": "WebPage",
+    "name": "민사 센터",
+    "url": "https://yuillawfirm.com/civil.html"
+  }
+}
+</script>
+
 <script src="main.js"></script>
 
 </body>
