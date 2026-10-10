@@ -1681,7 +1681,7 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
   /*
     전화 — 번호는 그 페이지의 것을 그대로 쓴다.
 
-    창구가 하나인 페이지(거의 전부)는 이름을 "전화상담" 으로 고정한다.
+    창구가 하나인 페이지(거의 전부)는 이름을 "무료상담" 으로 고정한다.
     아래 막대의 이름("상담")을 그대로 가져오면
     바로 밑의 "상담신청" 과 헷갈리기 때문이다.
 
@@ -1696,7 +1696,7 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
     const name = t.textContent.trim();          /* 예: "공증 상담" */
     const short = name.split(/\s+/)[0];          /* 예: "공증" */
     rail.append(tile("rail-tel", t.getAttribute("href"),
-                     many ? name : "전화상담",
+                     many ? name : "무료상담",
                      false,
                      many ? short : null));
   });
