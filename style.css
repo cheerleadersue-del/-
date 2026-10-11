@@ -3375,6 +3375,56 @@ body.no-scroll .head .burger i { background: var(--ink); }
   min-width: 900px;
 }
 
+/* =====================================================================
+   그림으로 보여주는 경과 — 성병감염 쪽의 혈청전환 그래프
+
+   SVG 안의 글자는 바깥 글꼴 크기를 따르지 않으므로 여기서 정합니다.
+   색은 쪽 전체와 같은 토큰을 씁니다. 선은 잉크, 점만 금색입니다.
+===================================================================== */
+
+.chart {
+  margin: 38px 0 0;
+  padding: 30px 26px 24px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chart .c-ax,
+.chart .c-tag,
+.chart .c-lb {
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+}
+
+.chart .c-ax  { font-size: 13px; fill: var(--ink-faint); }
+.chart .c-tag { font-size: 12.5px; fill: var(--ink-soft); }
+.chart .c-lb  { font-size: 13.5px; font-weight: 500; fill: var(--ink); }
+
+.chart figcaption {
+  max-width: 640px;
+  margin-top: 20px;
+  color: var(--ink-faint);
+  font-size: 13px;
+  line-height: 1.9;
+  word-break: keep-all;
+}
+
+@media (max-width: 760px) {
+  /*
+    좁은 화면에서는 그래프가 줄어들며 글자가 같이 작아집니다.
+    읽을 수 없게 되므로 가로로 밀어 보게 둡니다.
+  */
+  .chart { padding: 22px 0 20px; overflow-x: auto; }
+  .chart svg { width: 700px; max-width: none; margin: 0 18px; }
+  .chart figcaption { margin: 20px 18px 0; }
+}
+
 .table-note {
   max-width: 780px;
   margin-top: 22px;
