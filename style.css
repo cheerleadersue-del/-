@@ -3375,6 +3375,21 @@ body.no-scroll .head .burger i { background: var(--ink); }
   min-width: 900px;
 }
 
+/*
+  표의 줄 이름 아래에 붙는 작은 글씨.
+  「성기헤르페스 / 단순포진 2형」처럼 학술 이름을 덧붙일 때 씁니다.
+*/
+.ptable .t-sub {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
 /* =====================================================================
    그림으로 보여주는 경과 — 성병감염 쪽의 혈청전환 그래프
 
