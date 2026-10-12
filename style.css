@@ -3376,6 +3376,136 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /*
+  세 줄 요약 — 긴 쪽의 머리에서 뼈대만 먼저 드립니다.
+  번호는 크게, 글은 작게. 읽는 눈이 번호를 따라 내려갑니다.
+*/
+.gist {
+  display: grid;
+  gap: 2px;
+  max-width: 920px;
+  margin: 0 auto 34px;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.gist li {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(16px, 2.2vw, 30px);
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.gist-no {
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+}
+
+.gist p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.95;
+  word-break: keep-all;
+}
+
+.gist b { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 760px) {
+  .gist li { gap: 14px; padding: 20px 0; }
+  .gist-no { font-size: 16px; }
+  .gist p { font-size: 15px; }
+}
+
+
+/* =====================================================================
+   차례와 진행 막대 — 긴 쪽을 읽기 쉽게
+
+   main.js 의 buildToc 가 채웁니다. 자바스크립트가 꺼져 있으면
+   빈 자리로 남으므로 .is-on 이 붙기 전에는 보이지 않습니다.
+===================================================================== */
+
+.toc { display: none; }
+
+.toc.is-on {
+  display: block;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 34px 38px 32px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.toc-head {
+  margin-bottom: 20px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+}
+
+.toc-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 34px;
+  list-style: none;
+}
+
+.toc-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.6;
+  text-decoration: none;
+  word-break: keep-all;
+  border-bottom: 1px solid var(--line-soft);
+  transition: color 0.2s var(--ease);
+}
+
+.toc-list a:hover { color: var(--ink); }
+
+.toc-no {
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+}
+
+@media (max-width: 760px) {
+  .toc.is-on { padding: 26px 22px 22px; }
+  .toc-list { grid-template-columns: 1fr; gap: 0; }
+}
+
+/*
+  머리글 아래에 붙는 가는 선. 얼마나 읽었는지 보여 줍니다.
+  왼쪽을 고정해 두고 가로로만 늘립니다. 다시 그리지 않아 가볍습니다.
+*/
+.read-bar {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .read-bar { transition: none; }
+}
+
+
+/*
   표의 줄 이름 아래에 붙는 작은 글씨.
   「성기헤르페스 / 단순포진 2형」처럼 학술 이름을 덧붙일 때 씁니다.
 */
