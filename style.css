@@ -3376,6 +3376,57 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /* =====================================================================
+   「이것만은」 배너 — 놓치면 되돌릴 수 없는 한 줄
+
+   ⚠️ 쪽마다 하나, 많아야 둘입니다. 셋이 넘으면 어느 것도 눈에
+      띄지 않습니다. 「중요합니다」가 열 번 나오면 아무것도 중요하지
+      않은 것과 같습니다.
+
+   ⚠️ 색은 둘뿐입니다. 딱지와 같은 계열을 씁니다.
+        callout        금색 — 꼭 아셔야 하는 것
+        callout-warn   벽돌 — 놓치면 되돌릴 수 없는 것
+===================================================================== */
+
+.callout {
+  max-width: 920px;
+  margin: 32px 0 0;
+  padding: 22px clamp(20px, 2.4vw, 28px);
+  border: 1px solid #ece5d6;
+  border-left: 3px solid var(--gold);
+  background: #faf7f0;
+}
+
+.callout > p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  line-height: 1.95;
+  word-break: keep-all;
+}
+
+.callout > p + p { margin-top: 10px; }
+.callout b { color: var(--ink); font-weight: 500; }
+
+.callout-head {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+
+.callout-warn {
+  border-color: #efdfd9;
+  border-left-color: #8c4a3a;
+  background: #faf2ef;
+}
+
+.callout-warn .callout-head { color: #8c4a3a; }
+
+
+/* =====================================================================
    본문 속 법률 용어 — 점선 밑줄과 뜻풀이
 
    ⚠️ 딱지(.flag)와 섞지 마십시오. 딱지는 「무거운가 가벼운가」를,
@@ -3520,22 +3571,33 @@ body.no-scroll .head .burger i { background: var(--ink); }
   세 줄 요약 — 긴 쪽의 머리에서 뼈대만 먼저 드립니다.
   번호는 크게, 글은 작게. 읽는 눈이 번호를 따라 내려갑니다.
 */
+/*
+  요약은 한 덩어리로 묶어 바탕에 옅은 색을 깝니다.
+  긴 쪽에서 「여기부터 여기까지가 요약」이라는 것이 한눈에 보입니다.
+  색은 딱지의 금색 바탕(#f5f1e9)과 같은 계열을 조금 더 옅게 썼습니다.
+  사이트에 없던 색을 새로 들이지 않기 위해서입니다.
+*/
 .gist {
   display: grid;
   gap: 2px;
   max-width: 920px;
-  margin: 0 auto 34px;
+  margin: 0 auto 30px;
+  padding: 10px clamp(22px, 3vw, 38px) 14px;
+  border: 1px solid #ece5d6;
+  background: #faf7f0;
   list-style: none;
-  border-top: 1px solid var(--line);
 }
 
 .gist li {
   display: flex;
   align-items: baseline;
   gap: clamp(16px, 2.2vw, 30px);
-  padding: 24px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 22px 0;
+  border-bottom: 1px solid #ece5d6;
 }
+
+/* 마지막 줄 아래에는 선을 긋지 않습니다 */
+.gist li:last-child { border-bottom: 0; }
 
 .gist-no {
   flex: 0 0 auto;
@@ -3571,13 +3633,17 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .toc { display: none; }
 
+/*
+  차례는 요약보다 조용해야 합니다. 그래서 무채색 바탕입니다.
+  요약(따뜻한 색) → 차례(무채색) 순으로 눈이 가게 둡니다.
+*/
 .toc.is-on {
   display: block;
   max-width: 920px;
   margin: 0 auto;
-  padding: 34px 38px 32px;
+  padding: 30px clamp(22px, 3vw, 38px) 26px;
   border: 1px solid var(--line);
-  background: var(--paper);
+  background: var(--paper-2);
 }
 
 .toc-head {
@@ -3606,7 +3672,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
   line-height: 1.6;
   text-decoration: none;
   word-break: keep-all;
-  border-bottom: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line);
   transition: color 0.2s var(--ease);
 }
 
