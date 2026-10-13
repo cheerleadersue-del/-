@@ -1818,3 +1818,145 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
   addEventListener("resize", ask);
   draw();
 })();
+
+
+/* =====================================================================
+   본문에 섞인 법률 용어에 뜻을 달아 줍니다
+
+   쪽마다 아래쪽에 「말 / 뜻」 표가 있습니다. 거기 적힌 뜻을 그대로
+   끌어와, 본문에서 그 말이 처음 나오는 자리에 점선 밑줄을 긋고
+   눌렀을 때 뜻이 뜨게 합니다.
+
+   ⚠️ 뜻을 여기에 다시 적지 않습니다. 표에서 꺼내 씁니다.
+      표를 고치면 뜻풀이도 저절로 따라옵니다.
+
+   ⚠️ 한 낱말에 한 번만 답니다. 나올 때마다 달면 본문이 점선 밭이 됩니다.
+
+   ⚠️ 한국어에는 낱말 사이 띄어쓰기가 늘 있지 않아, 「감정」이
+      「신체감정」 안에서 잘못 걸릴 수 있습니다. 그래서 앞뒤 글자를
+      봅니다 — 앞이 한글이면 건너뛰고, 뒤는 조사만 허용합니다.
+===================================================================== */
+
+(function buildTerms() {
+  /* 「말 / 뜻」 표를 찾습니다 */
+  let table = null;
+  document.querySelectorAll("table caption").forEach((c) => {
+    if (!table && /쓰는 말과 그 뜻/.test(c.textContent)) table = c.closest("table");
+  });
+  if (!table) return;
+
+  /* 말 → 뜻. 한 칸에 「청구취지 ·<br>청구원인」처럼 둘이 들어가기도 합니다 */
+  const book = new Map();
+  table.querySelectorAll("tbody tr").forEach((tr) => {
+    const th = tr.querySelector("th");
+    const td = tr.querySelector("td");
+    if (!th || !td) return;
+    /*
+      <br> 은 칸이 좁아 줄을 바꾼 것일 뿐이므로 빈칸으로 바꿉니다.
+      「강제집행 인낙(認諾)<br>문구」를 쪼개면 「문구」가 낱말이 되어
+      엉뚱한 자리에 걸립니다. 낱말을 가르는 것은 가운뎃점뿐입니다.
+    */
+    const cell = th.innerHTML.replace(/<br\s*\/?>/gi, " ");
+    const parts = cell.split("·");
+    parts.forEach((raw) => {
+      const word = raw.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+      const bare = word.replace(/\s*\([^)]*\)\s*/g, "").trim();
+      /*
+        두 글자도 받습니다 — 면책 · 송치 · 기소 · 소장처럼 그 자체로
+        법률 용어인 것이 많습니다. 「지급정지」 안의 「정지」처럼
+        낱말 안쪽에 걸리는 것은 아래에서 앞뒤 글자를 보아 막습니다.
+      */
+      if (bare.length >= 2) book.set(bare, td.innerHTML);
+      const alt = (word.match(/\(([^)]+)\)/) || [])[1];
+      if (alt && alt.trim().length >= 2) book.set(alt.trim(), td.innerHTML);
+    });
+  });
+  if (!book.size) return;
+
+  /* 긴 말부터 찾습니다. 「소멸시효」가 「시효」에 먼저 먹히지 않게. */
+  const words = [...book.keys()].sort((a, b) => b.length - a.length);
+
+  const HANGUL = /[가-힣]/;
+  /* 뒤에 붙어도 같은 낱말인 것들 — 조사와 흔한 어미 */
+  const JOSA = /^(이|가|은|는|을|를|에|의|와|과|도|만|로|으로|부터|까지|라|란|이란|에서|에게|보다|처럼|마저|조차|밖에|이나|나|든|이든|요|입니다|이다|라고|이라고)/;
+
+  const SKIP = new Set(["A", "BUTTON", "H1", "H2", "H3", "H4", "CAPTION",
+                        "SCRIPT", "STYLE", "TH", "NAV"]);
+
+  const done = new Set();
+  const main = document.querySelector("main");
+  if (!main) return;
+
+  const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      for (let el = node.parentElement; el && el !== main; el = el.parentElement) {
+        if (SKIP.has(el.tagName)) return NodeFilter.FILTER_REJECT;
+        if (el === table) return NodeFilter.FILTER_REJECT;      /* 표 자신 */
+        if (el.classList.contains("flag")) return NodeFilter.FILTER_REJECT;
+        if (el.classList.contains("t-sub")) return NodeFilter.FILTER_REJECT;
+        if (el.classList.contains("term")) return NodeFilter.FILTER_REJECT;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    },
+  });
+
+  const texts = [];
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) texts.push(n);
+
+  texts.forEach((node) => {
+    for (const word of words) {
+      if (done.has(word)) continue;
+      const txt = node.nodeValue;
+      const at = txt.indexOf(word);
+      if (at < 0) continue;
+
+      const before = at > 0 ? txt[at - 1] : "";
+      const after = txt.slice(at + word.length);
+      if (HANGUL.test(before)) continue;                 /* 낱말 안쪽이다 */
+      if (HANGUL.test(after[0] || "") && !JOSA.test(after)) continue;
+
+      /* 쪼갠다 — 앞 / 말 / 뒤 */
+      const tail = node.splitText(at);
+      tail.splitText(word.length);
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "term";
+      btn.textContent = word;
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-label", word + " 뜻 보기");
+
+      const pop = document.createElement("span");
+      pop.className = "term-pop";
+      pop.innerHTML = "<b>" + word + "</b> " + book.get(word);
+
+      const wrap = document.createElement("span");
+      wrap.className = "term-wrap";
+      wrap.append(btn, pop);
+      tail.parentNode.replaceChild(wrap, tail);
+
+      done.add(word);
+      return;        /* 이 글조각에서는 하나만 */
+    }
+  });
+
+  if (!done.size) return;
+
+  /* 열고 닫기 */
+  const shut = (except) => {
+    document.querySelectorAll('.term[aria-expanded="true"]').forEach((b) => {
+      if (b !== except) b.setAttribute("aria-expanded", "false");
+    });
+  };
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".term");
+    if (!btn) { shut(null); return; }
+    const open = btn.getAttribute("aria-expanded") === "true";
+    shut(btn);
+    btn.setAttribute("aria-expanded", open ? "false" : "true");
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") shut(null);
+  });
+})();

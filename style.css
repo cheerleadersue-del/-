@@ -3376,6 +3376,86 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /* =====================================================================
+   본문 속 법률 용어 — 점선 밑줄과 뜻풀이
+
+   ⚠️ 딱지(.flag)와 섞지 마십시오. 딱지는 「무거운가 가벼운가」를,
+      이것은 「무슨 뜻인가」를 말합니다. 하는 일이 달라 모양도 다릅니다.
+      용어에 색을 칠하면 색의 뜻이 둘로 갈려 둘 다 못 읽게 됩니다.
+      그래서 여기에는 색을 쓰지 않고 점선만 긋습니다.
+===================================================================== */
+
+.term-wrap {
+  position: relative;
+  display: inline;
+}
+
+.term {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px dotted var(--ink-faint);
+  background: none;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  cursor: help;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.term:hover,
+.term:focus-visible,
+.term[aria-expanded="true"] {
+  border-bottom-color: var(--gold);
+  color: var(--ink);
+}
+
+.term-pop {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + 10px);
+  left: 0;
+  display: none;
+  width: max-content;
+  max-width: min(360px, 78vw);
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: 0 10px 30px rgba(20, 20, 22, 0.1);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: -0.02em;
+  color: var(--ink-soft);
+  text-align: left;
+  word-break: keep-all;
+  white-space: normal;
+}
+
+.term-pop b { font-weight: 500; color: var(--ink); }
+
+/* 손을 올리거나, 눌러서 열었을 때 */
+.term-wrap:hover .term-pop,
+.term:focus-visible + .term-pop,
+.term[aria-expanded="true"] + .term-pop { display: block; }
+
+/*
+  어두운 구간(topic-flow 등)에서는 글자색이 밝으므로
+  점선도 밝게 둡니다. 뜻풀이 상자는 밝은 바탕 그대로입니다.
+*/
+.topic-flow .term,
+.topic-hero .term { border-bottom-color: rgba(252, 252, 251, 0.45); }
+
+.topic-flow .term:hover,
+.topic-hero .term:hover { border-bottom-color: var(--gold-soft); color: var(--paper); }
+
+@media (max-width: 760px) {
+  /* 좁은 화면에서는 오른쪽으로 넘치기 쉬워 왼쪽 끝에 붙입니다 */
+  .term-pop { left: auto; right: 0; max-width: min(300px, 86vw); }
+}
+
+
+/* =====================================================================
    상태 표 — 표에서 한눈에 갈라 보이게 하는 작은 딱지
 
    ⚠️ 이 사이트는 색을 아껴 씁니다. 무채색이 기본이고 금색은 좁게만
