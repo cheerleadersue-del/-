@@ -3489,6 +3489,12 @@ body.no-scroll .head .burger i { background: var(--ink); }
    빈 자리로 남으므로 .is-on 이 붙기 전에는 보이지 않습니다.
 ===================================================================== */
 
+/*
+  차례만 담는 절. 안에 제목이 없으므로 위아래 여백을 줄입니다.
+  그대로 두면 빈 자리가 너무 넓어 보입니다.
+*/
+.toc-sec { padding-top: clamp(40px, 5vw, 64px); padding-bottom: 0; }
+
 .toc { display: none; }
 
 .toc.is-on {
