@@ -1737,20 +1737,20 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
 
 
 /* =====================================================================
-   긴 쪽을 읽기 쉽게 — 차례와 진행 막대
+   긴 쪽을 읽기 쉽게 — 목차와 진행 막대
 
    쪽이 길어지면 지금 어디쯤 읽고 있는지, 앞으로 무엇이 남았는지를
    알 수 없습니다. 성병감염 쪽은 2만 5천 px 가 넘습니다.
 
    두 가지를 붙입니다.
-     1) 차례 — 쪽 안의 절 제목을 모아 바로가기를 만듭니다.
+     1) 목차 — 쪽 안의 절 제목을 모아 바로가기를 만듭니다.
         HTML 에 <nav class="toc"></nav> 를 두신 쪽에서만 생깁니다.
         제목은 이미 있는 id 를 그대로 쓰므로 따로 적으실 것이 없습니다.
      2) 진행 막대 — 머리글 아래에 가는 선으로 얼마나 읽었는지 보입니다.
-        차례가 있는 쪽에만 붙입니다. 짧은 쪽에는 군더더기입니다.
+        목차가 있는 쪽에만 붙입니다. 짧은 쪽에는 군더더기입니다.
 
    ⚠️ 자바스크립트가 꺼져 있어도 쪽은 그대로 읽힙니다.
-      차례 자리는 비어 있을 뿐이고 CSS 가 그 자리를 감춥니다.
+      목차 자리는 비어 있을 뿐이고 CSS 가 그 자리를 감춥니다.
 ===================================================================== */
 
 (function buildToc() {
@@ -1762,7 +1762,7 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
     이미 id 가 붙어 있어 그 자리로 바로 갈 수 있습니다.
   */
   const items = [];
-  const own = box.closest("section");      /* 차례가 들어 있는 절 */
+  const own = box.closest("section");      /* 목차가 들어 있는 절 */
   document.querySelectorAll("main section[aria-labelledby]").forEach((sec) => {
     if (sec === own) return;               /* 자기 자신은 넣지 않는다 */
     const id = sec.getAttribute("aria-labelledby");
@@ -1773,11 +1773,11 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
     if (name) items.push({ id, name });
   });
 
-  /* 서넛밖에 안 되는 쪽에 차례를 두면 오히려 걸리적거립니다 */
+  /* 서넛밖에 안 되는 쪽에 목차를 두면 오히려 걸리적거립니다 */
   if (items.length < 6) return;
 
   const head = el("p", "toc-head");
-  head.textContent = "이 쪽에서 다루는 것";
+  head.textContent = "목차";
 
   const list = el("ol", "toc-list");
   items.forEach((it, i) => {
