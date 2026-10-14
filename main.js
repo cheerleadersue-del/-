@@ -206,8 +206,9 @@ const practices = [
     page: "civil.html",
     /*
       이 줄은 칸 이름 바로 밑에 붙어 "누가 맡는가" 를 먼저 보여준다.
-      차례가 곧 무게라서, 민사 중심으로 바꾸면서 건설 · 부동산을
-      맡는 양진희 변호사를 맨 앞에 두었다.
+      차례가 곧 무게라서 양진희 변호사를 맨 앞에 두었다.
+      ⚠️ 이 줄은 civil.html 의 .topic-team 과 글이 같아야 한다.
+         한쪽만 고치면 홈 화면과 민사 쪽이 서로 다르게 보인다.
     */
     /*
       이름 한 사람씩 nb 로 묶어 이름과 괄호가 갈라지지 않게 하고,
@@ -217,7 +218,7 @@ const practices = [
       다음 줄로 넘어가거나 "· 김제도 변호사" 처럼 점이 줄머리에 선다.
       이렇게 묶어 두면 줄은 언제나 사람과 사람 사이에서만 넘어간다.
     */
-    credit: "<span class=\"nb\">양진희 변호사(건설&nbsp;· 부동산)</span>&nbsp;· " +
+    credit: "<span class=\"nb\">양진희 변호사(일반민사&nbsp;· 의료사고)</span>&nbsp;· " +
             "<span class=\"nb\">정주현 변호사(부동산)</span>&nbsp;· " +
             "<span class=\"nb\">김제도 변호사(의료사고)</span>",
     image: "assets/center-civil.webp",
