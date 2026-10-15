@@ -1465,7 +1465,7 @@ if (form && formStatus) {
     const onNetlify = /(^|\.)netlify\.app$/i.test(location.hostname);
     if (!useEndpoint && !onNetlify) {
       event.preventDefault();
-      say("지금은 상담신청서를 받을 수 없습니다. 전화 010-8227-8485 또는 카톡으로 연락 주세요.");
+      say("지금은 상담신청서를 받을 수 없습니다. 전화 010-3336-0289 또는 카톡으로 연락 주세요.");
       return;
     }
 
