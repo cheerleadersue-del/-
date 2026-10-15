@@ -434,8 +434,8 @@ const practices = [
 ];
 
 const attorneys = [
-  { name: "정호길", role: "대표변호사", field: "형사 · 수사 및 재판 대응",
-    image: "assets/lawyer-01.webp", career: ["25년 경력 형사전문"] },
+  { name: "정호길", role: "대표변호사", field: "형사 · 민사",
+    image: "assets/lawyer-01.webp", career: ["법조경력 25년 차"] },
 ];
 ```
 
