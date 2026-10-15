@@ -3557,6 +3557,47 @@ body.no-scroll .head .burger i { background: var(--ink); }
 .flag-mid { background: #f5f1e9; color: #786139; }
 .flag-low { background: var(--paper-2); color: var(--ink-soft); }
 
+/*
+  공증 쪽 업무 딱지 — 「위임장 양식」 표의 첫 칸.
+
+  .flag 과 생김새는 같으나 뜻이 다릅니다.
+  .flag 은 「무겁다 · 불리하다」 같은 판단을 적는 딱지이고,
+  이것은 업무의 종류를 적는 이름표입니다.
+  섞어 쓰면 뒤에 고치는 사람이 판단으로 잘못 읽습니다.
+
+  색은 세 가지뿐입니다. 여섯 가지 색을 쓰면 색마다 뜻이 있는 것처럼
+  보이지만 실제로는 뜻이 없어 읽는 데 도움이 되지 않습니다.
+    deed  집행증서   — 돈과 물건을 바로 집행할 수 있는 증서
+    auth  인증       — 이미 있는 문서의 진정성을 확인하는 일
+    self  대리 불가  — 본인이 직접 오셔야 하는 것(유언)
+  명도 대비는 .flag 에서 재어 둔 값을 그대로 씁니다.
+    deed 5.23 : 1    auth 7.05 : 1    self 5.87 : 1
+*/
+.job {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.job::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.job-deed { background: #f5f1e9;         color: #786139; }
+.job-auth { background: var(--sand);     color: var(--ink-soft); }
+.job-self { background: #f7efec;         color: #8c4a3a; }
+
 /* 딱지 아래에 붙는 설명 — 딱지가 결론, 아래가 까닭입니다 */
 .flag-why {
   display: block;
