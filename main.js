@@ -262,6 +262,7 @@ const practices = [
       { name: "코인 OTC",     href: "criminal-crypto.html" },
       { name: "성병감염",      href: "criminal-std.html" },
       { name: "학교폭력·교권침해", href: "criminal-school.html" },
+      { name: "명예훼손",      href: "criminal-defamation.html" },
       { name: "형사 센터 전체",    href: "criminal.html" }
     ]
   },

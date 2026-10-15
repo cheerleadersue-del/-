@@ -65,6 +65,13 @@ window.CRIMINAL_AREAS = [
     en:   "SCHOOL VIOLENCE & TEACHER RIGHTS",
     href: "criminal-school.html",
     line: "조치 하나가 생활기록부에 남고 진학까지 따라갑니다. 기한이 짧습니다."
+  },
+  {
+    no:   "09",
+    name: "명예훼손 · 모욕",
+    en:   "DEFAMATION",
+    href: "criminal-defamation.html",
+    line: "사실을 적어도 처벌됩니다. 인터넷에 쓰면 더 무겁습니다. 대화 원문이 전부입니다."
   }
 ];
 
