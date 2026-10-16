@@ -384,7 +384,7 @@ const attorneys = [
   },
   {
     name: "양진희", role: "변호사",
-    field: "일반민사 · 의료사고 · 형사 · 성병감염",
+    field: "건설 · 부동산 · 민사 · 형사",
     /* 사진을 올리기 전까지는 자리표시자가 대신 보인다. */
     image: "assets/lawyer-06.webp",
     career: [
