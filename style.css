@@ -4584,6 +4584,78 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 /* =====================================================================
+   13-b. 조문 · 판례 상자
+
+   법 조문이나 판결을 그대로 옮겨 적는 자리입니다.
+   본문과 섞어 쓰면 어디까지가 법이고 어디부터가 우리 설명인지
+   구분이 되지 않습니다. 그래서 상자로 떼어 둡니다.
+
+   ⚠️ 이 상자 안에는 조문과 판시를 그대로만 적으십시오.
+      우리 해석을 섞으면 법에 그렇게 적혀 있는 것처럼 읽힙니다.
+      해석은 상자 밖에 적습니다.
+
+   ⚠️ 상자 아래 출처 줄(.law-src)에는 확인한 날짜를 함께 적습니다.
+      법은 개정되고, 언제 기준인지가 그 자체로 정보입니다.
+===================================================================== */
+
+.law-box {
+  margin: 26px 0 0;
+  padding: 20px clamp(20px, 2.4vw, 30px) 22px;
+  border: 1px solid #ece5d6;
+  border-left: 3px solid var(--gold);
+  background: #faf7f0;
+}
+
+/* 상자가 잇달아 올 때는 사이를 띄운다 */
+.law-box + .law-box { margin-top: 14px; }
+
+.law-tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+}
+
+.law-box p {
+  font-family: var(--font-serif);
+  font-size: 16.5px;
+  font-weight: 300;
+  line-height: 1.95;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  word-break: keep-all;
+}
+
+.law-box p + p { margin-top: 12px; }
+
+.law-box b { font-weight: 500; }
+
+.law-src {
+  margin-top: 14px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+/*
+  제목 안의 강조.
+
+  ⚠️ 색은 #7a6540 입니다. 쪽의 금색(#8a7248)보다 조금 진합니다.
+     금색 그대로 쓰면 흰 바탕에서 4.47 : 1 이라 작은 글씨에 모자랍니다.
+     이 값은 흰 바탕 5.44 : 1, 회색 바탕 4.93 : 1, 조문 상자 5.22 : 1 로
+     어느 바탕에서도 4.5 : 1 을 넘습니다. 색을 바꾸실 때 다시 재십시오.
+
+  ⚠️ 제목에서만 쓰십시오. 본문에서 쓰면 어디가 중요한지 흐려집니다.
+     한 쪽에 여남은 개가 넘으면 아무것도 강조되지 않습니다.
+*/
+.hl { color: #7a6540; }
+
+
+/* =====================================================================
    14. 모션 최소화
 ===================================================================== */
 
