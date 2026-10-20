@@ -190,15 +190,47 @@ const questions = PAGE.questions || [
 
 const practices = [
   /*
-    민사 중심으로 잠시 바꾸면서 이 차례가 되었다.
-    맨 앞이 대문에서 가장 먼저 펼쳐지는 센터다.
+    센터 차례. 맨 앞이 대문에서 가장 먼저 펼쳐지는 센터다.
+    상단 메뉴(nav-menu)도 이 배열을 그대로 읽으므로,
+    여기 순서를 고치면 메뉴 순서도 함께 바뀐다.
 
-    교통형사 칸을 통째로 뺐다. 그 칸이 홈페이지에서 바깥 사이트
-    (교통형사전문로펌.com)로 가는 하나뿐인 문이었으므로,
-    지금은 홈페이지 어디에서도 그 사이트로 갈 수 없다.
-    바깥 사이트 자체는 그대로 떠 있다.
-    형사 중심으로 되돌리실 때는 docs/민사중심-되돌리기.md 를 보십시오.
+    2026-10-20. 법인에서 정하신 차례로 맞추었다.
+    형사 · 민사 · 교통사고 · 가사 · 회생 · 공증 · 등기.
+    (그 전에는 민사가 맨 앞이었다.)
+
+    같은 날 「교통사고」라는 이름을 「교통사고」로 바꾸었다.
+    홈페이지에 보이는 글만 바꾼 것이고, 바깥 사이트 주소인
+    교통형사전문로펌.com 은 실제 도메인이므로 그대로 둔다.
   */
+  {
+    name: "형사",
+    slug: "criminal",
+    en: "CRIMINAL",
+    /* 이 센터의 대문 페이지. 최상단 메뉴가 여기로 간다. */
+    page: "criminal.html",
+    /* <b class="tint"> 로 감싼 부분만 글자색이 달라진다 */
+    credit: "<b class=\"tint\">법조 경력 25년 변호사</b>와 " +
+            "<b class=\"tint\">경찰 경력 18년(광역/마약수사대, 성폭력수사대) 형사전담센터장</b>이 " +
+            "사건을 함께 검토합니다.",
+    image: "assets/center-criminal.webp",
+    /* desc 를 비워두면 그 줄은 아예 나오지 않는다 */
+    /*
+      태그에 href 를 넣으면 링크가 되고, 없으면 그냥 글자로 나온다.
+      상세 페이지를 만들 때마다 href 를 채우면 된다.
+    */
+    tags: [
+      { name: "마약",         href: "criminal-drug.html" },
+      { name: "도박",         href: "criminal-gambling.html" },
+      { name: "해외조직범죄",  href: "criminal-organized.html" },
+      { name: "금융범죄",      href: "criminal-finance.html" },
+      { name: "성범죄",       href: "criminal-sex.html" },
+      { name: "코인 OTC",     href: "criminal-crypto.html" },
+      { name: "성병감염",      href: "criminal-std.html" },
+      { name: "학교폭력·교권침해", href: "criminal-school.html" },
+      { name: "명예훼손",      href: "criminal-defamation.html" },
+      { name: "형사 센터 전체",    href: "criminal.html" }
+    ]
+  },
   {
     name: "민사",
     slug: "civil",
@@ -237,37 +269,8 @@ const practices = [
       { name: "민사 센터 전체", href: "civil.html" }
     ]
   },
-  {
-    name: "형사",
-    slug: "criminal",
-    en: "CRIMINAL",
-    /* 이 센터의 대문 페이지. 최상단 메뉴가 여기로 간다. */
-    page: "criminal.html",
-    /* <b class="tint"> 로 감싼 부분만 글자색이 달라진다 */
-    credit: "<b class=\"tint\">법조 경력 25년 변호사</b>와 " +
-            "<b class=\"tint\">경찰 경력 18년(광역/마약수사대, 성폭력수사대) 형사전담센터장</b>이 " +
-            "사건을 함께 검토합니다.",
-    image: "assets/center-criminal.webp",
-    /* desc 를 비워두면 그 줄은 아예 나오지 않는다 */
-    /*
-      태그에 href 를 넣으면 링크가 되고, 없으면 그냥 글자로 나온다.
-      상세 페이지를 만들 때마다 href 를 채우면 된다.
-    */
-    tags: [
-      { name: "마약",         href: "criminal-drug.html" },
-      { name: "도박",         href: "criminal-gambling.html" },
-      { name: "해외조직범죄",  href: "criminal-organized.html" },
-      { name: "금융범죄",      href: "criminal-finance.html" },
-      { name: "성범죄",       href: "criminal-sex.html" },
-      { name: "코인 OTC",     href: "criminal-crypto.html" },
-      { name: "성병감염",      href: "criminal-std.html" },
-      { name: "학교폭력·교권침해", href: "criminal-school.html" },
-      { name: "명예훼손",      href: "criminal-defamation.html" },
-      { name: "형사 센터 전체",    href: "criminal.html" }
-    ]
-  },
   /*
-    교통형사는 세부 분야가 열두 갈래라 형사에서 떼어 따로 센터를 두었다.
+    교통사고는 세부 분야가 열두 갈래라 형사에서 떼어 따로 센터를 두었다.
     태그를 열두 개 다 늘어놓으면 칸이 넘치니 자주 찾는 것만 앞에 두고,
     나머지는 traffic.html 로 들어가 보시게 했다.
 
@@ -278,11 +281,11 @@ const practices = [
     되살리고 대문을 안으로 들였다. 옛 도메인은 이 쪽으로 301 한다.
   */
   {
-    name: "교통형사",
+    name: "교통사고",
     slug: "traffic",
-    en: "TRAFFIC CRIMINAL",
+    en: "TRAFFIC ACCIDENT",
     page: "traffic.html",
-    credit: "<b class=\"tint\">정호길 대표변호사</b>가 교통형사 사건을 직접 맡습니다.",
+    credit: "<b class=\"tint\">정호길 대표변호사</b>가 교통사고 사건을 직접 맡습니다.",
     image: "assets/center-traffic.webp",
     desc: "보험 처리와 형사 절차는 별개로 흘러갑니다. " +
           "합의와 공탁의 시기를 놓치면 되돌리기 어렵습니다.",
@@ -294,7 +297,7 @@ const practices = [
       { name: "중상해사고",      href: "traffic-serious.html" },
       { name: "음주운전",        href: "traffic-dui.html" },
       { name: "스쿨존(민식이법)", href: "traffic-schoolzone.html" },
-      { name: "교통형사 센터 전체", href: "traffic.html" }
+      { name: "교통사고 센터 전체", href: "traffic.html" }
     ]
   },
   {
