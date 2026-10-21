@@ -4633,11 +4633,19 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .law-box b { font-weight: 500; }
 
-.law-src {
+/*
+  출처 줄. 상자 안의 <p> 로도 쓰므로 .law-box p 보다 힘이 세야 한다.
+  그냥 .law-src 로만 적어 두었더니 조문과 같은 크기로 나왔다.
+  (2026-10-21, civil-medical.html 93다52402 상자에서 발견)
+*/
+.law-src,
+.law-box p.law-src {
   margin-top: 14px;
   font-family: var(--font-sans);
   font-size: 13px;
+  font-weight: 400;
   line-height: 1.7;
+  letter-spacing: 0;
   color: var(--ink-soft);
 }
 
