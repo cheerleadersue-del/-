@@ -4691,14 +4691,35 @@ body.no-scroll .head .burger i { background: var(--ink); }
   overflow: hidden;
 }
 
-/* 왼쪽 위에 가는 금색 선 하나 — 장식은 이것뿐입니다 */
+/*
+  금색 ㄱ자 — 위쪽 가로 전체(3px)와 왼쪽 세로 전체(4px).
+
+  2026-10-22 에 법인 지시로 바꿨습니다.
+  그 전에는 왼쪽 위에 56 × 2px 짜리 짧은 선 하나였는데,
+  너무 짧아 장식인지 실수인지 헷갈린다고 하셨습니다.
+
+  ⚠️ 굵기를 더 올리지 마십시오. 4px 가 넘어가면 금테를 두른 것처럼
+     보여 글보다 테두리가 먼저 읽힙니다.
+  ⚠️ 아래쪽과 오른쪽에는 선을 넣지 마십시오. 네 변이 모두 금색이면
+     액자가 됩니다. 이 홈페이지에서 가장 장식이 많은 요소가 됩니다.
+*/
 .key::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 56px;
-  height: 2px;
+  width: 100%;
+  height: 3px;
+  background: var(--gold-soft);
+}
+
+.key::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
   background: var(--gold-soft);
 }
 
