@@ -2528,6 +2528,48 @@ body.no-scroll .head .burger i { background: var(--ink); }
   letter-spacing: 0.1em;
 }
 
+/*
+  홈페이지를 만든 사람에게 닿는 줄. 2026-10-22 에 넣었습니다.
+
+  ⚠️ copyright 줄보다 더 작고 흐리게 둡니다.
+     의뢰인이 보는 화면이라 법인 정보보다 눈에 띄면 안 됩니다.
+     크기나 색을 올리지 마십시오.
+
+  밑줄은 평소에 숨기고 손을 올렸을 때만 보입니다.
+  바닥글에 밑줄이 둘(법인 이메일과 이 줄) 그어져 있으면
+  어느 쪽이 중요한지 흐려집니다.
+*/
+/*
+  .foot-legal 은 space-between 이라, 그냥 두면 이 줄이 세 번째 칸이 되어
+  copyright 를 가운데로 밀어냅니다. 그래서 한 줄을 통째로 차지하게 하고
+  copyright 아래에 붙입니다. 좁은 화면에서는 모두 왼쪽으로 섭니다.
+*/
+.foot-dev {
+  flex: 1 0 100%;
+  margin-top: 2px;
+  text-align: right;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 760px) {
+  .foot-dev { text-align: left; margin-top: 6px; }
+}
+
+.foot-dev a {
+  color: rgba(252, 252, 251, 0.28);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.foot-dev a:hover,
+.foot-dev a:focus-visible {
+  color: rgba(252, 252, 251, 0.6);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* =====================================================================
    11-b. 문서 페이지 (개인정보처리방침 등)
 ===================================================================== */
