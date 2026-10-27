@@ -234,7 +234,11 @@ const practices = [
     /* 이 센터의 대문 페이지. 최상단 메뉴가 여기로 간다. */
     page: "criminal.html",
     /* <b class="tint"> 로 감싼 부분만 글자색이 달라진다 */
-    credit: "<b class=\"tint\">법조 경력 25년 변호사</b>와 " +
+    /*
+      ⚠️ 이 줄은 criminal.html 의 .topic-team 과 글이 같아야 한다.
+         한쪽만 고치면 첫 화면과 형사 쪽이 서로 다르게 보인다.
+    */
+    credit: "<b class=\"tint\">대한변협 등록 형사법 전문변호사</b>와 " +
             "<b class=\"tint\">경찰 경력 18년(광역/마약수사대, 성폭력수사대) 형사전담센터장</b>이 " +
             "사건을 함께 검토합니다.",
     image: "assets/center-criminal.webp",
@@ -395,6 +399,15 @@ const attorneys = [
   {
     name: "정호길", role: "대표변호사",
     field: "강력범죄 · 형사 · 민사",
+    /*
+      대한변협 전문분야 등록. 등록증을 받아 확인했습니다.
+        전문분야 형사법 · 등록 제2026-657호 · 등록일 2026. 7. 27.
+      ⚠️ 등록 분야 이름은 「형사법」입니다. 「형사」가 아닙니다.
+      ⚠️ 등록이 풀리면 이 줄부터 지워야 합니다.
+         (변호사법 제23조 제2항 · 변호사업무광고규정)
+      ★ badge 를 적지 않은 분은 이 줄이 아예 나오지 않습니다.
+    */
+    badge: "대한변협 등록 형사법 전문변호사",
     /*
       lawyer-01-v2.webp 은 전신 컷아웃이라 목록에 넣으면 얼굴이 작아
       다른 분들과 크기가 안 맞는다. 목록에는 상반신 컷을 쓴다.
@@ -830,6 +843,7 @@ if (roster) {
       <div class="member-head">
         <p class="member-name">${person.name}<em>${person.role}</em></p>
         <p class="member-field">${person.field}</p>
+        ${person.badge ? `<p class="member-badge">${person.badge}</p>` : ""}
       </div>
       <ul class="member-career">${
         shown.map((c) => `<li>${c}</li>`).join("")
