@@ -127,7 +127,7 @@
        01. 분야 머리말
   ==================================================================== -->
   <section class="topic-hero">
-    <img class="topic-hero-bg" data-topic="std" src="assets/center-criminal.webp" alt=""
+    <img class="topic-hero-bg" data-topic="std" src="assets/center-criminal.webp" alt="밤 거리에 번진 경찰차 경광등 불빛"
          width="1200" height="800" fetchpriority="high">
     <span class="topic-hero-scrim" aria-hidden="true"></span>
 
@@ -583,9 +583,17 @@
       </header>
 
       <figure class="chart">
+        <!--
+          2026-10-28. 그림 이름을 <title> 대신 aria-label 로 옮겼습니다.
+          SVG 안의 <title> 은 원래 쓰라고 있는 것이고 문법에도 맞지만,
+          네이버 서치어드바이저가 「<title> 요소가 2개 이상 발견」이라고
+          잡습니다. 쪽 제목과 같은 이름이라 헷갈린 것입니다.
+          aria-label 로 바꿔도 화면낭독기에는 똑같이 읽힙니다.
+          ⚠️ 여기에 <title> 을 다시 넣지 마십시오.
+        -->
         <svg viewBox="0 0 880 300" role="img"
-             aria-labelledby="seroSvgT seroSvgD">
-          <title id="seroSvgT">감염 뒤 IgG 항체가 오르는 과정</title>
+             aria-label="감염 뒤 IgG 항체가 오르는 과정"
+             aria-describedby="seroSvgD">
           <desc id="seroSvgD">감염 직후 약 2주까지는 아직 항체가 만들어지지
             않아 검출되지 않고, 그 뒤 항체가 올라 오래 유지됩니다.
             1차 검사는 음성, 2차는 경계, 3차는 양성으로 나오는 경과를
