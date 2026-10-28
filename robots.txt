@@ -9,4 +9,16 @@
 User-agent: *
 Allow: /
 
+# 네이버 수집기의 이름은 Yeti 입니다. 위의 * 에 이미 들어가지만,
+# 2026-10-28 에 따로 한 번 더 적었습니다.
+# 네이버 서치어드바이저의 「색인」이 1 이라 혹시 막힌 것이 있나
+# 확인하려는 것입니다. 막힌 것은 없었고, 이 줄은 의심을 없애려고
+# 둔 것입니다. 지우셔도 동작은 같습니다.
+User-agent: Yeti
+Allow: /
+
+# 다음(카카오) 수집기입니다.
+User-agent: Daum
+Allow: /
+
 Sitemap: https://yuillawfirm.com/sitemap.xml
