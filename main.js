@@ -202,6 +202,14 @@ const practices = [
     홈페이지에 보이는 글만 바꾼 것이고, 바깥 사이트 주소인
     교통형사전문로펌.com 은 실제 도메인이므로 그대로 둔다.
 
+    ⚠️ 2026-10-28. 법인 지시로 공증 · 등기를 여섯째에서 넷째로 올렸다.
+       형사 전문 · 민사 전문 · 교통사고 · 공증 · 등기 · 가사 · 회생.
+       10-21 에 잠깐 넷째에 두었다가 여섯째로 되돌렸던 자리다.
+       ★ index.html 의 knowsAbout 과 docs/검색결과-문구.md 도 같은
+         차례를 따른다. 한쪽만 고치지 말 것.
+       ★ 검색결과 아래에 뜨는 링크는 검색엔진이 이 메뉴를 보고
+         알아서 뽑는다. 차례를 직접 지정할 수는 없다.
+
     ⚠️ 2026-10-23. 법인 지시로 앞의 둘만 「전문 센터」로 바꾸었다.
        형사 전문 센터 · 민사 전문 센터.
        나머지 넷(교통사고 · 가사 · 회생 · 공증 · 등기)은 그대로다.
@@ -330,38 +338,6 @@ const practices = [
     ]
   },
   {
-    name: "가사",
-    slug: "family",
-    en: "FAMILY",
-    page: "family.html",
-    image: "assets/center-family.webp",
-    desc: "재산과 양육은 감정과 분리해 다룹니다. " +
-          "합의로 끝낼 수 있는 부분과 아닌 부분을 나눕니다.",
-    tags: [
-      { name: "이혼",     href: "family-divorce.html" },
-      { name: "재산분할", href: "family-property.html" },
-      { name: "양육권",   href: "family-custody.html" },
-      { name: "상속",     href: "family-inheritance.html" },
-      { name: "가사 센터 전체", href: "family.html" }
-    ]
-  },
-  {
-    name: "회생",
-    slug: "rehab",
-    en: "REHABILITATION",
-    page: "rehab.html",
-    image: "assets/center-recovery.webp",
-    desc: "폐업과 회생 사이에서 남길 것을 정합니다. " +
-          "채권자 구성과 현금 흐름을 먼저 확인합니다.",
-    tags: [
-      { name: "법인회생",    href: "rehab-corporate.html" },
-      { name: "개인회생",    href: "rehab-personal.html" },
-      { name: "파산",        href: "rehab-bankruptcy.html" },
-      { name: "복권 · 면책", href: "rehab-discharge.html" },
-      { name: "회생 센터 전체", href: "rehab.html" }
-    ]
-  },
-{
     /*
       법인 · 부동산 등기까지 맡지만 이름은 "공증 · 등기" 로 줄여 부른다.
       칸 안에 그대로 쓰면 네 줄로 쪼개지고, 무엇을 하는지는
@@ -391,6 +367,38 @@ const practices = [
       { name: "내용증명",        href: "notary-content.html" },
       { name: "임차권등기명령",   href: "notary-lease.html" },
       { name: "공증 · 등기 센터 전체", href: "notary.html" }
+    ]
+  },
+  {
+    name: "가사",
+    slug: "family",
+    en: "FAMILY",
+    page: "family.html",
+    image: "assets/center-family.webp",
+    desc: "재산과 양육은 감정과 분리해 다룹니다. " +
+          "합의로 끝낼 수 있는 부분과 아닌 부분을 나눕니다.",
+    tags: [
+      { name: "이혼",     href: "family-divorce.html" },
+      { name: "재산분할", href: "family-property.html" },
+      { name: "양육권",   href: "family-custody.html" },
+      { name: "상속",     href: "family-inheritance.html" },
+      { name: "가사 센터 전체", href: "family.html" }
+    ]
+  },
+  {
+    name: "회생",
+    slug: "rehab",
+    en: "REHABILITATION",
+    page: "rehab.html",
+    image: "assets/center-recovery.webp",
+    desc: "폐업과 회생 사이에서 남길 것을 정합니다. " +
+          "채권자 구성과 현금 흐름을 먼저 확인합니다.",
+    tags: [
+      { name: "법인회생",    href: "rehab-corporate.html" },
+      { name: "개인회생",    href: "rehab-personal.html" },
+      { name: "파산",        href: "rehab-bankruptcy.html" },
+      { name: "복권 · 면책", href: "rehab-discharge.html" },
+      { name: "회생 센터 전체", href: "rehab.html" }
     ]
   }
 ];
