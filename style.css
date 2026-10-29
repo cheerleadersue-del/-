@@ -5068,7 +5068,21 @@ body.no-scroll .head .burger i { background: var(--ink); }
     ⚠️ 사진을 다른 비율로 바꾸시면 아래 0.8 도 함께 고치십시오.
        (가로 ÷ 세로)
   */
-  --lw-h: min(820px, 86svh);
+  /*
+    머리말의 기준 높이입니다. 사진 칸 너비를 여기에 0.8 을 곱해 정합니다.
+
+    ⚠️ svh(화면 높이)를 섞지 마십시오. 화면이 낮으면 이 값만 작아지고
+       글 높이는 그대로라 비율이 크게 어긋납니다.
+    ⚠️ 폭이 좁을수록 값을 줄입니다(62vw). 넓게 두면 사진 칸이 글 칸을
+       밀어내 1024px 화면에서 단추가 두 줄로 내려갑니다.
+
+    ★ 글이 길어 머리말이 이 값보다 높아지면 비율이 0.8 보다 작아지고,
+      그때는 사진의 좌우가 조금 잘립니다. 사람은 가운데에 있어
+      얼굴과 팔은 그대로 보입니다.
+      반대로 0.8 보다 커지면 아래가 잘려 팔이 날아갑니다.
+      그래서 이 값을 함부로 키우면 안 됩니다.
+  */
+  --lw-h: clamp(640px, 62vw, 820px);
 
   display: grid;
   grid-template-columns: minmax(0, 1fr) calc(var(--lw-h) * 0.8);
@@ -5120,18 +5134,28 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .lw-eyebrow {
   font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 0.3em;
+  font-size: 13px;
+  letter-spacing: 0.32em;
   color: var(--gold);
-  margin: 22px 0 12px;
+  margin: 24px 0 14px;
 }
 
+/*
+  2026-10-29. 법인에서 「글씨를 더 크고 강조해서」라고 하셔서
+  머리말의 글씨를 한 단씩 키우고 굵기를 올렸습니다.
+    이름   58 → 76  (굵기 300 → 400)
+    한 줄  22 → 30  (굵기 400 → 500)
+    분야   15 → 18  (색도 진하게)
+    소개   17 → 18.5
+  ⚠️ 더 키우면 머리말(최대 820px) 안에 글이 다 안 들어갑니다.
+     키우실 거면 좁은 화면에서 넘치지 않는지 꼭 보십시오.
+*/
 .lw-name {
   font-family: var(--font-serif);
-  font-weight: 300;
-  font-size: clamp(38px, 5vw, 58px);
-  letter-spacing: -0.04em;
-  line-height: 1.08;
+  font-weight: 400;
+  font-size: clamp(46px, 6vw, 76px);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
   color: var(--ink);
   margin: 0;
 }
@@ -5139,19 +5163,21 @@ body.no-scroll .head .burger i { background: var(--ink); }
 .lw-name em {
   font-style: normal;
   font-family: var(--font-sans);
-  font-size: clamp(15px, 1.4vw, 17px);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: clamp(16px, 1.6vw, 20px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
   color: var(--gold);
-  margin-left: 14px;
+  margin-left: 16px;
   white-space: nowrap;
 }
 
 .lw-field {
   font-family: var(--font-sans);
-  font-size: 15px;
-  color: var(--ink-soft);
-  margin: 12px 0 0;
+  font-size: clamp(16px, 1.5vw, 18px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 14px 0 0;
   word-break: keep-all;
 }
 
@@ -5167,19 +5193,19 @@ body.no-scroll .head .burger i { background: var(--ink); }
   padding-left: 18px;
   border-left: 2px solid var(--gold);
   font-family: var(--font-serif);
-  font-size: clamp(18px, 1.9vw, 22px);
-  font-weight: 400;
-  line-height: 1.65;
-  letter-spacing: -0.03em;
+  font-size: clamp(21px, 2.4vw, 30px);
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: -0.035em;
   color: var(--ink);
-  max-width: 22ch;
+  max-width: 20ch;
   word-break: keep-all;
 }
 
 .lw-intro {
   font-family: var(--font-serif);
-  font-size: clamp(15.5px, 1.5vw, 17px);
-  line-height: 1.9;
+  font-size: clamp(16px, 1.6vw, 18.5px);
+  line-height: 1.85;
   color: var(--ink);
   margin: 20px 0 0;
   max-width: 42ch;
@@ -5260,7 +5286,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
 .lw-sec h2 {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(21px, 2.1vw, 26px);
+  font-size: clamp(24px, 2.4vw, 32px);
   letter-spacing: -0.03em;
   color: var(--ink);
   margin: 0;
@@ -5289,7 +5315,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .lw-bio h3 {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
   color: var(--gold);
@@ -5307,10 +5333,10 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .lw-list li {
   position: relative;
-  padding: 13px 0 13px 20px;
+  padding: 14px 0 14px 20px;
   border-bottom: 1px solid var(--line-soft);
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.75;
   color: var(--ink);
   word-break: keep-all;
@@ -5425,7 +5451,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .lw-card-label {
   font-family: var(--font-serif);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 400;
   letter-spacing: -0.03em;
   color: var(--ink);
@@ -5505,7 +5531,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .lw-win h3 {
   font-family: var(--font-serif);
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 400;
   letter-spacing: -0.03em;
   color: var(--ink);
@@ -5575,13 +5601,16 @@ body.no-scroll .head .burger i { background: var(--ink); }
   .lw-photo {
     order: -1;
     /*
-      ⚠️ 너무 낮게 두면 팔이 잘립니다. 사진 속에서 팔짱 낀 팔이
-         위에서 62% 쯤에 있습니다. 칸이 가로로 길수록 아래가
-         잘리므로, 가로 390px 기준으로 416px 는 되어야 합니다.
-      ⚠️ 너무 높게 두면 사진만 한 화면을 덮고 이름이 안 보입니다.
+      쌓을 때도 사진 비율(0.8)을 그대로 지킵니다. 높이를 정하면
+      가로가 넓은 화면에서 칸이 납작해져 팔이 잘립니다.
+      960 × 700 에서 960 × 364(비율 2.6)가 되어 몸통만 남았습니다.
+      ⚠️ 340px 보다 키우지 마십시오. 사진이 첫 화면을 다 덮어
+         이름이 아래로 밀려납니다.
     */
-    height: min(52svh, 440px);
-    margin-top: var(--head-h);
+    width: min(100%, 340px);
+    height: auto;
+    aspect-ratio: 1024 / 1280;
+    margin: var(--head-h) auto 0;
   }
 
   .lw-hero-text {
