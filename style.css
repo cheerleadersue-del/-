@@ -5055,10 +5055,25 @@ body.no-scroll .head .burger i { background: var(--ink); }
        그래서 이 묶음만 .shell 을 쓰지 않고, 글 쪽 왼쪽 여백을
        계산해서 다른 쪽과 줄을 맞춥니다.
   */
+  /*
+    사진 칸의 너비를 머리말 높이에 맞춰 정합니다.
+    사진 넉 장이 모두 1024 × 1280 — 가로가 세로의 0.8 배입니다.
+    칸을 그 비율로 맞추면 사진이 한 점도 잘리지 않습니다.
+
+    ⚠️ 2026-10-29. 그 전에는 칸을 화면의 절반(1fr 1fr)으로 두었습니다.
+       그러면 칸이 가로로 넓어져 사진 아래쪽 35%가 잘려 나갔습니다.
+       정호길 대표변호사만 사진이 크게 찍혀 팔이 잘리는 선 위에
+       있었고, 나머지 세 분은 팔이 잘렸습니다.
+       칸을 좁히는 대신 사진을 통째로 보여 줍니다.
+    ⚠️ 사진을 다른 비율로 바꾸시면 아래 0.8 도 함께 고치십시오.
+       (가로 ÷ 세로)
+  */
+  --lw-h: min(820px, 86svh);
+
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) calc(var(--lw-h) * 0.8);
   align-items: stretch;
-  min-height: min(780px, 88svh);
+  min-height: var(--lw-h);
   background: var(--paper-2);
   border-bottom: 1px solid var(--line);
   overflow: hidden;
@@ -5193,6 +5208,19 @@ body.no-scroll .head .burger i { background: var(--ink); }
   margin: 0;
   align-self: stretch;
   overflow: hidden;
+  /* 사진 바깥쪽은 머리말 바탕과 같은 색. 사진 넉 장의 배경색이
+     이 색과 같아 테두리가 보이지 않는다. */
+  background: var(--paper-2);
+
+  /*
+    왼쪽 가장자리를 살짝 흐려 바탕에 녹인다.
+    사진 넉 장 중 정호길 대표변호사 것만 배경이 아주 조금 밝아
+    (238~245, 바탕은 241) 세로로 금이 보였다.
+    5% 만 흐리면 사람은 건드리지 않고 금만 사라진다.
+    ⚠️ 더 키우지 마십시오. 어깨가 잘려 보입니다.
+  */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%);
+  mask-image: linear-gradient(to right, transparent 0, #000 5%);
 }
 
 .lw-photo img {
@@ -5201,13 +5229,13 @@ body.no-scroll .head .burger i { background: var(--ink); }
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   /*
-    ⚠️ 사진이 세로로 잘립니다. 얼굴이 잘리지 않게 위를 기준으로 둡니다.
-       사진 넉 장 모두 1024 × 1280 이라 잘리는 양이 많지 않습니다.
+    칸이 사진과 같은 비율(0.8)이라 거의 잘리지 않습니다.
+    글이 길어 머리말이 더 높아진 화면에서는 좌우가 조금 잘립니다.
+    그때도 가운데는 남으므로 얼굴과 팔은 그대로 보입니다.
   */
-  object-position: top center;
-  background: var(--sand);
+  object-fit: cover;
+  object-position: center top;
 }
 
 /* ---------- 본문 묶음 ---------- */
@@ -5546,7 +5574,13 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
   .lw-photo {
     order: -1;
-    height: min(46svh, 360px);
+    /*
+      ⚠️ 너무 낮게 두면 팔이 잘립니다. 사진 속에서 팔짱 낀 팔이
+         위에서 62% 쯤에 있습니다. 칸이 가로로 길수록 아래가
+         잘리므로, 가로 390px 기준으로 416px 는 되어야 합니다.
+      ⚠️ 너무 높게 두면 사진만 한 화면을 덮고 이름이 안 보입니다.
+    */
+    height: min(52svh, 440px);
     margin-top: var(--head-h);
   }
 

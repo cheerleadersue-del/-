@@ -31,13 +31,20 @@ import path from "node:path";
 
 const ROOT = process.cwd();
 
+/*
+  날짜표는 연월일 + 시분입니다. 예: 202610291432
+
+  ⚠️ 하루에 두 번 고쳐 올리는 날이 있습니다. 날짜만 쓰면 두 번째
+     올린 것이 첫 번째와 같은 번호가 되어, 아침에 들른 분의
+     브라우저가 새 꾸밈을 받지 않습니다. 그래서 시분까지 넣습니다.
+*/
 const arg = process.argv[2];
-const today = new Date();
-const stamp = arg && /^\d{8}$/.test(arg)
+const d = new Date();
+const two = (n) => String(n).padStart(2, "0");
+const stamp = arg && /^\d{8,14}$/.test(arg)
   ? arg
-  : [today.getFullYear(),
-     String(today.getMonth() + 1).padStart(2, "0"),
-     String(today.getDate()).padStart(2, "0")].join("");
+  : [d.getFullYear(), two(d.getMonth() + 1), two(d.getDate()),
+     two(d.getHours()), two(d.getMinutes())].join("");
 
 /*
   이미 ?v=... 가 붙어 있으면 숫자만 갈아 끼웁니다. 없으면 새로 붙입니다.

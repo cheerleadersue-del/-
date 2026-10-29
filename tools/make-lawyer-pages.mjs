@@ -240,7 +240,7 @@ ${p.wins.map((w) => `          <article class="lw-win">${w.result ? `
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Serif+KR:wght@200;300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
 
-<link rel="stylesheet" href="style.css?v=20261029">
+<link rel="stylesheet" href="style.css?v=202610290815">
 
 </head>
 
@@ -359,7 +359,7 @@ ${BAR}
 }
 </script>
 
-<script src="main.js?v=20261029"></script>
+<script src="main.js?v=202610290815"></script>
 
 </body>
 </html>
