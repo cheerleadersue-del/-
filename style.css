@@ -5179,12 +5179,25 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 .lw-photo {
+  /*
+    ⚠️ position: relative + 안의 사진을 띄워 둡니다(absolute).
+       그냥 두면 사진의 본디 비율(1024 : 1280)이 머리말 높이를
+       끌고 올라갑니다. 넓은 화면일수록 심합니다.
+         1440px 화면 → 사진 720 × 900  (괜찮음)
+         1920px 화면 → 사진 960 × 1200 (얼굴만 가득 찹니다)
+       2026-10-29 에 법인에서 PC 화면을 보내 주셔서 찾았습니다.
+       띄워 두면 사진이 높이를 못 끌고, 머리말 높이는 글 칸과
+       아래 min-height 가 정합니다.
+  */
+  position: relative;
   margin: 0;
   align-self: stretch;
   overflow: hidden;
 }
 
 .lw-photo img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -5516,11 +5529,15 @@ body.no-scroll .head .burger i { background: var(--ink); }
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 960px) {
   /*
     좁은 화면에서는 위아래로 쌓는다. 사진을 먼저 보여 주되
     화면을 다 덮지 않게 높이를 묶어 둔다. 사진만 보이고 이름이
     안 보이면 누구 쪽인지 알 수 없다.
+
+    ⚠️ 960px 에서 쌓습니다. 760px 로 두었더니 태블릿 가로(768)에서
+       사진 칸이 384 × 780 이 되어 좌우가 많이 잘렸습니다.
+       사진이 1024 × 1280 이라 칸이 너무 홀쭉하면 얼굴 옆이 날아갑니다.
   */
   .lw-hero {
     grid-template-columns: 1fr;
