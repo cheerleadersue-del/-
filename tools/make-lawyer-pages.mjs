@@ -143,23 +143,42 @@ ${meta.tags.map(([ko, href]) =>
       `        <ul class="lw-list">\n${li([...(p.work || []), ...(p.books || [])])}\n        </ul>`));
   }
 
-  /* 주요 승소사례 — 자료가 없으면 묶음을 아예 만들지 않는다 */
-  if (p.wins?.length) {
-    parts.push(section(n++, { id: "winTitle", en: "RESULTS", ko: "주요 승소사례" },
-      p.wins.map((w) => `        <div class="lw-win">
-          <h3>${esc(w.title)}</h3>
-          <p>${esc(w.body)}</p>${w.meta ? `
-          <p class="lw-win-meta">${w.meta.map(esc).join(" · ")}</p>` : ""}
-        </div>`).join("\n") +
-      `\n        <p class="lw-note">사건의 결과는 사실관계와 증거에 따라 달라집니다.
-        위 사례가 같은 결과를 보장하지 않습니다.</p>`));
+  /*
+    주요 업무사례 — 어떤 사건을 다루었는가. 결과는 적지 않는다.
+    묶음(label)마다 카드 한 장이 나온다.
+  */
+  if (p.cases?.length) {
+    parts.push(section(n++, { id: "caseTitle", en: "CASES", ko: "주요 업무사례" },
+      `        <div class="lw-cards">
+${p.cases.map((c, i) => `          <article class="lw-card">
+            <p class="lw-card-no">${String(i + 1).padStart(2, "0")}</p>
+            <h3 class="lw-card-label">${esc(c.label)}</h3>
+            <ul class="lw-chips">
+${c.items.map((x) => `              <li>${esc(x)}</li>`).join("\n")}
+            </ul>
+          </article>`).join("\n")}
+        </div>
+        <p class="lw-note">결과가 아니라 <b>어떤 사건을 다루었는지</b>를 적었습니다.
+        의뢰인의 이름은 적지 않습니다.</p>`));
   }
 
-  if (p.cases?.length) {
-    parts.push(section(n++, { id: "caseTitle", en: "CASES", ko: "다룬 사건" },
-      `        <ul class="lw-list">\n${li(p.cases)}\n        </ul>
-        <p class="lw-note">결과가 아니라 어떤 사건을 다루었는지를 적었습니다.
-        의뢰인의 이름은 적지 않습니다.</p>`));
+  /*
+    성공사례 — 자료가 없으면 묶음을 아예 만들지 않는다.
+    ⚠️ 광고규정에 선이 있다. docs/승소사례-적는-법.md 를 먼저 읽을 것.
+       승소율 · 건수 · 단정 표현은 쓸 수 없다.
+  */
+  if (p.wins?.length) {
+    parts.push(section(n++, { id: "winTitle", en: "RESULTS", ko: "성공사례" },
+      `        <div class="lw-cards">
+${p.wins.map((w) => `          <article class="lw-win">${w.result ? `
+            <p class="lw-win-tag">${esc(w.result)}</p>` : ""}
+            <h3>${esc(w.title)}</h3>
+            <p>${esc(w.body)}</p>${w.meta ? `
+            <p class="lw-win-meta">${w.meta.map(esc).join(" · ")}</p>` : ""}
+          </article>`).join("\n")}
+        </div>
+        <p class="lw-note">사건의 결과는 사실관계와 증거에 따라 달라집니다.
+        위 사례가 같은 결과를 보장하지 않습니다.</p>`));
   }
 
   if (p.advisory?.length) {
@@ -243,7 +262,9 @@ ${DRAWER}
 
         <p class="lw-eyebrow">ATTORNEY</p>
         <h1 class="lw-name">${p.name}<em>${p.role}</em></h1>
-        <p class="lw-field">${p.field}</p>${badge}
+        <p class="lw-field">${p.field}</p>${badge}${
+  p.quote ? `
+        <p class="lw-quote">${p.quote}</p>` : ""}
         <p class="lw-intro">${p.intro}</p>
 
         <div class="lw-acts">

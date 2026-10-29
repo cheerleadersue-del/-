@@ -5053,7 +5053,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .lw-hero-in {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
+  grid-template-columns: minmax(0, 1fr) 360px;
   gap: clamp(36px, 5vw, 76px);
   align-items: center;
   /*
@@ -5117,6 +5117,27 @@ body.no-scroll .head .burger i { background: var(--ink); }
   font-size: 15px;
   color: var(--ink-soft);
   margin: 12px 0 0;
+  word-break: keep-all;
+}
+
+/*
+  머리말의 한 줄 신조. 2026-10-29 에 넣었습니다.
+  법인에서 보내 주신 참고 사이트가 이 자리에 한 줄을 두고 있었습니다.
+  이름 아래 큰 글씨 한 줄이 있으면 어떤 사람인지가 먼저 읽힙니다.
+  ⚠️ 결과를 약속하는 말을 넣지 마십시오(변호사법 제23조 제2항).
+*/
+.lw-quote {
+  position: relative;
+  margin: 22px 0 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--gold);
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 1.9vw, 22px);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  max-width: 24ch;
   word-break: keep-all;
 }
 
@@ -5275,46 +5296,156 @@ body.no-scroll .head .burger i { background: var(--ink); }
   ⚠️ 결과를 적으실 때 지켜야 할 선은
      docs/승소사례-적는-법.md 에 적어 두었습니다. 먼저 읽어 주십시오.
 */
-.lw-win {
-  padding: 20px 22px 22px;
-  background: #fff;
+/* =====================================================================
+   주요 업무사례 · 성공사례 — 카드
+
+   2026-10-29. 법인에서 보내 주신 참고 사이트처럼 카드로 보여 줍니다.
+   줄글로 늘어놓은 것보다 눈으로 훑기 쉽고, 젊은 분들이 익숙한 모양입니다.
+
+   ⚠️ 모서리를 둥글게(14px) 두었습니다. 이 홈페이지에서 둥근 것은
+      단추(999px)뿐이었는데, 카드까지만 조금 둥글게 열어 둔 것입니다.
+      다른 곳으로 넓히지 마십시오. 사이트가 물러 보입니다.
+===================================================================== */
+
+.lw-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(286px, 1fr));
+  gap: 14px;
+}
+
+.lw-card {
+  position: relative;
+  padding: 24px 24px 26px;
   border: 1px solid var(--line);
-  margin-bottom: 12px;
+  border-radius: 14px;
+  background: #fff;
+  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease);
+}
+
+.lw-sec-alt .lw-card {
+  background: var(--paper);
+}
+
+.lw-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.lw-card-no {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  margin: 0 0 10px;
+}
+
+.lw-card-label {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 0 0 16px;
+  word-break: keep-all;
+}
+
+/* 사건 이름 알약 */
+.lw-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lw-chips li {
+  padding: 6px 13px 7px;
+  border-radius: 999px;
+  background: var(--paper-2);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  word-break: keep-all;
+}
+
+.lw-sec-alt .lw-chips li {
+  background: #fff;
+}
+
+/* ---------- 성공사례 ---------- */
+
+/*
+  ⚠️ 자료를 받기 전까지는 이 묶음이 쪽에 아예 나오지 않습니다.
+     결과를 적으실 때 지켜야 할 선은 docs/승소사례-적는-법.md 에
+     적어 두었습니다. 먼저 읽어 주십시오.
+*/
+.lw-win {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px 26px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease);
+}
+
+/* 결과 pill 은 글자 길이만큼만 */
+.lw-win > * {
+  align-self: flex-start;
 }
 
 .lw-sec-alt .lw-win {
   background: var(--paper);
 }
 
-.lw-win:last-child {
-  margin-bottom: 0;
+.lw-win:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+/* 결과 — 이 쪽에서 가장 먼저 눈에 들어와야 하는 한 마디 */
+.lw-win-tag {
+  display: inline-block;
+  margin: 0 0 13px;
+  padding: 6px 14px 7px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .lw-win h3 {
-  font-family: var(--font-sans);
-  font-size: 15.5px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
   color: var(--ink);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   word-break: keep-all;
 }
 
 .lw-win p {
   font-family: var(--font-sans);
   font-size: 14.5px;
-  line-height: 1.8;
+  line-height: 1.85;
   color: var(--ink-soft);
   margin: 0;
   word-break: keep-all;
 }
 
+/* 때와 곳은 카드 맨 아래에 붙인다. 카드 높이가 달라도 줄이 맞는다. */
 .lw-win-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 14px;
-  margin-top: 12px;
-  padding-top: 12px;
+  align-self: stretch;
+  margin-top: auto;
+  padding-top: 13px;
   border-top: 1px solid var(--line-soft);
   font-family: var(--font-sans);
   font-size: 12.5px;
