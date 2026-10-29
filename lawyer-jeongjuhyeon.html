@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--
+  ⚠️ 이 쪽은 손으로 고치지 마십시오.
+     tools/make-lawyer-pages.mjs 가 main.js 의 자료로 찍어 냅니다.
+     고치실 것은 main.js 의 attorneys 배열입니다.
+     고치신 뒤 홈페이지 폴더에서 아래를 치십시오.
+         node tools/make-lawyer-pages.mjs
+     자세한 것은 docs/변호사-쪽-고치는-법.md 에 있습니다.
+-->
+<title>정주현 변호사 — 부동산 · 민사 | 법무법인 유일</title>
+<meta name="description" content="부동산을 중심으로 민사와 형사를 맡습니다. 1998년 사법시험 · 사법연수원 30기. 건국대 부동산대학원 석사. 저서 『헌법 완결』 『행정법 완결』.">
+<!--
+  검색어입니다. 구글은 이 줄을 보지 않습니다(2009년부터).
+  네이버가 아직 참고한다고 알려져 있어 넣어 둡니다.
+  ★ 쪽마다 스무 개로 맞췄습니다. 더 늘리지 마십시오.
+  ★ 이름을 띄어 쓴 것과 붙여 쓴 것을 모두 넣었습니다.
+    실적을 보니 「정호길 변호사」와 「정호길변호사」가 따로 들어옵니다.
+-->
+<meta name="keywords" content="정주현, 정주현 변호사, 정주현변호사, 변호사 정주현, 법무법인 유일, 서초동 변호사, 부동산변호사, 부동산, 민사, 형사, 부동산대학원, 사법연수원 30기, 사법시험, 조정위원, 순직보상, 헌법, 행정법, 고려대학교, 저서, 서초동">
+
+<link rel="canonical" href="https://yuillawfirm.com/lawyer-jeongjuhyeon.html">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://yuillawfirm.com/lawyer-jeongjuhyeon.html">
+<meta property="og:site_name" content="법무법인 유일">
+<meta property="og:title" content="정주현 변호사 — 부동산 · 민사 | 법무법인 유일">
+<meta property="og:description" content="부동산을 중심으로 민사와 형사를 맡습니다. 1998년 사법시험 · 사법연수원 30기. 건국대 부동산대학원 석사. 저서 『헌법 완결』 『행정법 완결』.">
+<meta property="og:image" content="https://yuillawfirm.com/assets/lawyer-03.webp">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Serif+KR:wght@200;300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<a class="skip" href="#main">본문 바로가기</a>
+
+
+<header class="head is-stuck" id="head">
+  <div class="shell head-in">
+
+    <a class="brand" href="index.html" aria-label="법무법인 유일 홈">
+      <svg class="brand-mark" viewBox="0 0 310 375" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M30 8 L130 160 L130 367" stroke-width="62"/>
+          <path d="M286 8 L192 156 L192 367" stroke-width="38"/>
+        </g>
+      </svg>
+      <span class="brand-text">
+        <strong>법무법인 유일</strong>
+        <small>YUIL LAW FIRM</small>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="index.html#practice">전담센터</a>
+      <a href="notary-deed.html">공증센터</a>
+      <a href="index.html#lawyers">구성원</a>
+      <a href="index.html#location">오시는 길</a>
+    </nav>
+
+    <a class="head-call" href="tel:02-6254-8485">
+      <span class="head-call-label">무료상담</span>
+      <span class="head-call-num">02-6254-8485</span>
+    </a>
+
+    <button class="burger" id="burger" type="button"
+            aria-expanded="false" aria-controls="drawer" aria-label="메뉴 열기">
+      <i aria-hidden="true"></i><i aria-hidden="true"></i>
+    </button>
+
+  </div>
+</header>
+
+
+<div class="drawer" id="drawer" inert>
+  <nav class="drawer-nav" aria-label="모바일 메뉴">
+    <a href="index.html#practice"><em>01</em>전담센터</a>
+    <a href="notary-deed.html"><em>02</em>공증센터</a>
+    <a href="index.html#lawyers"><em>03</em>구성원</a>
+    <a href="index.html#location"><em>04</em>오시는 길</a>
+    <a href="index.html#contact"><em>05</em>상담 신청</a>
+  </nav>
+  <div class="drawer-foot">
+    <a class="btn btn-fill" href="tel:02-6254-8485">무료상담전화</a>
+    <p>평일 09:00 – 18:00</p>
+  </div>
+</div>
+
+
+<main id="main">
+
+  <section class="lw-hero">
+    <div class="shell lw-hero-in">
+      <div>
+        <nav class="crumb" aria-label="위치">
+          <a href="index.html">홈</a>
+          <span aria-hidden="true">/</span>
+          <a href="index.html#lawyers">구성원</a>
+          <span aria-hidden="true">/</span>
+          <b>정주현</b>
+        </nav>
+
+        <p class="lw-eyebrow">ATTORNEY</p>
+        <h1 class="lw-name">정주현<em>변호사</em></h1>
+        <p class="lw-field">부동산 · 민사 · 형사</p>
+        <p class="lw-intro">부동산을 중심으로 민사와 형사를 맡습니다. 부동산대학원에서 석사를 마치고 박사과정을 수료했습니다.</p>
+
+        <div class="lw-acts">
+          <a class="btn btn-fill" href="tel:02-6254-8485">무료상담전화<i aria-hidden="true"></i></a>
+          <a class="btn btn-line" href="index.html#contact">상담 신청서 쓰기</a>
+        </div>
+      </div>
+
+      <figure class="lw-photo">
+        <img src="assets/lawyer-03.webp" alt="정주현 변호사"
+             width="300" height="370" fetchpriority="high">
+      </figure>
+    </div>
+  </section>
+
+
+  <section class="lw-sec" aria-labelledby="workTitle">
+    <div class="shell lw-sec-in">
+      <h2 id="workTitle"><small>PRACTICE</small>맡는 일</h2>
+      <div>
+        <div class="lw-tags">
+          <a href="civil-realestate.html">부동산<i aria-hidden="true"></i></a>
+          <a href="civil.html">민사 전문 센터<i aria-hidden="true"></i></a>
+          <a href="criminal.html">형사 전문 센터<i aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lw-sec lw-sec-alt" aria-labelledby="eduTitle">
+    <div class="shell lw-sec-in">
+      <h2 id="eduTitle"><small>EDUCATION</small>학력</h2>
+      <div>
+        <ul class="lw-list">
+        <li>고려대학교 법학과</li>
+        <li>건국대학교 부동산대학원 석사</li>
+        <li>강남대학교 부동산대학원 박사과정 수료</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="lw-sec" aria-labelledby="careerTitle">
+    <div class="shell lw-sec-in">
+      <h2 id="careerTitle"><small>CAREER</small>경력</h2>
+      <div>
+        <ul class="lw-list">
+        <li>1998년 사법시험 합격 · 사법연수원 30기</li>
+        <li>前 행정안전부 순직보상심사위원회 위원</li>
+        <li>前 서울중앙지방법원 조정위원</li>
+        <li>저서 『헌법 완결』 『행정법 완결』</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="topic-cta">
+    <div class="shell topic-cta-in">
+      <p class="eyebrow eyebrow-light">CONTACT</p>
+      <h2 class="topic-cta-title">
+        먼저 사실관계부터 <br>들려주십시오.
+      </h2>
+      <p class="topic-cta-lead">
+        언제 무슨 일이 있었는지, 지금 어디까지 와 있는지.
+        가지고 계신 서류가 있으면 함께 보내 주십시오.
+        되지 않을 사건을 붙잡고 의뢰인의 시간을 쓰지 않습니다.
+      </p>
+
+      <dl class="done-tel">
+        <div>
+          <dt>대표전화</dt>
+          <dd><a href="tel:02-6254-8485">02-6254-8485</a></dd>
+        </div>
+      </dl>
+
+      <p class="topic-cta-act">
+        <a class="btn btn-cream" href="index.html#contact">상담 신청서 쓰기<i aria-hidden="true"></i></a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+
+<footer class="foot">
+  <div class="shell foot-legal">
+    <p class="foot-disclaimer">
+      이 페이지의 내용은 일반적인 정보 제공을 위한 것이며 법률 자문이 아닙니다.
+      개별 사건의 결과는 사실관계와 증거에 따라 달라집니다.
+      법정형과 부수처분의 기준은 개정될 수 있으므로 상담 시점의 기준을 다시 확인해 드립니다.
+    </p>
+    <p class="foot-copy">사업자등록번호 120-86-64302 &nbsp;·&nbsp; © 법무법인 유일</p>
+    <!--
+      주소 줄입니다. 2026-10-28 에 쉰두 장 모두에 넣었습니다.
+      네이버에서 「서초동법무법인」처럼 자리로 찾는 말의 노출이
+      가장 많은데(2,334번) 이 쪽들에는 주소가 한 글자도 없었습니다.
+
+      ⚠️ 첫 화면(index.html)에는 넣지 않습니다. 거기에는 .foot-in
+         안에 이미 주소가 있습니다.
+      ⚠️ 주소 · 전화는 첫 화면과 구조화 데이터의 것과 한 글자도
+         달라서는 안 됩니다. 고치실 때 세 군데를 함께 고치십시오.
+    -->
+    <p class="foot-addr">
+      <b>법무법인 유일</b>&nbsp;·&nbsp;서울특별시 서초구 서초대로 264, 2층 (서초동, 법조타워)&nbsp;·&nbsp;대표전화 <a href="tel:02-6254-8485">02-6254-8485</a>
+    </p>
+    <!--
+      홈페이지를 만든 사람에게 닿는 길입니다. 2026-10-22 에 넣었습니다.
+
+      ⚠️ 이 줄은 쪽 쉰세 장 모두에 들어 있습니다.
+         고치실 때는 쉰세 곳을 함께 고쳐야 합니다.
+
+      ⚠️ 카카오톡 오픈채팅 링크는 방을 지우거나 링크를 새로 만들면
+         끊깁니다. 끊긴 링크가 쉰세 쪽에 그대로 남으므로, 방을
+         바꾸시면 이 줄도 반드시 함께 고치십시오.
+
+      ★ 의뢰인이 보는 화면이라 법인 정보보다 눈에 띄면 안 됩니다.
+        그래서 copyright 줄보다 더 작고 흐리게 두었습니다(.foot-dev).
+        크기나 색을 올리지 마십시오.
+
+      ★ 법률 상담 창구가 아닙니다. 상담 전화는 위의 대표전화입니다.
+        이 둘이 헷갈리지 않도록 「홈페이지 제작 · 문의」라고만 적었습니다.
+    -->
+    <p class="foot-dev">
+      <a href="https://open.kakao.com/o/gmDpiETi"
+         target="_blank" rel="noopener noreferrer">홈페이지 제작 · 문의<span class="sr-only">(새 창)</span></a>
+    </p>
+  </div>
+</footer>
+
+
+<div class="bar">
+  <a class="bar-call" href="tel:02-6254-8485">무료상담</a>
+  <a class="bar-form" href="index.html#contact">상담 신청</a>
+</div>
+
+
+<!-- 구조화 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://yuillawfirm.com/" },
+    { "@type": "ListItem", "position": 2, "name": "구성원", "item": "https://yuillawfirm.com/#lawyers" },
+    { "@type": "ListItem", "position": 3, "name": "정주현", "item": "https://yuillawfirm.com/lawyer-jeongjuhyeon.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://yuillawfirm.com/lawyer-jeongjuhyeon.html#person",
+  "name": "정주현",
+  "jobTitle": "변호사",
+  "url": "https://yuillawfirm.com/lawyer-jeongjuhyeon.html",
+  "image": "https://yuillawfirm.com/assets/lawyer-03.webp",
+  "telephone": "+82-2-6254-8485",
+  "knowsAbout": ["부동산","민사","형사"],
+  "alumniOf": [{"@type":"EducationalOrganization","name":"고려대학교 법학과"},{"@type":"EducationalOrganization","name":"건국대학교 부동산대학원 석사"},{"@type":"EducationalOrganization","name":"강남대학교 부동산대학원 박사과정 수료"}],
+  "worksFor": {
+    "@type": "LegalService",
+    "@id": "https://yuillawfirm.com/#firm",
+    "name": "법무법인 유일",
+    "url": "https://yuillawfirm.com/",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "서초대로 264, 2층 (서초동, 법조타워)",
+      "addressLocality": "서초구",
+      "addressRegion": "서울특별시",
+      "addressCountry": "KR"
+    }
+  }
+}
+</script>
+
+<script src="main.js"></script>
+
+</body>
+</html>

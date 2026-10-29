@@ -2095,6 +2095,71 @@ body.no-scroll .head .burger i { background: var(--ink); }
   transform: rotate(0deg);
 }
 
+/*
+  명단 카드에서 변호사 한 분 쪽으로 가는 줄. 2026-10-29 에 넣었습니다.
+
+  까닭 — 실적에서 「정호길 변호사」로 열 분, 「양진희 변호사」로 다섯 분이
+  이름을 치고 들어오셨습니다. 그때 보여 드릴 쪽이 대문 명단뿐이었습니다.
+
+  ★ 「경력 더 보기」(.member-toggle)보다 아래, 조금 더 또렷하게 둡니다.
+    펼쳐 읽는 것보다 쪽으로 넘어가는 쪽이 우리가 바라는 행동입니다.
+*/
+.member-link {
+  margin-top: 16px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--font-sans);
+  font-size: 14px;
+}
+
+.member-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease, gap 0.3s var(--ease);
+}
+
+.member-link a:hover,
+.member-link a:focus-visible {
+  color: var(--gold);
+  gap: 14px;
+}
+
+/* 오른쪽 화살표 */
+.member-link i {
+  width: 16px;
+  height: 1px;
+  background: currentColor;
+  position: relative;
+  flex: none;
+}
+
+.member-link i::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* 이름도 쪽으로 간다 */
+.member-name a {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.member-name a:hover,
+.member-name a:focus-visible {
+  color: var(--gold);
+}
+
 /* =====================================================================
    09. 원칙 — 어두운 구간
 ===================================================================== */
@@ -4959,5 +5024,340 @@ body.no-scroll .head .burger i { background: var(--ink); }
   .panel-detail {
     grid-template-rows: 1fr;
     opacity: 1;
+  }
+}
+
+
+/* =====================================================================
+   15. 변호사 한 분 쪽 (lawyer-*.html)
+
+   2026-10-29 에 넣었습니다.
+
+   까닭 — 실적을 보니 이름으로 찾아 들어오시는 분이 꾸준합니다.
+     구글   정호길 변호사 10 · 양진희 변호사 2
+     네이버 정호길 변호사 10 · 양진희 변호사 3
+   그런데 보여 드릴 쪽이 대문 명단뿐이었습니다.
+
+   ⚠️ 머리말은 전담센터 쪽(.topic-hero)과 같은 리듬으로 두되,
+      바탕을 어둡게 하지 않습니다. 변호사 사진이 밝은 배경의
+      스튜디오 컷이라 어두운 히어로 위에 얹으면 사진만 떠 보입니다.
+   ⚠️ 사진은 네 분 모두 같은 상반신 컷(3 : 3.7)을 씁니다.
+      대표님 전신 컷(lawyer-01-v2.webp)은 대문 인사말에만 씁니다.
+      한 분만 전신으로 두면 네 분이 제각각으로 보입니다.
+===================================================================== */
+
+.lw-hero {
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.lw-hero-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: clamp(36px, 5vw, 76px);
+  align-items: center;
+  /*
+    ⚠️ 머리띠(.head)가 화면에 붙어 있어, 그만큼 비워 두지 않으면
+       「홈 / 구성원 / 이름」 줄이 머리띠 밑으로 들어가 가려집니다.
+       전담센터 쪽(.topic-hero)도 같은 방법으로 비워 둡니다.
+  */
+  padding-top: calc(var(--head-h) + clamp(26px, 3.5vw, 50px));
+  padding-bottom: clamp(44px, 5vw, 70px);
+}
+
+/*
+  ⚠️ .crumb 은 어두운 머리말에 맞춰 흰 글자로 되어 있습니다.
+     이 쪽은 바탕이 밝아 그대로 두면 글자가 보이지 않습니다.
+*/
+.lw-hero .crumb {
+  color: var(--ink-faint);
+  margin-bottom: 0;
+}
+
+.lw-hero .crumb a:hover,
+.lw-hero .crumb a:focus-visible {
+  color: var(--gold);
+}
+
+.lw-hero .crumb b {
+  color: var(--ink);
+}
+
+.lw-eyebrow {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin: 22px 0 12px;
+}
+
+.lw-name {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(38px, 5vw, 58px);
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  color: var(--ink);
+  margin: 0;
+}
+
+.lw-name em {
+  font-style: normal;
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 1.4vw, 17px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--gold);
+  margin-left: 14px;
+  white-space: nowrap;
+}
+
+.lw-field {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin: 12px 0 0;
+  word-break: keep-all;
+}
+
+.lw-intro {
+  font-family: var(--font-serif);
+  font-size: clamp(15.5px, 1.5vw, 17px);
+  line-height: 1.9;
+  color: var(--ink);
+  margin: 20px 0 0;
+  max-width: 46ch;
+  word-break: keep-all;
+}
+
+.lw-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.lw-photo {
+  margin: 0;
+}
+
+.lw-photo img {
+  display: block;
+  width: 100%;
+  /*
+    ⚠️ height: auto 가 없으면 html 의 height="370" 이 그대로 쓰여
+       aspect-ratio 가 무시됩니다. 좁은 화면에서 사진만 길쭉해집니다.
+  */
+  height: auto;
+  aspect-ratio: 3 / 3.7;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--sand);
+}
+
+/* ---------- 본문 묶음 ---------- */
+
+.lw-sec {
+  padding-top: clamp(52px, 6vw, 84px);
+  padding-bottom: clamp(52px, 6vw, 84px);
+  background: var(--paper);
+}
+
+.lw-sec-alt {
+  background: var(--paper-2);
+}
+
+.lw-sec-in {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+}
+
+.lw-sec h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(21px, 2.1vw, 26px);
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.lw-sec h2 small {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  color: var(--gold);
+  margin-bottom: 9px;
+}
+
+/* 줄 목록 — 명단 카드와 같은 모양으로 둔다 */
+.lw-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lw-list li {
+  position: relative;
+  padding: 13px 0 13px 20px;
+  border-bottom: 1px solid var(--line-soft);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink);
+  word-break: keep-all;
+}
+
+.lw-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 23px;
+  width: 8px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.lw-list li:first-child {
+  padding-top: 0;
+}
+
+.lw-list li:first-child::before {
+  top: 10px;
+}
+
+.lw-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* 맡는 일 — 센터로 가는 알약 */
+.lw-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.lw-tags a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 17px 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.lw-tags a:hover,
+.lw-tags a:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.lw-tags a i {
+  width: 5px;
+  height: 5px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+  flex: none;
+}
+
+/*
+  ⚠️ 주요 승소사례 자리입니다. 자료를 받기 전까지는 쪽에 아예
+     나오지 않습니다(wins 가 비어 있으면 묶음을 만들지 않습니다).
+  ⚠️ 결과를 적으실 때 지켜야 할 선은
+     docs/승소사례-적는-법.md 에 적어 두었습니다. 먼저 읽어 주십시오.
+*/
+.lw-win {
+  padding: 20px 22px 22px;
+  background: #fff;
+  border: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+
+.lw-sec-alt .lw-win {
+  background: var(--paper);
+}
+
+.lw-win:last-child {
+  margin-bottom: 0;
+}
+
+.lw-win h3 {
+  font-family: var(--font-sans);
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 8px;
+  word-break: keep-all;
+}
+
+.lw-win p {
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  margin: 0;
+  word-break: keep-all;
+}
+
+.lw-win-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+.lw-note {
+  margin-top: 18px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--ink-faint);
+  word-break: keep-all;
+}
+
+@media (max-width: 900px) {
+  .lw-hero-in {
+    grid-template-columns: minmax(0, 1fr) 230px;
+    gap: 28px;
+  }
+
+  .lw-sec-in {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 620px) {
+  .lw-hero-in {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  /*
+    좁은 화면에서는 사진을 먼저 보여준다. 다만 크게 두면 사진만으로
+    첫 화면이 다 차서 이름이 보이지 않는다. 작게 둔다.
+  */
+  .lw-photo {
+    order: -1;
+    max-width: 164px;
+  }
+
+  .lw-eyebrow {
+    margin-top: 14px;
   }
 }
