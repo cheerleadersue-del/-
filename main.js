@@ -1894,7 +1894,10 @@ document.querySelectorAll("[data-photo]").forEach((band) => {
     머리말이 화면에서 사라지면 나타난다.
     머리말이 없는 페이지(개인정보처리방침 등)에서는 바로 보인다.
   */
-  const hero = $(".hero") || $(".topic-hero") || $(".doc-head");
+  /* ⚠️ 머리말 묶음을 새로 만드시면 여기에도 더해 주십시오.
+         빠지면 쪽 맨 위에서부터 단추가 떠 글을 가립니다.
+         2026-10-29 에 변호사 쪽(.lw-hero)이 그래서 가려졌습니다. */
+  const hero = $(".hero") || $(".topic-hero") || $(".lw-hero") || $(".doc-head");
   if (!hero || !("IntersectionObserver" in window)) {
     rail.classList.add("is-on");
     return;

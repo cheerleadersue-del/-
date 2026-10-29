@@ -5047,22 +5047,42 @@ body.no-scroll .head .burger i { background: var(--ink); }
 ===================================================================== */
 
 .lw-hero {
+  /*
+    2026-10-29. 사진을 화면의 절반으로 키웠습니다.
+    법인에서 「압도적인 크기로」라고 하셔서, 사진 칸을 글 칸과 같은
+    너비로 두고 화면 오른쪽 끝까지 꽉 차게 했습니다.
+    ⚠️ .shell 안에 넣으면 좌우 여백 때문에 끝까지 가지 않습니다.
+       그래서 이 묶음만 .shell 을 쓰지 않고, 글 쪽 왼쪽 여백을
+       계산해서 다른 쪽과 줄을 맞춥니다.
+  */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  min-height: min(780px, 88svh);
   background: var(--paper-2);
   border-bottom: 1px solid var(--line);
+  overflow: hidden;
 }
 
-.lw-hero-in {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: clamp(36px, 5vw, 76px);
-  align-items: center;
-  /*
-    ⚠️ 머리띠(.head)가 화면에 붙어 있어, 그만큼 비워 두지 않으면
-       「홈 / 구성원 / 이름」 줄이 머리띠 밑으로 들어가 가려집니다.
-       전담센터 쪽(.topic-hero)도 같은 방법으로 비워 둡니다.
-  */
-  padding-top: calc(var(--head-h) + clamp(26px, 3.5vw, 50px));
-  padding-bottom: clamp(44px, 5vw, 70px);
+.lw-hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* 왼쪽 여백은 .shell 의 글 시작선과 같은 자리 */
+  padding:
+    calc(var(--head-h) + clamp(24px, 3vw, 44px))
+    clamp(26px, 3.4vw, 54px)
+    clamp(40px, 5vw, 64px)
+    max(var(--gutter), calc((100vw - var(--shell)) / 2 + var(--gutter)));
+}
+
+/*
+  ⚠️ 세로로 쌓는 묶음이라 그냥 두면 안의 것들이 가로로 늘어납니다.
+     전문분야 배지가 칸 끝까지 늘어나 금색 띠처럼 보였습니다.
+*/
+.lw-hero-text > * {
+  align-self: flex-start;
+  max-width: 100%;
 }
 
 /*
@@ -5137,7 +5157,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
   line-height: 1.65;
   letter-spacing: -0.03em;
   color: var(--ink);
-  max-width: 24ch;
+  max-width: 22ch;
   word-break: keep-all;
 }
 
@@ -5147,7 +5167,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
   line-height: 1.9;
   color: var(--ink);
   margin: 20px 0 0;
-  max-width: 46ch;
+  max-width: 42ch;
   word-break: keep-all;
 }
 
@@ -5160,18 +5180,19 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .lw-photo {
   margin: 0;
+  align-self: stretch;
+  overflow: hidden;
 }
 
 .lw-photo img {
   display: block;
   width: 100%;
-  /*
-    ⚠️ height: auto 가 없으면 html 의 height="370" 이 그대로 쓰여
-       aspect-ratio 가 무시됩니다. 좁은 화면에서 사진만 길쭉해집니다.
-  */
-  height: auto;
-  aspect-ratio: 3 / 3.7;
+  height: 100%;
   object-fit: cover;
+  /*
+    ⚠️ 사진이 세로로 잘립니다. 얼굴이 잘리지 않게 위를 기준으로 둡니다.
+       사진 넉 장 모두 1024 × 1280 이라 잘리는 양이 많지 않습니다.
+  */
   object-position: top center;
   background: var(--sand);
 }
@@ -5212,6 +5233,28 @@ body.no-scroll .head .burger i { background: var(--ink); }
   letter-spacing: 0.26em;
   color: var(--gold);
   margin-bottom: 9px;
+}
+
+/*
+  학력 · 경력 · 자문을 한 자리에 모아 보여 줍니다.
+  2026-10-29 에 법인 지시로 세 묶음을 하나로 합쳤습니다.
+  넓은 화면에서는 세 칸, 좁은 화면에서는 위아래로 쌓입니다.
+*/
+.lw-bio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: clamp(26px, 3vw, 46px);
+}
+
+.lw-bio h3 {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin: 0 0 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
 }
 
 /* 줄 목록 — 명단 카드와 같은 모양으로 둔다 */
@@ -5462,33 +5505,40 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 @media (max-width: 900px) {
-  .lw-hero-in {
-    grid-template-columns: minmax(0, 1fr) 230px;
-    gap: 28px;
-  }
-
   .lw-sec-in {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+
+  .lw-bio {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 
-@media (max-width: 620px) {
-  .lw-hero-in {
+@media (max-width: 760px) {
+  /*
+    좁은 화면에서는 위아래로 쌓는다. 사진을 먼저 보여 주되
+    화면을 다 덮지 않게 높이를 묶어 둔다. 사진만 보이고 이름이
+    안 보이면 누구 쪽인지 알 수 없다.
+  */
+  .lw-hero {
     grid-template-columns: 1fr;
-    gap: 26px;
+    min-height: 0;
   }
 
-  /*
-    좁은 화면에서는 사진을 먼저 보여준다. 다만 크게 두면 사진만으로
-    첫 화면이 다 차서 이름이 보이지 않는다. 작게 둔다.
-  */
   .lw-photo {
     order: -1;
-    max-width: 164px;
+    height: min(46svh, 360px);
+    margin-top: var(--head-h);
   }
 
-  .lw-eyebrow {
-    margin-top: 14px;
+  .lw-hero-text {
+    padding: clamp(24px, 6vw, 34px) var(--gutter) clamp(34px, 7vw, 46px);
+  }
+
+  .lw-quote,
+  .lw-intro {
+    max-width: none;
   }
 }

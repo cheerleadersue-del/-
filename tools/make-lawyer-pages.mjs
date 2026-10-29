@@ -39,7 +39,9 @@ const attorneys = eval(m[1]);
    검색결과에 뜨는 제목 · 설명 · 검색어입니다.
    자료가 아니라 '문구' 라서 여기에 둡니다.
    ⚠️ 제목 60칸 · 설명 155칸을 넘기지 마십시오. 아래에서 재 줍니다.
-   ⚠️ 검색어는 스무 개로 맞춥니다.                                  */
+   ⚠️ 검색어는 스무 개로 맞춥니다.
+   ★ tags 는 2026-10-29 부터 쓰지 않습니다. 「맡는 일」 묶음을 뺐기
+     때문입니다. 다시 넣으실 수 있게 지우지 않고 두었습니다.        */
 const META = {
   jeonghogil: {
     title: "정호길 변호사 — 형사법 전문변호사 | 법무법인 유일",
@@ -127,20 +129,30 @@ function build(p) {
   const parts = [];
   let n = 0;
 
-  parts.push(section(n++, { id: "workTitle", en: "PRACTICE", ko: "맡는 일" },
-    `        <div class="lw-tags">
-${meta.tags.map(([ko, href]) =>
-  `          <a href="${href}">${ko}<i aria-hidden="true"></i></a>`).join("\n")}
+  /*
+    2026-10-29. 「맡는 일」 묶음을 뺐습니다. 분야는 이름 바로 아래
+    (.lw-field)에 이미 적혀 있어 같은 말을 두 번 하고 있었습니다.
+    ⚠️ 다시 넣으실 거면 META 의 tags 가 그대로 남아 있습니다.
+
+    학력 · 경력 · 자문을 한 묶음(「약력」)으로 합쳤습니다.
+    넓은 화면에서 세 칸으로 나란히 섭니다.
+  */
+  const bio = [
+    ["학력", p.edu],
+    ["경력", [...(p.work || []), ...(p.books || [])]],
+    ["자문", p.advisory]
+  ].filter(([, items]) => items?.length);
+
+  if (bio.length) {
+    parts.push(section(n++, { id: "bioTitle", en: "PROFILE", ko: "약력" },
+      `        <div class="lw-bio">
+${bio.map(([ko, items]) => `          <div>
+            <h3>${ko}</h3>
+            <ul class="lw-list">
+${items.map((x) => `              <li>${x}</li>`).join("\n")}
+            </ul>
+          </div>`).join("\n")}
         </div>`));
-
-  if (p.edu?.length) {
-    parts.push(section(n++, { id: "eduTitle", en: "EDUCATION", ko: "학력" },
-      `        <ul class="lw-list">\n${li(p.edu)}\n        </ul>`));
-  }
-
-  if (p.work?.length || p.books?.length) {
-    parts.push(section(n++, { id: "careerTitle", en: "CAREER", ko: "경력" },
-      `        <ul class="lw-list">\n${li([...(p.work || []), ...(p.books || [])])}\n        </ul>`));
   }
 
   /*
@@ -179,11 +191,6 @@ ${p.wins.map((w) => `          <article class="lw-win">${w.result ? `
         </div>
         <p class="lw-note">사건의 결과는 사실관계와 증거에 따라 달라집니다.
         위 사례가 같은 결과를 보장하지 않습니다.</p>`));
-  }
-
-  if (p.advisory?.length) {
-    parts.push(section(n++, { id: "advTitle", en: "ADVISORY", ko: "자문" },
-      `        <ul class="lw-list">\n${li(p.advisory)}\n        </ul>`));
   }
 
   const badge = p.badge ? `\n        <p class="member-badge">${p.badge}</p>` : "";
@@ -250,8 +257,7 @@ ${DRAWER}
 <main id="main">
 
   <section class="lw-hero">
-    <div class="shell lw-hero-in">
-      <div>
+    <div class="lw-hero-text">
         <nav class="crumb" aria-label="위치">
           <a href="index.html">홈</a>
           <span aria-hidden="true">/</span>
@@ -271,13 +277,12 @@ ${DRAWER}
           <a class="btn btn-fill" href="tel:02-6254-8485">무료상담전화<i aria-hidden="true"></i></a>
           <a class="btn btn-line" href="index.html#contact">상담 신청서 쓰기</a>
         </div>
-      </div>
-
-      <figure class="lw-photo">
-        <img src="${p.image}" alt="${p.name} ${p.role}"
-             width="300" height="370" fetchpriority="high">
-      </figure>
     </div>
+
+    <figure class="lw-photo">
+      <img src="${p.image}" alt="${p.name} ${p.role}"
+           width="1024" height="1280" fetchpriority="high">
+    </figure>
   </section>
 
 ${parts.join("")}
