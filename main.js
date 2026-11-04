@@ -1449,22 +1449,24 @@ if (burger && drawer) {
 
   label  목록에 크게 보이는 이름
   tel    실제로 걸리는 번호
-  note   그 아래 작은 글씨. 무엇을 보는 곳인지
 
   ⚠️ 번호를 고치시면 쪽에 박혀 있는 번호도 함께 고쳐야 합니다.
      머리띠 · 아래 막대 · 본문 단추 · 오시는 길 · 바닥글에 있습니다.
   ⚠️ 차례는 홈페이지의 전담센터 차례를 따릅니다.
-     대표를 맨 위에 두고, 그 아래는 형사 · 민사 · 교통사고 ·
-     공증 · 등기 · 회생 입니다.
   ★ 가사 사건은 따로 번호가 없어 형사 · 민사와 같은 번호를 씁니다.
+
+  2026-11-04 (두 번째). 법인 지시로 설명 글을 모두 뺐습니다.
+  「어디로 걸까요」 제목과 「어느 쪽인지 모르시면…」 안내,
+  번호마다 달려 있던 작은 설명까지 지웠습니다.
+  이름과 번호만 크게 둡니다.
 */
 const phones = [
-  { label: "대표",        tel: "02-563-0625",  note: "어디로 걸지 모르실 때" },
-  { label: "형사 · 민사",  tel: "02-6254-8485", note: "강력범죄 · 마약 · 성범죄 · 손해배상 · 가사" },
-  { label: "교통사고",     tel: "02-597-4977",  note: "음주운전 · 뺑소니 · 12대 중과실" },
-  { label: "공증",        tel: "02-567-4377",  note: "공정증서 · 사서증서인증" },
-  { label: "등기",        tel: "02-522-2006",  note: "법인 · 부동산 등기" },
-  { label: "회생",        tel: "02-523-5237",  note: "개인회생 · 파산 · 면책" }
+  { label: "대표번호",          tel: "02-563-0625" },
+  { label: "형사 · 민사 무료상담", tel: "02-6254-8485" },
+  { label: "교통사고",          tel: "02-597-4977" },
+  { label: "공증",             tel: "02-567-4377" },
+  { label: "등기",             tel: "02-522-2006" },
+  { label: "회생",             tel: "02-523-5237" }
 ];
 
 (function buildCallMenu() {
@@ -1513,29 +1515,27 @@ const phones = [
 
   /* ---------- 고르는 칸을 한 번만 만든다 ---------- */
   const sheet = el("div", "callsheet");
+  /*
+    ⚠️ 눈에 보이는 제목이 없습니다. 그래도 화면낭독기에는 이 칸이
+       무엇인지 알려 줘야 해서 aria-label 로 이름을 답니다.
+  */
   sheet.innerHTML = `
     <div class="callsheet-scrim" data-close></div>
     <div class="callsheet-box" role="dialog" aria-modal="true"
-         aria-labelledby="callsheetTitle">
+         aria-label="전화 걸 곳 고르기">
       <button class="callsheet-x" type="button" aria-label="닫기" data-close>
         <i aria-hidden="true"></i><i aria-hidden="true"></i>
       </button>
-      <p class="callsheet-eyebrow">CALL</p>
-      <h2 class="callsheet-title" id="callsheetTitle">어디로 걸까요</h2>
-      <p class="callsheet-lead">맡는 곳으로 바로 이어집니다.
-        어느 쪽인지 모르시면 <b>대표</b>로 거십시오.</p>
       <ul class="callsheet-list">${
         phones.map((p) => `
         <li>
           <a href="tel:${p.tel}">
             <span class="callsheet-label">${p.label}</span>
             <span class="callsheet-num">${p.tel}</span>
-            <span class="callsheet-note">${p.note}</span>
           </a>
         </li>`).join("")
       }</ul>
-      <p class="callsheet-foot">평일 09:00 – 18:00
-        <span>주말 · 야간 상담은 사전 예약</span></p>
+      <p class="callsheet-foot">평일 09:00 – 18:00 · 주말 · 야간은 사전 예약</p>
     </div>`;
   sheet.setAttribute("inert", "");
   document.body.append(sheet);

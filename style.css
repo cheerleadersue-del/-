@@ -5663,10 +5663,10 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .callsheet-box {
   position: relative;
-  width: min(100%, 460px);
+  width: min(100%, 520px);
   max-height: calc(100svh - 48px);
   overflow-y: auto;
-  padding: 36px 30px 30px;
+  padding: 58px 34px 26px;
   background: var(--paper);
   transform: translateY(14px) scale(0.99);
   transition: transform 0.4s var(--ease);
@@ -5679,10 +5679,10 @@ body.no-scroll .head .burger i { background: var(--ink); }
 /* 닫기 — 오른쪽 위 × */
 .callsheet-x {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 42px;
-  height: 42px;
+  top: 12px;
+  right: 12px;
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
   color: var(--ink-faint);
@@ -5696,7 +5696,7 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .callsheet-x i {
   position: absolute;
-  width: 15px;
+  width: 16px;
   height: 1px;
   background: currentColor;
 }
@@ -5704,37 +5704,11 @@ body.no-scroll .head .burger i { background: var(--ink); }
 .callsheet-x i:first-child { transform: rotate(45deg); }
 .callsheet-x i:last-child  { transform: rotate(-45deg); }
 
-.callsheet-eyebrow {
-  font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 0.3em;
-  color: var(--gold);
-  margin: 0 0 10px;
-}
-
-.callsheet-title {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: 27px;
-  letter-spacing: -0.035em;
-  color: var(--ink);
-  margin: 0;
-}
-
-.callsheet-lead {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 1.75;
-  color: var(--ink-soft);
-  margin: 10px 0 22px;
-  word-break: keep-all;
-}
-
-.callsheet-lead b {
-  font-weight: 600;
-  color: var(--ink);
-}
-
+/*
+  2026-11-04 (두 번째). 법인 지시로 제목과 안내 글을 모두 뺐습니다.
+  이름과 번호만 크게 둡니다.
+  ⚠️ 설명 줄을 다시 넣지 마십시오. 「심플하게」가 주문이었습니다.
+*/
 .callsheet-list {
   margin: 0;
   padding: 0;
@@ -5743,12 +5717,12 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 .callsheet-list a {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
   align-items: baseline;
-  gap: 4px 14px;
-  padding: 15px 14px 16px;
-  margin: 0 -14px;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 21px 16px 22px;
+  margin: 0 -16px;
   border-bottom: 1px solid var(--line-soft);
   transition: background 0.25s ease;
 }
@@ -5760,28 +5734,20 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
 .callsheet-label {
   font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   color: var(--ink);
+  word-break: keep-all;
 }
 
 /* 번호는 숫자가 또렷한 서체로 — 머리띠의 번호와 같은 모양 */
 .callsheet-num {
   font-family: var(--font-display);
-  font-size: 19px;
-  letter-spacing: 0.02em;
+  font-size: 27px;
+  letter-spacing: 0.01em;
   color: var(--ink);
   white-space: nowrap;
-}
-
-.callsheet-note {
-  grid-column: 1 / -1;
-  font-family: var(--font-sans);
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: var(--ink-faint);
-  word-break: keep-all;
 }
 
 .callsheet-foot {
@@ -5789,14 +5755,12 @@ body.no-scroll .head .burger i { background: var(--ink); }
   font-size: 12.5px;
   line-height: 1.7;
   color: var(--ink-faint);
-  margin: 20px 0 0;
+  margin: 18px 0 0;
+  text-align: center;
+  word-break: keep-all;
 }
 
-.callsheet-foot span {
-  display: block;
-}
-
-@media (max-width: 520px) {
+@media (max-width: 560px) {
   /* 좁은 화면에서는 아래에서 올라오는 칸으로 둔다. 엄지에 가깝다. */
   .callsheet {
     place-items: end stretch;
@@ -5805,18 +5769,46 @@ body.no-scroll .head .burger i { background: var(--ink); }
 
   .callsheet-box {
     width: 100%;
-    max-height: 88svh;
-    padding: 30px 22px calc(22px + env(safe-area-inset-bottom));
+    max-height: 92svh;
+    /*
+      ⚠️ 여섯 줄이 한 화면에 다 들어와야 합니다. 스크롤이 생기면
+         아래 두 줄이 있는 줄도 모르십니다. 여백을 빡빡하게 둡니다.
+    */
+    padding: 44px 20px calc(16px + env(safe-area-inset-bottom));
     transform: translateY(22px);
   }
 
+  /*
+    ⚠️ 한 줄에 나란히 두면 「형사 · 민사 무료상담」과 번호가
+       서로 밀어 글자가 줄어듭니다. 위아래로 쌓습니다.
+  */
   .callsheet-list a {
-    margin: 0 -6px;
-    padding: 16px 6px 17px;
+    display: block;
+    margin: 0 -8px;
+    padding: 11px 8px 12px;
+  }
+
+  .callsheet-label {
+    display: block;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    margin-bottom: 0;
   }
 
   .callsheet-num {
-    font-size: 20px;
+    display: block;
+    font-size: 27px;
+    line-height: 1.3;
+  }
+
+  .callsheet-foot {
+    margin-top: 14px;
+  }
+
+  .callsheet-x {
+    top: 6px;
+    right: 8px;
   }
 }
 
