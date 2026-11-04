@@ -1426,6 +1426,164 @@ if (burger && drawer) {
 
 
 /* =====================================================================
+   전화 고르기
+
+   2026-11-04. 법인에 전화 창구가 여섯입니다. 그런데 쪽마다 번호가
+   하나씩만 박혀 있어, 교통사고로 들어오신 분이 공증 쪽에 걸거나
+   대표번호로 걸어 다시 돌려지는 일이 생깁니다.
+
+   그래서 「대표전화」 · 「무료상담」처럼 창구를 가리지 않는 단추를
+   누르면 여섯을 펼쳐 고르게 합니다.
+
+   ⚠️ 창구가 적힌 단추(「공증 무료상담」 · 「교통 무료상담」 …)는
+      그대로 바로 걸립니다. 그 쪽에 오신 분은 이미 어디로 걸지
+      아시는 분이라, 한 번 더 고르게 하면 성가십니다.
+      아래 GENERIC 에 적힌 글자와 똑같을 때만 펼칩니다.
+
+   ⚠️ 광고 전용 쪽(account*.html)의 010 번호는 여기 넣지 않습니다.
+      그 번호는 어느 광고에서 왔는지 세는 데 쓰입니다.
+===================================================================== */
+
+/*
+  ★ 번호를 고치실 자리 ★
+
+  label  목록에 크게 보이는 이름
+  tel    실제로 걸리는 번호
+  note   그 아래 작은 글씨. 무엇을 보는 곳인지
+
+  ⚠️ 번호를 고치시면 쪽에 박혀 있는 번호도 함께 고쳐야 합니다.
+     머리띠 · 아래 막대 · 본문 단추 · 오시는 길 · 바닥글에 있습니다.
+  ⚠️ 차례는 홈페이지의 전담센터 차례를 따릅니다.
+     대표를 맨 위에 두고, 그 아래는 형사 · 민사 · 교통사고 ·
+     공증 · 등기 · 회생 입니다.
+  ★ 가사 사건은 따로 번호가 없어 형사 · 민사와 같은 번호를 씁니다.
+*/
+const phones = [
+  { label: "대표",        tel: "02-563-0625",  note: "어디로 걸지 모르실 때" },
+  { label: "형사 · 민사",  tel: "02-6254-8485", note: "강력범죄 · 마약 · 성범죄 · 손해배상 · 가사" },
+  { label: "교통사고",     tel: "02-597-4977",  note: "음주운전 · 뺑소니 · 12대 중과실" },
+  { label: "공증",        tel: "02-567-4377",  note: "공정증서 · 사서증서인증" },
+  { label: "등기",        tel: "02-522-2006",  note: "법인 · 부동산 등기" },
+  { label: "회생",        tel: "02-523-5237",  note: "개인회생 · 파산 · 면책" }
+];
+
+(function buildCallMenu() {
+  /*
+    ⚠️ 광고 전용 쪽은 건너뛴다. 그 쪽의 010 번호는 어느 광고에서
+       왔는지 세는 데 쓰이므로, 다른 번호를 섞어 보여 주면 안 된다.
+       그 쪽들은 모두 noindex 가 박혀 있어 그것으로 가린다.
+       (없는 주소 안내 · 상담 접수 완료 쪽도 함께 빠진다. 그래도 된다.)
+  */
+  if ($('meta[name="robots"][content*="noindex"]')) return;
+
+  /* 창구를 가리지 않는 단추의 글자. 이것과 똑같을 때만 펼친다. */
+  const GENERIC = /^(대표전화|무료상담|무료상담전화|무료 전화상담|상담|상담전화)$/;
+
+  const labelOf = (a) => {
+    if (a.classList.contains("head-call")) {
+      return (a.querySelector(".head-call-label")?.textContent || "").trim();
+    }
+    if (a.classList.contains("rail-tel")) {
+      return (a.getAttribute("aria-label") || "").trim();
+    }
+    /* 화면낭독기용 숨은 글자는 빼고 읽는다 */
+    const c = a.cloneNode(true);
+    c.querySelectorAll(".sr-only").forEach((x) => x.remove());
+    return c.textContent.trim();
+  };
+
+  const isButton = (a) =>
+    a.classList.contains("btn") || a.classList.contains("head-call") ||
+    a.classList.contains("bar-call") || a.classList.contains("rail-tel");
+
+  /*
+    바닥글에 「다른 번호 보기」를 한 줄 붙인다.
+
+    공증 쪽처럼 창구가 적힌 단추만 있는 쪽에는 펼칠 자리가 없다.
+    그 쪽에 오셨다가 다른 일로 걸고 싶으신 분이 길을 잃는다.
+    쪽마다 손으로 넣지 않고 여기서 한 번에 붙인다.
+  */
+  const footSlot = $(".foot-addr") || $(".foot-col dd");
+  if (footSlot) {
+    const more = el("a", "foot-callmore", "다른 번호 보기");
+    more.href = `tel:${phones[0].tel}`;      /* 자바스크립트가 꺼져 있어도 걸린다 */
+    more.dataset.callmenu = "";
+    footSlot.append(document.createTextNode(" "), more);
+  }
+
+  /* ---------- 고르는 칸을 한 번만 만든다 ---------- */
+  const sheet = el("div", "callsheet");
+  sheet.innerHTML = `
+    <div class="callsheet-scrim" data-close></div>
+    <div class="callsheet-box" role="dialog" aria-modal="true"
+         aria-labelledby="callsheetTitle">
+      <button class="callsheet-x" type="button" aria-label="닫기" data-close>
+        <i aria-hidden="true"></i><i aria-hidden="true"></i>
+      </button>
+      <p class="callsheet-eyebrow">CALL</p>
+      <h2 class="callsheet-title" id="callsheetTitle">어디로 걸까요</h2>
+      <p class="callsheet-lead">맡는 곳으로 바로 이어집니다.
+        어느 쪽인지 모르시면 <b>대표</b>로 거십시오.</p>
+      <ul class="callsheet-list">${
+        phones.map((p) => `
+        <li>
+          <a href="tel:${p.tel}">
+            <span class="callsheet-label">${p.label}</span>
+            <span class="callsheet-num">${p.tel}</span>
+            <span class="callsheet-note">${p.note}</span>
+          </a>
+        </li>`).join("")
+      }</ul>
+      <p class="callsheet-foot">평일 09:00 – 18:00
+        <span>주말 · 야간 상담은 사전 예약</span></p>
+    </div>`;
+  sheet.setAttribute("inert", "");
+  document.body.append(sheet);
+
+  let opener = null;
+
+  const setOpen = (on) => {
+    document.body.classList.toggle("no-scroll", on);
+    sheet.classList.toggle("is-on", on);
+    if (on) {
+      sheet.removeAttribute("inert");
+      requestAnimationFrame(() => sheet.querySelector(".callsheet-list a")?.focus());
+    } else {
+      sheet.setAttribute("inert", "");
+      opener?.focus();
+    }
+  };
+
+  /*
+    ⚠️ 단추 하나하나에 거는 대신 문서 전체에서 받는다.
+       오른쪽 빠른 상담 단추(.rail)는 이 묶음보다 늦게 만들어진다.
+       먼저 걸어 두면 그 단추에는 걸리지 않는다. 실제로 그랬다.
+  */
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="tel:"]');
+    if (!a || sheet.contains(a)) return;
+    const wants = a.dataset.callmenu !== undefined ||
+                  (isButton(a) && GENERIC.test(labelOf(a)));
+    if (!wants) return;
+    e.preventDefault();
+    opener = a;
+    setOpen(true);
+  });
+
+  sheet.addEventListener("click", (e) => {
+    /* 바깥을 누르거나 닫기를 누르면 닫는다. 번호를 고르면 걸리고 닫는다. */
+    if (e.target.closest("[data-close]") || e.target.closest("a[href^='tel:']")) {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && sheet.classList.contains("is-on")) setOpen(false);
+  });
+})();
+
+
+/* =====================================================================
    어디에서 오셨는지 — 유입경로 꼬리표
 
    광고를 여러 곳에 걸면 「어느 광고가 사람을 데려왔는가」를 알아야
