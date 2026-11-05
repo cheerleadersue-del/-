@@ -3045,6 +3045,29 @@ body.no-scroll .head .burger i { background: var(--ink); }
   text-wrap: pretty;
 }
 
+/*
+  담당 안내 줄(topic-team) 안에서 변호사 한 분 쪽으로 보내는 링크.
+  어두운 머리 배경이라 색을 바꾸지 않고 금색 밑줄로만 표시한다.
+  어두운 바탕을 쓰는 .key 안의 링크도 같이 맡는다.
+  2026-11-05 추가 — 계약분쟁 쪽에서 처음 씀.
+*/
+.topic-team a,
+.key a {
+  color: #fcfcfb;
+  text-decoration: underline;
+  text-decoration-color: var(--gold-soft);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.topic-team a:hover,
+.topic-team a:focus-visible,
+.key a:hover,
+.key a:focus-visible {
+  text-decoration-color: var(--gold);
+}
+
 .topic-acts {
   display: flex;
   flex-wrap: wrap;
