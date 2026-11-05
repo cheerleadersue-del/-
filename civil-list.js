@@ -43,7 +43,7 @@ window.CIVIL_AREAS = [
     name: "계약분쟁",
     en:   "CONTRACT DISPUTE",
     href: "civil-contract.html",
-    line: "계약서에 적힌 것보다 적히지 않은 것이 문제되는 일이 더 많습니다."
+    line: "해제인지 해지인지, 위약금이 손해배상액의 예정인지 위약벌인지부터 가립니다."
   },
   {
     no:   "06",
