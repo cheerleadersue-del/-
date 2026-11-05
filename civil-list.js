@@ -43,7 +43,7 @@ window.CIVIL_AREAS = [
     name: "계약분쟁",
     en:   "CONTRACT DISPUTE",
     href: "civil-contract.html",
-    line: "해제인지 해지인지, 위약금이 손해배상액의 예정인지 위약벌인지부터 가립니다."
+    line: "부동산 계약과 의료 합의서. 손해배상액의 예정인지 위약벌인지부터 가립니다."
   },
   {
     no:   "06",
