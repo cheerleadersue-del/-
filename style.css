@@ -5861,3 +5861,230 @@ body.no-scroll .head .burger i { background: var(--ink); }
   padding: 0;
   border: 0;
 }
+
+
+/* =====================================================================
+   17. 랜딩 쪽 — 운전자보험 (traffic-insurance.html)
+
+   2026-11-20 에 넣었습니다.
+
+   랜딩 쪽 하나만 쓰는 모양입니다. 색은 한 가지도 새로 만들지
+   않았습니다. :root 에 있는 값만 씁니다.
+
+   ⚠️ 다른 쪽에서 쓰지 마십시오. 쓰실 일이 생기면 이 묶음을
+      일반 구성요소로 옮긴 뒤에 쓰십시오.
+===================================================================== */
+
+/*
+  머리말 맨 아래의 실적 · 담당자 한 줄.
+  .topic-lead · .topic-team 보다 더 작고 흐리게 둡니다.
+  이 줄이 크면 제목과 버튼이 묻힙니다.
+
+  ⚠️ 여기 적히는 숫자는 법인이 근거를 보관하고 있어야 합니다
+     (변호사법 제23조 제2항).
+*/
+.hero-proof {
+  max-width: 68ch;
+  word-break: keep-all;
+  margin: 28px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(252, 252, 251, 0.16);
+  color: rgba(252, 252, 251, 0.62);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.95;
+  letter-spacing: -0.01em;
+}
+
+.hero-proof b {
+  color: var(--cream);
+  font-weight: 400;
+}
+
+/* -----------------------------------------------------------------
+   증권 사진과 설명선
+
+   사진 한 장을 왼쪽에, 그 사진에서 볼 것 두 가지를 오른쪽에 둡니다.
+   사진 위의 ①②와 오른쪽 목록의 ①②가 짝입니다.
+
+   ⚠️ 사진이 없는 동안에는 ①②가 나오지 않습니다(.has-photo 일 때만).
+      그래서 사진을 나중에 올리셔도 쪽이 깨지지 않습니다.
+   ⚠️ ①②의 자리는 HTML 에 적은 --x · --y 두 값으로 정합니다.
+      사진이 바뀌면 그 네 숫자를 다시 잡아야 합니다.
+------------------------------------------------------------------ */
+
+.shot {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(24px, 3.4vw, 46px);
+  align-items: start;
+  margin: 34px 0 0;
+}
+
+/*
+  ⚠️ 사진은 이 틀에 맞춰 잘립니다(object-fit: cover).
+     세로로 긴 증권 사진을 그대로 올리시면 위아래가 잘립니다.
+     특약 목록 부분만 가로로 잘라서 올려 주십시오.
+     사진을 주시면 그에 맞게 이 비율을 다시 잡겠습니다.
+*/
+.shot-fig {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+}
+
+/* main.js 가 넣는 사진. .band-photo 가 이미 꽉 채우도록 잡혀 있습니다. */
+
+/* 사진을 올리기 전까지 보이는 자리표시자 */
+.shot-wait {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0 24px;
+  color: var(--ink-faint);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.9;
+  text-align: center;
+}
+
+.shot-wait span {
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+}
+
+.shot-fig.has-photo .shot-wait { display: none; }
+
+/*
+  설명선. 동그라미에서 오른쪽으로 가는 가는 금색 선 한 줄을
+  ::after 로 긋습니다. 선이 사진 밖으로 나가지 않도록
+  .shot-fig 에 overflow: hidden 을 두었습니다.
+*/
+.shot-pin {
+  position: absolute;
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  z-index: 2;
+  display: none;
+  place-content: center;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 5px rgba(138, 114, 72, 0.22);
+  color: var(--paper);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+}
+
+.shot-fig.has-photo .shot-pin { display: grid; }
+
+.shot-pin::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: clamp(28px, 7vw, 74px);
+  height: 1px;
+  background: var(--gold);
+}
+
+/* 오른쪽 설명 목록 */
+.shot-notes {
+  counter-reset: shot;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shot-notes li {
+  position: relative;
+  padding: 0 0 0 42px;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  margin-top: 22px;
+}
+
+.shot-notes li:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.shot-notes li::before {
+  counter-increment: shot;
+  content: counter(shot);
+  position: absolute;
+  left: 0;
+  top: 22px;
+  display: grid;
+  place-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--gold-soft);
+  border-radius: 50%;
+  color: var(--gold);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.shot-notes li:first-child::before { top: 0; }
+
+.shot-notes h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 1.3vw, 19px);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.shot-notes p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.95;
+  letter-spacing: -0.01em;
+}
+
+/* 좁은 화면에서는 사진 아래로 내려 세웁니다 */
+@media (max-width: 860px) {
+  .shot {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+
+/*
+  「더 자세한 내용」의 제목에 걸린 링크.
+  .work-list 는 본래 링크가 없는 칸이라 밑줄만 가늘게 둡니다.
+*/
+.work-list h3 a {
+  color: inherit;
+  border-bottom: 1px solid var(--gold-soft);
+  text-decoration: none;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.work-list h3 a:hover,
+.work-list h3 a:focus-visible {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}

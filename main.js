@@ -1877,9 +1877,15 @@ if (KAKAO_URL) {
      전화 버튼이 둘인 줄도 있다(공증 · 등기 센터). 그때는 마지막
      전화 버튼 뒤에 넣어야 두 번호가 붙어 있는다. 첫 버튼 뒤에 넣으면
      노란 버튼이 두 번호 사이를 갈라놓는다. */
+  /*
+     버튼에 적히는 말은 보통 "카톡 상담" 입니다. 쪽마다 달리 적어야
+     할 때가 있어(예: 랜딩 쪽의 "카톡으로 증권 보내기") 버튼 줄에
+     data-kakao-label="..." 을 붙이면 그 말로 바뀝니다.
+     주소(KAKAO_URL)는 여기 한 곳에만 둡니다. HTML 에 적지 마십시오. */
   document.querySelectorAll(".topic-acts, .topic-cta-act, .hero-acts, .done-back")
     .forEach((row) => {
-      const kakao = kakaoLink("btn btn-kakao", "카톡 상담", true);
+      const kakao = kakaoLink("btn btn-kakao",
+                              row.dataset.kakaoLabel || "카톡 상담", true);
       const tels = [...row.children]
         .filter((c) => (c.getAttribute("href") || "").startsWith("tel:"));
       const anchor = tels.length ? tels[tels.length - 1] : row.firstElementChild;
