@@ -1,0 +1,1280 @@
+# 이미지 프롬프트 모음
+
+AI 이미지 생성 서비스(미드저니 · ChatGPT · 파이어플라이 등)에
+그대로 붙여 넣으실 수 있게 정리했습니다.
+
+---
+
+## 0. 먼저 읽어 주십시오 — 왜 PC에서 흐려 보이는가
+
+사진이 흐린 것은 **화면 탓도 압축 탓도 아니고 원본이 작아서**입니다.
+브라우저가 작은 사진을 늘려 그리기 때문에, 화면이 큰 PC에서 특히 심합니다.
+
+실제로 재 본 값입니다.
+
+| 자리 | 화면에 그려지는 크기 | 필요한 원본 | 지금 파일 |
+|---|---|---|---|
+| 첫 화면 배경 | 1920 × 956 | **3840 × 1920** | 1138 × 1098 |
+| 사진 띠 | 1920 × 400 | **3840 × 1280** | 1672 × 941 |
+| 전담분야 패널 | 441 × 540 | **1600 × 2000** | 416 × 358 (형사) |
+| 변호사 사진 | 358 × 441 | **1600 × 2000** | 426 × 586 |
+| 세부 페이지 머리 | 1920 × 616 | **3200 × 1600** | 위와 같은 파일 |
+
+요즘 화면은 점 하나를 두 개로 그립니다(레티나). 그래서 **보이는 크기의
+두 배**로 만들어야 선명합니다. 위 "필요한 원본"이 그 값입니다.
+
+### 급한 순서
+
+1. **첫 화면 배경** — 손님이 가장 먼저, 가장 크게 봅니다
+2. **전담분야 패널 5장** — 첫 화면 바로 아래, 형사 사진이 제일 심합니다
+3. **사진 띠 home-1 · home-2**
+4. **변호사 사진** — 이건 AI로 만들면 안 됩니다. 아래 5-B 참고
+5. 세부 페이지 머리와 띠
+
+---
+
+## 1. 규격
+
+| 쓰이는 곳 | 파일 수 | 크기 | 비율 |
+|---|---|---|---|
+| 첫 화면 배경 | 1장 | **3840 × 2160 px** | 16 : 9 |
+| 전담분야 패널 | 5장 | **1600 × 2000 px** | 4 : 5 (세로) |
+| 사진 띠 | 50장 | **3840 × 1280 px** | 3 : 1 |
+| 세부 페이지 머리 | 24장 | **3200 × 1600 px** | 2 : 1 |
+
+- 형식은 **webp** 를 권합니다. 같은 화질에서 jpg 보다 3분의 1쯤 가볍습니다
+- 용량은 **첫 화면 500KB, 나머지 400KB 이하**를 목표로 하십시오
+- 원본이 위 크기보다 크면 그대로 두지 마시고 **줄여서** 올리십시오.
+  1만 픽셀짜리를 올리면 휴대폰에서 화면이 한참 비어 있습니다
+- 파일 이름은 아래 목록과 **정확히 같아야** 합니다. 올리는 순간 자동으로 들어갑니다
+
+> **줄이고 용량 맞추는 법**
+> [squoosh.app](https://squoosh.app) 에 사진을 끌어다 놓고, 오른쪽에서
+> WebP 를 고른 뒤 Quality 를 **80** 으로 두십시오. 아래 크기 칸에 위 표의
+> 숫자를 넣으면 됩니다. 무료이고 설치할 것이 없습니다.
+
+---
+
+## 2. 반드시 지켜야 할 네 가지
+
+### ① 너무 어둡게 만들지 마십시오
+
+사진 띠는 글자가 읽히도록 **위에 72% 검은 막**이 덮입니다.
+원본이 이미 어두우면 **완전히 까만 화면**이 됩니다.
+
+**중간 밝기**로 만드십시오. 원본만 보면 조금 밝다 싶은 정도가 맞습니다.
+
+### ② 왼쪽을 비워 두십시오
+
+글자가 **왼쪽에** 놓입니다.
+사진의 볼거리는 **오른쪽**에 두고 왼쪽 3분의 1은 조용하게 두십시오.
+
+### ③ 가운데로 몰아 넣으십시오
+
+화면 크기에 따라 위아래 또는 좌우가 잘립니다.
+중요한 것은 **한가운데**에, 가장자리는 여백으로 두십시오.
+
+### ④ 글자가 나오지 않게 하십시오
+
+AI는 한글을 제대로 쓰지 못합니다.
+서류나 화면이 나오는 사진은 **글자가 흐릿하거나 안 보이는 구도**로 요청하십시오.
+아래 프롬프트에는 이미 반영해 두었습니다.
+
+---
+
+## 3. 공통 스타일 (모든 프롬프트 앞에 붙입니다)
+
+### 색감에 대하여 — 이 문단이 사진의 인상을 결정합니다
+
+예전 문서는 **차가운 회색**으로 잡혀 있었습니다. 그런데 이 사이트가 쓰는
+강조색은 크림(`#e4d5b7`)과 모래빛 금색(`#c6ab7f`) 으로 **따뜻한 계열**입니다.
+사진만 차가우면 글자와 겉돌아서, 잘 만든 사진도 싸늘하고 밋밋해 보입니다.
+
+그래서 **따뜻한 저채도**로 바꿉니다. 색을 빼되 차갑게 빼지 않고,
+빛이 닿는 곳에 옅은 호박색이 남게 하는 방식입니다. 필름 사진의 인상이
+아름다워 보이는 이유가 대체로 이것입니다.
+
+세 가지만 지키면 됩니다.
+
+1. **채도는 낮게, 그러나 흑백은 아니게** — 색이 아주 조금 남아 있어야 합니다
+2. **밝은 쪽은 따뜻하게, 어두운 쪽은 중성으로** — 이게 필름 느낌의 핵심입니다
+3. **까맣게 뭉개지 말 것** — 그림자 안이 보여야 고급스럽습니다
+
+```
+warm desaturated photograph, muted sand, warm grey and soft ochre palette,
+low saturation but not black and white, gentle warm cast in the highlights,
+neutral open shadows that never crush to pure black,
+soft rolled-off highlights, subtle film curve, fine 35mm film grain,
+soft directional late-afternoon daylight from one side, matte finish,
+no people, no faces, no text, no lettering, no logos,
+large simple shapes, generous empty space, calm and restrained,
+shallow depth of field, editorial architectural photography,
+medium format, 35mm lens
+```
+
+> **색을 정확히 맞추고 싶으시면** 사진에서 가장 밝은 부분이 크림색
+> `#e4d5b7` 근처, 중간 밝기가 모래빛 `#c6ab7f` 근처, 가장 어두운 부분이
+> `#17171a` 보다 밝게 오도록 보정해 달라고 하시면 됩니다.
+
+**가로로 긴 사진(띠 · 첫 화면 · 머리말)** 에는 아래 한 줄을 더 붙이십시오.
+글자가 왼쪽에 놓이기 때문입니다.
+
+```
+wide horizontal composition, left third of the frame quiet and uncluttered,
+subject weighted to the right of centre
+```
+
+## 4. 제외할 것 (Negative prompt)
+
+넣는 칸이 따로 있는 서비스라면 여기에 넣으십시오.
+
+```
+people, faces, hands, text, letters, korean text, watermark, logo, signature,
+bright saturated colours, red, neon, teal and orange, cold blue cast, glossy, plastic,
+HDR, oversharpened, cluttered, busy detail, heavy vignette, very dark, underexposed,
+black crush, muddy shadows, low resolution, blurry, upscaled, soft focus,
+cigarettes, drugs, syringes, handcuffs, money stacks, gold bars, dice, casino chips,
+hooded figure, crime scene tape, gavel, scales of justice, courtroom drama,
+generic stock photo look, smiling businesspeople
+```
+
+> **법봉(gavel)과 저울**은 일부러 뺐습니다.
+> 법봉은 미국 법정 물건이라 한국 법원에는 없습니다.
+> 이런 걸 쓰면 실무를 모르는 곳으로 보입니다.
+
+---
+
+---
+
+# 4-A. 첫 화면 (가장 급합니다)
+
+손님이 사이트에서 처음 보는 한 장입니다. 여기가 흐리면 나머지가 아무리
+좋아도 인상이 정해집니다.
+
+## 배경 사진 — `assets/hero-building.webp`
+
+| | |
+|---|---|
+| 크기 | **3840 × 2160 px** (16:9) |
+| 용량 | 500KB 이하 |
+| 덮이는 막 | 왼쪽이 짙고 오른쪽이 옅은 검은 막 |
+
+가운데에 로고와 글자가 놓입니다. **한가운데는 조용해야** 하고,
+볼거리는 **위쪽과 양옆**에 두십시오.
+
+```
+warm desaturated photograph, muted sand, warm grey and soft ochre palette,
+low saturation but not black and white, gentle warm cast in the highlights,
+neutral open shadows that never crush to pure black, subtle film curve, fine 35mm film grain,
+looking up at a calm modern office tower in late afternoon light,
+clean vertical lines, glass and pale stone, one plane of the building catching warm sun,
+quiet overcast sky with soft gradient, centre of the frame open and uncluttered,
+no people, no faces, no text, no lettering, no logos, no signage,
+matte finish, editorial architectural photography, medium format --ar 16:9
+```
+
+**다른 방향 두 가지** — 건물이 식상하시면 이쪽도 좋습니다.
+
+```
+(새벽 도시) empty city avenue before sunrise seen from above, warm street lamps still on,
+long quiet perspective, thin mist, pale amber sky meeting deep neutral shadow, no people
+```
+
+```
+(창과 빛) tall office window from inside, warm late daylight falling across a bare floor,
+long soft shadows of the window frame, pale stone wall, nothing else in the room, no people
+```
+
+## 동영상 — `assets/hero.mp4` (선택)
+
+이 파일이 있으면 **사진 위에 자동으로 덮여** 재생됩니다. 빼고 싶으시면
+파일을 지우시면 사진만 남습니다.
+
+| | |
+|---|---|
+| 크기 | **1920 × 1080** 이상 (2560 × 1440 권장) |
+| 길이 | **8 ~ 15초**, 이어 붙여도 티 안 나게 |
+| 용량 | **3MB 이하** — 넘으면 휴대폰에서 첫 화면이 늦게 뜹니다 |
+| 소리 | 없어야 합니다 |
+
+**움직임은 아주 느려야 합니다.** 빠르게 움직이면 글자가 안 읽히고
+싸구려로 보입니다. 카메라가 거의 멈춘 듯 아주 천천히 올라가거나
+구름만 흐르는 정도가 맞습니다.
+
+지금 들어 있는 영상이 마음에 안 드신다면 다음 중 하나를 권합니다.
+
+1. **영상을 아예 빼기** — `assets/hero.mp4` 를 지우면 됩니다.
+   좋은 사진 한 장이 어중간한 영상보다 낫습니다
+2. **무료 영상에서 고르기** — [pexels.com/videos](https://www.pexels.com/videos/)
+   에서 `slow architecture`, `city timelapse clouds`, `office window light` 로
+   찾으시고 4K 로 받으십시오. 상업적 사용이 무료입니다
+3. **AI 영상** — Runway, Kling 등에 아래를 넣으십시오
+
+```
+very slow upward camera move along a calm modern office tower,
+warm late afternoon light, muted sand and warm grey tones, low saturation,
+soft clouds drifting slowly behind the building, no people, no text, no signage,
+cinematic, film grain, steady and quiet, minimal movement
+```
+
+---
+
+# 4-B. 전담분야 패널 5장 (첫 화면 바로 아래)
+
+첫 화면 다음으로 눈에 띄는 자리입니다. 지금 **형사 사진이 416 픽셀짜리**라
+가장 심하게 뭉개져 보입니다.
+
+## 이 자리만의 조건 — 반드시 읽어 주십시오
+
+패널은 **누르면 넓어지고 닫히면 좁아집니다.**
+
+| 상태 | 화면 크기 | 사진이 잘리는 모양 |
+|---|---|---|
+| 닫힘 | 170 × 540 | 아주 좁고 긴 세로 조각 |
+| 열림 | 441 × 540 | 세로로 긴 네모 |
+
+**같은 사진이 두 가지로 잘립니다.** 그래서
+
+- 보여줄 것은 **한가운데 세로 줄**에 두십시오. 양옆은 잘려 나갑니다
+- 좁은 조각으로 잘려도 무엇인지 알아볼 수 있어야 합니다
+- 가로로 길게 늘어선 구도(지평선, 넓은 방)는 **쓰지 마십시오**.
+  좁게 잘리면 아무것도 안 남습니다
+- **세로선이 살아 있는 구도**가 가장 잘 맞습니다.
+  기둥, 문, 창틀, 계단, 서가 같은 것들입니다
+
+| | |
+|---|---|
+| 크기 | **1600 × 2000 px** (4:5 세로) |
+| 용량 | 400KB 이하 |
+
+## 파일 이름
+
+```
+assets/center-criminal.webp    형사
+assets/center-civil.webp       민사
+assets/center-family.webp      가사
+assets/center-recovery.webp    회생
+assets/center-notary.webp      공증 · 법인/부동산 등기
+```
+
+> `center-recovery.webp` 는 지금 사진 안에 **"채무정리 / 신용회복 / 재기지원"
+> 이라는 한글이 박혀** 있습니다. 아래 배너 이름과 맞지 않으니 이건 크기와
+> 상관없이 꼭 바꾸셔야 합니다.
+
+## 공통 앞머리 (다섯 장 모두 앞에 붙입니다)
+
+```
+warm desaturated photograph, muted sand, warm grey and soft ochre palette,
+low saturation but not black and white, gentle warm cast in the highlights,
+neutral open shadows that never crush to pure black, subtle film curve, fine 35mm film grain,
+vertical composition, strong vertical lines, subject centred in the middle column,
+reads clearly even when cropped to a narrow vertical strip,
+no people, no faces, no text, no lettering, no logos,
+matte finish, editorial photography, medium format --ar 4:5
+```
+
+### `center-criminal.webp` — 형사
+
+```
+a long empty corridor of a government building at night, one row of warm lights
+receding into the distance, closed heavy doors on both sides, polished floor
+reflecting the lights, deep quiet, nobody there
+```
+
+의도: 조사받는 밤의 긴 복도입니다. 겁주는 그림이 아니라 **혼자 남은 시간**을
+보여줍니다. 수갑·유치장 같은 것은 넣지 마십시오. 의뢰인이 자기 얘기로 읽습니다.
+
+### `center-civil.webp` — 민사
+
+```
+tall stack of bound document folders on a shelf seen from the front,
+warm side light grazing the paper edges, shallow depth of field,
+neutral wall behind, nothing written or printed visible
+```
+
+의도: 민사는 결국 **기록 싸움**입니다. 돈다발이나 계약서 도장 같은 상투적인
+그림보다, 쌓인 기록이 이 분야의 실제 모습에 가깝습니다.
+
+### `center-family.webp` — 가사
+
+```
+an empty dining table by a window with two chairs, warm late afternoon light
+falling across the tabletop, long soft shadows, a quiet home interior,
+nothing on the table, nobody there
+```
+
+의도: **비어 있는 두 자리**입니다. 우는 사람이나 반지 뺀 손 같은 것은
+넣지 마십시오. 가사 사건 의뢰인은 이미 충분히 힘듭니다.
+
+### `center-recovery.webp` — 회생
+
+```
+a shop shutter half open at dawn, warm first light entering underneath,
+worn concrete and painted metal, quiet empty street outside, nobody there
+```
+
+의도: **닫힌 것이 아니라 다시 열리는 중**입니다. 회생은 끝이 아니라 정리하고
+다시 시작하는 절차이므로, 그 방향이 사진에 담겨야 합니다.
+
+### `center-notary.webp` — 공증 · 등기
+
+```
+close-up of a red seal impression on thick cream paper, warm raking light,
+paper texture and fibres visible, shallow depth of field,
+no writing, no letters, no characters of any kind
+```
+
+의도: 도장 자국 하나면 충분합니다. **글자가 나오면 안 됩니다.** AI는 한글을
+못 씁니다. 이상한 글자가 찍히면 그 자리가 제일 먼저 눈에 띕니다.
+
+---
+
+# 4-C. 페이지 머리말 배경 (직관적으로 보이는 자리)
+
+**지금 여러 페이지가 같은 사진을 쓰고 있습니다.**
+마약도 도박도 성범죄도 머리말이 똑같습니다.
+
+여기가 **무슨 페이지인지 한눈에 알아야 하는 자리**입니다.
+사진 띠는 이미 페이지를 읽고 있는 사람이 보는 곳이라
+알아보게 하는 역할은 머리말이 맡습니다.
+
+## 규격
+
+| | |
+|---|---|
+| 크기 | **3200 × 1600 px** (2 : 1) |
+| 용량 | 400KB 이하 |
+
+## 이 자리만의 조건
+
+머리말에는 **왼쪽이 92%, 오른쪽이 42%** 로 기울어진 검은 막이 덮입니다.
+글자가 왼쪽에 놓이기 때문입니다.
+
+**그래서 왼쪽 절반은 거의 안 보이고, 오른쪽만 보입니다.**
+보여주고 싶은 것은 반드시 **오른쪽**에 두십시오.
+
+## 파일 이름
+
+```
+assets/topic-drug.jpg        마약
+assets/topic-gambling.jpg    도박
+assets/topic-organized.jpg   해외조직범죄
+assets/topic-otc.jpg         코인 OTC
+assets/topic-sexcrime.jpg    성범죄
+assets/topic-finance.jpg     금융범죄
+assets/topic-notary.jpg      공증
+assets/topic-std.jpg         성병감염
+assets/topic-medical.jpg     의료사고
+assets/topic-jeonse.jpg      전세사기
+
+민사   assets/topic-realestate.jpg   assets/topic-loan.jpg
+       assets/topic-contract.jpg     assets/topic-damages.jpg
+가사   assets/topic-divorce.jpg      assets/topic-property.jpg
+       assets/topic-custody.jpg      assets/topic-inheritance.jpg
+회생   assets/topic-corporate.jpg    assets/topic-personal.jpg
+       assets/topic-bankruptcy.jpg   assets/topic-discharge.jpg
+공증   assets/topic-review.jpg       assets/topic-certified.jpg
+```
+
+올리는 순간 그 페이지만 바뀝니다. 없으면 지금 사진이 그대로 남습니다.
+한 장씩 올리셔도 됩니다.
+
+## 공통 스타일 (머리말용)
+
+```
+warm desaturated photograph, muted sand, warm grey and soft ochre palette,
+low saturation but not black and white, gentle warm cast in the highlights,
+neutral open shadows that never crush to pure black, subtle film curve, fine 35mm film grain,
+soft directional late-afternoon daylight, matte finish,
+no people, no faces, no text, no lettering, no logos,
+subject placed on the right side of the frame, left half quiet and empty,
+large simple shapes, shallow depth of field, restrained and quiet,
+editorial photography, medium format
+```
+
+미드저니라면 뒤에 `--ar 2:1` 을 붙이십시오.
+제외할 것(Negative prompt)은 앞의 4번과 같습니다.
+
+## 주제
+
+| 파일 | 무엇을 찍나 | 왜 이것인가 |
+|---|---|---|
+| `topic-drug` | 실험실 시험관 선반과 감정 장비 | 마약 사건은 성분 분석에서 시작합니다 |
+| `topic-gambling` | 숫자가 가득한 모니터 여러 대 | 온라인 도박이 바로 읽힙니다 |
+| `topic-organized` | 여권과 출입국 심사대 | "해외"가 한눈에 전해집니다 |
+| `topic-otc` | 어두운 방의 화면과 하드웨어 지갑 | 코인 거래가 바로 읽힙니다 |
+| `topic-sexcrime` | 법원 복도, 닫힌 문 | 이 주제는 직접 그릴 수 없습니다 |
+| `topic-finance` | 계산기와 장부, 쌓인 영수증 | 돈 계산이 바로 읽힙니다 |
+| `topic-notary` | 도장과 붉은 인영이 찍힌 서류 | 공증이 가장 직관적입니다 |
+| `topic-std` | 검사실 채혈관 선반과 차트철 | 몸이 아니라 검사와 기록을 보여야 합니다 |
+| `topic-medical` | 진료기록 뭉치와 판독대의 필름 | 의료기록이 사건의 전부입니다 |
+| `topic-jeonse` | 임대차계약서와 현관 열쇠 | 계약서와 등기부가 이 사건의 출발입니다 |
+| `topic-realestate` | 등기부 서류와 도면, 열쇠 | 부동산은 서류에서 시작합니다 |
+| `topic-loan` | 통장과 계산기, 접힌 차용증 | 돈이 오간 기록이 전부입니다 |
+| `topic-contract` | 여러 장의 계약서와 만년필 | 문구 하나가 결론을 바꿉니다 |
+| `topic-damages` | 진단서 · 영수증 뭉치와 계산기 | 항목을 더해서 만들어집니다 |
+| `topic-divorce` | 창가의 빈 의자 두 개 | 사람을 그리지 않고 상황만 |
+| `topic-property` | 저울 대신 나뉜 서류 두 묶음 | 나누는 일이 핵심입니다 |
+| `topic-custody` | 작은 신발 한 켤레와 현관 | 아이를 직접 찍지 않습니다 |
+| `topic-inheritance` | 오래된 서류함과 인장 | 남기신 것을 정리하는 일 |
+| `topic-corporate` | 불 꺼진 사무실과 서류 상자 | 회사를 정리하거나 살리는 자리 |
+| `topic-personal` | 정리된 고지서 묶음과 달력 | 갚아 나가는 계획을 세웁니다 |
+| `topic-bankruptcy` | 비워진 책상과 창문 빛 | 끝이 아니라 다시 시작 |
+| `topic-discharge` | 열린 창과 정리된 빈 책상 | 회복을 뜻하는 밝은 톤 |
+| `topic-review` | 돋보기와 계약서, 표시된 줄 | 서명 전에 한 번 보는 일 |
+| `topic-certified` | 우체국 봉투와 접수 도장 | 내용증명이 바로 읽힙니다 |
+
+### `topic-drug.jpg`
+
+```
+a laboratory rack of glass test tubes and an analysis instrument on the right side
+of the frame, clean bench surface, left half empty and quiet, warm desaturated
+photograph, muted sand, warm grey and soft ochre palette, low saturation but not
+black and white, gentle warm cast in the highlights, neutral open shadows that
+never crush to pure black, soft directional late-afternoon daylight, matte finish,
+subtle film curve, fine 35mm film grain, no people, no faces, no text, no
+lettering, no logos, large simple shapes, shallow depth of field, restrained and
+quiet, editorial photography, medium format
+```
+
+### `topic-gambling.jpg`
+
+```
+several computer monitors on a desk on the right side of the frame, each showing
+dense grids of blurred illegible numbers, cool screen glow, left half dark and
+empty, warm desaturated photograph, muted sand, warm grey and soft ochre palette,
+low saturation but not black and white, gentle warm cast in the highlights,
+neutral open shadows that never crush to pure black, matte finish, subtle film
+curve, fine 35mm film grain, no people, no faces, no text, no lettering, no logos,
+large simple shapes, shallow depth of field, restrained and quiet, editorial
+photography, medium format
+```
+
+### `topic-organized.jpg`
+
+```
+an immigration inspection counter at an airport seen from the side, a closed
+passport lying on the counter on the right side of the frame, left half empty and
+quiet, no people, warm desaturated photograph, muted sand, warm grey and soft
+ochre palette, low saturation but not black and white, gentle warm cast in the
+highlights, neutral open shadows that never crush to pure black, matte finish,
+subtle film curve, fine 35mm film grain, no faces, no text, no lettering, no
+logos, large simple shapes, shallow depth of field, restrained and quiet,
+editorial photography, medium format
+```
+
+### `topic-otc.jpg`
+
+```
+a dark desk on the right side of the frame with a monitor showing a blurred
+illegible price chart and a small hardware wallet device beside it, cool screen
+glow, left half dark and empty, warm desaturated photograph, muted sand, warm grey
+and soft ochre palette, low saturation but not black and white, gentle warm cast
+in the highlights, neutral open shadows that never crush to pure black, matte
+finish, subtle film curve, fine 35mm film grain, no people, no faces, no text, no
+lettering, no logos, large simple shapes, shallow depth of field, restrained and
+quiet, editorial photography, medium format
+```
+
+### `topic-sexcrime.jpg`
+
+```
+a courthouse corridor with tall closed doors on the right side of the frame, cold
+daylight from a window, completely empty, left half quiet and empty, warm
+desaturated photograph, muted sand, warm grey and soft ochre palette, low
+saturation but not black and white, gentle warm cast in the highlights, neutral
+open shadows that never crush to pure black, matte finish, subtle film curve, fine
+35mm film grain, no people, no faces, no text, no lettering, no logos, large
+simple shapes, shallow depth of field, solemn and still, editorial architectural
+photography, medium format
+```
+
+### `topic-finance.jpg`
+
+```
+a desk calculator, an open ledger book and a stack of receipts arranged on the
+right side of the frame, blurred illegible figures, left half empty, warm
+desaturated photograph, muted sand, warm grey and soft ochre palette, low
+saturation but not black and white, gentle warm cast in the highlights, neutral
+open shadows that never crush to pure black, matte finish, subtle film curve, fine
+35mm film grain, no people, no faces, no text, no lettering, no logos, large
+simple shapes, shallow depth of field, restrained and quiet, editorial
+photography, medium format
+```
+
+### `topic-notary.jpg`
+
+```
+a wooden hand stamp, an ink pad and a document bearing a single round red seal
+impression, arranged on the right side of the frame, blank unreadable paper, warm
+soft daylight, left half quiet and empty, gentle warm desaturated photograph with
+one small red accent, warm stone and paper tones, low saturation but not black and
+white, gentle warm cast in the highlights, neutral open shadows that never crush
+to pure black, matte finish, subtle film curve, fine 35mm film grain, no people,
+no faces, no text, no lettering, no logos, large simple shapes, shallow depth of
+field, calm and orderly, editorial still life photography, medium format
+```
+
+### `topic-std.jpg`
+
+> **이 페이지만 특별히 조심하실 것이 있습니다.**
+> 성병감염 페이지에 몸이나 사람이 나오는 사진을 쓰면 안 됩니다.
+> 보는 분이 이미 수치심을 안고 오시는 자리입니다.
+> **검사실과 기록** — 그 두 가지만 보이게 하십시오.
+
+```
+a row of sealed laboratory blood collection tubes standing in a metal rack on the
+right side of the frame, a closed medical chart folder beside them, clean quiet
+clinic bench, warm soft daylight, left half quiet and empty, gentle near-
+monochrome photograph, cool grey and paper tones, low saturation but not black and
+white, gentle warm cast in the highlights, neutral open shadows that never crush
+to pure black, matte finish, subtle film curve, fine 35mm film grain, no people,
+no faces, no bodies, no skin, no text, no lettering, no logos, large simple
+shapes, shallow depth of field, calm and clinical, editorial still life
+photography, medium format
+```
+
+### `topic-medical.jpg`
+
+```
+a thick stack of hospital chart papers and a large X-ray film resting on a light
+box, arranged on the right side of the frame, blank unreadable documents, warm
+soft daylight, left half quiet and empty, gentle warm desaturated photograph, cool
+grey and paper tones, low saturation but not black and white, gentle warm cast in
+the highlights, neutral open shadows that never crush to pure black, matte finish,
+subtle film curve, fine 35mm film grain, no people, no faces, no bodies, no text,
+no lettering, no logos, large simple shapes, shallow depth of field, calm and
+orderly, editorial still life photography, medium format
+```
+
+### `topic-jeonse.jpg`
+
+> **불안하거나 절망적인 사진을 쓰지 마십시오.**
+> 이 페이지에 오시는 분은 이미 겁이 나 있습니다.
+> "정리할 수 있다" 는 느낌이 나야 합니다.
+
+```
+a residential lease contract document lying flat with a single house key resting
+on top of it, arranged on the right side of the frame, blank unreadable paper,
+calm daylight from a window, gentle warm desaturated photograph, warm stone and
+paper tones, low saturation but not black and white, gentle warm cast in the
+highlights, neutral open shadows that never crush to pure black, matte finish,
+subtle film curve, fine 35mm film grain, no people, no faces, no text, no
+lettering, no logos, large simple shapes, shallow depth of field, calm and
+orderly, editorial still life photography, medium format
+```
+
+---
+
+# 4-D. 변호사 사진 — 여기만 AI 를 쓰시면 안 됩니다
+
+**실존하는 변호사의 얼굴입니다. AI 로 만들거나 보정으로 얼굴을 바꾸면 안
+됩니다.** 손님을 속이는 일이 되고, 실제로 만났을 때 사진과 다르면 신뢰가
+한 번에 무너집니다. 변호사 광고에서 특히 문제가 됩니다.
+
+지금 파일들은 **426 ~ 635 픽셀**로 필요한 크기의 절반쯤입니다. 두 가지
+길이 있습니다.
+
+### 길 ①  원본을 찾으신다 (공짜, 제일 빠름)
+
+지금 파일은 어딘가에서 **줄여서 저장된 것**입니다. 처음 촬영하신 원본이
+남아 있으면 그게 훨씬 큽니다. 사진관에 맡기셨다면 원본 파일을 요청하시면
+대개 보내줍니다. 원본만 있으면 새로 찍을 필요가 없습니다.
+
+찾으시면 아래 크기로 잘라서 올리시면 됩니다.
+
+| | |
+|---|---|
+| 크기 | **1600 × 2000 px** (4:5 세로) |
+| 용량 | 300KB 이하 |
+| 구도 | 가슴 위, 눈이 위에서 3분의 1 지점 |
+
+### 길 ②  다시 찍으신다
+
+여섯 분을 **같은 날 같은 자리에서** 찍는 것이 가장 중요합니다. 지금 사진들이
+따로 놀아 보이는 이유는 해상도만이 아니라 배경과 빛이 제각각이기 때문입니다.
+한 사람만 다른 날 찍어도 그 한 장이 눈에 띕니다.
+
+사진사에게 그대로 보여주시면 되는 내용입니다.
+
+```
+■ 배경    밝은 무채색 벽 한 가지 (#e6e6e3 모래색 계열).
+          여섯 분 전부 같은 벽. 사무실 책장이나 블라인드는 피할 것
+
+■ 빛      한쪽에서 들어오는 부드러운 빛 + 반대쪽 반사판.
+          그림자가 지되 얼굴선이 살아 있을 것. 정면 플래시 금지
+
+■ 옷      짙은 색 정장, 흰 셔츠. 넥타이는 무늬 없는 것.
+          여섯 분의 옷 밝기를 서로 비슷하게 맞출 것
+
+■ 표정    웃지 않되 굳지도 않게. 입은 다물고 눈에 힘을 뺄 것.
+          팔짱, 법전 들기, 창밖 응시 같은 연출은 하지 말 것
+
+■ 구도    가슴 위(bust shot), 정면 또는 15도.
+          머리 위 여백을 조금 남기고, 눈은 화면 위에서 1/3 지점
+
+■ 파일    세로 4:5, 긴 쪽 2000px 이상, 보정 전 원본도 함께 받을 것
+
+■ 색보정  따뜻한 저채도. 피부색을 붉거나 노랗게 과하게 만들지 말 것.
+          여섯 장의 밝기와 색을 마지막에 서로 맞출 것 ← 이게 제일 중요
+```
+
+> **한 명만 급하시면** 대표변호사 사진부터 바꾸십시오. 목록 맨 위라
+> 가장 많이 보입니다.
+
+파일 이름은 지금 것을 그대로 쓰시면 됩니다. 덮어쓰기만 하면 바뀝니다.
+
+```
+assets/lawyer-01-portrait.webp   목록에 나오는 대표변호사 얼굴
+assets/lawyer-01.webp            대표변호사 전신
+assets/lawyer-02.webp ~ lawyer-06.webp
+```
+
+---
+
+# 4-E. 어느 것부터 만드시면 되는가
+
+한 번에 다 만드실 필요 없습니다. 효과가 큰 순서입니다.
+
+| 순서 | 무엇 | 장수 | 왜 |
+|---|---|---|---|
+| **1** | 머리말 `topic-*` | 24장 | 지금 여러 페이지가 같은 사진입니다. 가장 티가 납니다 |
+| **2** | 첫 화면 `hero` | 1장 | 첫인상 |
+| **3** | 띠 앞쪽 `*-1` | 24장 | 각 페이지의 성격을 살립니다 |
+| **4** | 띠 뒤쪽 `*-2` | 1장 | 아래 참고 |
+
+### 띠 뒤쪽은 한 장만 만드시면 됩니다
+
+`drug-2` `gambling-2` `organized-2` `otc-2` `sexcrime-2` `finance-2`
+`std-2` `medical-2`
+— 이 여덟 자리는 **문구가 사실상 같습니다.**
+
+> *"결과를 약속드리지 않습니다. 대신 무엇을 어떻게 다투는지 미리 말씀드립니다."*
+
+그래서 **한 장을 만들어 이름만 바꿔 여덟 번 올리시면 됩니다.**
+여러 페이지를 옮겨 다니는 분은 많지 않고,
+같은 문구에 같은 사진이 나오는 것은 오히려 일관되게 보입니다.
+
+**띠에는 사진이 없어도 됩니다.** 지금도 글자만으로 보기 좋습니다.
+머리말부터 하시고, 띠는 나중에 하셔도 됩니다.
+
+
+# 5. 파일별 프롬프트
+
+각 항목의 코드 블록을 **그대로 복사**해서 쓰시면 됩니다.
+(공통 스타일이 이미 포함되어 있습니다)
+
+미드저니를 쓰신다면 맨 뒤에 `--ar 3:1` 을 붙이십시오.
+
+---
+
+## 마약 페이지
+
+### `drug-1.jpg` — 과학적 증거 · 감정서
+
+> 들어갈 문장: *"마약 사건은 과학적 증거가 중심에 있습니다. 그래서 감정서를 읽을 줄 아는 사람이 필요합니다."*
+
+```
+a laboratory bench with a neat row of small clear glass vials and a folded
+analytical chart printout lying flat beside them, an analytical instrument softly
+out of focus behind, warm desaturated photograph, muted sand, warm grey and soft
+ochre palette, low saturation but not black and white, gentle warm cast in the
+highlights, neutral open shadows that never crush to pure black, soft directional
+late-afternoon daylight from one side, matte finish, subtle film curve, fine 35mm
+film grain, no people, no faces, no text, no lettering, no logos, wide horizontal
+composition, large simple shapes, generous empty space, left third of the frame
+quiet and uncluttered, subject weighted to the right of centre, shallow depth of
+field, restrained and quiet, editorial architectural photography, medium format,
+35mm lens
+```
+
+### `drug-2.jpg` — 무엇을 어떻게 다투는지
+
+> 들어갈 문장: *"결과를 약속드리지 않습니다. 대신 무엇을 어떻게 다투는지 미리 말씀드립니다."*
+
+```
+a stack of thick document folders on a dark wooden table, one folder open with
+blank unreadable pages, a fountain pen resting beside it, warm desaturated
+photograph, muted sand, warm grey and soft ochre palette, low saturation but not
+black and white, gentle warm cast in the highlights, neutral open shadows that
+never crush to pure black, soft directional late-afternoon daylight from one side,
+matte finish, subtle film curve, fine 35mm film grain, no people, no faces, no
+text, no lettering, no logos, wide horizontal composition, large simple shapes,
+generous empty space, left third of the frame quiet and uncluttered, subject
+weighted to the right of centre, shallow depth of field, restrained and quiet,
+editorial architectural photography, medium format, 35mm lens
+```
+
+---
+
+## 도박 페이지
+
+### `gambling-1.jpg` — 돈의 흐름 · 계좌
+
+> 들어갈 문장: *"도박 사건은 돈의 흐름으로 재구성됩니다. 그래서 계좌를 읽을 줄 아는 사람이 필요합니다."*
+
+```
+printed financial statements spread across a desk showing long columns of blurred
+illegible numbers, a single desk lamp lighting one corner, warm desaturated
+photograph, muted sand, warm grey and soft ochre palette, low saturation but not
+black and white, gentle warm cast in the highlights, neutral open shadows that
+never crush to pure black, soft directional late-afternoon daylight from one side,
+matte finish, subtle film curve, fine 35mm film grain, no people, no faces, no
+text, no lettering, no logos, wide horizontal composition, large simple shapes,
+generous empty space, left third of the frame quiet and uncluttered, subject
+weighted to the right of centre, shallow depth of field, restrained and quiet,
+editorial architectural photography, medium format, 35mm lens
+```
+
+### `gambling-2.jpg` — 무엇을 어떻게 다투는지
+
+```
+an empty meeting room seen from the doorway, long table, chairs pushed in, soft
+daylight from tall windows, warm desaturated photograph, muted sand, warm grey and
+soft ochre palette, low saturation but not black and white, gentle warm cast in
+the highlights, neutral open shadows that never crush to pure black, matte finish,
+subtle film curve, fine 35mm film grain, no people, no faces, no text, no
+lettering, no logos, wide horizontal composition, large simple shapes, generous
+empty space, left third of the frame quiet and uncluttered, subject weighted to
+the right of centre, shallow depth of field, restrained and quiet, editorial
+architectural photography, medium format, 35mm lens
+```
+
+---
+
+## 해외조직범죄 페이지
+
+### `organized-1.jpg` — 조직도
+
+> 들어갈 문장: *"수사는 조직도를 그리는 것으로 시작합니다. 그 그림 속 내 자리가 맞는지부터 봅니다."*
+
+```
+a large printed diagram pinned to a plain wall, empty rectangles connected by thin
+straight lines, no writing inside the boxes, seen slightly from an angle in soft
+low light, warm desaturated photograph, muted sand, warm grey and soft ochre
+palette, low saturation but not black and white, gentle warm cast in the
+highlights, neutral open shadows that never crush to pure black, soft directional
+late-afternoon daylight from one side, matte finish, subtle film curve, fine 35mm
+film grain, no people, no faces, no text, no lettering, no logos, wide horizontal
+composition, large simple shapes, generous empty space, left third of the frame
+quiet and uncluttered, subject weighted to the right of centre, shallow depth of
+field, restrained and quiet, editorial architectural photography, medium format,
+35mm lens
+```
+
+### `organized-2.jpg` — 무엇을 어떻게 다투는지
+
+```
+a long empty airport corridor at night, strong horizontal lines receding into the
+distance, cold even light, completely empty, warm desaturated photograph, muted
+sand, warm grey and soft ochre palette, low saturation but not black and white,
+gentle warm cast in the highlights, neutral open shadows that never crush to pure
+black, matte finish, subtle film curve, fine 35mm film grain, no people, no faces,
+no text, no lettering, no logos, wide horizontal composition, large simple shapes,
+generous empty space, left third of the frame quiet and uncluttered, subject
+weighted to the right of centre, shallow depth of field, restrained and quiet,
+editorial architectural photography, medium format, 35mm lens
+```
+
+---
+
+## 코인 OTC 페이지
+
+### `otc-1.jpg` — 인식은 기록으로 다툰다
+
+> 들어갈 문장: *"쟁점은 거래가 아니라 인식입니다. 그리고 인식은 말이 아니라 기록으로 다투어집니다."*
+
+```
+a dark quiet room lit only by a computer monitor showing a plain grid of blurred
+illegible rows, cool screen glow falling on the desk surface, warm desaturated
+photograph, muted sand, warm grey and soft ochre palette, low saturation but not
+black and white, gentle warm cast in the highlights, neutral open shadows that
+never crush to pure black, matte finish, subtle film curve, fine 35mm film grain,
+no people, no faces, no text, no lettering, no logos, wide horizontal composition,
+large simple shapes, generous empty space, left third of the frame quiet and
+uncluttered, subject weighted to the right of centre, shallow depth of field,
+restrained and quiet, editorial architectural photography, medium format, 35mm
+lens
+```
+
+### `otc-2.jpg` — 무엇을 어떻게 다투는지
+
+```
+a desk at night with a closed laptop, a printed ledger and a glass of water, one
+soft lamp from the side, warm desaturated photograph, muted sand, warm grey and
+soft ochre palette, low saturation but not black and white, gentle warm cast in
+the highlights, neutral open shadows that never crush to pure black, matte finish,
+subtle film curve, fine 35mm film grain, no people, no faces, no text, no
+lettering, no logos, wide horizontal composition, large simple shapes, generous
+empty space, left third of the frame quiet and uncluttered, subject weighted to
+the right of centre, shallow depth of field, restrained and quiet, editorial
+architectural photography, medium format, 35mm lens
+```
+
+---
+
+## 성범죄 페이지
+
+> **이 페이지는 사람이 절대 나오면 안 됩니다.**
+> 남녀가 함께 나오는 사진은 어떻게 골라도 오해를 부릅니다.
+> 비어 있는 공간만 씁니다.
+
+### `sexcrime-1.jpg` — 형은 절반이다
+
+> 들어갈 문장: *"이 사건에서 형은 절반입니다. 나머지 절반은 형이 끝난 뒤에 시작됩니다."*
+
+```
+a long empty institutional corridor with closed doors receding into the distance,
+cold even daylight, completely empty and still, warm desaturated photograph, muted
+sand, warm grey and soft ochre palette, low saturation but not black and white,
+gentle warm cast in the highlights, neutral open shadows that never crush to pure
+black, matte finish, subtle film curve, fine 35mm film grain, no people, no faces,
+no text, no lettering, no logos, wide horizontal composition, large simple shapes,
+generous empty space, left third of the frame quiet and uncluttered, subject
+weighted to the right of centre, shallow depth of field, restrained and quiet,
+editorial architectural photography, medium format, 35mm lens
+```
+
+### `sexcrime-2.jpg` — 무엇을 어떻게 다투는지
+
+```
+a single empty chair beside a tall window in a bare room, soft grey light falling
+across the floor, nothing else in the room, warm desaturated photograph, muted
+sand, warm grey and soft ochre palette, low saturation but not black and white,
+gentle warm cast in the highlights, neutral open shadows that never crush to pure
+black, matte finish, subtle film curve, fine 35mm film grain, no people, no faces,
+no text, no lettering, no logos, wide horizontal composition, large simple shapes,
+generous empty space, left third of the frame quiet and uncluttered, subject
+weighted to the right of centre, shallow depth of field, restrained and quiet,
+editorial architectural photography, medium format, 35mm lens
+```
+
+---
+
+## 금융범죄 페이지
+
+### `finance-1.jpg` — 계산에서 갈린다
+
+> 들어갈 문장: *"이 사건은 계산에서 갈립니다. 그래서 계좌 내역을 처음부터 다시 봅니다."*
+
+```
+an old desk calculator beside an open ledger book and a small stack of receipts,
+blurred illegible figures on the paper, overhead soft light, warm desaturated
+photograph, muted sand, warm grey and soft ochre palette, low saturation but not
+black and white, gentle warm cast in the highlights, neutral open shadows that
+never crush to pure black, matte finish, subtle film curve, fine 35mm film grain,
+no people, no faces, no text, no lettering, no logos, wide horizontal composition,
+large simple shapes, generous empty space, left third of the frame quiet and
+uncluttered, subject weighted to the right of centre, shallow depth of field,
+restrained and quiet, editorial architectural photography, medium format, 35mm
+lens
+```
+
+### `finance-2.jpg` — 무엇을 어떻게 다투는지
+
+```
+a boardroom table seen from slightly above, printed spreadsheets with blurred
+illegible rows laid out, two pens placed neatly, no people, warm desaturated
+photograph, muted sand, warm grey and soft ochre palette, low saturation but not
+black and white, gentle warm cast in the highlights, neutral open shadows that
+never crush to pure black, matte finish, subtle film curve, fine 35mm film grain,
+no faces, no text, no lettering, no logos, wide horizontal composition, large
+simple shapes, generous empty space, left third of the frame quiet and
+uncluttered, subject weighted to the right of centre, shallow depth of field,
+restrained and quiet, editorial architectural photography, medium format, 35mm
+lens
+```
+
+---
+
+## 공증 페이지
+
+> **이 두 장만 조금 밝고 따뜻해도 됩니다.**
+> 공증은 위기에 빠진 분이 오는 페이지가 아니라
+> 준비물을 확인하러 오는 페이지이기 때문입니다.
+> 인주의 붉은색은 예외적으로 허용합니다. 그 외의 빨강은 넣지 마십시오.
+
+### `notary-1.jpg` — 다투기 전에 만드는 문서
+
+> 들어갈 문장: *"다투게 된 뒤에 쓰는 문서가 아닙니다. 다투지 않기 위해 미리 만들어 두는 문서입니다."*
+
+```
+a document lying flat on a desk with a single round red seal impression pressed
+onto it, a wooden hand stamp and an ink pad placed beside, blank unreadable paper,
+warm soft daylight from a window, gentle warm desaturated photograph with one
+small red accent, warm stone and paper tones, low saturation but not black and
+white, gentle warm cast in the highlights, neutral open shadows that never crush
+to pure black, matte finish, subtle film curve, fine 35mm film grain, no people,
+no faces, no text, no lettering, no logos, wide horizontal composition, large
+simple shapes, generous empty space, left third of the frame quiet and
+uncluttered, subject weighted to the right of centre, shallow depth of field, calm
+and orderly, editorial still life photography, medium format, 35mm lens
+```
+
+### `notary-2.jpg` — 수수료는 법으로 정해져 있다
+
+```
+a quiet consultation table with two chairs facing each other, a closed folder and
+a pen placed neatly on the surface, bright soft window light, warm calm interior,
+gentle warm desaturated photograph, warm stone and paper tones, low saturation but
+not black and white, gentle warm cast in the highlights, neutral open shadows that
+never crush to pure black, matte finish, subtle film curve, fine 35mm film grain,
+no people, no faces, no text, no lettering, no logos, wide horizontal composition,
+large simple shapes, generous empty space, left third of the frame quiet and
+uncluttered, subject weighted to the right of centre, shallow depth of field, calm
+and orderly, editorial architectural photography, medium format, 35mm lens
+```
+
+---
+
+## 성병감염 페이지
+
+> **사람도, 몸도, 침대도 넣지 마십시오.**
+> 이 페이지에 오시는 분은 이미 수치심을 안고 오십니다.
+> 사진이 그것을 한 번 더 건드리면 그대로 창을 닫으십니다.
+> **검사와 기록과 시간** — 이 세 가지만 보이게 하십시오.
+
+### `std-1.jpg` — 흔한 병이냐가 아니라 이 사람에게서 옮았느냐
+
+> 들어갈 문장: *"흔한 병이냐가 아니라 이 사람에게서 옮았느냐를 묻는 절차입니다."*
+
+```
+two sealed laboratory sample tubes standing side by side on a clean bench, one
+clearly in focus and the other slightly behind, a printed lab result sheet with
+unreadable blank lines lying underneath, warm soft daylight, gentle near-
+monochrome photograph, cool grey and paper tones, low saturation but not black and
+white, gentle warm cast in the highlights, neutral open shadows that never crush
+to pure black, matte finish, subtle film curve, fine 35mm film grain, no people,
+no faces, no bodies, no skin, no text, no lettering, no logos, wide horizontal
+composition, large simple shapes, generous empty space, left third of the frame
+quiet and uncluttered, subject weighted to the right of centre, shallow depth of
+field, calm and clinical, editorial still life photography, medium format, 35mm
+lens
+```
+
+### `std-2.jpg` — 무엇을 어떻게 찾아낼지 미리 말씀드립니다
+
+> `drug-2` 등과 문구가 거의 같습니다.
+> **이미 만드신 `*-2` 사진이 있으면 이름만 바꿔 올리셔도 됩니다.**
+
+```
+a wall of numbered archive drawers with one drawer pulled slightly open, a slim
+stack of documents resting on top, warm soft daylight, gentle warm desaturated
+photograph, cool grey and paper tones, low saturation but not black and white,
+gentle warm cast in the highlights, neutral open shadows that never crush to pure
+black, matte finish, subtle film curve, fine 35mm film grain, no people, no faces,
+no text, no lettering, no logos, wide horizontal composition, large simple shapes,
+generous empty space, left third of the frame quiet and uncluttered, subject
+weighted to the right of centre, shallow depth of field, calm and orderly,
+editorial still life photography, medium format, 35mm lens
+```
+
+---
+
+## 의료사고 페이지
+
+### `medical-1.jpg` — 입증 책임이 환자 쪽에 있다
+
+```
+a very thick stack of hospital chart papers bound with a clip, seen from a low
+angle so the height of the stack reads clearly, a single pen resting beside it,
+blank unreadable pages, warm soft daylight, gentle warm desaturated photograph,
+cool grey and paper tones, low saturation but not black and white, gentle warm
+cast in the highlights, neutral open shadows that never crush to pure black, matte
+finish, subtle film curve, fine 35mm film grain, no people, no faces, no text, no
+lettering, no logos, wide horizontal composition, large simple shapes, generous
+empty space, left third of the frame quiet and uncluttered, subject weighted to
+the right of centre, shallow depth of field, calm and orderly, editorial still
+life photography, medium format, 35mm lens
+```
+
+### `medical-2.jpg` — 무엇을 어떻게 다투는지 미리 말씀드립니다
+
+> 여기도 이미 만드신 `*-2` 사진을 이름만 바꿔 올리셔도 됩니다.
+
+---
+
+## 전세사기 페이지
+
+> **겁주는 사진을 쓰지 마십시오.**
+> 무너진 집, 빨간 딱지, 우는 사람 — 전부 안 됩니다.
+> 이미 겁이 난 분들이 보는 자리입니다.
+> **차분한 서류와 시간**만 보이면 됩니다.
+
+### `jeonse-1.jpg` — 기다리는 것과 절차를 밟는 것
+
+> 들어갈 문장: *"기다리는 것과 절차를 밟는 것은 같이 할 수 있습니다."*
+
+```
+a stack of property documents and a desk calendar side by side on a quiet table, a
+pen resting between them, blank unreadable pages, calm soft daylight from a
+window, warm desaturated photograph, warm stone and paper tones, low saturation
+but not black and white, gentle warm cast in the highlights, neutral open shadows
+that never crush to pure black, matte finish, subtle film curve, fine 35mm film
+grain, no people, no faces, no text, no lettering, no logos, wide horizontal
+composition, large simple shapes, generous empty space, left third of the frame
+quiet and uncluttered, subject weighted to the right of centre, shallow depth of
+field, calm and orderly, editorial still life photography, medium format, 35mm
+lens
+```
+
+### `jeonse-2.jpg` — 지금 며칠 안에 할 일
+
+> 다른 페이지의 `*-2` 와 문구가 거의 같습니다.
+> **이미 만드신 `*-2` 사진이 있으면 이름만 바꿔 올리셔도 됩니다.**
+
+---
+
+## 첫 화면(메인) 페이지의 띠
+
+> 메인 페이지 중간에 두 자리를 두었습니다.
+> 인사말 다음과 업무분야 다음입니다.
+> **여기는 사무실 사진이나 도시 사진이 잘 맞습니다.**
+> 마약 · 도박 같은 주제를 그리는 자리가 아니라
+> 한 번 숨을 고르는 자리이기 때문입니다.
+
+> **✅ 두 장 모두 올라와 있습니다.**
+> `home-1.webp` (밤 도시 부감), `home-2.webp` (고층빌딩).
+> 아래 프롬프트는 나중에 바꾸고 싶으실 때를 위해 남겨 둡니다.
+
+### `home-1.jpg` — 어떤 분에게는 가장 긴 밤
+
+> 들어갈 문장: *"누군가에게는 그저 지나가는 밤이지만, 어떤 분에게는 가장 긴 밤입니다."*
+>
+> **밤 도시를 위에서 내려다본 사진이 가장 잘 맞습니다.**
+> 짙은 남색 바탕에 가로등 불빛만 따뜻하게 남는 사진입니다.
+> 이 사이트의 색과 거의 같습니다.
+
+```
+an aerial top-down view of a city at night, wide avenues meeting at a
+crossing, warm street lights against deep navy blue buildings,
+no visible people, deep blue and charcoal tones with small warm amber
+accents, mid-tone exposure, not too dark, matte finish, fine film grain,
+no text, no lettering, no logos, no brand signs,
+wide horizontal composition, large simple shapes,
+left third of the frame quiet and uncluttered,
+calm and still, editorial aerial photography
+```
+
+### `home-2.jpg` — 불리한 것부터 말씀드립니다
+
+> 들어갈 문장: *"듣기 좋은 말씀만 드리지 않습니다. 불리한 것부터 말씀드립니다."*
+>
+> 지금은 고층빌딩 사진(`home-2.webp`)이 들어가 있습니다.
+> 나중에 바꾸고 싶으실 때를 위해 아래 프롬프트를 남겨 둡니다.
+> 사무실 안을 찍은 사진도 이 문장과 잘 맞습니다.
+
+```
+a quiet law office interior at dusk, one desk with an open case file and a reading
+lamp still on, tall window showing the city out of focus, warm restrained light,
+warm desaturated photograph, warm stone and paper tones, low saturation but not
+black and white, gentle warm cast in the highlights, neutral open shadows that
+never crush to pure black, matte finish, subtle film curve, fine 35mm film grain,
+no people, no faces, no text, no lettering, no logos, wide horizontal composition,
+large simple shapes, generous empty space, left third of the frame quiet and
+uncluttered, shallow depth of field, calm and orderly, editorial architectural
+photography, medium format, 35mm lens
+```
+
+---
+
+## 첫 화면 배경
+
+> **지금은 동영상(`hero.mp4`)이 재생되고 있습니다.**
+> 이 사진은 동영상이 뜨기 전 잠깐, 그리고 동영상이 재생되지 않는 분에게
+> 보이는 배경입니다. 없어도 되지만 있으면 첫인상이 매끄러워집니다.
+>
+> **둘 중 마음에 드는 하나를 골라 `hero.jpg` 로 저장**하십시오.
+> 지금 걸려 있는 법조타워 사진을 대신하게 됩니다.
+>
+> 크기는 **2000 × 1400 px**. 미드저니라면 `--ar 10:7`.
+> 글자가 화면 **한가운데**에 놓이므로 가운데는 비워 두십시오.
+
+### 안 ① — 건물을 올려다보는 구도
+
+```
+looking up at a modern office tower facade at dusk, repeating grid of windows,
+calm empty sky, warm desaturated photograph, muted sand, warm grey and soft ochre
+palette, low saturation but not black and white, gentle warm cast in the
+highlights, neutral open shadows that never crush to pure black, matte finish,
+subtle film curve, fine 35mm film grain, no people, no faces, no text, no
+lettering, no logos, large simple shapes, generous empty space in the centre of
+the frame, quiet and monumental, editorial architectural photography, medium
+format, 24mm lens
+```
+
+### 안 ② — 새벽의 빈 사무실
+
+```
+a wide quiet office interior at dawn, floor to ceiling windows, the city faintly
+visible outside, empty desks, long horizontal lines, warm desaturated photograph,
+muted sand, warm grey and soft ochre palette, low saturation but not black and
+white, gentle warm cast in the highlights, neutral open shadows that never crush
+to pure black, matte finish, subtle film curve, fine 35mm film grain, no people,
+no faces, no text, no lettering, no logos, large simple shapes, generous empty
+space in the centre of the frame, quiet and still, editorial architectural
+photography, medium format, 24mm lens
+```
+
+---
+
+# 6. 만드신 뒤에 확인할 것
+
+1. **밝기** — 눈을 가늘게 뜨고 봤을 때 형태가 남아 있습니까?
+   너무 어두우면 검은 막에 덮여 사라집니다
+2. **왼쪽** — 왼쪽 3분의 1이 비어 있습니까? 거기에 글자가 놓입니다
+3. **글자** — 서류나 화면에 깨진 글자가 보이지 않습니까?
+   AI가 만든 가짜 글자는 자세히 보면 티가 납니다
+4. **사람** — 얼굴이나 손이 들어가지 않았습니까?
+5. **용량** — 400KB를 넘지 않습니까?
+
+---
+
+# 7. 저작권
+
+AI로 만든 이미지를 **상업적으로 써도 되는지는 서비스마다 다릅니다.**
+법인 홈페이지는 상업적 이용에 해당합니다.
+
+쓰시려는 서비스의 이용약관에서 **상업적 이용 가능 여부**를 반드시 확인하십시오.
+유료 요금제에서만 허용하는 곳이 많습니다.
+
+**가장 안전한 것은 사무실을 직접 찍는 것입니다.**
+회의실 · 서가 · 창가 · 서류가 놓인 책상을
+휴대폰으로 **가로로** 찍어 보내주시면 색감을 맞춰 넣어 드리겠습니다.
+저작권 걱정이 없고, 진짜 우리 사무실이라는 것이 전해집니다.
+
+---
+
+# 8. 파일 목록
+
+`assets/` 폴더에 이 이름 그대로 올리시면 됩니다.
+올리는 순간 자동으로 들어갑니다. 코드는 고치지 않습니다.
+
+```
+assets/drug-1.jpg        assets/drug-2.jpg
+assets/gambling-1.jpg    assets/gambling-2.jpg
+assets/organized-1.jpg   assets/organized-2.jpg
+assets/otc-1.jpg         assets/otc-2.jpg
+assets/sexcrime-1.jpg    assets/sexcrime-2.jpg
+assets/finance-1.jpg     assets/finance-2.jpg
+assets/notary-1.jpg      assets/notary-2.jpg
+assets/std-1.jpg         assets/std-2.jpg
+assets/medical-1.jpg     assets/medical-2.jpg
+assets/jeonse-1.jpg      assets/jeonse-2.jpg
+
+민사   realestate-1/2   loan-1/2   contract-1/2   damages-1/2
+가사   divorce-1/2      property-1/2   custody-1/2   inheritance-1/2
+회생   corporate-1/2    personal-1/2   bankruptcy-1/2   discharge-1/2
+공증   review-1/2       certified-1/2
+
+  ※ 이 서른두 자리는 모두 `*-2` 문구가 사실상 같습니다.
+     한 장을 만들어 이름만 바꿔 올리셔도 됩니다.
+     `*-1` 은 페이지마다 문구가 달라 따로 만드시는 편이 좋습니다.
+assets/home-1.webp  ✅   assets/home-2.webp  ✅
+assets/hero.jpg
+
+assets/topic-drug.jpg      assets/topic-gambling.jpg
+assets/topic-organized.jpg assets/topic-otc.jpg
+assets/topic-sexcrime.jpg  assets/topic-finance.jpg
+assets/topic-notary.jpg    assets/topic-std.jpg
+assets/topic-medical.jpg   assets/topic-jeonse.jpg
+```
+
+`.webp` `.png` 도 됩니다. 한 번에 다 올리지 않으셔도 되고,
+올린 것만 먼저 들어갑니다.
+
+---
+
+# 11. 12대 중과실 랜딩페이지 사진 (2026-11-20 추가)
+
+`traffic-insurance.html` 에 들어갈 사진 **세 장**입니다.
+지피티 · 미드저니 · 파이어플라이에 그대로 붙여 넣으십시오.
+
+| 파일 이름 | 크기 | 어디에 |
+|---|---|---|
+| `traffic-insurance-hero.webp` | **3200 × 1600** | 머리말 배경 |
+| `traffic-insurance-1.webp` | **3840 × 1280** | 가운데 사진 띠 |
+| `traffic-insurance-2.webp` | **3840 × 1280** | 아래쪽 사진 띠 |
+
+> **파일 이름이 정확해야 합니다.** 그대로 `assets/` 에 올리시면
+> 자동으로 들어갑니다. webp 로, 400KB 이하로 맞춰 주십시오.
+> 줄이는 법은 이 문서 1번에 적어 두었습니다.
+
+## 세 장 모두에 붙이실 공통 문구
+
+```
+전문적이고 절제된 한국 법무법인 홈페이지에 쓸 사진.
+광고 사진이 아니라 다큐멘터리 사진처럼.
+색이 거의 없는 차분한 화면. 차가운 회색과 검정, 아주 약한 황갈색.
+채도가 낮습니다. 화사하거나 알록달록하면 안 됩니다.
+글자, 로고, 상표, 번호판, 얼굴은 들어가지 않습니다.
+16:9 보다 더 옆으로 긴 화면. 가운데를 비워 두세요.
+그 위에 흰 글씨를 얹을 것이라 가운데가 복잡하면 안 됩니다.
+```
+
+## ① 머리말 배경 — `traffic-insurance-hero.webp`
+
+```
+비가 그친 밤의 도시 도로를 멀리서 낮게 바라본 장면.
+젖은 아스팔트에 신호등과 가로등 불빛이 길게 번져 비칩니다.
+차는 보이지 않거나 아주 멀리 흐릿하게 한두 대.
+사람도 사고 현장도 보이지 않습니다.
+전체적으로 어둡습니다. 왼쪽 절반은 거의 검정에 가깝고
+오른쪽으로 갈수록 불빛이 조금 있습니다.
+차분하고 고요하고 조금 무겁습니다.
+3200 × 1600 픽셀, 가로로 긴 화면.
+```
+
+> ⚠️ **사고 장면을 넣지 마십시오.** 부서진 차, 구급차,
+> 다친 사람, 경광등은 쓰지 않습니다. 보시는 분이
+> 그날을 다시 떠올리게 됩니다. 수임으로 이어지지 않습니다.
+
+## ② 가운데 띠 — `traffic-insurance-1.webp`
+
+```
+어두운 나무 책상 위를 비스듬히 위에서 내려다본 장면.
+서류 몇 장이 겹쳐 놓여 있고, 그 위에 만년필과 안경이 있습니다.
+서류의 글자는 읽히지 않습니다. 흐리거나 각도 때문에 보이지 않습니다.
+창에서 들어온 약한 빛이 한쪽에서 비칩니다.
+사람은 보이지 않거나 손만 아주 조금 보입니다.
+얼굴은 나오지 않습니다.
+색이 거의 없습니다. 회색과 짙은 갈색.
+3840 × 1280 픽셀, 아주 가로로 긴 화면.
+```
+
+> ⚠️ **보험증권이나 법원 서류처럼 보이게 만들지 마십시오.**
+> 글자가 읽히면 가짜 서류가 됩니다. **흐리게** 하십시오.
+
+## ③ 아래쪽 띠 — `traffic-insurance-2.webp`
+
+```
+오래된 법원 건물의 긴 복도를 끝에서 바라본 장면.
+천장이 높고 바닥은 돌입니다. 창에서 들어온 빛이
+바닥에 길게 떨어집니다.
+사람은 없거나, 아주 멀리 뒷모습 한 사람.
+간판이나 글자는 보이지 않습니다.
+차갑고 조용합니다. 회색과 베이지.
+3840 × 1280 픽셀, 아주 가로로 긴 화면.
+```
+
+## 지피티에서 만드실 때
+
+지피티는 한 번에 한 장씩 만듭니다. **공통 문구 + 한 장 문구**를
+묶어서 세 번 넣으십시오.
+
+그리고 지피티가 만든 그림은 보통 **1024 × 1024** 라
+그대로 쓰기에 작습니다. 이렇게 말씀해 주십시오.
+
+```
+가로로 아주 긴 화면(와이드스크린)으로 만들어 주세요.
+가능한 한 크게 만들어 주세요.
+```
+
+그래도 작게 나오면 **업스케일**을 한 번 거치십시오.
+미드저니나 파이어플라이가 더 큰 그림을 줍니다.
+
+## 받으신 뒤에
+
+파일 이름을 위 표대로 바꿔서 `assets/` 에 올려 주시면 됩니다.
+**제가 쪽에 연결해 두겠습니다.** 사진이 없어도 쪽은 돌아갑니다.
+어두운 바탕에 글자만 나옵니다.
