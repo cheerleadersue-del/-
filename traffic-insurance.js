@@ -1,80 +1,237 @@
 /* =====================================================================
-   운전자보험으로 변호사 선임 (랜딩) — 이 페이지에서만 쓰는 내용
+   운전자보험 교통사고 랜딩 쪽 — traffic-insurance.html 전용
 
    main.js 보다 먼저 불러와야 합니다.
 
+   이 파일이 하는 일은 넷입니다.
+     1. 성공사례 여섯 칸을 그립니다 (아래 wins).
+     2. 숫자가 0 에서 올라가는 효과.
+     3. 화면을 내릴 때 칸이 떠오르는 효과를 켭니다(AOS).
+     4. 카톡 단추에 법인 채널 주소를 끼웁니다.
+
    ⚠️ 법정형 · 조문 · 보험 약관의 한도는 개정되거나 상품마다 다릅니다.
       내용을 고치실 때는 반드시 변호사 검토를 거치세요.
-   ⚠️ 보험이 「나온다」고 단정하는 말은 쓰지 마십시오.
-      면책사유(음주 · 무면허 · 뺑소니 · 약물)와 한도, 미가입이
-      있어서 모든 사건에 참이 아닙니다.
+===================================================================== */
+
+
+/* =====================================================================
+   성공사례
+
+   ★ 판결문을 받으시면 여기만 고치면 됩니다. HTML 은 건드리지
+     않습니다. 아래 칸을 채운 만큼 쪽에 나옵니다.
+
+   한 칸은 이렇게 적습니다.
+
+       {
+         tag:  "판례 01",                 // 칸 위의 작은 딱지
+         title:"신호위반 · 전치 8주",      // 칸의 제목
+         case: "서울중앙지법 2026고단0000", // 사건번호(있으면)
+         fact: "사건 개요를 한두 줄로",
+         work: "유일이 한 일을 한두 줄로",
+         result:"판결 결과를 한 줄로"
+       }
+
+   ⚠️ 꼭 지켜 주셔야 하는 것 (변호사법 제23조 제2항)
+
+      · 적은 결과는 **근거를 보관**하고 계셔야 합니다.
+        판결문 · 결정문을 사건번호와 선고일로 찾을 수 있게
+        정리해 두십시오. 근거 없이 적으면 거짓 광고입니다.
+
+      · **의뢰인을 알아볼 수 있는 것은 적지 마십시오.**
+        이름 · 나이 · 차량번호 · 회사 이름 · 사고 장소와 날짜가
+        그렇습니다. 「40대 운전자」 「서울 시내 교차로」 정도로
+        충분합니다.
+
+      · 「무조건」 「반드시」 「100%」 같은 말을 쓰지 마십시오.
+        결과를 약속하는 광고가 됩니다.
+
+      · 다른 법률사무소의 사례를 옮겨 적지 마십시오.
+
+   ★ 아직 자료가 없는 칸은 wait: true 로 두십시오.
+     「실제 판결문 등록 예정」으로 흐리게 나옵니다.
+     여섯 칸을 다 채우지 않으셔도 됩니다. 넷이면 넷만 나옵니다.
 ===================================================================== */
 
 window.PAGE_DATA = {
 
-  /*
-    이 쪽의 「맡는 사람」 칸에 세울 사람입니다.
-    main.js 의 attorneys 에 적힌 이름과 한 글자도 달라서는 안 됩니다.
-
-    ★ 글에 적힌 「경찰 경력 18년 형사전담센터장」은 변호사가 아니어서
-      attorneys 목록에 없습니다. 그래서 카드가 아니라 위의 표로만
-      적었습니다. 이름을 여기에 적지 마십시오. 카드가 비어 나옵니다.
-  */
-  attorneyNames: ["정호길"],
-
-  questions: [
-    {
-      tag: "합의",
-      q: "합의하면 처벌을 안 받습니까?",
-      a: [
-        "<b>합의해도 공소권은 없어지지 않습니다.</b> 교통사고처리 특례법 제3조 제2항 단서에 해당해 반의사불벌의 효력이 미치지 않습니다.",
-        "다만 형을 정하는 데 가장 크게 반영됩니다. 합의가 있으면 벌금형이나 집행유예로 갈리는 경우가 많습니다.",
-        "합의가 어렵다면 선고 전에 공탁을 검토합니다."
-      ]
-    },
-    {
-      tag: "처분",
-      q: "초범인데도 재판을 받습니까?",
-      a: [
-        "피해 정도에 따라 벌금으로 끝나기도, 정식재판(구공판)으로 가기도 합니다. <b>진단 주수가 분기점</b>입니다.",
-        "죄명은 「교통사고처리특례법위반(치상)」, 법정형은 5년 이하의 금고 또는 2천만원 이하의 벌금입니다(제3조 제1항).",
-        "형사와 별개로 벌점 · 면허정지 · 면허취소가 진행됩니다. 기한이 따로 있어 늦으면 다툴 수 없습니다."
-      ]
-    },
-    {
-      tag: "비용",
-      q: "변호사비를 먼저 내야 합니까?",
-      a: [
-        "특약에 따라 다릅니다. 기본형 「변호사선임비용」은 기소된 뒤부터, <b>「변호사선임비용(경찰조사포함)」은 경찰 조사 단계부터</b>입니다.",
-        "증권을 보고 순서를 맞춥니다. 괄호가 없는데 경찰 단계에서 개인 돈으로 쓰시면 돌려받지 못합니다.",
-        "음주 · 무면허 · 뺑소니 · 약물은 면책사유라 선임비용도 나오지 않습니다. 그 경우에는 비용을 따로 말씀드립니다."
-      ]
-    },
-    {
-      tag: "보험료",
-      q: "보험사에 알리면 보험료가 오릅니까?",
-      a: [
-        "운전자보험 특약과 자동차보험 할증은 다른 이야기입니다. 할증은 자동차보험에서 피해자에게 지급된 금액으로 정해집니다.",
-        "가입하신 상품의 조건은 증권을 보고 확인해 드립니다."
-      ]
-    },
-    {
-      tag: "거절",
-      q: "불송치됐다고 지원금을 거절당했습니다",
-      a: [
-        "다툴 수 있습니다. 금융감독원은 불송치 결정을 이유로 교통사고처리지원금 지급을 거절한 것이 <b>부당</b>하다고 판단했습니다(2026. 5. 13.).",
-        "「상해급수 1~3급 부상」은 중상해 여부와 무관한 독립적 지급사유이고, 형사합의의 필요성은 합의 당시 중상해로 이행될 가능성이 있었으면 충분하다고 보았습니다.",
-        "거절 통보서를 가지고 오십시오. 약관과 함께 봅니다."
-      ]
-    },
-    {
-      tag: "증권",
-      q: "증권을 어디서 찾습니까?",
-      a: [
-        "보험사 앱이나 홈페이지에서 「보험증권」 또는 「가입증명서」를 내려받으시면 됩니다. 콜센터에 전화해 문자나 메일로 받으셔도 됩니다.",
-        "<b>자동차보험 증권과 운전자보험 증권은 다른 장입니다.</b> 두 장을 찾아 주십시오.",
-        "필요한 것은 특약 목록이 나온 쪽입니다. 이름 · 증권번호는 가리고 보내 주셔도 됩니다."
-      ]
-    }
+  wins: [
+    { tag: "판례 01", wait: true },
+    { tag: "판례 02", wait: true },
+    { tag: "판례 03", wait: true },
+    { tag: "판례 04", wait: true },
+    { tag: "판례 05", wait: true },
+    { tag: "판례 06", wait: true }
   ]
+
 };
+
+
+/* =====================================================================
+   성공사례를 그린다
+===================================================================== */
+
+(function drawWins() {
+  const grid = document.getElementById("winGrid");
+  if (!grid) return;
+
+  const rows = (window.PAGE_DATA && window.PAGE_DATA.wins) || [];
+  if (!rows.length) {
+    grid.remove();
+    return;
+  }
+
+  /* 글을 그대로 넣는다. 꺾쇠가 섞여도 화면에 글자로만 보이게. */
+  const put = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
+  };
+
+  const card = (w, i) => {
+    const li = document.createElement("li");
+    li.className = "win" + (w.wait ? " is-wait" : "");
+
+    /* 하나씩 차례로 떠오르게. 여섯 칸이 한꺼번에 튀면 어지럽다. */
+    li.setAttribute("data-aos", "fade-up");
+    li.setAttribute("data-aos-delay", String((i % 3) * 90));
+
+    li.append(put("span", "win-no", w.tag || "판례 " + String(i + 1).padStart(2, "0")));
+    li.append(put("h3", "win-ttl", w.wait ? "실제 판결문 등록 예정" : (w.title || "")));
+
+    const dl = document.createElement("dl");
+    dl.className = "win-rows";
+
+    [["사건 개요", w.fact], ["유일의 대응", w.work], ["판결 결과", w.result]]
+      .forEach(([label, value]) => {
+        const row = document.createElement("div");
+        row.append(put("dt", "", label));
+        row.append(put("dd", "", value || "—"));
+        dl.append(row);
+      });
+
+    li.append(dl);
+
+    /* 사건번호가 있으면 맨 아래에 작게 */
+    if (!w.wait && w.case) {
+      li.append(put("p", "win-case", w.case));
+    }
+
+    return li;
+  };
+
+  grid.replaceChildren(...rows.map(card));
+})();
+
+
+/* =====================================================================
+   숫자가 올라가는 효과
+
+   ⚠️ 숫자는 HTML 에 이미 적혀 있습니다(data-count 와 같은 값).
+      자바스크립트가 돌지 않아도 3,000 과 25 는 그대로 보입니다.
+      그러니 이 부분이 사라져도 쪽이 망가지지 않습니다.
+===================================================================== */
+
+(function countUp() {
+  const nums = document.querySelectorAll("[data-count]");
+  if (!nums.length) return;
+
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (still || !("IntersectionObserver" in window)) return;   /* 적힌 값 그대로 */
+
+  /* 3000 → 3,000 */
+  const comma = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  const run = (el) => {
+    const end = parseInt(el.dataset.count, 10);
+    if (!Number.isFinite(end)) return;
+
+    const useComma = el.hasAttribute("data-comma");
+    const ms = 1200;
+    const t0 = performance.now();
+
+    (function step(now) {
+      const p = Math.min((now - t0) / ms, 1);
+      /* 끝에서 부드럽게 멎도록 */
+      const eased = 1 - Math.pow(1 - p, 3);
+      const v = Math.round(end * eased);
+      el.textContent = useComma ? comma(v) : String(v);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = useComma ? comma(end) : String(end);
+    })(t0);
+  };
+
+  const io = new IntersectionObserver((rows) => {
+    rows.forEach((row) => {
+      if (!row.isIntersecting) return;
+      run(row.target);
+      io.unobserve(row.target);
+    });
+  }, { threshold: 0.6 });
+
+  nums.forEach((n) => io.observe(n));
+})();
+
+
+/* =====================================================================
+   떠오르는 효과 (AOS)
+
+   꾸러미는 vendor/aos.js 에 있습니다. 어디서 받아왔는지는
+   vendor/README.md 를 보십시오.
+
+   ⚠️ 「화면 움직임 줄이기」를 켜 두신 분께는 효과를 끕니다.
+      멀미를 하시는 분이 있고, 그분들께는 효과가 방해입니다.
+      disable 은 AOS 가 제공하는 기능입니다.
+
+   ⚠️ once: true — 한 번 떠오르면 다시 숨기지 않습니다.
+      올렸다 내렸다 할 때마다 글이 사라지면 읽기 어렵습니다.
+===================================================================== */
+
+(function startAOS() {
+  if (typeof AOS === "undefined") return;    /* 꾸러미가 없으면 그냥 넘어간다 */
+
+  AOS.init({
+    duration: 620,
+    easing: "ease-out-cubic",
+    once: true,
+    offset: 90,
+    disable: () =>
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  });
+
+  /*
+    성공사례처럼 나중에 그려 넣은 칸은 AOS 가 모릅니다.
+    한 번 다시 세어 달라고 알려 줍니다.
+  */
+  window.addEventListener("load", () => AOS.refreshHard());
+})();
+
+
+/* =====================================================================
+   카톡 단추
+
+   채널 주소는 main.js 의 KAKAO_URL 한 곳에만 둡니다.
+   여기에 주소를 적지 마십시오. 주소가 바뀌면 두 군데를 고쳐야 합니다.
+
+   main.js 가 이 파일보다 나중에 불러와지므로, 다 불러온 뒤에
+   (load) 가져옵니다. 주소가 비어 있으면 단추는 상담 신청서로
+   내려가게 그대로 둡니다 — 눌리지 않는 단추보다 낫습니다.
+===================================================================== */
+
+window.addEventListener("load", function wireKakao() {
+  let url = "";
+  try { url = KAKAO_URL || ""; } catch (e) { url = ""; }
+  if (!url) return;
+
+  document.querySelectorAll("[data-kakao]").forEach((a) => {
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+
+    /* 새 창으로 열린다는 것은 화면 낭독기에만 따로 알린다 */
+    const note = document.createElement("span");
+    note.className = "sr-only";
+    note.textContent = "(새 창)";
+    a.append(note);
+  });
+});
