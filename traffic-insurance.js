@@ -235,3 +235,43 @@ window.addEventListener("load", function wireKakao() {
     a.append(note);
   });
 });
+
+
+/* =====================================================================
+   3D 아이콘
+
+   data-i3d="이름" 이 붙은 칸에 assets/ins-3d-이름.webp 를 찾아 넣습니다.
+
+   ★ 파일이 없으면 아무 일도 일어나지 않고, 안에 들어 있는
+     선그림(.ic)이 그대로 보입니다. 그래서
+       · 그림을 나중에 올리셔도 되고
+       · 그림이 마음에 안 드시면 assets/ 에서 지우기만 하면
+         선그림으로 되돌아갑니다.
+     쪽의 코드는 어느 쪽이든 고치지 않습니다.
+
+   ⚠️ 파일 이름을 바꾸지 마십시오. HTML 의 data-i3d 와 짝입니다.
+      (data-i3d="bank"  ↔  assets/ins-3d-bank.webp)
+
+   ⚠️ 그림은 투명 배경이어야 합니다. 흰 배경으로 올리시면
+      옅은 파란 칸 위에 흰 네모가 생깁니다.
+===================================================================== */
+
+document.querySelectorAll("[data-i3d]").forEach((slot) => {
+  const src = "assets/ins-3d-" + slot.dataset.i3d + ".webp";
+
+  const probe = new Image();
+  probe.onload = () => {
+    const img = document.createElement("img");
+    img.className = "i3d";
+    img.src = src;
+    img.alt = "";
+    img.width = 256;
+    img.height = 256;
+    img.loading = "lazy";
+    img.decoding = "async";
+    slot.append(img);
+    slot.classList.add("has-3d");      /* 이것이 붙으면 선그림이 숨습니다 */
+  };
+  probe.onerror = () => {};            /* 없으면 선그림 그대로 */
+  probe.src = src;
+});

@@ -1752,3 +1752,54 @@ textarea.f-in {
 .chip-ico .ic { width: 20px; height: 20px; }
 .loss-ico .ic { width: 26px; height: 26px; }
 .phone-row i .ic { width: 15px; height: 15px; }
+
+/* =====================================================================
+   19. 3D 아이콘
+
+   2026-11-26. 법인에서 지피티로 만들어 주신 그림입니다.
+
+   선그림(.ic)은 지우지 않고 그대로 두었습니다. 그림 파일이 없으면
+   선그림이 보입니다. 되돌리기 쉽게 하려고 그렇게 두었습니다.
+
+   ⚠️ 3D 그림은 선그림보다 자리를 더 차지해야 읽힙니다. 같은 크기로
+      두면 뭉개져 보입니다. 그래서 칸과 그림을 함께 키웠습니다.
+        .pen-ico   54 → 72px 칸 · 그림 42px
+        .chip-ico  40 → 48px 칸 · 그림 28px
+        .loss-ico            그림 34px
+===================================================================== */
+
+/* 그림이 들어온 칸에서는 선그림을 숨깁니다 */
+.has-3d .ic { display: none; }
+
+.i3d {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pen-ico.has-3d  { width: 72px; height: 72px; }
+.pen-ico  .i3d   { width: 42px; }
+
+.chip-ico.has-3d { width: 48px; height: 48px; }
+.chip-ico .i3d   { width: 28px; }
+
+.loss-ico .i3d   { width: 34px; }
+
+/*
+  ⚠️ 서류 그림(ins-3d-doc)은 옅은 하늘색이라 흰 칸 위에서 흐립니다.
+     그래서 「네 가지 잃는 것」 칸의 그림 뒤에만 옅은 바탕을 깝니다.
+     넷을 함께 깔아야 한 칸만 튀지 않습니다.
+*/
+.loss-ico.has-3d {
+  display: grid;
+  place-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--b50);
+}
+
+@media (max-width: 760px) {
+  .pen-ico.has-3d  { width: 62px; height: 62px; }
+  .pen-ico  .i3d   { width: 36px; }
+}
