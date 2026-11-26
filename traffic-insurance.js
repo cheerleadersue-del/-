@@ -360,3 +360,92 @@ document.querySelectorAll("[data-" + attr + "]:not(.has-" + cls + ")").forEach((
 }
 
 fillPictures();
+
+
+/* =====================================================================
+   더 오래 머물게 하는 움직임 셋
+
+   2026-11-26. 법인 요청으로 넣었습니다.
+     ① 형광펜이 그어집니다
+     ② 맨 위 진행 막대
+     ③ 머리말 휴대폰이 스크롤에 따라 아주 조금 움직입니다
+
+   ⚠️ 셋 다 「화면 움직임 줄이기」를 켜 두신 분께는 돌지 않습니다.
+      멀미를 하시는 분이 있습니다. 이 검사를 빼지 마십시오.
+   ⚠️ 셋 다 없어도 쪽은 그대로 읽힙니다. 장식입니다.
+===================================================================== */
+
+(function liveliness() {
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- ① 형광펜 ---------- */
+  const marks = document.querySelectorAll(".mark");
+  if (marks.length) {
+    if (still || !("IntersectionObserver" in window)) {
+      /* 움직임 없이, 처음부터 그어진 채로 */
+      marks.forEach((m) => m.classList.add("is-lit"));
+    } else {
+      const io = new IntersectionObserver((rows) => {
+        rows.forEach((row) => {
+          if (!row.isIntersecting) return;
+          row.target.classList.add("is-lit");
+          io.unobserve(row.target);
+        });
+      }, { threshold: 0.9, rootMargin: "0px 0px -8% 0px" });
+      marks.forEach((m) => io.observe(m));
+    }
+  }
+
+  /* ---------- ② 진행 막대 · ③ 휴대폰 ---------- */
+  const bar = document.querySelector(".prog i");
+
+  /*
+    ★ 진행 막대는 「화면 움직임 줄이기」를 켜 두신 분께도 그립니다.
+      어디까지 읽었는지 알려 주는 길잡이이지, 눈을 어지럽히는
+      장식이 아닙니다. 휴대폰 모형이 따라 움직이는 것만 끕니다.
+  */
+  const phones = still ? [] : [...document.querySelectorAll(".lp-hero-art .phone")];
+  if (!bar && !phones.length) return;
+
+  /*
+    스크롤마다 계산하면 화면이 버벅입니다.
+    requestAnimationFrame 으로 한 프레임에 한 번만 셈합니다.
+  */
+  let waiting = false;
+
+  const paint = () => {
+    waiting = false;
+    const y = window.scrollY || 0;
+
+    if (bar) {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = total > 0 ? Math.min(100, (y / total) * 100) : 0;
+      bar.style.setProperty("--p", pct.toFixed(2) + "%");
+    }
+
+    /*
+      머리말 휴대폰. 내려갈수록 아주 조금 올라가고 더 눕습니다.
+      ⚠️ 크게 움직이면 어지럽습니다. 최대 26px · 4도입니다.
+      ⚠️ 기울기는 CSS 의 .phone-tilt-* 가 정합니다. 여기서는
+         --sy(올라가는 거리)와 --sr(더 눕는 각도)만 건넵니다.
+    */
+    if (phones.length) {
+      const k = Math.max(0, Math.min(1, y / (window.innerHeight || 800)));
+      phones.forEach((el, i) => {
+        const depth = i === 0 ? 1 : 0.62;     /* 뒤쪽은 덜 움직입니다 */
+        el.style.setProperty("--sy", (-26 * k * depth).toFixed(1) + "px");
+        el.style.setProperty("--sr", (4 * k * depth).toFixed(2) + "deg");
+      });
+    }
+  };
+
+  const onScroll = () => {
+    if (waiting) return;
+    waiting = true;
+    requestAnimationFrame(paint);
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  paint();
+})();

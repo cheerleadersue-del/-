@@ -106,13 +106,19 @@
   어디서 받아온 것인지는 vendor/README.md 에 적어 두었습니다.
 -->
 <link rel="stylesheet" href="vendor/aos.css?v=202611231532">
-<link rel="stylesheet" href="insurance.css?v=202611261228">
+<link rel="stylesheet" href="insurance.css?v=202611261354">
 
 </head>
 
 <body>
 
 <a class="skip" href="#main">본문 바로가기</a>
+
+<!--
+  맨 위 스크롤 진행 막대입니다. 어디까지 읽었는지 보여 줍니다.
+  ⚠️ 자바스크립트가 꺼져 있으면 0% 인 채로 안 보입니다. 탈이 없습니다.
+-->
+<div class="prog" aria-hidden="true"><i></i></div>
 
 
 <!--
@@ -199,18 +205,28 @@
 
         <p class="lp-hero-kick">12대 중과실 교통사고</p>
 
+        <!--
+          ★ 「운전자보험」이 이 쪽에서 가장 큰 글자입니다. 의뢰인이
+            네 글자만 보고도 무슨 쪽인지 알아야 합니다. 줄이지 마십시오.
+        -->
         <h1 class="lp-hero-ttl">
-          <span class="sun">운전자보험만<br>가입되어 있으면!</span>
+          <span class="sun"><em class="big">운전자보험</em>만<br>가입되어 있으면!</span>
           <span class="thin">12대 중과실<br>교통사고 상담</span>
         </h1>
 
         <div class="claim" data-aos="fade-up" data-aos-delay="150">
           <p class="claim-lead">
             유일이 직접 <b>약관 확인</b>부터<br>
-            <b>합의금 · 벌금 · 변호사비용</b> 청구까지
+            <b class="mark">합의금 · 벌금 · 변호사비용</b> 청구까지
           </p>
+          <!--
+            ★ 「0원」만 따로 더 크게 뽑았습니다. 이 쪽에서 둘째로 큰
+              글자입니다. 줄이지 마십시오.
+            ⚠️ 바로 아래 단서 줄(.claim-note)과 짝입니다. 단서를 지우면
+              결과를 단정하는 광고가 됩니다(변호사법 제23조 제2항 제4호).
+          -->
           <p class="claim-big">
-            본인부담금 0원<span>까지 가능합니다</span>
+            본인부담금 <em class="zero">0원</em><span>까지 가능합니다</span>
           </p>
           <!--
             ⚠️ 이 단서 줄을 지우지 마십시오. 위의 「0원」이 참이 되는
@@ -350,7 +366,7 @@
     <div class="shell">
 
       <h2 class="sec-ttl" id="penTitle" data-aos="fade-up">
-        보험에 가입했어도,<br><em>형사 절차는 남습니다.</em>
+        보험에 가입했어도,<br><em class="mark">형사 절차는 남습니다.</em>
       </h2>
 
       <ul class="tags" data-aos="fade-up" data-aos-delay="100">
@@ -424,7 +440,7 @@
 
         <div class="deal-copy" data-aos="fade-up">
           <h2 class="sec-ttl" id="dealTitle">
-            수사 단계에서<br><em>섣불리 개인<br>합의하지 마세요.</em>
+            수사 단계에서<br><em class="mark">섣불리 개인<br>합의하지 마세요.</em>
           </h2>
           <p class="sec-sub">
             합의금과 합의서 문구, 보험 보장 요건을<br>먼저 검토하세요.
@@ -573,7 +589,7 @@
 
         <div data-aos="fade-up">
           <h2 class="sec-ttl" id="covTitle">
-            변호사비용 · 합의금 · 벌금<br><em>유일이 약관부터<br>확인합니다.</em>
+            변호사비용 · 합의금 · 벌금<br><em class="mark mark-gold">유일이 약관부터<br>확인합니다.</em>
           </h2>
           <p class="sec-sub">
             어떤 특약에 드셨는지, 언제부터 보장되는지를<br>
@@ -604,7 +620,7 @@
           <div class="cov-when">
             <span class="cov-day" data-i3d="calendar" aria-hidden="true"><b>42일</b></span>
             <p>
-              <b>중상해</b> 또는 <b>42일 이상 치료 진단</b><br>
+              <b>중상해</b> 또는 <b class="mark mark-gold">42일 이상 치료 진단</b><br>
               · 상품에 따라 상해급수 1~3급
             </p>
           </div>
@@ -763,8 +779,8 @@
 
 
 <script src="vendor/aos.js?v=202611231532"></script>
-<script src="traffic-insurance.js?v=202611261228"></script>
-<script src="main.js?v=202611261228"></script>
+<script src="traffic-insurance.js?v=202611261354"></script>
+<script src="main.js?v=202611261354"></script>
 
 <!-- 구조화 데이터 -->
 <script type="application/ld+json">
