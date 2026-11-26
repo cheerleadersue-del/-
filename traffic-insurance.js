@@ -96,6 +96,15 @@ window.PAGE_DATA = {
     li.setAttribute("data-aos", "fade-up");
     li.setAttribute("data-aos-delay", String((i % 3) * 90));
 
+    /*
+      판결문 그림. assets/ins-3d-verdict.webp 가 있으면 들어갑니다.
+      위의 PIC 묶음이 data-i3d 를 찾아 넣으므로 여기서는 자리만 만듭니다.
+    */
+    const pic = put("span", "win-pic");
+    pic.setAttribute("data-i3d", "verdict");
+    pic.setAttribute("aria-hidden", "true");
+    li.append(pic);
+
     li.append(put("span", "win-no", w.tag || "판례 " + String(i + 1).padStart(2, "0")));
     li.append(put("h3", "win-ttl", w.wait ? "실제 판결문 등록 예정" : (w.title || "")));
 
@@ -256,22 +265,41 @@ window.addEventListener("load", function wireKakao() {
       옅은 파란 칸 위에 흰 네모가 생깁니다.
 ===================================================================== */
 
-document.querySelectorAll("[data-i3d]").forEach((slot) => {
-  const src = "assets/ins-3d-" + slot.dataset.i3d + ".webp";
+/*
+  data-i3d="이름"  →  assets/ins-3d-이름.webp   (작은 3D 아이콘)
+  data-art="이름"  →  assets/ins-art-이름.webp  (휴대폰 화면 속 그림)
+  둘 다 같은 방식으로 찾아 넣습니다.
+*/
+const PIC = [["i3d", "ins-3d-", "i3d"], ["art", "ins-art-", "art"]];
+
+/*
+  ★ 함수로 둔 까닭 — 성공사례 칸은 이 파일 위쪽에서 자바스크립트가
+    그립니다. 그래서 그림 찾기를 그보다 뒤에서 불러야 합니다.
+    쪽에 칸을 더 넣으시고 다시 부르셔도 되도록 함수로 두었습니다.
+    이미 그림이 들어간 칸은 has-i3d 가 붙어 있어 건너뜁니다.
+*/
+function fillPictures() {
+PIC.forEach(([attr, prefix, cls]) => {
+document.querySelectorAll("[data-" + attr + "]:not(.has-" + cls + ")").forEach((slot) => {
+  const src = "assets/" + prefix + slot.dataset[attr] + ".webp";
 
   const probe = new Image();
   probe.onload = () => {
     const img = document.createElement("img");
-    img.className = "i3d";
+    img.className = cls;
     img.src = src;
     img.alt = "";
-    img.width = 256;
-    img.height = 256;
+    img.width = probe.naturalWidth;
+    img.height = probe.naturalHeight;
     img.loading = "lazy";
     img.decoding = "async";
     slot.append(img);
-    slot.classList.add("has-3d");      /* 이것이 붙으면 선그림이 숨습니다 */
+    slot.classList.add("has-" + cls);  /* 이것이 붙으면 선그림이 숨습니다 */
   };
   probe.onerror = () => {};            /* 없으면 선그림 그대로 */
   probe.src = src;
 });
+});
+}
+
+fillPictures();

@@ -106,7 +106,7 @@
   어디서 받아온 것인지는 vendor/README.md 에 적어 두었습니다.
 -->
 <link rel="stylesheet" href="vendor/aos.css?v=202611231532">
-<link rel="stylesheet" href="insurance.css?v=202611261103">
+<link rel="stylesheet" href="insurance.css?v=202611261118">
 
 </head>
 
@@ -185,14 +185,21 @@
   <!-- ================================================================
        01. 첫 화면
   ================================================================= -->
-  <section class="hero wedge-down">
-    <div class="shell hero-in">
+  <section class="lp-hero wedge-down">
+    <!--
+      배경에 아주 흐리게 깔리는 자동차 · 법원 그림입니다.
+      ⚠️ 진하게 만들지 마십시오. 제목 글자가 안 읽힙니다.
+      ⚠️ 그림이 없으면 아무 일도 일어나지 않습니다(사선 무늬만 남습니다).
+    -->
+    <span class="lp-herobg" data-art="bg-hero" aria-hidden="true"></span>
 
-      <div class="hero-copy" data-aos="fade-up" data-aos-duration="700">
+    <div class="shell lp-hero-in">
 
-        <p class="hero-kick">12대 중과실 교통사고</p>
+      <div class="lp-hero-copy" data-aos="fade-up" data-aos-duration="700">
 
-        <h1 class="hero-ttl">
+        <p class="lp-hero-kick">12대 중과실 교통사고</p>
+
+        <h1 class="lp-hero-ttl">
           <span class="sun">운전자보험만<br>가입되어 있으면!</span>
           <span class="thin">12대 중과실<br>교통사고 상담</span>
         </h1>
@@ -227,7 +234,7 @@
           </span>
         </div>
 
-        <div class="acts acts-hero" data-aos="fade-up" data-aos-delay="260">
+        <div class="acts lp-acts-hero" data-aos="fade-up" data-aos-delay="260">
           <a class="btn btn-kakao" data-kakao href="#ask">
             <svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-chat-circle-dots"/></svg>카톡상담
           </a>
@@ -243,7 +250,7 @@
       </div>
 
       <!-- 휴대폰 모형 둘. 그림 파일이 아니라 글과 네모로 만든 것입니다. -->
-      <div class="hero-art" aria-hidden="true">
+      <div class="lp-hero-art" aria-hidden="true">
 
         <div class="phone phone-tilt-a float" data-aos="fade-up" data-aos-delay="200">
           <div class="phone-in">
@@ -253,6 +260,7 @@
               <p>교통사고, 혼자 판단하지<br>마시고 먼저 물어보십시오.</p>
             </div>
             <div class="phone-body">
+              <div class="phone-art" data-art="consult" aria-hidden="true"></div>
               <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-clipboard-text"/></svg></i><span><b>경찰 조사 전</b><span>무엇을 말할지부터</span></span><em>›</em></div>
               <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-magnifying-glass"/></svg></i><span><b>조사 뒤</b><span>의율과 자료를 봅니다</span></span><em>›</em></div>
               <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-scales"/></svg></i><span><b>재판 준비</b><span>합의 · 공탁 · 양형</span></span><em>›</em></div>
@@ -432,7 +440,8 @@
                 <p>교통사고, 단계별로<br>차례대로 대응합니다.</p>
               </div>
               <div class="phone-body">
-                <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-money"/></svg></i><span><b>합의금 검토</b><span>적정 한도를 먼저 봅니다</span></span><em>›</em></div>
+                <div class="phone-art" data-art="action" aria-hidden="true"></div>
+              <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-money"/></svg></i><span><b>합의금 검토</b><span>적정 한도를 먼저 봅니다</span></span><em>›</em></div>
                 <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-shield-check"/></svg></i><span><b>보험 검토</b><span>운전자보험 보장 요건 확인</span></span><em>›</em></div>
                 <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-scales"/></svg></i><span><b>변호사 선임</b><span>형사 절차 전반을 맡습니다</span></span><em>›</em></div>
                 <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-calendar-check"/></svg></i><span><b>선임 시점</b><span>지금 선임해도 되는지 판단</span></span><em>›</em></div>
@@ -581,7 +590,8 @@
                 <p>사고 유형과 보장 특약,<br>한도까지 확인해 드립니다.</p>
               </div>
               <div class="phone-body">
-                <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-briefcase"/></svg></i><span><b>변호사비용</b><span>지급 요건과 보장 시점</span></span><em>›</em></div>
+                <div class="phone-art" data-art="policy" aria-hidden="true"></div>
+              <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-briefcase"/></svg></i><span><b>변호사비용</b><span>지급 요건과 보장 시점</span></span><em>›</em></div>
                 <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-handshake"/></svg></i><span><b>합의금</b><span>지원금 지급 요건 판단</span></span><em>›</em></div>
                 <div class="phone-row"><i><svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-coins"/></svg></i><span><b>벌금</b><span>약관에 따른 보장 확인</span></span><em>›</em></div>
               </div>
@@ -592,7 +602,7 @@
         <div class="cov-card" data-aos="fade-up" data-aos-delay="120">
 
           <div class="cov-when">
-            <span class="cov-day" aria-hidden="true">42일</span>
+            <span class="cov-day" data-i3d="calendar" aria-hidden="true"><b>42일</b></span>
             <p>
               <b>중상해</b> 또는 <b>42일 이상 치료 진단</b><br>
               · 상품에 따라 상해급수 1~3급
@@ -612,7 +622,7 @@
             <h3>벌금 특약 · 상해 예시</h3>
             <ul class="cov-tiers is-two">
               <li><span>대인</span><b>2,000만원</b></li>
-              <li><span>어린이보호구역</span><b>3,000만원</b></li>
+              <li data-i3d="school"><span>어린이보호구역</span><b>3,000만원</b></li>
             </ul>
           </div>
 
@@ -742,8 +752,8 @@
 
 
 <script src="vendor/aos.js?v=202611231532"></script>
-<script src="traffic-insurance.js?v=202611261103"></script>
-<script src="main.js?v=202611261103"></script>
+<script src="traffic-insurance.js?v=202611261118"></script>
+<script src="main.js?v=202611261118"></script>
 
 <!-- 구조화 데이터 -->
 <script type="application/ld+json">

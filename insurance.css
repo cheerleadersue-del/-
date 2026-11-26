@@ -448,7 +448,7 @@ ul, ol { list-style: none; }
    05. 첫 화면
 ===================================================================== */
 
-.hero {
+.lp-hero {
   position: relative;
   overflow: hidden;
   padding: 118px 0 clamp(52px, 6vw, 76px);
@@ -459,7 +459,7 @@ ul, ol { list-style: none; }
 }
 
 /* 바탕에 깔리는 옅은 무늬. 글을 가리지 않을 만큼만 */
-.hero::after {
+.lp-hero::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -470,7 +470,7 @@ ul, ol { list-style: none; }
   pointer-events: none;
 }
 
-.hero-in {
+.lp-hero-in {
   position: relative;
   z-index: 1;
   display: grid;
@@ -479,7 +479,7 @@ ul, ol { list-style: none; }
   align-items: center;
 }
 
-.hero-kick {
+.lp-hero-kick {
   display: inline-block;
   margin-bottom: 16px;
   padding: 7px 16px;
@@ -491,16 +491,16 @@ ul, ol { list-style: none; }
   color: rgba(255, 255, 255, 0.92);
 }
 
-.hero-ttl {
+.lp-hero-ttl {
   font-size: clamp(30px, 4.6vw, 54px);
   font-weight: 800;
   line-height: 1.24;
   letter-spacing: -0.045em;
 }
 
-.hero-ttl .sun { color: var(--sun); }
+.lp-hero-ttl .sun { color: var(--sun); }
 
-.hero-ttl .thin {
+.lp-hero-ttl .thin {
   display: block;
   margin-top: 6px;
   font-size: clamp(24px, 3.5vw, 40px);
@@ -565,7 +565,7 @@ ul, ol { list-style: none; }
   color: var(--ink2);
 }
 
-.acts-hero { margin-top: 28px; }
+.lp-acts-hero { margin-top: 28px; }
 
 /*
   머리말의 휴대폰 모형 자리.
@@ -577,7 +577,7 @@ ul, ol { list-style: none; }
 
   ★ 뒤에 깔린 빛무리(::before)가 모형을 띄워 보이게 합니다.
 */
-.hero-art {
+.lp-hero-art {
   position: relative;
   display: flex;
   justify-content: center;
@@ -587,7 +587,7 @@ ul, ol { list-style: none; }
   perspective-origin: 62% 42%;
 }
 
-.hero-art::before {
+.lp-hero-art::before {
   content: "";
   position: absolute;
   left: 50%;
@@ -1382,7 +1382,7 @@ textarea.f-in {
   background: var(--white);
   /*
     ⚠️ 글자색을 여기서 다시 잡아 줍니다.
-       휴대폰 모형이 글자색이 흰 구간(.hero · .sec-deep) 안에 들어가
+       휴대폰 모형이 글자색이 흰 구간(.lp-hero · .sec-deep) 안에 들어가
        있어서, 이 줄이 없으면 하얀 칸 위에 하얀 글씨가 됩니다.
        (2026-11-23 에 「사건 검토」가 안 보여 찾았습니다)
   */
@@ -1614,13 +1614,13 @@ textarea.f-in {
 ===================================================================== */
 
 @media (max-width: 1040px) {
-  .hero-in,
+  .lp-hero-in,
   .deal-in,
   .cov-in {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .hero-art { margin-top: 10px; }
+  .lp-hero-art { margin-top: 10px; }
 
   .deal-in > .phone-wrap,
   .cov-in > .phone-wrap { display: none; }   /* 가운데 모형은 접습니다 */
@@ -1655,7 +1655,7 @@ textarea.f-in {
   .head { padding: 14px 0; }
   .head-tel { display: none; }
 
-  .hero { padding: 94px 0 46px; }
+  .lp-hero { padding: 94px 0 46px; }
 
   .acts-div { display: none; }
 
@@ -1670,7 +1670,7 @@ textarea.f-in {
 }
 
 @media (max-width: 400px) {
-  .hero-ttl { font-size: 27px; }
+  .lp-hero-ttl { font-size: 27px; }
   .claim-big { font-size: 28px; }
 }
 
@@ -1697,10 +1697,10 @@ textarea.f-in {
   ⚠️ 접기만 합니다. 지우지 마십시오 — 넓은 화면에서는 둘 다 씁니다.
 */
 @media (max-width: 700px) {
-  .hero-art { flex-wrap: wrap; perspective: none; }
-  .hero-art::before { display: none; }
-  .hero-art .phone-sm { display: none; }
-  .hero-art .phone { max-width: min(252px, 100%); }
+  .lp-hero-art { flex-wrap: wrap; perspective: none; }
+  .lp-hero-art::before { display: none; }
+  .lp-hero-art .phone-sm { display: none; }
+  .lp-hero-art .phone { max-width: min(252px, 100%); }
 
   /*
     ⚠️ 좁은 화면에서는 기울기를 풉니다. 화면이 좁으면 비스듬한
@@ -1769,7 +1769,7 @@ textarea.f-in {
 ===================================================================== */
 
 /* 그림이 들어온 칸에서는 선그림을 숨깁니다 */
-.has-3d .ic { display: none; }
+.has-i3d .ic { display: none; }
 
 .i3d {
   display: block;
@@ -1777,10 +1777,10 @@ textarea.f-in {
   height: auto;
 }
 
-.pen-ico.has-3d  { width: 72px; height: 72px; }
+.pen-ico.has-i3d  { width: 72px; height: 72px; }
 .pen-ico  .i3d   { width: 42px; }
 
-.chip-ico.has-3d { width: 48px; height: 48px; }
+.chip-ico.has-i3d { width: 48px; height: 48px; }
 .chip-ico .i3d   { width: 28px; }
 
 .loss-ico .i3d   { width: 34px; }
@@ -1790,7 +1790,7 @@ textarea.f-in {
      그래서 「네 가지 잃는 것」 칸의 그림 뒤에만 옅은 바탕을 깝니다.
      넷을 함께 깔아야 한 칸만 튀지 않습니다.
 */
-.loss-ico.has-3d {
+.loss-ico.has-i3d {
   display: grid;
   place-content: center;
   width: 52px;
@@ -1800,7 +1800,7 @@ textarea.f-in {
 }
 
 @media (max-width: 760px) {
-  .pen-ico.has-3d  { width: 62px; height: 62px; }
+  .pen-ico.has-i3d  { width: 62px; height: 62px; }
   .pen-ico  .i3d   { width: 36px; }
 }
 
@@ -1884,7 +1884,7 @@ textarea.f-in {
 }
 
 /* 머리말 아래 — 다음은 믿을 거리 띠(--b25) */
-.hero { --wedge: var(--b25); }
+.lp-hero { --wedge: var(--b25); }
 
 /* 보장 검토(진한 파랑) 아래 — 다음은 성공사례(흰색) */
 .sec-deep { --wedge: var(--white); }
@@ -1915,3 +1915,131 @@ textarea.f-in {
 .pen li   { padding: clamp(20px, 2.4vw, 28px) 18px; }
 .chips li { padding: 15px 18px; }
 .loss li  { padding: 17px 20px; }
+
+/* =====================================================================
+   21. 레퍼런스 그림 — 휴대폰 속 자동차 · 배경 · 달력 · 표지판 · 판결문
+
+   2026-11-26. 법인에서 지피티로 만들어 주신 그림입니다.
+   ⚠️ 모두 그림이 없어도 쪽이 망가지지 않게 두었습니다.
+===================================================================== */
+
+/* ---------- 휴대폰 화면 속 자동차 그림 ---------- */
+.phone-art:empty { display: none; }     /* 그림이 없으면 자리도 없앱니다 */
+
+.phone-art {
+  margin: -4px -4px 4px;
+  border-radius: 10px;
+  background: linear-gradient(170deg, #e6f0ff, #f7faff);
+  overflow: hidden;
+}
+
+.phone-art .art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- 머리말 배경 ---------- */
+.lp-herobg {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+
+/*
+  ⚠️ opacity 를 올리지 마십시오. 제목 글자와 겹치는 자리입니다.
+     그림 자체가 이미 아주 흐리게(투명도 15%) 그려져 있어,
+     여기서 또 흐리게 할 필요는 없습니다. 0.9 는 안전띠입니다.
+*/
+.lp-herobg .art {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.9;
+}
+
+/* ---------- 42일 달력 ---------- */
+.cov-day {
+  position: relative;
+  background: transparent;              /* 달력 그림이 바탕을 대신합니다 */
+  width: 72px;
+  height: 72px;
+}
+
+/*
+  달력 그림의 흰 종이 자리에 「42일」을 얹습니다.
+
+  ★ translate 로 글자 높이의 절반을 올립니다. top 만 주면 글자가
+    그 선에서 아래로 자라서 달력 밖으로 삐져나옵니다.
+    (2026-11-26 에 그렇게 나왔습니다)
+  ★ 그림을 바꾸시면 top 의 % 만 다시 맞추면 됩니다.
+*/
+.cov-day b {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 56%;
+  translate: 0 -50%;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  color: #16357a;
+  text-align: center;
+  z-index: 1;
+}
+
+.cov-day .i3d { width: 72px; }
+
+/* 달력 그림이 없을 때는 예전처럼 노란 네모로 */
+.cov-day:not(.has-i3d) {
+  background: var(--sun);
+  color: #3a2d00;
+}
+
+.cov-day:not(.has-i3d) b {
+  position: static;
+  color: #3a2d00;
+  font-size: 19px;
+}
+
+/* ---------- 어린이보호구역 표지판 ---------- */
+.cov-tiers li[data-i3d] { position: relative; }
+
+/*
+  표지판은 칸 안쪽 오른쪽 위에 둡니다.
+  ⚠️ 전에는 top: -14px 으로 칸 밖에 띄웠는데, 칸과 떨어져 보여
+     그냥 노란 덩어리로 읽혔습니다. 모서리에 걸치는 정도가 낫습니다.
+*/
+.cov-tiers li .i3d {
+  position: absolute;
+  right: -6px;
+  top: -10px;
+  width: 32px;
+  rotate: 10deg;
+  filter: drop-shadow(0 3px 7px rgba(0, 20, 60, 0.35));
+}
+
+/* ---------- 성공사례 판결문 ---------- */
+.win { position: relative; }
+
+.win-pic:empty { display: none; }
+
+.win-pic {
+  position: absolute;
+  right: clamp(16px, 2vw, 24px);
+  top: clamp(16px, 2vw, 22px);
+}
+
+.win-pic .i3d {
+  width: 46px;
+  opacity: 0.9;
+}
+
+/* 아직 자료가 없는 칸에서는 더 흐리게 — 비어 있다는 것이 보여야 합니다 */
+.win.is-wait .win-pic .i3d { opacity: 0.4; }
+
+@media (max-width: 760px) {
+  .win-pic .i3d { width: 38px; }
+}
