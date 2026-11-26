@@ -57,6 +57,7 @@ window.PAGE_DATA = {
   wins: [
     {
       tag:  "판례 01",
+      doc:  1,
       title:"오토바이 동승자 대뇌 손상",
       fact: "승객을 태우려 갑자기 차로를 바꾼 택시가 직진하던 오토바이를 충격. 동승자가 대뇌 · 소뇌 손상을 입었습니다.",
       work: "배달통 때문에 위험이 커졌고 동승자에게도 안전운행을 촉구할 의무가 있었다는 상대방 주장을 다퉈 배척시켰습니다.",
@@ -65,6 +66,7 @@ window.PAGE_DATA = {
     },
     {
       tag:  "판례 02",
+      doc:  2,
       title:"비보호 좌회전 버스 — 동승자는 감액 없이",
       fact: "교차로에서 비보호 좌회전하던 전세버스가 직진 차량을 충격. 운전자는 대퇴골 · 경골 골절, 동승자는 늑골 다발골절.",
       work: "운전자 쪽 과실로 책임이 85%로 제한되는 가운데, 동승자는 운행이익을 함께 누린 사이가 아님을 밝혀 동승자에게는 제한이 적용되지 않게 했습니다.",
@@ -73,6 +75,7 @@ window.PAGE_DATA = {
     },
     {
       tag:  "판례 03",
+      doc:  3,
       title:"「전적으로 피해자 과실」 주장을 깨다",
       fact: "고속도로에서 앞 차량이 갑자기 차로를 바꾸자 이를 피하려다 중앙분리대를 들이받아 요추가 골절됐습니다.",
       work: "상대방은 피해자가 시속 136km로 과속했으니 책임이 없다고 주장했습니다. 블랙박스 영상과 상대 운전자의 진술로 <b>방향지시등을 켜지 않고</b> 진로를 바꾼 사실을 밝혔습니다.",
@@ -81,6 +84,7 @@ window.PAGE_DATA = {
     },
     {
       tag:  "판례 04",
+      doc:  4,
       title:"조수석 동승자 청력 상실 — 감액 주장 둘 다 배척",
       fact: "전방주시의무를 지키지 않은 차량이 앞차를 추돌. 조수석 동승자가 한쪽 청력을 잃었습니다.",
       work: "상대방의 <b>호의동승 감액</b> 주장과 <b>안전띠 미착용</b> 주장을 모두 다퉈 받아들여지지 않게 했습니다.",
@@ -89,6 +93,7 @@ window.PAGE_DATA = {
     },
     {
       tag:  "판례 05",
+      doc:  5,
       title:"중앙선 침범 유턴 택시 — 이륜차 과실 부정",
       fact: "2차로에 서 있다가 급히 1차로를 가로질러 황색 복선 중앙선을 넘어 유턴한 택시와 뒤따르던 이륜차가 충돌했습니다.",
       work: "뒤따르던 이륜차 운전자에게도 과실이 있다는 주장을 다퉈, 상대방 책임이 제한되지 않게 했습니다.",
@@ -97,6 +102,7 @@ window.PAGE_DATA = {
     },
     {
       tag:  "판례 06",
+      doc:  6,
       title:"보험사가 낸 채무부존재확인의 소 — 각하",
       fact: "버스 안에서 넘어져 외상성 경막하 출혈을 입은 승객을 상대로, 버스 기사와 보험사가 「배상할 채무가 없음을 확인해 달라」며 소를 냈습니다.",
       work: "치료비가 이미 지급됐고 달리 청구받은 바도 없어 <b>확인의 이익이 없다</b>는 점을 들어 본안 전 항변을 했습니다.",
@@ -154,15 +160,44 @@ window.PAGE_DATA = {
     li.setAttribute("data-aos-delay", String((i % 3) * 90));
 
     /*
-      판결문 그림. assets/ins-3d-verdict.webp 가 있으면 들어갑니다.
-      위의 PIC 묶음이 data-i3d 를 찾아 넣으므로 여기서는 자리만 만듭니다.
+      ⚠️ 2026-11-26 에 연필 아이콘(ins-3d-verdict)을 뺐습니다.
+         아래에 진짜 판결문 그림이 들어가면서 겹쳤습니다.
+         그림 파일은 assets/ 에 그대로 두었습니다. 다른 자리에
+         쓰실 일이 생기면 쓰시면 됩니다.
     */
-    const pic = put("span", "win-pic");
-    pic.setAttribute("data-i3d", "verdict");
-    pic.setAttribute("aria-hidden", "true");
-    li.append(pic);
 
     li.append(put("span", "win-no", w.tag || "판례 " + String(i + 1).padStart(2, "0")));
+
+    /*
+      실제 판결문. assets/ins-doc-N.webp 가 있을 때만 붙습니다.
+
+      ⚠️ 그림 속 당사자 이름은 법원이 가린 것이고, 그 위에 제3자
+         이름 한 곳을 더 가렸습니다. 판결문을 새로 올리실 때도
+         반드시 한 장씩 눈으로 확인하십시오.
+      ⚠️ 윗머리의 「개인정보유출주의 … 출력자 …」 줄은 잘라냈습니다.
+         그 줄에는 법인 직원 이름이 찍혀 있습니다.
+      ★ 누르면 크게 보입니다. <button> 으로 둔 까닭은 키보드로도
+        열 수 있어야 하기 때문입니다.
+    */
+    if (w.doc) {
+      const btn = document.createElement("button");
+      btn.className = "win-doc";
+      btn.type = "button";
+      btn.dataset.doc = String(w.doc);
+      btn.setAttribute("aria-label", (w.tag || "판례") + " 판결문 크게 보기");
+
+      const im = document.createElement("img");
+      im.src = "assets/ins-doc-" + w.doc + ".webp";
+      im.alt = "";
+      im.loading = "lazy";
+      im.decoding = "async";
+      /* 그림이 없으면 단추째로 치웁니다 — 깨진 그림을 두지 않습니다 */
+      im.addEventListener("error", () => btn.remove());
+      btn.append(im);
+
+      btn.append(put("span", "win-doc-cap", "판결문 보기"));
+      li.append(btn);
+    }
     li.append(put("h3", "win-ttl", w.wait ? "실제 판결문 등록 예정" : (w.title || "")));
 
     const dl = document.createElement("dl");
@@ -448,4 +483,70 @@ fillPictures();
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
   paint();
+})();
+
+
+/* =====================================================================
+   판결문 크게 보기
+
+   성공사례 칸의 판결문을 누르면 화면 가득 크게 보여 줍니다.
+
+   ⚠️ 꾸러미를 쓰지 않고 직접 만들었습니다. 이 하나를 위해 남의
+      코드를 더 받아올 까닭이 없습니다.
+   ★ Esc 로 닫힙니다. 바깥을 눌러도 닫힙니다.
+   ★ 닫으면 눌렀던 자리로 초점이 돌아갑니다. 키보드로 보시는 분이
+     길을 잃지 않도록.
+===================================================================== */
+
+(function docViewer() {
+  const grid = document.getElementById("winGrid");
+  if (!grid) return;
+
+  let box = null, opener = null;
+
+  const build = () => {
+    box = document.createElement("div");
+    box.className = "docbox";
+    box.innerHTML =
+      '<div class="docbox-scrim" data-close></div>' +
+      '<div class="docbox-in" role="dialog" aria-modal="true" aria-label="판결문">' +
+        '<button class="docbox-x" type="button" aria-label="닫기" data-close></button>' +
+        '<img alt="">' +
+        '<p class="docbox-note">' +
+          '당사자 이름은 법원이 가린 것입니다. ' +
+          '사건번호로 판결서를 직접 확인하실 수 있습니다.' +
+        '</p>' +
+      '</div>';
+    document.body.append(box);
+
+    box.addEventListener("click", (e) => {
+      if (e.target.closest("[data-close]")) close();
+    });
+  };
+
+  const open = (src, from) => {
+    if (!box) build();
+    box.querySelector("img").src = src;
+    box.classList.add("is-on");
+    document.body.classList.add("no-scroll");
+    opener = from;
+    requestAnimationFrame(() => box.querySelector(".docbox-x").focus());
+  };
+
+  const close = () => {
+    if (!box) return;
+    box.classList.remove("is-on");
+    document.body.classList.remove("no-scroll");
+    if (opener) { opener.focus(); opener = null; }
+  };
+
+  grid.addEventListener("click", (e) => {
+    const btn = e.target.closest(".win-doc");
+    if (!btn) return;
+    open("assets/ins-doc-" + btn.dataset.doc + ".webp", btn);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && box && box.classList.contains("is-on")) close();
+  });
 })();

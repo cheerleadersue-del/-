@@ -2411,3 +2411,145 @@ textarea.f-in {
   font-weight: 500;
   color: var(--ink2);
 }
+
+/* =====================================================================
+   25. 실제 판결문
+
+   2026-11-26. 법인 요청 — 「실제 판결문을 보여 주면 신뢰를 준다」.
+
+   ⚠️ 그림 속 당사자 이름은 법원이 가린 것입니다. 그 위에 제3자
+      이름 한 곳(법무사)을 더 가렸고, 윗머리의 「개인정보유출주의 …
+      출력자 …」 줄은 잘라냈습니다. 그 줄에는 법인 직원 이름이
+      찍혀 있습니다.
+      ★ 판결문을 새로 올리실 때도 반드시 한 장씩 눈으로 확인하십시오.
+===================================================================== */
+
+/* 칸 안의 판결문 — 누르는 단추입니다 */
+.win-doc {
+  display: block;
+  width: 100%;
+  margin: 16px 0 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-s);
+  background: var(--white);
+  cursor: zoom-in;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.win-doc:hover,
+.win-doc:focus-visible {
+  border-color: var(--b300);
+  box-shadow: var(--shadow-m);
+}
+
+/*
+  ⚠️ contain 입니다. cover 로 두면 판결문마다 높이가 달라
+     빨간 네모가 잘립니다. 빨간 네모가 보이는 것이 이 그림의
+     전부이므로 잘리면 안 됩니다.
+*/
+.win-doc img {
+  display: block;
+  width: 100%;
+  height: 188px;
+  object-fit: contain;
+  object-position: center top;
+  background: var(--white);
+}
+
+.win-doc-cap {
+  display: block;
+  padding: 7px 10px;
+  border-top: 1px solid var(--line);
+  background: var(--b25);
+  color: var(--b700);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.win-doc:hover .win-doc-cap { background: var(--b50); }
+
+/* ---------- 크게 보기 ---------- */
+.docbox {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(14px, 3vw, 40px);
+}
+
+.docbox.is-on { display: flex; }
+
+.docbox-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 20, 50, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.docbox-in {
+  position: relative;
+  max-width: 940px;
+  width: 100%;
+  max-height: 92vh;
+  overflow: auto;
+  padding: 14px;
+  border-radius: var(--r-m);
+  background: var(--white);
+  box-shadow: var(--shadow-l);
+}
+
+.docbox-in img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.docbox-note {
+  margin-top: 12px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink3);
+  text-align: center;
+}
+
+.docbox-x {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  cursor: pointer;
+}
+
+.docbox-x::before,
+.docbox-x::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 18px;
+  width: 16px;
+  height: 2px;
+  background: var(--white);
+}
+
+.docbox-x::before { rotate: 45deg; }
+.docbox-x::after  { rotate: -45deg; }
+
+/* 크게 보기가 열려 있는 동안 뒤가 밀리지 않게 */
+body.no-scroll { overflow: hidden; }
+
+@media (max-width: 760px) {
+  .win-doc img { height: 150px; }
+}
