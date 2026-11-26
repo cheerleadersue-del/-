@@ -2193,3 +2193,15 @@ textarea.f-in {
 @media (max-width: 700px) {
   .lp-hero-art .phone { max-width: min(288px, 100%); }
 }
+
+/*
+  맺음말 맨 아래의 작은 한 줄.
+  ⚠️ 흐리게 두지만 읽을 수는 있어야 합니다. 「0원」을 크게 적은
+     만큼 균형을 잡는 자리입니다. 더 흐리게 만들지 마십시오.
+*/
+.end-fine {
+  margin-top: 14px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.64);
+}
