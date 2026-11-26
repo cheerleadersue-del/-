@@ -2130,8 +2130,12 @@ textarea.f-in {
 
 .mark.is-lit { background-size: 100% 36%; }
 
-/* 어두운 구간에서는 금색으로 */
-.mark-gold { --mark-c: rgba(255, 216, 77, 0.34); }
+/*
+  어두운 구간에서는 금색으로.
+  ⚠️ 0.34 로 두었더니 짙은 파랑과 섞여 회색 띠로 보였습니다
+     (2026-11-26). 어두운 바탕에서는 더 진해야 금색으로 읽힙니다.
+*/
+.mark-gold { --mark-c: rgba(255, 214, 64, 0.52); }
 
 @media (prefers-reduced-motion: reduce) {
   .mark { background-size: 100% 36%; transition: none; }
@@ -2204,4 +2208,166 @@ textarea.f-in {
   font-size: 13.5px;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.64);
+}
+
+/* =====================================================================
+   23. 보장 검토 머리글 — 「본인부담금 0원」을 크게 외칩니다
+
+   2026-11-26. 법인 요청.
+   머리말에 이어 「0원」을 두 번째로 크게 적는 자리입니다.
+===================================================================== */
+
+.cov-ttl {
+  display: grid;
+  gap: 4px;
+  line-height: 1.22;
+}
+
+/* 위아래 줄은 큰 글자에 자리를 내줍니다 */
+.cov-top,
+.cov-bot {
+  display: block;
+  font-size: clamp(19px, 2.1vw, 27px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.cov-bot { margin-top: 2px; }
+
+/*
+  「본인부담금 0원」 — 금색 그라데이션이 천천히 흐릅니다.
+
+  ⚠️ background-clip: text 를 읽지 못하는 브라우저에서는 금색
+     단색으로 나옵니다. 색이 먼저 적혀 있어 글자가 사라지지
+     않습니다. color 줄을 지우지 마십시오.
+  ⚠️ 「화면 움직임 줄이기」를 켜 두신 분께는 흐르지 않고 멈춰
+     있습니다. 그라데이션은 그대로 보입니다.
+*/
+/*
+  「본인부담금 0원」
+
+  ⚠️ 2026-11-26 에 금색 그라데이션이 흐르는 효과를 넣었다가
+     법인에서 「별로다」 하셔서 뺐습니다. 홈페이지 다른 곳과 같은
+     단색 금색입니다. 머리말의 「운전자보험만 가입되어 있으면!」과
+     같은 색이라 눈에 따로 놀지 않습니다.
+     ★ 그라데이션을 다시 넣지 마십시오.
+
+  ★ 들어올 때 커지는 효과(data-aos="zoom-in")는 그대로 둡니다.
+    그건 그라데이션과 다른 것이고, 법인이 빼라고 하신 적이 없습니다.
+*/
+.cov-zero {
+  display: block;
+  margin: 6px 0 2px;
+  font-size: clamp(34px, 5.2vw, 66px);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 1.08;
+  color: var(--sun);
+  text-shadow: 0 4px 34px rgba(255, 200, 40, 0.3);
+}
+
+.cov-zero em {
+  font-style: normal;
+  font-size: 1.22em;
+}
+
+/* 뒤에 아주 옅은 빛무리 */
+.cov-ttl { position: relative; }
+
+.cov-ttl::before {
+  content: "";
+  position: absolute;
+  left: -8%;
+  top: 28%;
+  width: 72%;
+  aspect-ratio: 2 / 1;
+  background: radial-gradient(closest-side,
+              rgba(255, 216, 77, 0.16), rgba(255, 216, 77, 0) 72%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (max-width: 760px) {
+  .cov-ttl::before { display: none; }
+}
+
+/*
+  어두운 구간의 형광펜은 「칠하기」가 아니라 「밑줄」로 그립니다.
+
+  ⚠️ 반투명 금색을 짙은 파랑 위에 깔면 섞여서 올리브색이 됩니다.
+     금색(255,214,64) 52% + 파랑 = (143,150,125) — 회색입니다.
+     계산해 보면 그렇습니다(2026-11-26 에 두 번 헛손질했습니다).
+     진하게 만들면 글자를 덮습니다. 그래서 얇은 불투명 밑줄로
+     바꿨습니다. 이쪽이 금색으로 또렷하게 읽힙니다.
+
+  ★ 밝은 구간(.mark)은 그대로 칠하기입니다. 흰 바탕에서는
+    반투명 파랑이 제대로 섞입니다.
+*/
+.mark-gold {
+  --mark-c: var(--sun);
+  background-position: 0 97%;
+  background-size: 0% 13%;
+}
+
+.mark-gold.is-lit { background-size: 100% 13%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mark-gold { background-size: 100% 13%; }
+}
+
+/* ---------- 보장 셋 — 1 변호사비용 · 2 합의금 · 3 벌금 ----------
+   2026-11-26. 법인이 번호를 매기자고 하셔서 바꿨습니다.
+   「변호사비용 · 합의금 · 벌금」을 한 줄로 흘려 적는 것보다
+   하나씩 세어 보여 주는 쪽이 눈에 잘 들어옵니다.
+--------------------------------------------------------------------- */
+.cov-three {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 4px;
+}
+
+.cov-three > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.09);
+  font-size: clamp(14px, 1.5vw, 17px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+/* 번호 동그라미 */
+.cov-three i {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+  background: var(--sun);
+  color: #3a2d00;
+  font-size: 12.5px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+/* 머리글 맨 윗줄은 작게 — 큰 글자에 자리를 내줍니다 */
+.cov-top {
+  font-size: clamp(16px, 1.7vw, 21px);
+  color: var(--sun);
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 420px) {
+  .cov-three { gap: 6px; }
+  .cov-three > span { padding: 7px 13px 7px 8px; font-size: 13.5px; }
+  .cov-three i { width: 21px; height: 21px; font-size: 11.5px; }
 }
