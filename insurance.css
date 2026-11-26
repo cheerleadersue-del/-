@@ -2553,3 +2553,391 @@ body.no-scroll { overflow: hidden; }
 @media (max-width: 760px) {
   .win-doc img { height: 150px; }
 }
+
+/* =====================================================================
+   26. 글자 체계 정리
+
+   2026-11-26. 쪽 전체를 재어 보니 글자 꼴이 67가지였습니다.
+   같은 13px 인데 굵기 · 줄간격 · 자간이 제각각인 것만 여섯 가지였고,
+   무엇보다 큰 글자가 본문 줄간격(1.7)을 그대로 물려받아 헐거웠습니다.
+   (「0원」 57px 에 줄간격 1.7 → 글자 사이가 한 뼘씩 벌어집니다)
+
+   그래서 역할별로 묶어 아홉 단으로 줄였습니다.
+
+     단   크기        줄간격  자간      쓰는 곳
+     ───────────────────────────────────────────────────
+     D0   62~80px     1.14   -0.05em   머리말 「운전자보험」
+     D1   40~66px     1.18   -0.05em   「본인부담금 0원」
+     D2   27~44px     1.28   -0.04em   구간 제목
+     H1   19~28px     1.42   -0.035em  칸 제목 · 외침 한 줄
+     H2   16~21px     1.55   -0.03em   작은 제목
+     B    15px        1.85   -0.02em   본문
+     S    13.5px      1.75   -0.015em  단서 · 덧말
+     M    12px        1.60   -0.01em   딱지 · 사건번호
+     T    9px         1.70   +0.18em   영문 머리글
+
+   ⚠️ 새 글자 크기를 더하지 마십시오. 위 아홉 단 중에서 고르십시오.
+      하나를 더할 때마다 쪽이 조금씩 지저분해집니다.
+   ⚠️ 큰 글자에 줄간격 1.7 을 주지 마십시오. 1.2 언저리라야 합니다.
+===================================================================== */
+
+/* ---------- D0 · D1 — 가장 큰 글자 ---------- */
+.lp-hero-ttl       { line-height: 1.18; letter-spacing: -0.05em; }
+.lp-hero-ttl .big  { line-height: 1.14; letter-spacing: -0.055em; }
+.lp-hero-ttl .thin { line-height: 1.22; letter-spacing: -0.04em; }
+
+.claim-big {
+  line-height: 1.18;                 /* 1.70 이었습니다 — 너무 헐거웠습니다 */
+  letter-spacing: -0.05em;
+}
+.claim-big .zero { line-height: 1.1; }
+
+.cov-zero { line-height: 1.12; letter-spacing: -0.055em; }
+
+/* ---------- D2 — 구간 제목 ---------- */
+.sec-ttl,
+.end-ttl {
+  line-height: 1.28;
+  letter-spacing: -0.042em;
+}
+
+.cov-ttl { line-height: 1.28; }
+
+/* ---------- H1 — 칸 제목 · 외침 한 줄 ---------- */
+.punch,
+.ask-ttl,
+.telbig {
+  line-height: 1.42;
+  letter-spacing: -0.035em;
+}
+
+/*
+   ⚠️ .pen-txt 는 여기(H1)에 있었는데 D2 로 옮겼습니다. 28px 글씨에
+      40px 짜리 숫자(「5년」·「2천만원」)가 섞여 있어, 1.42 줄간격이면
+      숫자 위아래로 빈 띠가 생깁니다. 칸 제목이므로 1.28 이 맞습니다.
+*/
+.pen-txt {
+  line-height: 1.28;
+  letter-spacing: -0.038em;
+}
+
+.telbig { line-height: 1.2; }        /* 숫자만 있는 줄이라 더 붙입니다 */
+
+/* ---------- H2 — 작은 제목 ---------- */
+.cov-top,
+.cov-bot,
+.claim-cover,
+.win-ttl,
+.loss h3,
+.chips h3,
+.shot-notes h3,
+.cred-txt b {
+  line-height: 1.55;
+  letter-spacing: -0.032em;
+}
+
+/* ---------- B — 본문 ---------- */
+.sec-sub,
+.end-sub,
+.loss p,
+.chips p,
+.shot-notes p,
+.win-rows dd,
+.cov-when p,
+.table-note {
+  font-size: 15px;
+  line-height: 1.85;
+  letter-spacing: -0.02em;
+}
+
+/* 넓은 화면에서는 본문도 조금 키웁니다 */
+@media (min-width: 1100px) {
+  .sec-sub,
+  .end-sub { font-size: 16px; }
+}
+
+/* ---------- S — 단서 · 덧말 ---------- */
+.claim-lead,
+.claim-note,
+.note,
+.ask-sub,
+.end-fine,
+.cov-note,
+.f-agree,
+.ask-tel {
+  font-size: 13.5px;
+  line-height: 1.75;
+  letter-spacing: -0.015em;
+}
+
+/* ---------- M — 딱지 · 사건번호 ---------- */
+.win-no,
+.win-case,
+.win-rows dt,
+.win-doc-cap,
+.tag {
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+.tag { font-size: 14px; }
+
+/* ---------- T — 영문 머리글 ---------- */
+.phone-top small {
+  line-height: 1.7;
+  letter-spacing: 0.18em;
+}
+
+/*
+  ---------- 한글이 낱말 가운데서 끊기지 않게 ----------
+  ⚠️ word-break: keep-all 이 없으면 「운전자보험」이 「운전자보
+     험」처럼 끊깁니다. 제목과 짧은 글에는 반드시 넣어야 합니다.
+     본문처럼 긴 글에는 넣지 않습니다. 넣으면 줄 끝이 들쭉날쭉해집니다.
+*/
+.lp-hero-ttl,
+.sec-ttl,
+.end-ttl,
+.cov-ttl,
+.claim-big,
+.claim-cover,
+.punch,
+.pen-txt,
+.win-ttl,
+.loss h3,
+.chips h3,
+.shot-notes h3,
+.ask-ttl,
+.cred-txt,
+.tag {
+  word-break: keep-all;
+}
+
+/* ---------- 숫자는 더 붙여 씁니다 ----------
+   금액은 한 덩어리로 읽혀야 합니다. 본문 줄간격(1.7)을 쓰면
+   숫자 사이가 벌어져 세 덩어리처럼 보입니다.
+--------------------------------------------------------------------- */
+.cov-tiers b,
+.cov-day b,
+.cred-txt b i {
+  line-height: 1.25;
+  letter-spacing: -0.04em;
+}
+
+.cov-tiers span {
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+
+/* 법정형 칸의 작은 덧말(자유형입니다 · 재산형입니다) */
+.pen-txt span {
+  margin-top: 4px;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+
+/*
+  ---------- 휴대폰 모형 속 글자는 따로 둡니다 ----------
+  ⚠️ 모형 안은 「축소된 앱 화면」입니다. 쪽 본문과 같은 크기로
+     맞추면 모형이 아니라 진짜 칸처럼 보여 어색해집니다.
+     10~18px 의 자체 체계를 그대로 두십시오.
+  ★ 다만 줄간격만 1.5 로 통일해 둡니다. 모형 안에서도 제각각이면
+    지저분해 보입니다.
+*/
+.phone-in b,
+.phone-in span,
+.phone-in p { letter-spacing: -0.03em; }
+
+.phone-top b { line-height: 1.38; }
+.phone-top p { line-height: 1.55; }
+.phone-row b,
+.phone-steps li b { line-height: 1.45; }
+.phone-row span,
+.phone-steps li span { line-height: 1.5; }
+
+/*
+  ---------- 끝줄에 한 낱말만 남는 것을 막습니다 ----------
+
+  글이 세 줄인데 마지막 줄에 「드립니다.」 한 마디만 남으면
+  지저분해 보입니다. 사람이 <br> 로 맞추면 화면 폭이 바뀔 때마다
+  어긋나므로, 브라우저가 알아서 줄을 고르게 합니다.
+
+  ★ text-wrap: pretty — 끝줄이 너무 짧아지지 않게 앞줄에서
+    낱말을 하나 내려 줍니다.
+  ★ 제목에는 balance 를 씁니다. 두세 줄의 길이를 고르게 맞춥니다.
+  ⚠️ 읽지 못하는 브라우저는 그냥 지금처럼 줄을 끊습니다. 탈이 없습니다.
+*/
+/*
+   ★ 두 가지를 가려 씁니다.
+
+   · balance — 두세 줄짜리 짧은 글. 줄 길이를 서로 고르게 맞춥니다.
+     제목, 구간 부제, 칸 제목, 외침 띠가 여기 듭니다.
+   · pretty — 네 줄 넘는 긴 글. 줄 길이는 그대로 두고 끝줄만 챙깁니다.
+     긴 글에 balance 를 쓰면 브라우저가 포기합니다(여섯 줄까지만 봅니다).
+
+   ⚠️ 2026-11-26. 처음에는 구간 부제에도 pretty 를 걸었는데, 보장검토
+      칸에서 끝줄에 「확인해 드립니다.」 한 마디만 남았습니다. pretty 는
+      낱말 하나를 내려 주는 것이 전부라, 두 줄짜리 글에는 힘이 모자랍니다.
+      짧은 글은 balance 로 옮겼습니다.
+*/
+.sec-ttl,
+.end-ttl,
+.win-ttl,
+.punch,
+.loss h3,
+.chips h3,
+.shot-notes h3,
+.sec-sub,
+.end-sub,
+.ask-sub,
+.cov-note,
+.table-note,
+.loss p,
+.chips p {
+  text-wrap: balance;
+}
+
+.claim-note,
+.claim-lead,
+.note,
+.end-fine,
+.shot-notes p,
+.win-rows dd,
+.q-note {
+  text-wrap: pretty;
+}
+
+/* =====================================================================
+   27. 배치와 배열 — 가운데를 하나로, 읽는 폭을 가두고, 숫자를 키웁니다
+
+   2026-11-26. 「전체적으로 글자가 지저분하다」에 대한 둘째 손질입니다.
+   26번이 글자 크기와 줄간격을 정리했고, 여기서는 **자리**를 정리합니다.
+
+   무엇이 지저분했는지 세 가지입니다.
+
+   ① 가운데와 왼쪽이 섞여 있었습니다.
+      형사절차 칸은 제목만 왼쪽, 아래 내용은 모두 가운데였습니다.
+      → 쪽의 규칙을 하나로 정했습니다.
+        · 한 칸을 통째로 쓰는 구간(형사절차 · 성공사례) = 가운데
+        · 글과 휴대폰을 좌우로 나눈 구간(합의 · 보장검토) = 왼쪽
+        이제 가운데 → 왼쪽 → 왼쪽 → 가운데 로 흐릅니다.
+
+   ② 본문이 너무 넓게 퍼졌습니다.
+      컴퓨터에서 쪽 가로가 1180px 입니다. 15px 글자를 여기에 그냥
+      풀어 놓으면 **한 줄에 한글 일흔 자**가 들어갑니다. 신문 한 단이
+      스물다섯 자 안팎인 것과 견주면 세 배입니다. 줄이 길면 눈이
+      다음 줄 머리를 못 찾아 글이 어수선해 보입니다.
+      → 본문의 폭을 em(글자 크기의 배수)으로 가둡니다. 글자가 커지면
+        폭도 함께 늘어나서, 화면 크기와 상관없이 한 줄의 글자 수가
+        비슷하게 유지됩니다.
+
+   ③ 큰 숫자가 옆 글자와 같은 크기였습니다.
+      「5년」과 「2천만원」이 「이하 금고」와 똑같이 보였습니다.
+      → 숫자만 1.45배로 키우고 파랗게 했습니다. 눈이 먼저 갑니다.
+        (HTML 에서 숫자를 <b> 로 감쌌습니다)
+
+   ⚠️ 폭을 ch 나 px 가 아니라 em 으로 적었습니다. ch 는 글꼴마다
+      기준 글자 폭이 달라 한글에서 어긋나고, px 는 글자가 커져도
+      폭이 그대로여서 큰 화면에서 줄이 다시 길어집니다.
+   ===================================================================== */
+
+/* ---------- ① 가운데 구간 — 제목 · 본문 · 알약을 모두 가운데로 ------- */
+.sec-head-c { text-align: center; }
+
+.sec-head-c .tags { justify-content: center; }
+
+.sec-head-c .sec-ttl,
+.sec-head-c .sec-sub {
+  margin-inline: auto;
+}
+
+/* ---------- ② 읽는 폭 — 한 줄의 글자 수를 가둡니다 ------------------ */
+/*
+   본문 29em ≒ 한글 스물아홉 자. 신문보다 조금 넓고, 눈이 줄을
+   놓치지 않는 범위입니다.
+*/
+.sec-sub,
+.end-sub {
+  max-width: 29em;
+}
+
+/* 제목은 더 넓게 둡니다. 글자가 크니 같은 em 이면 너무 좁아집니다 */
+.sec-head-c .sec-ttl { max-width: 20em; }
+
+/* 작은 글씨 — 가운데 놓인 꼬리말들 */
+.note,
+.punch,
+.table-note {
+  max-width: 27em;
+  margin-inline: auto;
+  text-wrap: balance;             /* 짧은 꼬리말이라 두 줄 길이를 맞춥니다.
+                                     위 pretty 묶음보다 뒤에 있어 이것이 이깁니다 */
+}
+
+.punch { max-width: 26em; }       /* 한 줄로 외치는 띠라 더 좁게 */
+
+/*
+   ⚠️ 좌우로 나뉜 구간(합의 · 보장검토)의 .sec-sub 는 이미 칸이
+      좁으므로 29em 이 걸리지 않습니다. 그대로 둡니다.
+*/
+
+/* ---------- ③ 숫자를 키웁니다 — 법정형 두 칸 ------------------------ */
+.pen-txt b {
+  font-size: 1.45em;
+  font-weight: 900;
+  color: var(--b700);
+  letter-spacing: -0.05em;
+}
+
+/*
+   ⚠️ 1.45em 은 「부모 글자의 1.45배」입니다. .pen-txt 가 화면에 따라
+      20~28px 로 바뀌므로, 숫자도 29~41px 로 함께 움직입니다.
+      px 로 고정하면 휴대폰에서 칸을 뚫고 나갑니다.
+*/
+
+/* ---------- 파란 외침 띠 — 더 또렷하게 ------------------------------ */
+/*
+   금색 윗줄을 한 줄 올려 눈을 잡습니다. 어두운 파랑 위라 반투명
+   금색은 올리브색으로 섞입니다 — 불투명한 금색이어야 합니다.
+*/
+.punch {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(22px, 2.6vw, 30px) 24px;
+}
+
+.punch::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--sun);
+}
+
+/* ---------- 구간 사이 숨 고르기 ------------------------------------- */
+/*
+   제목에서 본문까지는 가깝게, 본문에서 내용 덩어리까지는 멀게.
+   간격이 제각각이면 어디까지가 한 덩어리인지 눈이 헷갈립니다.
+*/
+.sec-head-c .sec-sub { margin-top: 14px; }
+.sec-head-c .tags    { margin-top: 18px; }
+.sec-head-c + .pen,
+.sec-head-c + .wins,
+.sec-head-c ~ .pen   { margin-top: clamp(30px, 3.4vw, 42px); }
+
+/* ---------- 좁은 화면 ----------------------------------------------- */
+@media (max-width: 720px) {
+  /*
+     휴대폰에서는 칸 자체가 좁아 폭을 가둘 필요가 없습니다.
+     오히려 가두면 양옆에 쓸데없는 빈자리가 생깁니다.
+  */
+  .sec-sub,
+  .end-sub,
+  .note,
+  .punch,
+  .table-note,
+  .sec-head-c .sec-ttl {
+    max-width: none;
+  }
+
+  .pen-txt b { font-size: 1.3em; }   /* 좁은 칸에서는 조금 덜 키웁니다 */
+}
