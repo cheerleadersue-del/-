@@ -1644,6 +1644,18 @@ const adEntry = (function readEntry() {
     naver: "네이버", google: "구글", daum: "다음", bing: "빙",
     kakao: "카카오", youtube: "유튜브", yt: "유튜브",
     blog: "블로그", band: "밴드", threads: "스레드", x: "엑스",
+
+    /*
+      2026-11-27 에 더했습니다. 네이버는 카페와 블로그가 따로
+      움직이는데 「naver」 하나로는 구별이 안 됐습니다.
+      ⚠️ 「cafe」가 「naver」보다 뒤에 있어도 상관없습니다.
+         통째로 먼저 찾고 없으면 첫 낱말로 찾기 때문입니다.
+    */
+    cafe: "네이버 카페", navercafe: "네이버 카페", ncafe: "네이버 카페",
+    naverblog: "네이버 블로그", nblog: "네이버 블로그",
+    tistory: "티스토리", brunch: "브런치",
+    threads_: "스레드", th: "스레드",
+    twitter: "엑스", tw: "엑스",
   };
 
   /* 비공개 모드에서는 저장 자리가 막혀 있다. 막혀도 죽지 않게 한다. */
