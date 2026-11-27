@@ -3310,7 +3310,14 @@ body.no-scroll { overflow: hidden; }
   container-type: inline-size;
   container-name: heroart;
   align-items: center;        /* 아래가 아니라 가운데를 맞춥니다 */
-  perspective: 1800px;        /* 멀리서 볼수록 뒤틀림이 적습니다 */
+
+  /*
+    ★ 2026-11-27. 「나」로 정하셨습니다 — 더 비스듬하게.
+      1800px 에서 1400px 로 줄였습니다. 이 값은 「보는 사람이
+      얼마나 가까이 있는가」입니다. 작을수록 가까이서 본 것처럼
+      입체감이 세집니다.
+  */
+  perspective: 1400px;
   perspective-origin: 50% 46%;
 }
 
@@ -3319,24 +3326,33 @@ body.no-scroll { overflow: hidden; }
   .lp-hero-art .phone-tilt-b { max-width: min(228px, 50cqw); }
 }
 
+/*
+  기울기 — 19도입니다 (「나」. 세 가지를 견주어 보고 고르셨습니다).
+
+  ⚠️ 두 모형의 rotateY 가 **반드시 같아야 합니다.** 다르면 둘이
+     다른 방향을 보게 되어 짝으로 안 보입니다.
+  ⚠️ translateY(var(--sy)) 를 지우지 마십시오. 쪽을 내릴 때 모형이
+     살짝 따라 움직이는 부분입니다 (traffic-insurance.js 가 넣습니다).
+*/
+
 /* 앞 모형 — 조금 아래로 내려 짝이 어긋나 보이게 */
 .lp-hero-art .phone-tilt-a {
   z-index: 2;
   margin-top: 26px;
   transform: translateY(var(--sy, 0))
-             rotateY(calc(-11deg - var(--sr, 0deg)))
-             rotateX(2.5deg) rotateZ(-1.5deg);
+             rotateY(calc(-19deg - var(--sr, 0deg)))
+             rotateX(3deg) rotateZ(-2deg);
 }
 
-/* 뒤 모형 — 위로 올리고, 테두리만 겹칩니다 */
+/* 뒤 모형 — 위로 올립니다. 19도에서는 겹침이 4px 밖에 안 됩니다 */
 .lp-hero-art .phone-tilt-b {
   z-index: 1;
-  margin-left: -16px;         /* ★ 테두리 두께만. 글은 안 가립니다 */
+  margin-left: -16px;
   margin-bottom: 30px;
   transform: translateY(var(--sy, 0))
-             rotateY(calc(-11deg - var(--sr, 0deg)))
-             rotateX(2.5deg) rotateZ(-1.5deg)
-             translateZ(-24px);
+             rotateY(calc(-19deg - var(--sr, 0deg)))
+             rotateX(3deg) rotateZ(-2deg)
+             translateZ(-30px);
 }
 
 /*
