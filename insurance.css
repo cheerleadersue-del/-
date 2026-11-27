@@ -3518,3 +3518,48 @@ body.no-scroll { overflow: hidden; }
 }
 
 .f-agree.is-bad span { color: #a52730; }
+
+/* ---------- 휴대폰에서는 모형을 똑바로 세웁니다 (2026-11-27) -------- */
+/*
+  ⚠️ 이것도 제가 낸 탈을 바로잡는 칸입니다.
+
+  원래 1727번 줄에 「700px 아래에서는 기울기를 푼다」는 규칙이 있었습니다.
+  그런데 제가 29번 칸을 적으면서 선택자를 `.lp-hero-art .phone-tilt-a`
+  처럼 두 마디로 썼습니다. 원래 규칙은 `.phone-tilt-a` 한 마디여서
+  힘이 약해 밀렸고, 휴대폰에서도 모형이 비스듬한 채로 남았습니다.
+
+  CSS 는 「같은 것을 두 곳에서 정하면 더 자세히 적은 쪽이 이긴다」가
+  규칙입니다. 그래서 여기서도 똑같이 두 마디로 적어 되돌립니다.
+
+  ★ 왜 휴대폰에서는 똑바로 세우는가
+    · 화면이 좁아 비스듬한 글자가 눈에 띄게 흐려집니다
+    · 모형 하나만 가운데 서므로 기울일 까닭이 없습니다
+      (뒤 모형은 700px 아래에서 접힙니다)
+
+  ⚠️ 위아래로 천천히 떠다니는 것은 그대로 둡니다. 그건 translate
+     라는 다른 성질이라 transform 을 지워도 살아 있습니다. 똑바로
+     선 채 오르내리기만 하므로 기울어 보이지 않습니다.
+*/
+@media (max-width: 700px) {
+  .lp-hero-art {
+    perspective: none;
+    perspective-origin: 50% 50%;
+  }
+
+  .lp-hero-art .phone-tilt-a,
+  .lp-hero-art .phone-tilt-b {
+    transform: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+  }
+
+  /* 뒤 모형은 접혀 있지만, 되살리실 때를 위해 그림자도 원래대로 */
+  .lp-hero-art .phone-tilt-b {
+    box-shadow:
+      0 1px 2px rgba(6, 24, 62, 0.22),
+      0 8px 18px rgba(6, 24, 62, 0.20),
+      0 26px 48px rgba(6, 24, 62, 0.24),
+      inset 0 1px 1px rgba(255, 255, 255, 0.85);
+  }
+}
