@@ -329,6 +329,13 @@ const practices = [
     tags: [
       { name: "형사합의 · 공탁",  href: "traffic-settlement.html" },
       { name: "12대 중과실",     href: "traffic-negligence.html" },
+      /*
+        2026-11-27 에 넣었습니다. 12대 중과실 바로 뒤가 맞습니다 —
+        같은 사건을 형사(중과실)와 비용(보험) 두 쪽에서 보는 짝입니다.
+        ⚠️ 이 칸은 모든 쪽의 메뉴에 깔립니다. 사이트 안에서 가장 센
+           링크 자리라, 검색엔진이 이 쪽을 중요하게 봅니다.
+      */
+      { name: "운전자보험",      href: "traffic-insurance.html" },
       { name: "뺑소니",          href: "traffic-hitrun.html" },
       { name: "사망사고",        href: "traffic-fatal.html" },
       { name: "중상해사고",      href: "traffic-serious.html" },
