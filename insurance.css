@@ -474,8 +474,17 @@ ul, ol { list-style: none; }
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
-  gap: clamp(28px, 4vw, 56px);
+  /*
+    ⚠️ 2026-11-27. 1.06 : 0.94 에서 반반으로 바꾸고 사이 간격도
+       56px → 44px 로 줄였습니다. 그림 칸이 506px 밖에 안 되어
+       휴대폰 모형이 홀쭉해졌기 때문입니다(1:2.39. 실제 기기는
+       1:2.06). 그림 칸을 544px 로 넓혀 모형을 제 비율로 되돌렸습니다.
+
+       제목이 조금 작아집니다(96px → 93px). 칸 너비에 붙여 두었기
+       때문입니다. 세 줄이 꽉 차는 비율은 그대로입니다.
+  */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 3.2vw, 44px);
   align-items: center;
 }
 
@@ -2792,12 +2801,18 @@ body.no-scroll { overflow: hidden; }
 .cov-note,
 .table-note,
 .loss p,
-.chips p {
+.chips p,
+.claim-note,
+.claim-lead {
   text-wrap: balance;
 }
 
-.claim-note,
-.claim-lead,
+/*
+  ⚠️ 2026-11-27. 흰 상자의 단서 줄(.claim-note)을 pretty 에서
+     balance 로 옮겼습니다. 머리말을 한 단으로 모으면서 상자가
+     좁아지자 끝줄에 「보장되지 않습니다.」만 남았습니다.
+     두 줄짜리 짧은 글에는 pretty 가 힘이 모자랍니다.
+*/
 .note,
 .end-fine,
 .shot-notes p,
@@ -3026,7 +3041,32 @@ body.no-scroll { overflow: hidden; }
   칸을 560px 로 묶으면 제목이 그 안에서 꽉 차고, 비율은 그대로입니다.
 */
 @media (max-width: 1040px) {
-  .lp-hero-copy { max-width: 560px; }
+  /*
+    한 단이 되면 가운데로 모읍니다. 그냥 두면 글은 왼쪽에 쏠리는데
+    아래 휴대폰 모형은 가운데라, 760px 쯤에서 오른쪽이 휑하게 비고
+    둘의 축이 어긋납니다. (2026-11-27)
+
+    ★★ 반드시 **바깥 칸(.lp-hero-in)** 을 가운데로 보내야 합니다.
+        글 칸(.lp-hero-copy) 에 margin-inline:auto 를 주면 쪽이
+        무너집니다. 2026-11-27 에 실제로 무너뜨렸습니다.
+
+        까닭 — .lp-hero-copy 는 제목 크기를 재는 「기준 칸」입니다
+        (container-type: inline-size). 제목은 「이 칸 너비의 17%」로
+        크기가 정해집니다. 그런데 margin-inline:auto 를 주면 칸의
+        너비가 반대로 **내용에 맞춰** 정해집니다.
+
+            칸 너비 ← 제목 크기 ← 칸 너비 ← …
+
+        서로 물고 물려 답이 안 나오니, 브라우저는 칸 너비를 0 으로
+        칩니다. 그 결과 흰 상자 속 글이 **한 글자씩 세로로** 쏟아져
+        마흔한 줄이 되었습니다.
+
+    ⚠️ 「기준 칸」에는 margin:auto · justify-self:center · width:fit-content
+       같이 **내용이 너비를 정하게 하는 것**을 쓰면 안 됩니다.
+       가운데로 보내려면 이렇게 바깥을 옮기십시오.
+  */
+  .lp-hero-in   { max-width: 560px; margin-inline: auto; }
+  .lp-hero-copy { max-width: none; }
 }
 
 /* 「운전자보험」 — 이 쪽에서 가장 큰 글자. 줄이지 마십시오 */
@@ -3321,9 +3361,25 @@ body.no-scroll { overflow: hidden; }
   perspective-origin: 50% 46%;
 }
 
+/*
+  모형 가로 — 실제 기기 비율(1 : 2.06)에 맞춥니다.
+
+  ⚠️ 2026-11-27 에 바로잡았습니다. 제가 이 칸을 처음 적을 때
+     252 / 228 로 적었는데, 그러면 앞 모형이 1 : 2.39 가 되어
+     실제 기기보다 16% 홀쭉해집니다. 사람 눈은 휴대폰 비율을
+     외우고 있어서 금방 어색하게 느낍니다.
+
+       252px → 1 : 2.39  (홀쭉함)
+       284px → 1 : 2.12  (실제 기기에 가까움)
+
+  ★ 숫자 둘의 뜻
+    앞의 px — 아무리 넓어져도 여기까지
+    뒤의 cqw — 그림 칸 너비에 붙은 값. 칸이 좁아지면 같이 줄어듭니다
+    둘 중 작은 쪽을 씁니다. 그래서 좁은 화면에서도 안 터집니다.
+*/
 @container heroart (min-width: 1px) {
-  .lp-hero-art .phone-tilt-a { max-width: min(252px, 56cqw); }
-  .lp-hero-art .phone-tilt-b { max-width: min(228px, 50cqw); }
+  .lp-hero-art .phone-tilt-a { max-width: min(294px, 54cqw); }
+  .lp-hero-art .phone-tilt-b { max-width: min(258px, 47.4cqw); }
 }
 
 /*
@@ -3401,4 +3457,39 @@ body.no-scroll { overflow: hidden; }
 
 @media (min-width: 1100px) {
   .phone-tip { font-size: 12px; padding: 10px 11px; }
+}
+
+
+/* ---------- 앞 모형 머리 여백을 조금 줄입니다 (2026-11-27) --------- */
+/*
+  가로를 294px 로 넓히고 나니 세로가 1 : 2.11 로 아직 조금 길었습니다.
+  파란 머리 칸의 위아래 여백에서 11px 을 덜어 1 : 2.07 로 맞췄습니다.
+  글자는 하나도 건드리지 않았습니다 — 여백만 줄였습니다.
+*/
+@media (min-width: 1100px) {
+  .lp-hero-art .phone-tilt-a .phone-top { padding: 26px 18px 15px; }
+}
+
+/* ---------- 좁은 화면 — 칸 기준을 쓰지 않습니다 (2026-11-27) ------- */
+/*
+  ⚠️ 제가 낸 탈을 바로잡는 칸입니다.
+
+  위 @container 는 「그림 칸 너비의 54%」로 모형 가로를 정합니다.
+  모형 둘이 한 칸을 나눠 쓸 때는 이게 맞습니다. 그런데 화면이
+  1040px 아래로 내려가면 머리말이 한 단이 되고, 휴대폰에서는
+  뒤 모형이 숨어 **앞 모형 혼자 남습니다.** 혼자인데도 칸의 54%만
+  쓰니 모형이 깡말라졌습니다.
+
+      휴대폰(390px)에서 191 × 664 = 1 : 3.48
+      실제 기기는 1 : 2.06 — 거의 1.7배 홀쭉했습니다
+
+  혼자일 때는 칸을 다 쓰게 합니다.
+
+  ★ 아래 두 줄의 선택자가 @container 안의 것과 똑같아야 합니다
+    (.lp-hero-art .phone-tilt-a). 한쪽만 짧게 적으면 힘이 약해
+    안 먹습니다. 이 칸이 뒤에 있어서 이깁니다.
+*/
+@media (max-width: 1040px) {
+  .lp-hero-art .phone-tilt-a { max-width: min(294px, 100%); }
+  .lp-hero-art .phone-tilt-b { max-width: min(258px, 100%); }
 }
