@@ -6088,3 +6088,31 @@ body.no-scroll .head .burger i { background: var(--ink); }
   color: var(--gold);
   border-bottom-color: var(--gold);
 }
+
+/* ---------- 빠뜨린 칸을 빨갛게 (2026-11-27) ------------------------- */
+/*
+  「보내기」를 눌렀는데 이름 · 연락처 · 동의가 빠져 있으면 그 칸을
+  빨갛게 두릅니다. 안내 글은 단추 아래에 있어 휴대폰에서는 화면
+  밖으로 밀려나는 일이 있습니다. 글만으로는 모르십니다.
+
+  main.js 의 stop() 이 is-bad 를 붙이고, 다시 손대시면 바로 뗍니다.
+  운전자보험 랜딩페이지(insurance.css)에도 같은 칸이 있습니다.
+*/
+.field input.is-bad,
+.field textarea.is-bad,
+.field.is-bad input,
+.field.is-bad textarea {
+  border-color: #c0392b;
+  background: #fdf6f5;
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+}
+
+.agree.is-bad {
+  display: block;
+  padding: 8px;
+  margin: -8px -8px 0;
+  background: #fdf6f5;
+  box-shadow: 0 0 0 2px rgba(192, 57, 43, 0.22);
+}
+
+.agree.is-bad span { color: #96281b; }

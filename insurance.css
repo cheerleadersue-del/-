@@ -3493,3 +3493,28 @@ body.no-scroll { overflow: hidden; }
   .lp-hero-art .phone-tilt-a { max-width: min(294px, 100%); }
   .lp-hero-art .phone-tilt-b { max-width: min(258px, 100%); }
 }
+
+/* ---------- 빠뜨린 칸을 빨갛게 (2026-11-27) ------------------------- */
+/*
+  「상담 신청하기」를 눌렀는데 이름이나 연락처가 빠져 있으면, 그 칸을
+  빨갛게 두릅니다. 안내 글이 단추 아래에 있어 휴대폰에서는 화면 밖으로
+  밀려나기 때문입니다. 글만으로는 모르십니다.
+
+  main.js 가 is-bad 를 붙이고, 다시 손대시면 바로 뗍니다.
+*/
+.f-in.is-bad,
+.f-row.is-bad .f-in {
+  border-color: #d53b45;
+  background: #fff6f6;
+  box-shadow: 0 0 0 3px rgba(213, 59, 69, 0.14);
+}
+
+.f-agree.is-bad {
+  border-radius: var(--r-s);
+  padding: 8px;
+  margin: -8px -8px 0;
+  background: #fff6f6;
+  box-shadow: 0 0 0 2px rgba(213, 59, 69, 0.22);
+}
+
+.f-agree.is-bad span { color: #a52730; }

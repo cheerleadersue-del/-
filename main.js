@@ -1799,10 +1799,71 @@ if (form && formStatus) {
     const tel = $("#fTel").value.replace(/\D/g, "");
     const agreed = $("#fAgree").checked;
 
+    /*
+      빠뜨린 칸을 막을 때.
+
+      ⚠️ 2026-11-27 에 고쳤습니다. 전에는 빨간 안내만 띄우고 끝냈는데,
+         그 안내는 「상담 신청하기」 단추 **아래**에 있습니다. 휴대폰에서
+         위쪽 칸(이름 · 연락처)이 잘못되면 안내가 화면 밖에 있었습니다
+         (화면 높이 664px 인데 안내는 929px 자리에 있었습니다).
+
+         누르신 분 눈에는 **아무 일도 안 일어난 것처럼** 보입니다.
+         그래서 「보냈다」고 생각하고 기다리시게 됩니다.
+
+      이제 세 가지를 함께 합니다.
+        ① 잘못된 칸에 빨간 테두리를 두릅니다 (is-bad)
+        ② 그 칸으로 화면을 옮깁니다
+        ③ 그 칸에 커서를 둡니다
+      빨간 테두리는 다시 손대시면 바로 지워집니다.
+    */
     const stop = (msg, field) => {
       event.preventDefault();
       say(msg);
-      field.focus();
+
+      field.classList.add("is-bad");
+
+      /* 동의 네모는 칸이 작으니 감싼 글까지 함께 표시합니다 */
+      const box = field.closest(".f-agree, .agree, .f-row, .field") || field;
+      box.classList.add("is-bad");
+
+      const clear = () => {
+        field.classList.remove("is-bad");
+        box.classList.remove("is-bad");
+      };
+      field.addEventListener("input", clear, { once: true });
+      field.addEventListener("change", clear, { once: true });
+
+      field.focus({ preventScroll: true });
+
+      /*
+        화면에 안 보이면 그 자리로 옮깁니다.
+
+        ⚠️ 두 가지를 지켜야 합니다.
+
+        ① **다음 그림틀에서 재야 합니다** (requestAnimationFrame).
+           빨간 안내 글이 생기면서 쪽의 높이가 달라집니다. 그 전에
+           재면 「보이는 자리」로 나오는데, 글이 들어간 뒤에 화면이
+           밀려 칸이 위로 벗어납니다. 2026-11-27 에 실제로 동의
+           네모가 화면 위 87px 로 밀려났습니다.
+
+        ② behavior 를 "smooth" 로 두지 마십시오. 스르르 움직이는
+           동안 다른 것이 끼어들어 중간에 끊깁니다. 잘못된 칸은
+           곧바로 보여 드리는 편이 낫습니다.
+      */
+      const bring = () => {
+        try {
+          const r = box.getBoundingClientRect();
+          if (r.top < 70 || r.bottom > window.innerHeight - 70) {
+            box.scrollIntoView({ block: "center" });
+          }
+        } catch (e) { /* 옛 브라우저. 그냥 넘어갑니다 */ }
+      };
+
+      if (typeof requestAnimationFrame === "function") {
+        requestAnimationFrame(() => requestAnimationFrame(bring));
+      } else {
+        bring();
+      }
     };
 
     if (name.length < 2) return stop("성함을 입력해 주세요.", $("#fName"));
