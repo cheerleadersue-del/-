@@ -2941,3 +2941,339 @@ body.no-scroll { overflow: hidden; }
 
   .pen-txt b { font-size: 1.3em; }   /* 좁은 칸에서는 조금 덜 키웁니다 */
 }
+
+/* =====================================================================
+   28. 머리말 꽉 채우기 · 0원 한 줄 · 동그란 말풍선 단추
+       (2026-11-27 요청)
+
+   여섯 가지를 고쳤습니다.
+     ① 머리말 제목을 칸 너비에 꽉 채웁니다
+     ② 흰 상자의 「본인부담금 0원」을 한가운데로
+     ③ 「합의금 · 벌금 · 변호사비용」을 더 크게 가운데로
+     ④ 보장검토 칸의 「본인부담금 0원」을 한 줄로 (0원이 안 내려가게)
+     ⑤ 「0원」에 숨 쉬는 효과
+     ⑥ 휴대폰에 동그란 말풍선 단추 (카톡 · 전화)
+   ===================================================================== */
+
+
+/* ---------- ① 머리말 제목 — 세 줄의 오른쪽 끝을 맞춥니다 ------------ */
+/*
+  왜 줄마다 크기가 다른가
+
+  세 줄의 글자 수가 다릅니다.
+      운전자보험만        6자  (앞 다섯 자가 1.22배라 사실상 6.9자)
+      가입되어 있으면!    8자
+      12대 중과실 교통사고  11자 (숫자는 한글보다 좁습니다)
+
+  같은 크기로 쓰면 첫 줄이 가장 짧아져 오른쪽이 휑합니다.
+  글자 수가 적은 줄일수록 크게 하면 세 줄 끝이 가지런해집니다.
+
+  ★ cqw 가 무엇인가
+    「칸 너비의 1%」입니다. vw(화면 너비)가 아닙니다.
+    머리말은 글 칸과 휴대폰 그림 칸으로 나뉘어 있어서, 화면이 아니라
+    **글 칸**을 기준으로 삼아야 끝이 맞습니다. 그래서 아래에서
+    .lp-hero-copy 를 「재는 칸」으로 지정했습니다(container-type).
+*/
+.lp-hero-copy {
+  container-type: inline-size;
+  container-name: herocopy;
+}
+
+.lp-hero-ttl {
+  font-weight: 800;
+  line-height: 1.06;          /* 줄을 바짝 붙여 덩어리로 보이게 */
+  letter-spacing: -0.055em;
+}
+
+.lp-hero-ttl .l1,
+.lp-hero-ttl .l2,
+.lp-hero-ttl .l3 {
+  display: block;
+  white-space: nowrap;        /* ⚠️ 줄이 저절로 꺾이면 끝이 어긋납니다 */
+}
+
+/* 금색 두 줄 */
+.lp-hero-ttl .l1,
+.lp-hero-ttl .l2 {
+  color: var(--sun);
+}
+
+/* 흰 셋째 줄 */
+.lp-hero-ttl .l3 {
+  margin-top: 0.1em;
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+/*
+  크기 — 숫자는 눈으로 재서 맞췄습니다.
+  min() 의 앞쪽은 「아무리 커져도 여기까지」(큰 화면에서 안 터지게),
+  뒤쪽은 「칸 너비에 맞춰 늘어나는 값」입니다.
+*/
+@container herocopy (min-width: 1px) {
+  .lp-hero-ttl .l1 { font-size: min(96px, 17.1cqw); }
+  .lp-hero-ttl .l2 { font-size: min(88px, 15.6cqw); }
+  .lp-hero-ttl .l3 { font-size: min(70px, 12.4cqw); }
+}
+
+/*
+  ⚠️ 글 칸의 너비를 묶어 둡니다 — 이게 없으면 터집니다.
+
+  화면이 1040px 아래로 내려가면 머리말이 한 단으로 바뀌면서 글 칸이
+  갑자기 992px 로 넓어집니다. 위 비율대로라면 제목이 170px 이 되어
+  태블릿 화면을 제목 하나가 다 먹습니다.
+  칸을 560px 로 묶으면 제목이 그 안에서 꽉 차고, 비율은 그대로입니다.
+*/
+@media (max-width: 1040px) {
+  .lp-hero-copy { max-width: 560px; }
+}
+
+/* 「운전자보험」 — 이 쪽에서 가장 큰 글자. 줄이지 마십시오 */
+.lp-hero-ttl .big {
+  display: inline-block;
+  font-size: 1.22em;
+  font-weight: 800;
+  font-style: normal;
+  letter-spacing: -0.06em;
+  text-shadow: 0 3px 18px rgba(255, 200, 40, 0.4);
+}
+
+
+/* ---------- ②③ 흰 상자 — 한가운데로, 더 크게 ----------------------- */
+.claim {
+  text-align: center;
+  padding: clamp(24px, 2.8vw, 34px) clamp(18px, 2.2vw, 28px);
+}
+
+/* 「본인부담금 0원」 */
+.claim-big {
+  justify-content: center;    /* flex 라 text-align 이 아니라 이것입니다 */
+  font-size: clamp(30px, 4.0vw, 46px);
+  line-height: 1.14;
+}
+
+/* 「합의금 · 벌금 · 변호사비용 보장」 — 한 단 키웠습니다 */
+.claim-cover {
+  margin-top: 8px;
+  font-size: clamp(18px, 2.2vw, 26px);
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+}
+
+/*
+  가운데 정렬이 되면 형광펜(.mark)이 글자보다 넓게 그어집니다.
+  칸 전체가 아니라 글자만 감싸도록 inline 으로 묶습니다.
+*/
+.claim-cover b.mark {
+  display: inline;
+  font-weight: 900;
+  color: var(--b700);
+}
+
+.claim-lead,
+.claim-note { text-align: center; }
+
+.claim-note {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 30em;
+}
+
+/*
+  방패 딱지가 가운데 정렬과 겹치지 않도록 조금 바깥으로 뺍니다
+*/
+.claim-badge { right: -18px; bottom: -16px; }
+
+
+/* ---------- ④ 보장검토 「본인부담금 0원」 — 반드시 한 줄 ------------ */
+/*
+  전에는 좁은 칸에서 「0원」만 아랫줄로 떨어졌습니다.
+  nowrap 으로 묶고, 대신 칸 너비에 맞춰 글자가 줄어들게 했습니다.
+  (여덟 글자 × 0.95em ≒ 7.6em 이라 13cqw 아래면 넘치지 않습니다)
+*/
+.cov-copy {
+  container-type: inline-size;
+  container-name: covcopy;
+}
+
+.cov-zero {
+  display: block;
+  white-space: nowrap;
+}
+
+@container covcopy (min-width: 1px) {
+  .cov-zero { font-size: min(66px, 13cqw); }
+}
+
+
+/* ---------- ⑤ 「0원」이 숨을 쉽니다 --------------------------------- */
+/*
+  ⚠️ 전에 퇴짜 맞은 「노란색 그라데이션이 흐르는」 효과가 아닙니다.
+     그건 색이 움직여 어지러웠습니다. 이건 크기와 빛무리만
+     아주 천천히 커졌다 작아집니다. 2.8초에 한 번, 4% 안쪽입니다.
+
+  ★ 심장이 뛰듯 느리게 — 눈이 저절로 가되 거슬리지 않는 정도입니다.
+*/
+@keyframes zeroBreathe {
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 0 rgba(255, 216, 77, 0)); }
+  50%      { transform: scale(1.04); filter: drop-shadow(0 6px 26px rgba(255, 216, 77, 0.55)); }
+}
+
+.claim-big .zero,
+.cov-zero em {
+  display: inline-block;      /* ⚠️ inline 에는 transform 이 안 먹습니다 */
+  transform-origin: center;
+  animation: zeroBreathe 2.8s ease-in-out infinite;
+}
+
+/* 흰 바탕 위의 「0원」은 파란 글씨라 빛무리를 파랗게 */
+@keyframes zeroBreatheBlue {
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 0 rgba(17, 80, 189, 0)); }
+  50%      { transform: scale(1.04); filter: drop-shadow(0 6px 22px rgba(17, 80, 189, 0.35)); }
+}
+
+.claim-big .zero { animation-name: zeroBreatheBlue; }
+
+/*
+  ⚠️ 「움직임 줄이기」를 켜 두신 분께는 멈춰야 합니다.
+     어지럼증이 있는 분들을 위한 운영체제 설정입니다.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .claim-big .zero,
+  .cov-zero em { animation: none; }
+}
+
+
+/* ---------- ⑥ 휴대폰 — 동그란 말풍선 단추 --------------------------- */
+/*
+  쪽을 읽는 내내 오른쪽 아래에 떠 있습니다.
+  아래 막대(.bar)보다 위에 자리잡게 띄웠습니다.
+
+  ⚠️ 컴퓨터에서는 숨깁니다. 컴퓨터 화면에는 이미 머리띠에 전화번호가
+     있고, 글 옆에 상담 신청서가 펼쳐져 있습니다.
+*/
+.fab { display: none; }
+
+@media (max-width: 860px) {
+  .fab {
+    position: fixed;
+    right: 14px;
+    /* 아래 막대(58px) + 아이폰 홈바 + 숨 */
+    bottom: calc(58px + env(safe-area-inset-bottom) + 14px);
+    z-index: 61;               /* 막대(60)보다 위 */
+    display: grid;
+    gap: 12px;
+    justify-items: end;
+
+    /*
+      머리말을 지나기 전에는 숨어 있습니다.
+      .fab-on 은 traffic-insurance.js 가 붙입니다.
+      ⚠️ display:none 이 아니라 투명도로 숨깁니다. display 는
+         나타날 때 툭 튀어나와서 놀라게 합니다.
+    */
+    opacity: 0;
+    translate: 0 14px;
+    pointer-events: none;
+    transition: opacity 0.3s ease, translate 0.3s ease;
+  }
+
+  .fab.fab-on {
+    opacity: 1;
+    translate: 0 0;
+    pointer-events: auto;
+  }
+
+  .fab-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  /* 말풍선 — 동그라미 왼쪽에 붙는 글자 칸 */
+  .fab-lab {
+    position: relative;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    box-shadow: 0 3px 14px rgba(8, 30, 75, 0.20);
+  }
+
+  /* 말풍선 꼬리 — 오른쪽 동그라미를 가리킵니다 */
+  .fab-lab::after {
+    content: "";
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    translate: 0 -50%;
+    width: 10px;
+    height: 10px;
+    rotate: 45deg;
+    background: var(--white);
+    border-radius: 2px;
+  }
+
+  /* 동그라미 */
+  .fab-ic {
+    display: grid;
+    place-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    box-shadow: 0 6px 20px rgba(8, 30, 75, 0.28);
+  }
+
+  .fab-ic .ic { width: 30px; height: 30px; }
+
+  .fab-kakao .fab-ic { background: var(--kakao);  color: var(--kakao-ink); }
+  .fab-tel   .fab-ic { background: var(--b600);   color: var(--white); }
+
+  /*
+    천천히 위아래로 떠다닙니다. 둘의 박자를 어긋나게 해서
+    기계처럼 똑같이 움직이지 않게 했습니다.
+  */
+  @keyframes fabBob {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -5px; }
+  }
+
+  .fab-kakao { animation: fabBob 3.2s ease-in-out infinite; }
+  .fab-tel   { animation: fabBob 3.2s ease-in-out infinite -1.6s; }
+
+  /* 누르는 느낌 */
+  .fab-btn:active .fab-ic { scale: 0.93; }
+  .fab-ic { transition: scale 0.12s ease; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab-kakao,
+  .fab-tel { animation: none; }
+}
+
+
+/* ---------- 아래 막대 — 한 칸이 되었습니다 (2026-11-27) ------------- */
+/*
+  전화 · 카톡을 동그란 말풍선으로 옮겼으므로 막대에는 신청서로
+  보내는 한 칸만 남았습니다. 한 칸이면 flex 로 나눌 것이 없습니다.
+*/
+.bar { display: none; }
+
+@media (max-width: 860px) {
+  .bar { display: block; }
+
+  .bar .bar-ask {
+    display: grid;
+    place-content: center;
+    min-height: 58px;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+}

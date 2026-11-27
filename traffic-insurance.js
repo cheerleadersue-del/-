@@ -413,6 +413,36 @@ fillPictures();
 (function liveliness() {
   const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------- ⓪ 동그란 말풍선 단추 — 머리말을 지나면 나옵니다 ----------
+
+     왜 처음부터 안 보이게 하는가
+
+     첫 화면에는 이미 노란 「카톡상담」과 「무료전화상담」 단추가
+     큼직하게 있습니다. 거기에 동그라미까지 겹치면 전화번호를
+     가립니다. 머리말이 화면에서 사라진 뒤에 나타나게 했습니다.
+
+     ⚠️ 자바스크립트가 막힌 환경에서는 .fab-on 이 안 붙어 단추가
+        끝까지 안 나옵니다. 그래서 아래 막대(.bar)는 그대로 둡니다.
+        둘 중 하나는 반드시 떠 있어야 상담이 들어옵니다.
+  */
+  (function fabOnScroll() {
+    const fab = document.querySelector(".fab");
+    const hero = document.querySelector(".lp-hero");
+    if (!fab || !hero) return;
+
+    if (!("IntersectionObserver" in window)) {
+      fab.classList.add("fab-on");          /* 못 재면 그냥 보여 줍니다 */
+      return;
+    }
+
+    new IntersectionObserver((rows) => {
+      rows.forEach((row) => {
+        /* 머리말이 화면 밖으로 나가면 켜고, 돌아오면 끕니다 */
+        fab.classList.toggle("fab-on", !row.isIntersecting);
+      });
+    }, { threshold: 0 }).observe(hero);
+  })();
+
   /* ---------- ① 형광펜 ---------- */
   const marks = document.querySelectorAll(".mark");
   if (marks.length) {
