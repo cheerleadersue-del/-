@@ -6116,3 +6116,131 @@ body.no-scroll .head .burger i { background: var(--ink); }
 }
 
 .agree.is-bad span { color: #96281b; }
+
+/* ---------- 꼬리말 바로가기 한 줄 (2026-11-27) --------------------- */
+/*
+  하위 쪽 꼬리말에는 링크가 하나도 없어 막다른 길이었습니다.
+  끝까지 내려오신 분이 갈 곳이 있어야 합니다.
+
+  ★ 법인 정보(주소 · 전화)보다 눈에 띄면 안 됩니다. 주소 줄 바로
+    위에 작고 조용하게 둡니다.
+*/
+.foot-quick {
+  /*
+    ⚠️ .foot-legal 이 flex(space-between)이라, 이 줄도 그냥 두면
+       다른 글 옆에 끼어 오른쪽 구석으로 밀립니다(2026-11-27 에
+       그렇게 나왔습니다). 한 줄을 통째로 차지하게 해야 가운데에
+       제대로 놓입니다.
+  */
+  flex: 0 0 100%;
+  width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 0;
+  margin: 2px 0 10px;
+}
+
+.foot-quick a {
+  padding: 4px 14px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* 사이사이 가는 칸막이. 첫 칸 앞에는 넣지 않습니다 */
+.foot-quick a + a {
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.foot-quick a:hover,
+.foot-quick a:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .foot-quick a { padding: 4px 10px; font-size: 12.5px; }
+}
+
+/* ---------- 교통사고 쪽 맨 위 안내 띠 (2026-11-27) ----------------- */
+/*
+  교통사고로 들어오신 분에게만 보입니다. 가장 정확한 과녁입니다.
+
+  ⚠️ 「본인부담금 0원」 같은 단정적인 말을 여기에 적지 마십시오.
+     단서(특약 · 한도 · 면책)를 함께 적을 자리가 없습니다.
+     여기서는 「되는지 확인해 드린다」까지만 말합니다.
+     (변호사법 제23조 제2항 제4호)
+*/
+.band-ins {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 18px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: linear-gradient(100deg, #0a3690, #1a67e0);
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(8, 30, 75, 0.18);
+}
+
+.band-ins-txt { flex: 1 1 auto; min-width: 0; }
+
+.band-ins p {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.band-ins p b { font-weight: 800; color: #ffd84d; }
+
+/*
+  ⚠️ 단서 줄입니다. 지우지 마십시오.
+     바로 위에 「본인부담금 0원」이라고 적었기 때문에, 그 말이
+     어디까지 참인지가 같은 칸 안에 있어야 합니다.
+     (변호사법 제23조 제2항 제4호 — 결과에 부당한 기대를 갖게 하는 광고)
+
+  ★ 흐리되 읽히는 밝기입니다(흰색 72%). 더 흐리게 만들지 마십시오.
+*/
+.band-ins-note {
+  margin-top: 5px !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.6 !important;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.band-ins a {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: #fff;
+  color: #0a3690;
+  font-size: 14.5px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.band-ins a:hover,
+.band-ins a:focus-visible { background: #ffd84d; color: #10203a; }
+
+.band-ins-wrap { margin: clamp(22px, 3vw, 34px) 0 0; }
+
+@media (max-width: 640px) {
+  .band-ins { flex-direction: column; text-align: center; padding: 18px 16px; }
+  .band-ins a { width: 100%; justify-content: center; }
+}
