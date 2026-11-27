@@ -3277,3 +3277,112 @@ body.no-scroll { overflow: hidden; }
     letter-spacing: -0.03em;
   }
 }
+
+/* =====================================================================
+   29. 머리말 휴대폰 둘 — 앞뒤로 겹치지 않고 나란히 비스듬히
+       (2026-11-27 요청: 「사건 대응 절차 속 내용이 가려진다」)
+
+   무엇이 문제였나
+
+   모형 둘을 앞뒤로 포개 놓았습니다. 뒤 모형(사건 대응 절차)은
+   앞 모형이 왼쪽 50px 을 덮고, 뒤로 62px 물러나 있고, 조금 어둡게
+   깔려 있었습니다. 셋이 겹치니 글이 안 읽혔습니다.
+
+     폭 276px 중 보이는 부분 226px — 82%
+     그나마 가려진 50px 이 **글이 시작되는 왼쪽**이었습니다
+
+   어떻게 고쳤나
+
+   겹침을 50px → 16px 로 줄였습니다. 16px 은 모형 **테두리 두께**라,
+   글이 있는 화면 부분은 하나도 가리지 않습니다.
+   뒤로 물러난 정도(translateZ)도 62px → 24px 로 줄이고, 어둡게
+   하던 것도 거의 풀었습니다. 이제 둘이 나란히 선 짝으로 보입니다.
+
+   ★ 기울기는 그대로 둡니다. 비스듬해야 평평한 그림이 아니라
+     실제 기기처럼 보입니다.
+
+   ⚠️ 자리가 빠듯합니다. 그림 칸은 넓을 때 506px, 좁을 때 447px 인데
+      모형 둘은 480px 입니다. 그래서 모형 크기를 **칸 너비에 붙여**
+      두었습니다(cqw). 칸이 좁아지면 둘 다 같이 줄어듭니다.
+   ===================================================================== */
+
+.lp-hero-art {
+  container-type: inline-size;
+  container-name: heroart;
+  align-items: center;        /* 아래가 아니라 가운데를 맞춥니다 */
+  perspective: 1800px;        /* 멀리서 볼수록 뒤틀림이 적습니다 */
+  perspective-origin: 50% 46%;
+}
+
+@container heroart (min-width: 1px) {
+  .lp-hero-art .phone-tilt-a { max-width: min(252px, 56cqw); }
+  .lp-hero-art .phone-tilt-b { max-width: min(228px, 50cqw); }
+}
+
+/* 앞 모형 — 조금 아래로 내려 짝이 어긋나 보이게 */
+.lp-hero-art .phone-tilt-a {
+  z-index: 2;
+  margin-top: 26px;
+  transform: translateY(var(--sy, 0))
+             rotateY(calc(-11deg - var(--sr, 0deg)))
+             rotateX(2.5deg) rotateZ(-1.5deg);
+}
+
+/* 뒤 모형 — 위로 올리고, 테두리만 겹칩니다 */
+.lp-hero-art .phone-tilt-b {
+  z-index: 1;
+  margin-left: -16px;         /* ★ 테두리 두께만. 글은 안 가립니다 */
+  margin-bottom: 30px;
+  transform: translateY(var(--sy, 0))
+             rotateY(calc(-11deg - var(--sr, 0deg)))
+             rotateX(2.5deg) rotateZ(-1.5deg)
+             translateZ(-24px);
+}
+
+/*
+  뒤 모형을 어둡게 하던 것을 거의 풀었습니다.
+  나란히 선 짝이므로 둘의 밝기가 비슷해야 합니다.
+*/
+.lp-hero-art .phone-tilt-b .phone-in {
+  filter: brightness(0.99) saturate(0.995);
+}
+
+/*
+  뒤 모형의 그림자를 줄입니다. 겹침이 얕아져서 전처럼 짙으면
+  앞 모형 위로 그림자가 번집니다.
+*/
+.lp-hero-art .phone-tilt-b {
+  box-shadow:
+    0 1px 2px rgba(6, 24, 62, 0.18),
+    0 6px 14px rgba(6, 24, 62, 0.16),
+    0 18px 34px rgba(6, 24, 62, 0.18),
+    inset 0 1px 1px rgba(255, 255, 255, 0.85);
+}
+
+/* 뒤 모형 꼬리말 — 조용한 알림 줄 (2026-11-27) */
+.phone-tip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 10px;
+  border-radius: var(--r-s);
+  background: var(--b50);
+  color: var(--b800);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -0.03em;
+}
+
+.phone-tip .ic {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  color: var(--b600);
+}
+
+.phone-tip b { font-weight: 800; }
+
+@media (min-width: 1100px) {
+  .phone-tip { font-size: 12px; padding: 10px 11px; }
+}

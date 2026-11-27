@@ -106,7 +106,7 @@
   어디서 받아온 것인지는 vendor/README.md 에 적어 두었습니다.
 -->
 <link rel="stylesheet" href="vendor/aos.css?v=202611231532">
-<link rel="stylesheet" href="insurance.css?v=202611271613">
+<link rel="stylesheet" href="insurance.css?v=202611271622">
 
 </head>
 
@@ -322,7 +322,32 @@
                 <li><i>1</i><b>사건 검토</b><span>사고 유형과 적용 법조 확인</span></li>
                 <li><i>2</i><b>대응 전략</b><span>형사 · 행정처분 대응 수립</span></li>
                 <li><i>3</i><b>조사 · 재판</b><span>경찰 조사부터 재판까지 대응</span></li>
+                <!--
+                  ★ 2026-11-27 에 넷째 단계를 더했습니다.
+                    모형을 나란히 놓으면서 아래쪽이 휑하게 비었는데,
+                    빈칸을 장식으로 메우는 대신 **빠져 있던 단계**를
+                    채웠습니다. 흰 상자에 「약관 확인부터 보험청구까지」
+                    라고 적어 놓고 정작 절차에는 없었습니다.
+                -->
+                <li><i>4</i><b>보험청구</b><span>운전자보험 약관 확인과 청구</span></li>
               </ul>
+            </div>
+            <!--
+              모형 아래 꼬리말. 앞 모형처럼 파란 단추를 또 넣으면
+              누르는 곳이 둘로 보여 헷갈립니다. 여기는 조용한
+              알림 줄로 두었습니다.
+            -->
+            <div class="phone-foot">
+              <p class="phone-tip">
+                <svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><use href="#i-sparkle"/></svg>
+                <!--
+                  ⚠️ 글자를 반드시 <span> 하나로 묶어야 합니다.
+                     .phone-tip 은 flex 인데, 묶지 않으면 「경찰 조사」
+                     「전」 「에 연락 주시는…」이 **각각 따로 칸**이 되어
+                     토막토막 흩어집니다 (2026-11-27 에 겪었습니다).
+                -->
+                <span>경찰 조사 <b>전</b>에 연락 주시는 것이 가장 좋습니다</span>
+              </p>
             </div>
           </div>
         </div>
@@ -894,8 +919,8 @@
 
 
 <script src="vendor/aos.js?v=202611231532"></script>
-<script src="traffic-insurance.js?v=202611271613"></script>
-<script src="main.js?v=202611271613"></script>
+<script src="traffic-insurance.js?v=202611271622"></script>
+<script src="main.js?v=202611271622"></script>
 
 <!-- 구조화 데이터 -->
 <script type="application/ld+json">
